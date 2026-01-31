@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>Menu de Aulas</title>
-<<<<<<< HEAD
   <link rel="stylesheet" href="./css/menu.css" />
-=======
-  <link rel="stylesheet" href="css/menu.css" />
->>>>>>> b1b8eddbd7509d4cb4c7c99d7049185730e3b692
 </head>
+
 <body>
   <!-- Botão para abrir menu -->
   <div class="menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
@@ -18,68 +15,10 @@
     <div class="sidebar-header">
       <span class="close-btn" onclick="toggleSidebar()">✖</span>
     </div>
+
     <ul>
-<<<<<<< HEAD
-      <li><a href="#" onclick="carregarAula(this, 'aula61')">📘 Aula 61</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula62')">📘 Aula 62</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula63')">📘 Aula 63</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula64')">📘 Aula 64</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula65')">📘 Aula 65</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula66')">📘 Aula 66</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula66')">📘 Aula 66</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'review1')">📘 Review 1</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'movie1')">📘 Movie 1</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula67')">📘 Aula 67</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula68')">📘 Aula 68</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula69')">📘 Aula 69</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula70')">📘 Aula 70</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula71')">📘 Aula 71</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula72')">📘 Aula 72</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'review2')">📘 Review 2</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'movie2')">📘 Movie 2</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula73')">📘 Aula 73</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula74')">📘 Aula 74</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula75')">📘 Aula 75</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula76')">📘 Aula 76</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula77')">📘 Aula 77</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula78')">📘 Aula 78</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'review3')">📘 Review 3</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'movie3')">📘 Movie 3</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula79')">📘 Aula 79</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula80')">📘 Aula 80</a></li>
-      <li><a href="#" onclick="carregarAula(this, 'aula81')">📘 Aula 81</a></li>
-
-
-
-
-    </ul>
-  </div>
-
-  <!-- Conteúdo principal //./conteudo/aula64.html -->
-  <div class="main-content">
-    <iframe id="iframeAula" src=""></iframe>
-  </div>
-
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("active");
-    }
-
-    function carregarAula(elemento, aula) {
-      const url = `./conteudo/${aula}.html`;
-      document.getElementById("iframeAula").src = url;
-
-      const links = document.querySelectorAll(".sidebar a");
-      links.forEach(link => link.classList.remove("active"));
-      elemento.classList.add("active");
-
-      // Fecha menu no mobile
-      document.getElementById("sidebar").classList.remove("active");
-    }
-  </script>
-=======
-      <li><a href="#" onclick="carregarAula(this, 'aula01')" class="active">📘 Aula 01</a></li>
+      <!-- Aulas 01 a 60 -->
+      <li><a href="#" onclick="carregarAula(this, 'aula01')">📘 Aula 01</a></li>
       <li><a href="#" onclick="carregarAula(this, 'aula02')">📘 Aula 02</a></li>
       <li><a href="#" onclick="carregarAula(this, 'aula03')">📘 Aula 03</a></li>
       <li><a href="#" onclick="carregarAula(this, 'aula04')">📘 Aula 04</a></li>
@@ -139,15 +78,66 @@
       <li><a href="#" onclick="carregarAula(this, 'aula58')">📘 Aula 58</a></li>
       <li><a href="#" onclick="carregarAula(this, 'aula59')">📘 Aula 59</a></li>
       <li><a href="#" onclick="carregarAula(this, 'aula60')">📘 Aula 60</a></li>
+
+      <!-- Aulas 61 a 81 + Reviews + Movies -->
+      <li><a href="#" onclick="carregarAula(this, 'aula61')">📘 Aula 61</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula62')">📘 Aula 62</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula63')">📘 Aula 63</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula64')">📘 Aula 64</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula65')">📘 Aula 65</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula66')">📘 Aula 66</a></li>
+
+      <li><a href="#" onclick="carregarAula(this, 'review1')">📝 Review 1</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'movie1')">🎬 Movie 1</a></li>
+
+      <li><a href="#" onclick="carregarAula(this, 'aula67')">📘 Aula 67</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula68')">📘 Aula 68</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula69')">📘 Aula 69</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula70')">📘 Aula 70</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula71')">📘 Aula 71</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula72')">📘 Aula 72</a></li>
+
+      <li><a href="#" onclick="carregarAula(this, 'review2')">📝 Review 2</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'movie2')">🎬 Movie 2</a></li>
+
+      <li><a href="#" onclick="carregarAula(this, 'aula73')">📘 Aula 73</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula74')">📘 Aula 74</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula75')">📘 Aula 75</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula76')">📘 Aula 76</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula77')">📘 Aula 77</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula78')">📘 Aula 78</a></li>
+
+      <li><a href="#" onclick="carregarAula(this, 'review3')">📝 Review 3</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'movie3')">🎬 Movie 3</a></li>
+
+      <li><a href="#" onclick="carregarAula(this, 'aula79')">📘 Aula 79</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula80')">📘 Aula 80</a></li>
+      <li><a href="#" onclick="carregarAula(this, 'aula81')">📘 Aula 81</a></li>
     </ul>
   </div>
 
   <!-- Conteúdo principal -->
   <div class="main-content">
-    <iframe id="iframeAula" src="./conteudo/aula01.html"></iframe>
+    <iframe id="iframeAula" src=""></iframe>
   </div>
 
-  <script src="js/menu.js"></script>
->>>>>>> b1b8eddbd7509d4cb4c7c99d7049185730e3b692
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("active");
+    }
+
+    function carregarAula(elemento, aula) {
+      const url = `./conteudo/${aula}.html`;
+      document.getElementById("iframeAula").src = url;
+
+      const links = document.querySelectorAll(".sidebar a");
+      links.forEach(link => link.classList.remove("active"));
+      elemento.classList.add("active");
+
+      // Fecha menu no mobile
+      document.getElementById("sidebar").classList.remove("active");
+    }
+  </script>
 </body>
 </html>
