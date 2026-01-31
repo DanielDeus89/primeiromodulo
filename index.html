@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu de Aulas</title>
+  <link rel="stylesheet" href="./css/menu.css" />
+</head>
+<body>
+  <!-- Botão para abrir menu -->
+  <div class="menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
+
+  <!-- Menu lateral oculto -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="close-btn" onclick="toggleSidebar()">✖</span>
+    </div>
+    <ul>
+      <li><a href="#" onclick="carregarAula(this, 'aula01')">📘 Aula 01</a></li>
+    </ul>
+  </div>
+
+  <!-- Conteúdo principal //./conteudo/aula64.html -->
+  <div class="main-content">
+    <iframe id="iframeAula" src=""></iframe>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("active");
+    }
+
+    function carregarAula(elemento, aula) {
+      const url = `./conteudo/${aula}.html`;
+      document.getElementById("iframeAula").src = url;
+
+      const links = document.querySelectorAll(".sidebar a");
+      links.forEach(link => link.classList.remove("active"));
+      elemento.classList.add("active");
+
+      // Fecha menu no mobile
+      document.getElementById("sidebar").classList.remove("active");
+    }
+  </script>
+</body>
+</html>
