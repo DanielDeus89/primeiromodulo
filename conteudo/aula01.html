@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
@@ -10,11 +11,44 @@
 <body>
   <div style="margin: 20px 0;">
     <label for="devCheckbox" style="font-weight: bold;">
+=======
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lesson 01 - English Class</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <h1 id="lessonTitle">Lesson</h1>
+  <p class="info-text">💡 Clique nas frases em azul para ouvir a pronúncia em inglês.</p>
+
+  <!-- Cards carregados dinamicamente -->
+  <div class="card-stack" id="cardStack"></div>
+
+  <div class="divider"></div>
+
+  <div class="stack-controls">
+    <button onclick="prevCard()">⬅️ Anterior</button>
+    <button id="nextBtn" onclick="nextCard()" disabled>Próximo ➡️</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="video-container">
+    <div id="player"></div>
+  </div>
+
+  <div style="margin: 20px 0;">
+    <label style="font-weight: bold;">
+>>>>>>> b1b8eddbd7509d4cb4c7c99d7049185730e3b692
       <input type="checkbox" id="devCheckbox" onchange="toggleDevMode()" />
       🛠️ Ativar Modo Desenvolvedor
     </label>
   </div>
 
+<<<<<<< HEAD
   <div style="max-width:1200px; margin:0 auto; padding:0 24px;">
 
     <!-- Linha principal: texto à esquerda, vídeo à direita -->
@@ -59,6 +93,8 @@
     </div>
   </div>
 
+=======
+>>>>>>> b1b8eddbd7509d4cb4c7c99d7049185730e3b692
   <!-- YouTube Iframe API -->
   <script>
     const tag = document.createElement('script');
@@ -66,8 +102,15 @@
     document.head.appendChild(tag);
   </script>
 
+<<<<<<< HEAD
   <script src="../js/player.js"></script>
   <script src="../js/engine.js"></script>
   <script src="../js/lesson01.js"></script>
+=======
+ <script src="/js/player.js"></script>
+  <script src="/js/engine.js"></script>
+  <script src="/js/lesson01.js"></script>
+
+>>>>>>> b1b8eddbd7509d4cb4c7c99d7049185730e3b692
 </body>
 </html>

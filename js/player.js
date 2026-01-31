@@ -108,6 +108,7 @@ function showCard(index) {
 window.onload = () => {
   showCard(currentIndex);
 };
+<<<<<<< HEAD
 
 
 function playSegment(start, end) {
@@ -125,3 +126,5 @@ function playSegment(start, end) {
     }
   }, (end - start) * 1000);
 }
+=======
+>>>>>>> b1b8eddbd7509d4cb4c7c99d7049185730e3b692
