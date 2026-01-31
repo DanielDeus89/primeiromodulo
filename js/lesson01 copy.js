@@ -64,73 +64,11 @@ const lessonCards = [
     ]
   ]
 },
- {
-    title: "Verbs",
-    columns: [
-      [["to drink", "beber"]],
-      [["to eat", "comer"]]
-    ]
-  },
-  {
-    title: "Vocabulary",
-    columns: [
-      [
-        ["coffee", "café"],
-        ["tea", "chá"],
-        ["milk", "leite"],
-        ["juice", "suco"],
-        ["water", "água"],
-        ["soda", "refrigerante"],
-        ["fish", "peixe"]
-      ],
-      [
-        ["meat", "carne"],
-        ["cheese", "queijo"],
-        ["ham", "presunto"],
-        ["bread", "pão"],
-        ["and", "e"],
-        ["I", "eu"],
-        ["you", "você"]
-      ]
-    ]
-  },
-  {
-    title: "Expressions",
-    columns: [
-      [
-        ["thank you", "obrigado"],
-        ["thanks", "obrigado"],
-        ["please", "por favor"],
-        ["hi", "oi"],
-        ["hello", "olá"],
-        ["goodbye", "tchau"]
-      ]
-    ]
-  },
-  {
-    title: "Grammar",
-    columns: [
-      [
-        ["I drink", "Eu bebo"],
-        ["I eat", "Eu como"]
-      ],
-      [
-        ["You drink", "Você bebe"],
-        ["You eat", "Você come"]
-      ]
-    ]
-  },
-  {
-    title: "Listening",
-    type: "listening",
-    segments: [
-      { text: "1. I drink coffee and milk", start: 1620, end: 1625 },
-      { text: "2. You eat bread and cheese", start: 1625, end: 1631 },
-      { text: "3. You eat fish and you drink soda.", start: 1631, end: 1638 },
-      { text: "4. I drink juice and I eat bread and ham.", start: 1638, end: 1646 },
-      { text: "5. I eat bread and meat.", start: 1646, end: 1653 }
-    ]
-  }
+
+ 
+
+ 
+ 
   
 ];
 
