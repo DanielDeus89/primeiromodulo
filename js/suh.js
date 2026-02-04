@@ -9,7 +9,7 @@ const timeRanges = [
 
 const lessonCards = [
 {
-  "title": "Au Pair Introduction",
+  "title": "Au Pair Introduction - SUh",
   "columns": [
     [
       ["Hi! My name is Sulian Favorato, and I’m from Brazil.", "", 15, 21],
