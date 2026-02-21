@@ -1,16 +1,16 @@
 const lessonTitle = "Lesson 03";
-const currentVideoId = "-BEJA4jUWnU";
+const currentVideoId = "9vrpDb0-aFw";
 
 const timeRanges = [
-  { start: 0, end: 246 }, //0
-  { start: 246, end: 418 }, //1
-  { start: 418, end: 665 }, //2
-  { start: 665, end: 765 }, //3
-  { start: 765, end: 900 }, //Verbs
-  { start: 900, end: 1472 }, //Vocabulary
-  { start: 1472, end: 1605 }, //Expressions
-  { start: 1605, end: 2125 },  //Grammar
-  { start: 2125, end: 99999 },  //Listening
+  { start: 10, end: 283 }, //0
+  { start: 283, end: 444 }, //1
+  { start: 444, end: 588 }, //2
+  { start: 588, end: 778 }, //3
+  { start: 778, end: 915 }, //Verbs
+  { start: 915, end: 1404 }, //Vocabulary
+  { start: 1404, end: 1542 }, //Expressions
+  { start: 1542, end: 1999 },  //Grammar
+  { start: 1999, end: 99999 },  //Listening
 ];
 
 const lessonCards = [
@@ -18,20 +18,20 @@ const lessonCards = [
   "title": "Practice Sentences",
   "columns": [
     [
-      ["I speak.", "Eu falo."],
-      ["You speak.", "Você fala."],
-      ["I speak English.", "Eu falo inglês."],
-      ["You speak Spanish.", "Você fala espanhol."],
-      ["I speak Portuguese.", "Eu falo português."],
-      ["You speak French.", "Você fala francês."]
+      ["I work.", "Eu trabalho."],
+      ["You work.", "Você trabalha."],
+      ["I work here.", "Eu trabalho aqui."],
+      ["You work there.", "Você trabalha lá."],
+      ["I work alone.", "Eu trabalho sozinho."],
+      ["You work at home.", "Você trabalha em casa."]
     ],
     [
-      ["I study.", "Eu estudo."],
-      ["You study.", "Você estuda."],
-      ["I study English.", "Eu estudo inglês."],
-      ["You study Spanish.", "Você estuda espanhol."],
-      ["I study Portuguese.", "Eu estudo português."],
-      ["You study French.", "Você estuda francês."]
+      ["I play.", "Eu jogo, eu brinco, eu toco."],
+      ["You play.", "Você joga, você brinca, você toca."],
+      ["I play soccer.", "Eu jogo futebol."],
+      ["You play tennis.", "Você joga tênis."],
+      ["I play volleyball with my friend.", "Eu jogo vôlei com meu amigo."],
+      ["You play chess with your brother.", "Você joga xadrez com seu irmão."]
     ]
   ]
 },
@@ -39,14 +39,14 @@ const lessonCards = [
   "title": "Practice Sentences",
   "columns": [
     [
-      ["I speak with my friend.", "Eu falo com meu amigo."],
-      ["I speak with my brother.", "Eu falo com meu irmão."],
-      ["You speak with your father.", "Você fala com seu pai."]
+      ["I don't work at a bank.", "Eu não trabalho em um banco."],
+      ["I don't work at the store.", "Eu não trabalho na loja."],
+      ["I don't work at home.", "Eu não trabalho em casa."]
     ],
     [
-      ["I study with my sister.", "Eu estudo com minha irmã."],
-      ["I study with my friend.", "Eu estudo com meu amigo."],
-      ["You study with your mother.", "Você estuda com sua mãe."]
+      ["I don't play the piano.", "Eu não toco piano."],
+      ["I don't play the guitar.", "Eu não toco violão."],
+      ["I don't play the violin.", "Eu não toco violino."]
     ]
   ]
 },
@@ -54,16 +54,14 @@ const lessonCards = [
   "title": "Practice Sentences",
   "columns": [
     [
-      ["I speak English with my son.", "Eu falo inglês com meu filho."],
-      ["I speak Portuguese with my daughter.", "Eu falo português com minha filha."],
-      ["You speak French with your child.", "Você fala francês com seu filho."],
-      ["You speak English with your daughter.", "Você fala inglês com sua filha."]
+      ["I work in the morning.", "Eu trabalho de manhã."],
+      ["I work in the afternoon.", "Eu trabalho à tarde."],
+      ["You work in the evening.", "Você trabalha à noite."]
     ],
     [
-      ["I study Spanish with my sister.", "Eu estudo espanhol com minha irmã."],
-      ["I study French with my children.", "Eu estudo francês com meus filhos."],
-      ["You study Portuguese with your father.", "Você estuda português com seu pai."],
-      ["You study English with your mother.", "Você estuda inglês com sua mãe."]
+      ["I play in the morning.", "Eu brinco de manhã."],
+      ["I play in the afternoon.", "Eu brinco à tarde."],
+      ["You play in the evening.", "Você brinca à noite."]
     ]
   ]
 },
@@ -71,9 +69,14 @@ const lessonCards = [
   "title": "Practice Sentences",
   "columns": [
     [
-      ["I don't speak French.", "Eu não falo francês."],
-      ["I don't study with my sister.", "Eu não estudo com minha irmã."],
-      ["I don't speak Spanish with my brother.", "Eu não falo espanhol com meu irmão."]
+      ["I study, but I don't work.", "Eu estudo, mas não trabalho."],
+      ["I don't work at night.", "Eu não trabalho à noite."],
+      ["I only work in the morning.", "Eu só trabalho de manhã."]
+    ],
+    [
+      ["I play soccer, but I don't play volleyball.", "Eu jogo futebol, mas não jogo vôlei."],
+      ["I play the guitar, but I don't play the violin.", "Eu toco violão, mas não toco violino."],
+      ["I play soccer, but I don't play tennis.", "Eu jogo futebol, mas não jogo tênis."]
     ]
   ]
 },
@@ -81,41 +84,39 @@ const lessonCards = [
   "title": "Verbs",
   "columns": [
     [
-      ["to speak", "falar"]
+      ["to work", "trabalhar"]
     ],
     [
-      ["to study", "estudar"]
+      ["to play", "jogar, brincar, tocar"]
     ]
   ]
 },
- {
+{
   "title": "Vocabulary",
   "columns": [
     [
-      ["father", "pai"],
-      ["mother", "mãe"],
-      ["brother", "irmão"],
-      ["sister", "irmã"],
-      ["child", "criança"],
-      ["daughter", "filha"],
-      ["son", "filho"],
-      ["children", "crianças, filhos"],
-      ["friend", "amigo, amiga"],
-      ["my", "meu, minha"],
-      ["your", "seu, sua"]
+      ["teacher", "professor"],
+      ["school", "escola"],
+      ["home", "lar, casa"],
+      ["store", "mercado, loja"],
+      ["bank", "banco"],
+      ["alone", "sozinho"],
+      ["only", "só, somente"],
+      ["but", "mas"],
+      ["here", "aqui"],
+      ["there", "lá"]
     ],
     [
-      ["with", "com"],
-      ["Portuguese", "português"],
-      ["English", "inglês"],
-      ["French", "francês"],
-      ["Spanish", "espanhol"],
-      ["of", "de"],
-      ["a", "um, uma"],
-      ["cup", "xícara"],
-      ["glass", "copo"],
-      ["now", "agora"],
-      ["today", "hoje"]
+      ["at", "em"],
+      ["the", "o, a, os, as"],
+      ["soccer", "futebol"],
+      ["tennis", "tênis"],
+      ["volleyball", "vôlei"],
+      ["basketball", "basquete"],
+      ["chess", "xadrez"],
+      ["piano", "piano"],
+      ["guitar", "violão"],
+      ["violin", "violino"]
     ]
   ]
 },
@@ -123,66 +124,63 @@ const lessonCards = [
   "title": "Expressions",
   "columns": [
     [
-      ["good morning", "bom dia"],
-      ["good afternoon", "boa tarde"]
+      ["excuse me", "desculpe, com licença, \"não entendi\""],
+      ["sorry", "desculpe"]
     ],
     [
-      ["good evening", "boa noite (chegada)"],
-      ["good night", "boa noite (saída)"]
+      ["you're welcome", "de nada"]
     ]
   ]
 },
- {
+{
   "title": "Grammar",
   "columns": [
     [
-      ["I drink.", "Eu bebo."],
-      ["I don't drink.", "Eu não bebo."],
-      ["I eat.", "Eu como."],
-      ["I don't eat.", "Eu não como."]
+      ["in the morning", "de manhã"],
+      ["in the afternoon", "à tarde"],
+      ["in the evening", "à noite"],
+      ["at night", "à noite"]
     ],
     [
-      ["I study.", "Eu estudo."],
-      ["I don't study.", "Eu não estudo."],
-      ["I speak.", "Eu falo."],
-      ["I don't speak.", "Eu não falo."]
+      ["I work at home.", "Eu trabalho em casa."],
+      ["I study at school.", "Eu estudo na escola."],
+      ["I work at a store.", "Eu trabalho em uma loja."],
+      ["I work at the bank.", "Eu trabalho no banco."]
     ],
     [
-      ["I speak with you.", "Eu falo com você."],
-      ["I don't speak with you.", "Eu não falo com você."],
-      ["I drink a glass of milk.", "Eu bebo um copo de leite."],
-      ["I don't drink a cup of coffee.", "Eu não bebo uma xícara de café."]
+      ["I play volleyball.", "Eu jogo vôlei."],
+      ["I play the violin.", "Eu toco violino."]
     ]
   ]
 },
- {
+{
   "title": "Listening",
   "type": "listening",
   "segments": [
     {
-      "text": "1. I don't speak Portuguese with my mother.",
-      "start": 2137,
-      "end": 2144
+      "text": "1. I play volleyball with my friends.",
+      "start": 2012,
+      "end": 2019
     },
     {
-      "text": "2. I study French with my friends.",
-      "start": 2144,
-      "end": 2150
+      "text": "2. I don't work at the bank. I work here.",
+      "start": 2019,
+      "end": 2028
     },
     {
-      "text": "3. I don't speak Spanish with my father.",
-      "start": 2150,
-      "end": 2156
+      "text": "3. I play the guitar but I don't play the violin.",
+      "start": 2028,
+      "end": 2036
     },
     {
-      "text": "4. I don't drink coffee and milk in the morning.",
-      "start": 2156,
-      "end": 2163
+      "text": "4. I study but I don't work.",
+      "start": 2036,
+      "end": 2043
     },
     {
-      "text": "5. I don't eat cheese and I don't drink milk.",
-      "start": 2163,
-      "end": 2172
+      "text": "5. I study French with my children.",
+      "start": 2043,
+      "end": 2053
     }
   ]
 }
