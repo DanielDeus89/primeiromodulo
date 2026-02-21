@@ -27,7 +27,7 @@ const lessonCards = [
   "columns": [
     [
       ["I study English at night.", ""],
-      ["I don t study English at night", ""],
+      ["I don't study English at night", ""],
       ["", ""],
       ["Portuguese", ""],
       ["Spanish", ""],
