@@ -2,65 +2,91 @@ const lessonTitle = "Lesson 39";
 const currentVideoId = "Fg1bY6Alsdc";
 
 const timeRanges = [
-  { start: 10, end: 193 }, //0
-  { start: 203, end: 346 }, //1
-  { start: 356, end: 576 }, //2
-  { start: 586, end: 787 }, //Verbs
-  { start: 797, end: 1290 }, //Vocabulary
-  { start: 1310, end: 1523 }, //Expressions
-  { start: 1533, end: 2042 },  //Grammar
-  { start: 2392, end: 99999 },  //Listening
+  { start: 10, end: 177 }, //0
+  { start: 187, end: 436 }, //1
+  { start: 450, end: 638 }, //2
+  { start: 638, end: 903 }, //3
+  { start: 903, end: 1165 }, //Verbs
+  { start: 1165, end: 1819 }, //Vocabulary
+  { start: 1819, end: 2014 }, //Expressions
+  { start: 2020, end: 2627 },  //Grammar
+  { start: 2627, end: 99999 },  //Listening
 ];
 
 const lessonCards = [
 {
-  "title": "Simple Present – Like & Sleep",
+  "title": "Simple Present – Verbs",
   "columns": [
     [
-      ["I like.", "Eu gosto."],
-      ["You like.", "Você gosta."],
-      ["I like my car.", "Eu gosto do meu carro."],
-      ["You like oranges.", "Você gosta de laranja."],
-      ["I like you.", "Eu gosto de você."]
+      ["I open.", "Eu abro."],
+      ["We open.", "Nós abrimos."]
     ],
     [
-      ["I sleep.", "Eu durmo."],
-      ["You sleep.", "Você dorme."],
-      ["I sleep in the morning.", "Eu durmo de manhã."],
-      ["You sleep in the afternoon.", "Você dorme à tarde."],
-      ["I sleep at night.", "Eu durmo à noite."]
+      ["I close.", "Eu fecho."],
+      ["They close.", "Eles fecham."]
+    ],
+    [
+      ["I live.", "Eu moro, vivo."],
+      ["We live.", "Nós moramos, vivemos."]
+    ],
+    [
+      ["I visit.", "Eu visito."],
+      ["They visit.", "Eles visitam."]
     ]
   ]
 },
 {
-  "title": "Simple Present – Like to",
+  "title": "Simple Present – Open & Close",
   "columns": [
     [
-      ["I like to study.", "Eu gosto de estudar."],
-      ["I like to work.", "Eu gosto de trabalhar."],
-      ["I like to speak.", "Eu gosto de falar."]
+      ["We open our drugstore early.", "Nós abrimos nossa farmácia cedo."],
+      ["They don't open the windows at night.", "Eles não abrem as janelas à noite."],
+      ["Do we have enough time?", "Nós temos tempo suficiente?"],
+      ["Don't they open the store on weekends?", "Eles não abrem a loja nos finais de semana?"]
     ],
     [
-      ["I don't like to drink soda.", "Eu não gosto de beber refrigerante."],
-      ["I don't like to play.", "Eu não gosto de jogar."],
-      ["I don't like to sleep.", "Eu não gosto de dormir."]
+      ["They close their store late.", "Eles fecham a loja deles tarde."],
+      ["We don't close the windows.", "Nós não fechamos as janelas."],
+      ["Do they close their office late?", "Eles fecham o escritório deles tarde?"],
+      ["Why don't we go now?", "Por que não vamos agora?"]
     ]
   ]
 },
 {
-  "title": "Simple Present – Like to (Questions & Answers)",
+  "title": "Simple Present – Live & Visit",
   "columns": [
     [
-      ["Do you like to study alone?", "Você gosta de estudar sozinho?"],
-      ["Do you like to work?", "Você gosta de trabalhar?"],
-      ["Do you like to eat?", "Você gosta de comer?"],
-      ["Do you like to sleep?", "Você gosta de dormir?"]
+      ["We live in a big country.", "Nós moramos em um país grande."],
+      ["They don't live near the airport.", "Eles não moram perto do aeroporto."],
+      ["Do we have to go there?", "Nós temos que ir lá?"],
+      ["Don't they live here?", "Eles não moram aqui?"]
     ],
     [
-      ["I like to study with you.", "Eu gosto de estudar com você."],
-      ["Do you like to study at home?", "Você gosta de estudar em casa?"],
-      ["I like to speak with you.", "Eu gosto de falar com você."],
-      ["Do you like to speak with me?", "Você gosta de falar comigo?"]
+      ["They visit their relatives every month.", "Eles visitam seus parentes todo mês."],
+      ["We don't want to visit that city.", "Nós não queremos visitar aquela cidade."],
+      ["Do they visit you every week?", "Eles visitam você toda semana?"],
+      ["Don't they want to visit the museum?", "Eles não querem visitar o museu?"]
+    ]
+  ]
+},
+{
+  "title": "Simple Present – Time & Routine",
+  "columns": [
+    [
+      ["What time do they get up?", "A que horas eles se levantam?"],
+      ["They usually get up at 6 o'clock.", "Eles geralmente se levantam às 6 horas."],
+      ["What time do your kids go to bed?", "A que horas seus filhos vão dormir?"],
+      ["They usually go to bed at 9 p.m.", "Eles geralmente vão dormir às 9 da noite."],
+      ["What time do you usually have breakfast?", "A que horas você normalmente toma café da manhã?"],
+      ["We have breakfast very early.", "Nós tomamos café da manhã bem cedo."]
+    ],
+    [
+      ["What time does the store open?", "A que horas a loja abre?"],
+      ["It opens at 10 o'clock.", "Abre às 10 horas."],
+      ["What time do you go to work?", "A que horas você vai para o trabalho?"],
+      ["We go to work at 7:25.", "Nós vamos para o trabalho às 7:25."],
+      ["What time do they go home?", "A que horas eles vão para casa?"],
+      ["They go home late at night.", "Eles vão para casa tarde da noite."]
     ]
   ]
 },
@@ -68,10 +94,16 @@ const lessonCards = [
   "title": "Verbs",
   "columns": [
     [
-      ["to like", "gostar (de)"]
+      ["to open", "abrir"]
     ],
     [
-      ["to sleep", "dormir"]
+      ["to close", "fechar"]
+    ],
+    [
+      ["to live", "morar, viver"]
+    ],
+    [
+      ["to visit", "visitar"]
     ]
   ]
 },
@@ -79,45 +111,63 @@ const lessonCards = [
   "title": "Vocabulary",
   "columns": [
     [
-      ["book", "livro"],
-      ["car", "carro"],
-      ["house", "casa"],
-      ["game", "jogo"],
-      ["big", "grande"]
+      ["door", "porta"],
+      ["window", "janela"],
+      ["drugstore", "farmácia"],
+      ["company", "companhia"],
+      ["office", "escritório"],
+      ["city", "cidade"],
+      ["state", "estado"],
+      ["farm", "fazenda"],
+      ["beach", "praia"],
+      ["museum", "museu"],
+      ["snack bar", "lanchonete"]
     ],
     [
-      ["small", "pequeno"],
-      ["new", "novo"],
-      ["old", "velho"],
-      ["husband", "marido"],
-      ["wife", "esposa"]
+      ["country", "país, interior"],
+      ["river", "rio"],
+      ["airport", "aeroporto"],
+      ["freeway", "rodovia"],
+      ["park", "parque"],
+      ["corner", "esquina"],
+      ["bridge", "ponte"],
+      ["neighbor", "vizinho"],
+      ["relatives", "parentes"],
+      ["until", "até"],
+      ["by", "até"]
     ],
     [
-      ["apple", "maçã"],
-      ["orange", "laranja"],
-      ["breakfast", "café da manhã"],
-      ["lunch", "almoço"],
-      ["dinner", "jantar"]
-    ],
-    [
-      ["this", "este, esse"],
-      ["yes", "sim"],
-      ["no", "não"],
-      ["or", "ou"],
-      ["for", "para, por"]
+      ["more", "mais"],
+      ["near", "perto"],
+      ["far", "longe"],
+      ["from", "de"],
+      ["noon", "meio-dia"],
+      ["midnight", "meia-noite"],
+      ["early", "cedo"],
+      ["late", "tarde"],
+      ["usually", "geralmente, normalmente"],
+      ["then", "então, depois, daí"]
     ]
   ]
 },
-  {
+{
   "title": "Expressions",
   "columns": [
     [
-      ["for breakfast", "no café da manhã"],
-      ["for lunch", "no almoço"],
-      ["for dinner", "no jantar"],
-      ["every day", "todos os dias"],
-      ["with me", "comigo"]
-      
+      ["What time is it?", "Que horas são?"],
+      ["to get up", "levantar-se"]
+    ],
+    [
+      ["to go to bed", "ir dormir"],
+      ["to have breakfast", "tomar café da manhã"]
+    ],
+    [
+      ["to have lunch", "almoçar"],
+      ["to have dinner", "jantar"]
+    ],
+    [
+      ["email box", "caixa de email"],
+      ["chat room", "sala de bate-papo"]
     ]
   ]
 },
@@ -125,51 +175,59 @@ const lessonCards = [
   "title": "Grammar",
   "columns": [
     [
-      ["I like to sleep.", "Eu gosto de dormir."],
-      ["I don't like to drink.", "Eu não gosto de beber."],
-      ["Do you like to study?", "Você gosta de estudar?"],
-      ["", ""],
-      ["a new book", "um livro novo"],
-      ["an old house", "uma casa velha"],
-      ["a big car", "um carro grande"],
-      ["a small store", "uma loja pequena"]
+      ["It's one o'clock.", "É uma hora."],
+      ["It's four fifteen.", "São quatro e quinze."],
+      ["It's nine twenty-five.", "São nove e vinte e cinco."],
+      ["It's five thirty.", "São cinco e meia."],
+      ["It's ten to four.", "São quatro menos dez."],
+      ["It's seven-o-five.", "São sete e cinco."],
+      ["It's a quarter after three.", "São três e quinze."],
+      ["It's half past ten.", "São dez e meia."],
+      ["It's a quarter to six.", "São seis menos quinze."],
+      ["a.m.", "0–12h"],
+      ["p.m.", "12–24h"]
     ],
     [
-      ["", ""],
-      ["", ""],
-      ["", ""],
-      ["", ""],
-      ["", ""],
-      ["an apple", "uma maçã"],
-      ["an orange", "uma laranja"],
-      ["an evening", "uma noite"],
-      ["an English teacher", "um professor de inglês"]
+      ["I", "eu"],
+      ["you", "você"],
+      ["he", "ele"],
+      ["she", "ela"],
+      ["it", "ele, ela (neutro)"],
+      ["we", "nós"],
+      ["you", "vocês"],
+      ["they", "eles, elas"]
+    ],
+    [
+      ["We go to school at 7 o'clock.", "Nós vamos à escola às 7 horas."],
+      ["They study until 11 o'clock.", "Eles estudam até às 11 horas."],
+      ["We have lunch at noon.", "Nós almoçamos ao meio-dia."],
+      ["We need to be there by midnight.", "Nós precisamos estar lá até a meia-noite."]
     ]
   ]
 },
 {
-  "title": "Listening",
+  "title": "Listening - Answer the Questions",
   "type": "listening",
   "segments": [
     {
-       "start": 2395,
-      "end": 2061
+       "start": 2640,
+      "end": 2643
     },
     {
-       "start": 2061,
-      "end": 2065
+       "start": 2643,
+      "end": 2649
     },
     {
-       "start": 2065,
-      "end": 2069
+       "start": 2649,
+      "end": 2655
     },
     {
-       "start": 2069,
-      "end": 2075
+       "start": 2655,
+      "end": 2660
     },
     {
-       "start": 2075,
-      "end": 2082
+       "start": 2660,
+      "end": 2665
     }
   ]
 }
