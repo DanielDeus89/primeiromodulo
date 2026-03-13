@@ -158,27 +158,22 @@ const lessonCards = [
   "type": "listening",
   "segments": [
     {
-      "text": "1. I play volleyball with my friends.",
       "start": 2012,
       "end": 2019
     },
     {
-      "text": "2. I don't work at the bank. I work here.",
       "start": 2019,
       "end": 2028
     },
     {
-      "text": "3. I play the guitar but I don't play the violin.",
       "start": 2028,
       "end": 2036
     },
     {
-      "text": "4. I study but I don't work.",
       "start": 2036,
       "end": 2043
     },
     {
-      "text": "5. I study French with my children.",
       "start": 2043,
       "end": 2053
     }
