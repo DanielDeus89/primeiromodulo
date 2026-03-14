@@ -1,47 +1,50 @@
-const lessonTitle = "Suh";
-const currentVideoId = "atKAEtCNEio";
+const lessonTitle = "Review 1 ";
+const currentVideoId = "CZijDeQ_rMs";
 
 const timeRanges = [
-
-  { start: 15, end: 9999 }, 
-
+  { start: 10, end: 62 }, //https://youtu.be/wu97CmI1zTw?t=78
+  { start: 70, end: 210 }, //https://youtu.be/wu97CmI1zTw?t=338
+  { start: 220, end: 999 }, //https://youtu.be/wu97CmI1zTw?t=338 https://youtu.be/wu97CmI1zTw?t=377
 ];
 
 const lessonCards = [
 {
-  "title": "Au Pair Introduction - SUh",
+  "title": "Improve your pronunciation",
   "columns": [
     [
-      ["Hi! My name is Sulian Favorato, and I’m from Brazil.", "", 15, 21],
-      ["",""],
-      ["I am a caring, responsible, and patient person, and I truly enjoy working with children.", "", 21, 27],
-      ["",""],
-      ["I chose to become an au pair because I want to experience a new culture, improve my English, and be part of a host family.", "", 27, 34],
-      ["",""],
-      ["I have solid childcare experience.", "", 34, 36],
-      ["",""],
-      ["I took care of a girl named Alicia for one year and four months, from the age of two until she was four.", "",  36, 42],
-      ["",""],
-      ["My responsibilities included preparing meals, helping with daily routines, playing, reading, and supporting her overall development.", "", 42, 50],
-      ["",""],
-      ["I also cared for a baby named Lua for eight months, from two to ten months old.", "", 50, 55],
-      ["",""],
-      ["I was responsible for her daily care, including feeding, changing diapers, bathing, putting her to sleep, and doing sensory and creative activities.", "", 55, 65],
-      ["",""],
-      ["Caring for children has taught me patience, responsibility, and how essential love and attention are for a child’s development.", "", 65, 72],
-      ["",""],
-      ["I come from a close and loving family, and family is very important to me.", "", 72, 77],
-      ["",""],
-      ["In my free time, I enjoy listening to music, watching videos, going out with friends, and learning new things.", "",77, 83 ],
-      ["",""],
-      ["I also love traveling and discovering new cultures.", "",83, 87 ],
-      ["",""],
-      ["I believe I can be a positive part of a host family by helping with childcare and sharing my culture.", "", 86, 93],
-      ["",""],
-      ["Thank you for watching my video. I hope to meet you soon!", "",93,9999 ]
+      ["cheese", "queijo"],
+      ["thanks", "obrigado / obrigado(a)"],
+      ["Portuguese", "português"],
+      ["daughter", "filha"]
+    ],
+    [
+      ["child", "criança / filho(a)"],
+      ["you're welcome", "de nada"],
+      ["apple", "maçã"],
+      ["juice", "suco"]
+    ],
+    [
+      ["breakfast", "café da manhã"],
+      ["an English teacher", "um professor de inglês"],
+      ["alone", "sozinho / sozinho(a)"],
+      ["a cup of tea", "uma xícara de chá"]
     ]
   ]
-}
+},
+  {
+       title: "Highlights",
+    columns: [
+      [
+      ]
+    ]
+  },
+  {
+       title: "Practice",
+    columns: [
+      [
+      ]
+    ]
+  },
 
 ];
 
