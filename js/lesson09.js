@@ -4,16 +4,13 @@ const currentVideoId = "M1IDJouaCwk";
 const timeRanges = [
   { start: 9, end: 286 },
   { start: 296, end: 502 }, //https://youtu.be/qVWg4NkpmDA?t=89
-  { start: 502, end: 9999 },   //https://youtu.be/qVWg4NkpmDA?t=109
-  { start: 110, end: 99999 }, // https://youtu.be/qVWg4NkpmDA?t=175
-  { start: 179, end: 99999 }, // https://youtu.be/qVWg4NkpmDA?t=233
-  { start: 233, end: 99999 }, // https://youtu.be/qVWg4NkpmDA?t=291
-  { start: 291, end: 99999 }, // https://youtu.be/qVWg4NkpmDA?t=332
-  { start: 332, end: 99999 }, // https://youtu.be/qVWg4NkpmDA?t=369 https://youtu.be/qVWg4NkpmDA?t=333
-  { start: 369, end: 99999 }, //https://youtu.be/qVWg4NkpmDA?t=599
-  { start: 605, end: 99999 }, //https://youtu.be/qVWg4NkpmDA?t=935
-  { start: 851, end: 99999 }, //https://youtu.be/qVWg4NkpmDA?t=851
-  { start: 941, end: 99999 }, //https://youtu.be/qVWg4NkpmDA?t=1184
+  { start: 512, end: 749 },   //https://youtu.be/qVWg4NkpmDA?t=109
+  { start: 759, end: 908 }, // https://youtu.be/qVWg4NkpmDA?t=175
+  { start: 918, end: 1475 }, // https://youtu.be/qVWg4NkpmDA?t=233
+  { start: 1485, end: 1648 }, // https://youtu.be/qVWg4NkpmDA?t=291
+  { start: 1658, end: 2001 }, // https://youtu.be/qVWg4NkpmDA?t=332
+  { start: 2011, end: 2043 }, // https://youtu.be/qVWg4NkpmDA?t=332
+
 ];
 
 const lessonCards = [
@@ -133,4 +130,31 @@ const lessonCards = [
       ["I have to go now.", "Eu tenho que ir agora."]
     ]
   ]
-}];
+},
+{
+  "title": "Listening",
+  "type": "listening",
+  "segments": [
+    {
+       "start": 2018,
+      "end": 2022
+    },
+    {
+       "start": 2022,
+      "end": 2027
+    },
+    {
+       "start": 2027 ,
+      "end": 2033
+    },
+    {
+       "start": 2033,
+      "end": 2037
+    },
+    {
+       "start": 2037,
+      "end": 2043
+    }
+  ]
+}
+];
