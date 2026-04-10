@@ -18,6 +18,7 @@ const lessonCards = [
   "title": "I want / I go",
   "columns": [
     [
+      ["I want", "Eu quero"],
       ["I want to go with you.", "Eu quero ir com você."],
       ["I want to speak only English.", "Eu quero falar só inglês."],
       ["I want to play soccer.", "Eu quero jogar futebol."],
@@ -25,6 +26,7 @@ const lessonCards = [
       ["I want to study French.", "Eu quero estudar francês."],
       ["I want to work at night.", "Eu quero trabalhar à noite."]    ],
     [
+      ["I go", "I vou"],
       ["I want to go to the movies.", "Eu quero ir ao cinema."],
       ["I want to go to the park.", "Eu quero ir ao parque."],
       ["I want to go to school.", "Eu quero ir à escola."],

@@ -105,7 +105,7 @@ body {
 .text-blue {
   color: #2c66ad;
   font-weight: bold;
-  font-size: 1.6em;
+  font-size: 1.8em;
   cursor: pointer;
 }
 
@@ -251,4 +251,22 @@ body {
   display: inline-block;
 }
 
+
+.card-play-pause-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.card-play-pause-btn:hover {
+  opacity: 0.9;
+}
 
