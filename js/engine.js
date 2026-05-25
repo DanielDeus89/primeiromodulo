@@ -117,9 +117,30 @@ function createNormalContent(card) {
     const col = document.createElement("div");
     col.className = "vocab-col";
 
-    colData.forEach(([en, pt]) => {
+    colData.forEach((item) => {
+      const en = item[0];
+      const pt = item[1];
+      const start = item[2];
+      const end = item[3];
+
       const p = document.createElement("p");
-      p.innerHTML = `<span class="text-blue">${en}</span><br><span class="text-white">${pt}</span>`;
+
+      if (start !== undefined && end !== undefined) {
+        p.innerHTML = `
+          <span class="text-blue" onclick="playSegment(${start}, ${end})" style="cursor:pointer;">
+            ${en}
+          </span>
+          <br>
+          <span class="text-white">${pt}</span>
+        `;
+      } else {
+        p.innerHTML = `
+          <span class="text-blue">${en}</span>
+          <br>
+          <span class="text-white">${pt}</span>
+        `;
+      }
+
       col.appendChild(p);
     });
 

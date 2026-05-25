@@ -32,18 +32,18 @@
           <p class="info-text" style="margin:8px 0 12px 0;">
             💡 Clique nas frases em azul para ouvir a pronúncia em inglês.
           </p>
-
-          <div class="stack-controls" style="margin:0; padding:0;">
-            <button onclick="prevCard()">⬅️ Anterior</button>
-            <button id="nextBtn" onclick="nextCard()" disabled>Próximo ➡️</button>
-          </div>
-        </div>
+      <div class="stack-controls" style="margin:0; padding:0;">
+        <button onclick="prevCard()">⬅️ Anterior</button>
+        <button onclick="back5Seconds()">⏪ Voltar 5s</button>
+        <button id="nextBtn" onclick="nextCard()" disabled>Próximo ➡️</button>
+      </div>
       </section>
 
       <!-- Vídeo -->
       <aside style="grid-column:2/3;">
         <div class="video-container" style="
-          width:100%;
+          width:50%;
+          height: 10%;
           aspect-ratio:16/9;
           background:#000;
           border-radius:10px;
@@ -68,6 +68,9 @@
 
   <script src="../js/player.js"></script>
   <script src="../js/engine.js"></script>
+  <script src="../js/card.js"></script>
+  <script src="../js/5s.js"></script>
   <script src="../js/lesson04.js"></script>
+
 </body>
 </html>

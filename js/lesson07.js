@@ -20,6 +20,8 @@ const lessonCards = [
     [
       ["I want", "Eu quero"],
       ["I want to go with you.", "Eu quero ir com você."],
+                  ["I want to go to the movies.", "Eu quero ir ao cinema."],
+
       ["I want to speak only English.", "Eu quero falar só inglês."],
       ["I want to play soccer.", "Eu quero jogar futebol."],
       ["I want to sleep now.", "Eu quero dormir agora."],
@@ -169,91 +171,3 @@ const lessonCards = [
   
 ];
 
-
-
-
-
-function loadLessonContent() {
-  document.getElementById("lessonTitle").textContent = lessonTitle;
-  const stack = document.querySelector(".card-stack");
-  stack.innerHTML = "";
-
-  lessonCards.forEach((card, index) => {
-    const div = document.createElement("div");
-    div.className = "card";
-    if (index === 0) div.classList.add("active");
-
-    // Título
-    if (card.title) {
-      const h2 = document.createElement("h2");
-      h2.className = "section-title";
-      h2.textContent = card.title;
-      div.appendChild(h2);
-    }
-
-    // Se for card de Listening
-    if (card.type === "listening" && Array.isArray(card.segments)) {
-      const row = document.createElement("div");
-      row.className = "listening-row";
-
-      card.segments.forEach((segment) => {
-        const cardDiv = document.createElement("div");
-        cardDiv.className = "listening-card";
-
-        const playBtn = document.createElement("button");
-        playBtn.textContent = "▶️ Ouvir";
-        playBtn.onclick = () => playSegment(segment.start, segment.end);
-
-        const toggleBtn = document.createElement("button");
-        toggleBtn.textContent = "👁️ Exibir";
-        toggleBtn.onclick = function () {
-          toggleText(this);
-        };
-
-        const span = document.createElement("span");
-        span.className = "hidden-text";
-        span.textContent = segment.text;
-
-        cardDiv.appendChild(playBtn);
-        cardDiv.appendChild(toggleBtn);
-        cardDiv.appendChild(span);
-        row.appendChild(cardDiv);
-      });
-
-      div.appendChild(row);
-      stack.appendChild(div);
-      return; // evita processar abaixo
-    }
-
-    // Cards normais
-    const grid = document.createElement("div");
-    grid.className = "grid2";
-
-    card.columns.forEach(colData => {
-      const col = document.createElement("div");
-      col.className = "vocab-col";
-
-      colData.forEach(([en, pt]) => {
-        const p = document.createElement("p");
-        p.innerHTML = `<span class="text-blue">${en}</span><br><span class="text-white">${pt}</span>`;
-        col.appendChild(p);
-      });
-
-      grid.appendChild(col);
-    });
-
-    div.appendChild(grid);
-    stack.appendChild(div);
-  });
-}
-
-// 🔸 ESSENCIAL PARA FUNCIONAR:
-window.onload = () => {
-  loadLessonContent();
-};
-
-function toggleText(button) {
-  const card = button.closest(".listening-card");
-  const isNowVisible = card.classList.toggle("show-text");
-  button.textContent = isNowVisible ? "🙈 Ocultar" : "👁️ Exibir";
-}

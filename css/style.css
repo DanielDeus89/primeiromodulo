@@ -270,3 +270,15 @@ body {
   opacity: 0.9;
 }
 
+.translation {
+  display: block;
+  font-size: 18px;
+  color: #444;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.text-white {
+  color: #333 !important;
+  display: block;
+}

@@ -97,7 +97,9 @@ const lessonCards = [
       ["brother", "irmão"],
       ["sister", "irmã"],
       ["child", "criança"],
-      ["daughter", "filha"],
+      ["daughter", "filha"]     
+    ],    
+    [
       ["son", "filho"],
       ["children", "crianças, filhos"],
       ["friend", "amigo, amiga"],
@@ -109,8 +111,10 @@ const lessonCards = [
       ["Portuguese", "português"],
       ["English", "inglês"],
       ["French", "francês"],
-      ["Spanish", "espanhol"],
-      ["of", "de"],
+      ["Spanish", "espanhol"]
+    ],
+      [
+    ["of", "de"],
       ["a", "um, uma"],
       ["cup", "xícara"],
       ["glass", "copo"],
@@ -182,7 +186,7 @@ const lessonCards = [
     {
       "text": "5. I don't eat cheese and I don't drink milk.",
       "start": 2163,
-      "end": 2172
+      "end": 2173
     }
   ]
 }

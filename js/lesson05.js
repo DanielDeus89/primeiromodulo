@@ -100,7 +100,7 @@ const lessonCards = [
       ["dinner", "jantar"]
     ],
     [
-      ["this", "este, esse", "deste", "desta"],
+      ["this", "este, esse, deste, desta"],
       ["yes", "sim"],
       ["no", "não"],
       ["or", "ou"],
@@ -172,7 +172,5 @@ const lessonCards = [
       "end": 2082
     }
   ]
-}
-
-  
+}  
 ];
