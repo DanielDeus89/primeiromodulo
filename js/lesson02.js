@@ -3,14 +3,14 @@ const currentVideoId = "RINF6CDh1_0";
 
 const timeRanges = [
   { start: 11, end: 246 }, //0
-  { start: 246, end: 418 }, //1
-  { start: 418, end: 665 }, //2
-  { start: 665, end: 765 }, //3
-  { start: 765, end: 900 }, //Verbs
-  { start: 900, end: 1472 }, //Vocabulary
-  { start: 1472, end: 1605 }, //Expressions
-  { start: 1605, end: 2125 },  //Grammar
-  { start: 2125, end: 99999 },  //Listening
+  { start: 256, end: 418 }, //1
+  { start: 428, end: 665 }, //2
+  { start: 675, end: 765 }, //3
+  { start: 775, end: 900 }, //Verbs
+  { start: 910, end: 1472 }, //Vocabulary
+  { start: 1482, end: 1605 }, //Expressions
+  { start: 1615, end: 2125 },  //Grammar
+  { start: 2135, end: 99999 },  //Listening
 ];
 
 const lessonCards = [

@@ -2,14 +2,14 @@ const lessonTitle = "Lesson 15";
 const currentVideoId = "lHDfVqOgXtE";
 
 const timeRanges = [
-  { start: 13, end: 393 },
-  { start: 403, end: 696 },
-  { start: 706, end: 898 },
-  { start: 908, end: 1046 },
-  { start: 1056, end: 1568 },
-  { start: 1578, end: 1751 },
-  { start: 1761, end: 2595 },
-  { start: 2605, end: 9999 },  
+  { start: 12, end: 304 },
+  { start: 314, end: 463 },
+  { start: 473, end: 640 },
+  { start: 650, end: 782 },
+  { start: 792, end: 1330 },
+  { start: 1340, end: 1503 },
+  { start: 1513, end: 2063 },
+  { start: 2073, end: 2113 },  
 ];
 
 const lessonCards = [
@@ -17,6 +17,7 @@ const lessonCards = [
   "title": "Input 15",
   "columns": [
     [
+      ["I help.", "Eu ajudo."],
       ["I help my cousin.", "Eu ajudo meu primo."],
       ["I help my uncle.", "Eu ajudo meu tio."],
       ["I help my aunt.", "Eu ajudo minha tia."],
@@ -24,6 +25,7 @@ const lessonCards = [
       ["I help my family.", "Eu ajudo minha família."]
     ],
     [
+      ["I know.", "Eu sei."],
       ["I know how to speak English.", "Eu sei falar inglês."],
       ["I know how to go downtown.", "Eu sei ir ao centro."],
       ["I know how to play chess.", "Eu sei jogar xadrez."],
@@ -39,16 +41,22 @@ const lessonCards = [
       ["I have sixteen cousins.", "Eu tenho 16 primos."],
       ["I have one hundred books.", "Eu tenho cem livros."],
       ["I have two hundred and fifty CDs.", "Eu tenho 250 CDs."],
-      ["", ""],
-      ["How many brothers and sisters do you have?", "Quantos irmãos e irmãs você tem?"],
-      ["I have two brothers.", "Eu tenho dois irmãos."],
-      ["I have one sister.", "Eu tenho uma irmã."]
     ],
     [
       ["Do you know my grandfather?", "Você conhece meu avô?"],
       ["Do you know my grandparents?", "Você conhece meus avós?"],
       ["Do you know my teacher?", "Você conhece meu professor?"],
-      ["", ""],
+    ]
+  ]
+},{
+  "title": "Input 15",
+  "columns": [
+    [
+      ["How many brothers and sisters do you have?", "Quantos irmãos e irmãs você tem?"],
+      ["I have two brothers.", "Eu tenho dois irmãos."],
+      ["I have one sister.", "Eu tenho uma irmã."]
+    ],
+    [
       ["How many grandchildren do you have?", "Quantos netos você tem?"],
       ["I have seven grandsons.", "Eu tenho sete netos."],
       ["I have five granddaughters.", "Eu tenho cinco netas."]
@@ -142,11 +150,11 @@ const lessonCards = [
     title: "Listening",
     type: "listening",
     segments: [
-      { text: "", start: 2610, end: 2617 },
-      { text: "", start: 2617, end: 2622 },
-      { text: "", start: 2622, end: 2629 },
-      { text: "", start: 2629, end: 2638 },
-      { text: "", start: 2638, end: 2647 }
+      { text: "", start: 2077, end: 2083 },
+      { text: "", start: 2083, end: 2089 },
+      { text: "", start: 2090, end: 2097 },
+      { text: "", start: 2097, end: 2104 },
+      { text: "", start: 2104, end: 2113 }
     ]
   }  
 ];

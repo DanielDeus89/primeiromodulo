@@ -278,13 +278,3 @@ function loadLessonContent() {
     stack.appendChild(div);
   });
 }
-
-window.onload = () => {
-  loadLessonContent();
-};
-
-function toggleText(button) {
-  const card = button.closest(".listening-card");
-  const isNowVisible = card.classList.toggle("show-text");
-  button.textContent = isNowVisible ? "🙈 Ocultar" : "👁️ Exibir";
-}
