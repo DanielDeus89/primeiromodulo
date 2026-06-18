@@ -22,9 +22,9 @@ const lessonCards = [
   "columns": [
     [
       ["I take.", "Eu levo."],
-       ["I go.", "Eu vou."],
-            ["I talk.", "Eu converso."],
-            ["I like.", "Eu gosto."],
+      ["I go.", "Eu vou."],
+      ["I talk.", "Eu converso."],
+      ["I like.", "Eu gosto."],
        ["I know.", "Eu conheço, sei."]
     ],
     [

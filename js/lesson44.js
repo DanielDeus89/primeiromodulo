@@ -96,7 +96,7 @@ const lessonCards = [
       ["Did she go to the bank this morning?", ""],
       ["What time did he have lunch yesterday?", ""],
       ["What did she eat for breakfast yesterday?", ""],
-      ["Where does he like to go with hisfriends?", ""],
+      ["Where does he like to go with his / her friends?", ""],
       ["Didn't she know it?", ""],
       ["How many cousins does he have?", ""],
       ["What time does her English class start?", ""],
