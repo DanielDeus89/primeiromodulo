@@ -3,13 +3,13 @@ const currentVideoId = "ZJ3pe7_QZrU";
 
 const timeRanges = [
   { start: 11, end: 155 }, //0
-  { start: 155, end: 477 }, //1
-  { start: 477, end: 834 }, //2
-  { start: 834, end: 9999 }, //3
-  { start: 765, end: 900 }, //Verbs
-  { start: 900, end: 1472 }, //Vocabulary
-  { start: 1472, end: 1605 }, //Expressions
-  { start: 1605, end: 2125 },  //Grammar
+  { start: 155 + 10, end: 477 }, //1
+  { start: 477 + 10, end: 834 }, //2
+  { start: 834 + 10, end: 9999 }, //3
+  { start: 765 + 10, end: 900 }, //Verbs
+  { start: 900 + 10, end: 1472 }, //Vocabulary
+  { start: 1472 + 10, end: 1605 }, //Expressions
+  { start: 1605 + 10, end: 2125 },  //Grammar
   { start: 2125, end: 99999 },  //Listening
 ];
 

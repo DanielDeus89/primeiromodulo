@@ -28,7 +28,7 @@ const lessonCards = [
     [
       ["I study English at night.", ""],
       ["I don't study English at night", ""],
-      ["", ""],
+      ["", " "],
       ["Portuguese", ""],
       ["Spanish", ""],
       ["French", ""],
@@ -50,15 +50,15 @@ const lessonCards = [
     [
       ["I drink coffee in the morning.", ""],
       ["I don't drink coffee in the morning, but I drink tea.", ""],
-      ["", ""],
+      ["", " "],
 
       ["I eat cheese in the afternoon.", ""],
       ["I don't eat cheese in the afternoon, but I eat bread and ham.", ""],
-      ["", ""],
+      ["", " "],
 
       ["I work with my father.", ""],
       ["I don't work with my father, but I work with my brother.", ""],
-      ["", ""],
+      ["", " "],
 
       ["I play the piano.", ""],
       ["I don't play the piano, but I play the guitar.", ""]

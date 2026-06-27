@@ -2,20 +2,21 @@ const lessonTitle = "Lesson 18";
 const currentVideoId = "nyLbLil_U7s";
 
 const timeRanges = [
-  { start: 18, end: 50 }, //0
-  { start: 55, end: 94 }, //0
-  { start: 113, end: 233 }, //Conversation
-  { start: 233 + 10, end: 317 }, //Fixacão
-  { start: 317 + 10, end: 369 }, //Passe para o Negativo
-  { start: 369 + 10, end: 471 }, //Fixacão
-  { start: 471 + 10, end: 513  }, //Passe para o Afirmativo
-  { start: 513 + 10, end: 619 }, //Fixacão
-  { start: 619 + 10, end: 669 }, //Passe para o Interrogativo
-  { start: 669 + 10, end: 763 }, //Fixacão
-  { start: 763 + 10, end: 810 }, //
-  { start: 810 + 10, end: 1152 }, //Questions
-  { start: 1152 + 10, end: 1823 }, //REsponda
-  { start: 1823 + 10, end: 1881 }, //
+  { start: 18, end: 40 }, //0
+  { start: 40, end: 72 }, //0
+  { start: 90, end: 169 }, //Conversation
+  { start: 169 + 0, end: 248 }, //Fixacão
+  { start: 248 + 10, end: 340 }, //Passe para o Negativo
+  { start: 340 + 10, end: 393 }, //Fixacão
+  { start: 393 + 10, end: 509  }, //Passe para o Afirmativo
+  { start: 509 + 10, end: 561 }, //Fixacão
+  { start: 561 + 10, end: 692 }, //Passe para o Interrogativo
+  { start: 692 + 10, end: 749 }, //Fixacão
+  { start: 749 + 10, end: 872 }, //
+  { start: 872 + 10, end: 930 }, //Questions
+  { start: 930 + 10, end: 1274 }, //REsponda
+  { start: 1274 + 10, end: 1645 }, //
+  { start: 1645 + 10, end: 1699 }, //
 ];
 
 const lessonCards = [
@@ -24,6 +25,16 @@ const lessonCards = [
   "type": "speak",
   "columns": [
     [
+      ["I read books every day.", ""],
+      ["I don't read books every day.", ""],
+      ["Do you read books every day?", ""],
+
+      ["", " "],
+
+      ["emails", ""],
+      ["many letters", ""],
+      ["magazines", ""],
+      ["the newspaper", ""]
     ]
   ]
 },
@@ -37,22 +48,38 @@ const lessonCards = [
   "type": "conversation",
   "columns": [
     [
-      ["Do you help your wife at home?", " "],
-      ["Yes, I do. I sometimes help my wife at home.", ""],
+      ["How many emails do you write every day?", ""],
+      ["I write about 10 emails every day.", ""],
       ["", " "],
 
-      ["Do you prefer to speak English or Spanish?", " "],
-      ["I prefer to speak English. I don't speak Spanish.", ""],
+      ["Do you read the newspaper at night?", ""],
+      ["Yes, I do. I read newspapers at night.", ""],
       ["", " "],
 
-      ["Do you want to help me tomorrow?", ""],
-      ["Sorry, but I have to work tomorrow.", " "],
+      ["Do you go to church with your family on weekends?", ""],
+      ["Yes, I do. I go to church with my family on weekends.", ""],
       ["", " "],
 
-      ["Do you want to go to the beach with me?", ""],
-      ["Yes, I do. I want to go to the beach with you.", ""]
+      ["Do you understand when I read in English?", ""],
+      ["Yes, I do. I understand when you read in English.", ""]
     ]
   ]
+},
+{
+  "title": "Conversation",
+  "type": "conversation",
+  "columns": [
+    [
+    ]
+  ]
+},
+{
+  "title": "Fixacão",
+  "columns": []  
+},
+{
+  "title": "Passe para o Negativo", 
+  "columns": []  
 },
 {
   "title": "Fixacão",
@@ -67,15 +94,7 @@ const lessonCards = [
   "columns": []  
 },
 {
-  "title": "Passe para o Interrogativo", 
-  "columns": []  
-},
-{
-  "title": "Fixacão",
-  "columns": []  
-},
-{
-  "title": "Passe para o Negativо ",
+  "title": "Passe para o Interrogativo ",
   "columns": []  
 },
 {
@@ -83,25 +102,25 @@ const lessonCards = [
   "columns": []  
 },
 {
-  "title": "Passe para o Interrogativo", 
+  "title": "Passe para o Afirmativo", 
   "columns": []  
 },
 {
   "title": "Questions",
   "columns": [
     [
-      ["When do you help your parents?", ""],
-      ["What do you want to sell?", ""],
-      ["Do you want to buy an apartment at the beach?", ""],
-      ["Do you know what car I have?", ""],
-      ["Do you need to work tomorrow?", ""],
-      ["Do you eat popcorn at the movies?", ""],
-      ["Do you like to drink tea or coffee in the morning?", ""],
-      ["Do you want some bubble gum?", ""],
-      ["How many cups of coffee do you drink every day?", ""],
-      ["Do you have time to help me today?", ""],
-      ["Do you know how to spell my name?", ""],
-      ["When do you want to go home?", ""]
+      ["Do you like to write emails to your teacher?", ""],
+      ["Do you read books in the evening?", ""],
+      ["When do you write to your grandparents?", ""],
+      ["Where do you like to go with your friends?", ""],
+      ["How many cousins do you have?", ""],
+      ["Do you like to go to the beach on weekends?", ""],
+      ["How many books do you have at home?", ""],
+      ["Do you understand English now?", ""],
+      ["Do you play the piano?", ""],
+      ["What time do you get up every day?", ""],
+      ["Do you have a brother?", ""],
+      ["Do you have to write emails in English at your work?", ""]
     ]
   ]
 },
@@ -116,11 +135,11 @@ const lessonCards = [
   title: "Listening & Comprehension",
   type: "listening",
   segments: [
-    { text: " ", start: 1836, end: 1840 }, //https://youtu.be/yeAbAUL7BWs?t=217
-    { text: " ", start: 1840, end: 1848 }, //https://youtu.be/yeAbAUL7BWs?t=222
-    { text: " ", start: 1848, end: 1857 }, //https://youtu.be/yeAbAUL7BWs?t=229
-    { text: " ", start: 1857, end: 1869 }, // https://youtu.be/yeAbAUL7BWs?t=237
-    { text: " ", start: 1869, end: 1881 } //https://youtu.be/yeAbAUL7BWs?t=241 
+    { text: " ", start: 1655, end: 1665 }, //https://youtu.be/yeAbAUL7BWs?t=217
+    { text: " ", start: 1665, end: 1673 }, //https://youtu.be/yeAbAUL7BWs?t=222
+    { text: " ", start: 1673, end: 1681 }, //https://youtu.be/yeAbAUL7BWs?t=229
+    { text: " ", start: 1681, end: 1690 }, // https://youtu.be/yeAbAUL7BWs?t=237
+    { text: " ", start: 1690, end: 1699 } //https://youtu.be/yeAbAUL7BWs?t=241 
   ]
 },
 
