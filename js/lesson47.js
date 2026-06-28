@@ -1,4 +1,4 @@
-const lessonTitle = "Lesson 45";
+const lessonTitle = "Lesson 47";
 const currentVideoId = "EmoqeP6OUOc";
 
 const timeRanges = [
@@ -18,7 +18,7 @@ const timeRanges = [
 
 const lessonCards = [
 {
-  "title": "Input 45",
+  "title": "Input 47",
   "columns": [
     [
       ["I work.", "Eu trabalho."],
@@ -37,7 +37,7 @@ const lessonCards = [
   ]
 },
 {
-  "title": "Input 45",
+  "title": "Input 47",
   "columns": [
     [
       ["He worked a lot today.", "Ele trabalhou muito hoje."],
@@ -51,8 +51,9 @@ const lessonCards = [
     ]
   ]
 },
+
 {
-  "title": "Input 45",
+  "title": "Input 47",
   "columns": [
     [
       ["We slept a little last night.", "Nós dormimos um pouco na noite passada."],
@@ -62,12 +63,14 @@ const lessonCards = [
     [
       ["They traveled to the USA.", "Eles viajaram para os Estados Unidos."],
       ["I didn't travel last year.", "Eu não viajei no ano passado."],
-      ["Did you travel to New York?", "Você viajou para Nova York?"]
+      ["Did you travel to New York?", "Você viajou para Nova Iorque?"]
     ]
   ]
 },
+
+
 {
-  "title": "Input 45",
+  "title": "Input 47",
   "columns": [
     [
       ["We studied all day long.", "Nós estudamos o dia todo."],
@@ -81,8 +84,10 @@ const lessonCards = [
     ]
   ]
 },
+
+
 {
-  "title": "Input 45",
+  "title": "Input 47",
   "columns": [
     [
       ["She didn't work with me.", "Ela não trabalhou comigo."],
@@ -92,12 +97,13 @@ const lessonCards = [
     [
       ["They didn't work with us.", "Eles não trabalharam conosco."],
       ["He didn't sleep here.", "Ele não dormiu aqui."],
-      ["I didn't take him with me.", "Eu não o levei comigo."]
+      ["I didn't take him with me.", "Eu não levei ele comigo."]
     ]
   ]
 },
+
 {
-  "title": "Input 45",
+  "title": "Input 47",
   "columns": [
     [
       ["Did you work with her?", "Você trabalhou com ela?"],
@@ -107,12 +113,13 @@ const lessonCards = [
     [
       ["Did they play last night?", "Eles jogaram na noite passada?"],
       ["Did you study with them?", "Você estudou com eles?"],
-      ["Did they travel once again?", "Eles viajaram mais uma vez?"]
+      ["Did they travel once again?", "Eles viajaram mais de uma vez?"]
     ]
   ]
 },
+
 {
-  "title": "Input 45",
+  "title": "Input 47",
   "columns": [
     [
       ["Didn't you study last semester?", "Você não estudou no semestre passado?"],
@@ -120,7 +127,7 @@ const lessonCards = [
       ["Didn't they work with you?", "Eles não trabalharam com você?"]
     ],
     [
-      ["Didn't he study Chinese?", "Ele não estudou chinês?"],
+      ["Didn't he study Chinese?", "Ele não estudou Chinês?"],
       ["Didn't he play soccer at school?", "Ele não jogou futebol na escola?"],
       ["Didn't you sleep at home?", "Você não dormiu em casa?"]
     ]
@@ -131,18 +138,24 @@ const lessonCards = [
   "columns": [
     [
       ["to work", "trabalhar"],
-            ["to sleep", "dormir"],
-
-      ["to study", "estudar"],
-            ["to travel", "viajar"],
-      ["to play", "jogar, tocar, brincar"]
+      ["to sleep", "dormir"]
     ],
     [
       ["worked", "trabalhou"],
-            ["slept", "dormiu"],
-
+      ["slept", "dormiu"]
+    ],
+    [
+      ["to study", "estudar"],
+      ["to travel", "viajar"]
+    ],
+    [
       ["studied", "estudou"],
-            ["traveled", "viajou"],
+      ["traveled", "viajou"]
+    ],
+    [
+      ["to play", "jogar, tocar, brincar"]
+    ],
+    [
       ["played", "jogou, tocou, brincou"]
     ]
   ]
@@ -158,10 +171,8 @@ const lessonCards = [
       ["secretary", "secretária"],
       ["assistant", "assistente"],
       ["police officer", "policial"],
-      ["mechanic", "mecânico"]
-  
-    ], [
-     ["business", "negócio, comércio"],
+      ["mechanic", "mecânico"],
+      ["business", "negócio, comércio"],
       ["businessman", "executivo"],
       ["businesswoman", "executiva"],
       ["administration", "administração"],
@@ -176,10 +187,8 @@ const lessonCards = [
       ["field", "campo"],
       ["court", "quadra"],
       ["tennis", "tênis"],
-      ["basketball", "basquete"]
-    ],
-        [
-       ["volleyball", "vôlei"],
+      ["basketball", "basquete"],
+      ["volleyball", "vôlei"],
       ["checkers", "jogo de damas"],
       ["soon", "logo, em breve"],
       ["later", "depois, mais tarde"],
@@ -209,20 +218,30 @@ const lessonCards = [
   "title": "Grammar",
   "columns": [
     [
-      ["me / She wants to take me to Miami.", ""],
-      ["you / I need to visit you tomorrow.", ""],
-      ["him  / She likes to cook for him.", ""],
-      ["her  / I have to say this to her.", ""],
-      ["it   / I need to wash it.", ""],
-      ["us   / They like to help us.", ""],
-      ["you  / I want to write to you.", ""],
-      ["them / She needs to talk to them.", ""]
+      ["me", ""],
+      ["you", ""],
+      ["him", ""],
+      ["her", ""],
+      ["it", ""],
+      ["us", ""],
+      ["you", ""],
+      ["them", ""]
     ],
     [
-      ["Who wants to go with me?", "Quem quer ir comigo?"],
-      ["Who plays the flute in your family?", "Quem toca flauta em sua família?"],
-      ["Who spoke in the meeting?", "Quem falou na reunião?"],
-      ["Who ate the toast?", "Quem comeu a torrada?"]
+      ["She wants to take me to Miami.", ""],
+      ["I need to visit you tomorrow.", ""],
+      ["She likes to cook for him.", ""],
+      ["I have to say this to her.", ""],
+      ["I need to wash it.", ""],
+      ["They like to help us.", ""],
+      ["I want to write to you.", ""],
+      ["She needs to talk to them.", ""]
+    ],
+    [
+      ["Who wants to go with me?", ""],
+      ["Who plays the flute in your family?", ""],
+      ["Who spoke in the meeting?", ""],
+      ["Who ate the toast?", ""]
     ]
   ]
 },

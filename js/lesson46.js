@@ -119,8 +119,8 @@ const lessonCards = [
   type: "listening",
   segments: [
     { text: " ", start: 1117, end: 1122 }, //https://youtu.be/yeAbAUL7BWs?t=217
-    { text: " ", start: 1122, end: 1122 }, //https://youtu.be/yeAbAUL7BWs?t=222
-    { text: " ", start: 1122, end: 1131 }, //https://youtu.be/yeAbAUL7BWs?t=229
+    { text: " ", start: 1122, end: 1127 }, //https://youtu.be/yeAbAUL7BWs?t=222
+    { text: " ", start: 1127, end: 1131 }, //https://youtu.be/yeAbAUL7BWs?t=229
     { text: " ", start: 1131, end: 1136 }, // https://youtu.be/yeAbAUL7BWs?t=237
     { text: " ", start: 1136, end: 1141 } //https://youtu.be/yeAbAUL7BWs?t=241 
   ]
