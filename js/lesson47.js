@@ -2,6 +2,7 @@ const lessonTitle = "Lesson 47";
 const currentVideoId = "gV-YvBkl8kk";
 
 const timeRanges = [
+<<<<<<< HEAD
   { start: 10, end: 131 },
   { start: 131 + 10, end: 269 },
   { start: 269 + 10, end: 421 },
@@ -14,6 +15,20 @@ const timeRanges = [
   { start: 1692 + 10, end: 1838 },//Expressions
   { start: 1838 + 10, end: 2313 },//Grammar
   { start: 2313 + 10, end: 99999 },
+=======
+  { start: 10, end: 132 },
+  { start: 132 + 10, end: 269 },
+  { start: 269 + 10, end: 421 },
+  { start: 421 + 10, end: 590 }, //We liked the game.
+  { start: 590 + 10, end: 741 }, //I didn't like that.
+  { start: 740 + 10, end: 852 },//Did you go downtown?
+  { start: 852 + 10, end: 983 },//Didn't she go?
+  { start: 983 + 10, end: 1200 }, //Verbs
+  { start: 1200 + 0, end: 1691 },//Vocabulary
+  { start: 1691 + 10, end: 1839 },//Expressions
+  { start: 1839 + 5, end: 2314 },//Grammar
+  { start: 2314 + 10, end: 2358 },
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
 ];
 
 const lessonCards = [
@@ -21,6 +36,7 @@ const lessonCards = [
   "title": "Input 47",
   "columns": [
     [
+<<<<<<< HEAD
       ["I read.", "Eu leio."],
       ["I write.", "Eu escrevo."],
       ["I say.", "Eu digo."],
@@ -33,6 +49,20 @@ const lessonCards = [
       ["I said.", "Eu disse."],
       ["I stayed.", "Eu fiquei."],
       ["I learned.", "Eu aprendi."]
+=======
+      ["I read", "Eu leio"],
+      ["I write", "Eu escrevo"],
+      ["I say", "Eu digo"],
+      ["I stay", "Eu fico"],
+      ["I learn", "Eu aprendo"]
+    ],
+    [
+      ["I read", "Eu li"],
+      ["I wrote", "Eu escrevi"],
+      ["I said", "Eu disse"],
+      ["I stayed", "Eu fiquei"],
+      ["I learned", "EU aprendi"]
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
     ]
   ]
 },
@@ -101,11 +131,20 @@ const lessonCards = [
   "columns": [
     [
       ["I have some friends in Europe.", "Eu tenho alguns amigos na Europa."],
+<<<<<<< HEAD
       ["They studied with some friends.", "Eles estudaram com alguns amigos."]
      ],
     [
       ["She doesn't play any instruments.", "Ela não toca nenhum instrumento."],
       ["We didn't have any cookies.", "Nós não comemos nenhum biscoito."]    ]
+=======
+      ["They studied with some friends.", "Eles estudaram com alguns amigos."],
+    ],
+    [
+      ["She doesn't play any instruments.", "Ela não toca nenhum instrumento."],
+      ["We didn't have any cookies.", "Nós não comemos nenhum biscoito."],
+    ]
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
   ]
 },
 {
@@ -117,7 +156,11 @@ const lessonCards = [
     ],
     [
       ["Didn't she have any money with her?", "Ela não tinha nenhum dinheiro com ela?"],
+<<<<<<< HEAD
       ["Didn't they buy any books?", "Elas não compraram nenhum livro?"]
+=======
+      ["Didn't they buy any books?", "Eles não compraram nenhum livro?"]
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
     ]
   ]
 },
@@ -126,6 +169,7 @@ const lessonCards = [
   "columns": [
     [
       ["to read", "ler"],
+<<<<<<< HEAD
             ["to stay", "ficar"],
 
       ["to write", "escrever"],
@@ -140,6 +184,18 @@ const lessonCards = [
       ["wrote", "escreveu"],
             ["learned", "aprendeu"],
 
+=======
+      ["to stay", "ficar"],
+      ["to write", "escrever"],
+      ["to learn", "aprender"],
+      ["to say", "dizer"]
+    ],
+    [
+      ["read", "leu"],
+      ["stayed", "ficou"],
+      ["wrote", "escreveu"],
+      ["learned", "aprendeu"],
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
       ["said", "disse"]
     ]
   ]
@@ -153,9 +209,17 @@ const lessonCards = [
       ["cards", "cartas, baralho"],
       ["chess", "xadrez"],
       ["just", "só, apenas"],
+<<<<<<< HEAD
       ["slowly", "devagar, lentamente"],
       ["quickly", "rapidamente"]
     ], [
+=======
+      ["slowly", "devagar, lentamente"]
+      
+    ],    
+    [
+      ["quickly", "rapidamente"],
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
       ["fast", "rápido"],
       ["too", "também"],
       ["also", "também"],
@@ -169,10 +233,18 @@ const lessonCards = [
       ["leisure", "lazer"],
       ["kitchen", "cozinha"],
       ["bedroom", "quarto"],
+<<<<<<< HEAD
       ["mall", "shopping"],
       ["library", "biblioteca"]
     ],
     [
+=======
+      ["mall", "shopping"]
+
+    ],
+     [
+      ["library", "biblioteca"],
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
       ["gas station", "posto de gasolina"],
       ["supermarket", "supermercado"],
       ["bakery", "padaria"],
@@ -204,6 +276,7 @@ const lessonCards = [
       ["Do you have any books?", "Você tem alguns livros?"],
       ["I don't have any books.", "Eu não tenho nenhum livro."],
       ["He studies English and also French.", "Ele estuda inglês e francês também."],
+<<<<<<< HEAD
       ["He studies English, too.", "Ele estuda inglês também."],
       ["", " "],
 
@@ -237,6 +310,39 @@ const lessonCards = [
       { text: "", start: 2335, end: 2339 },
       { text: "", start: 2339, end: 2345 },
       { text: "", start: 2345, end: 2352 },
+=======
+      ["He studies English, too.", "Ele estuda inglês também."]
+    ],
+    [
+      ["I want to learn how to cook.", "Eu quero aprender a cozinhar."],
+      ["I learn English from my teacher.", "Eu aprendo inglês com meu professor."]
+    ],
+    [
+      ["Months of the year (in)", ""],
+      ["January", ""],
+      ["February", ""],
+      ["March", ""],
+      ["April", ""],
+      ["May", ""],
+      ["June", ""],
+      ["July", ""],
+      ["August", ""],
+      ["September", ""],
+      ["October", ""],
+      ["November", ""],
+      ["December", ""]
+    ]
+  ]
+},
+{
+    title: "Change into negative:",
+    type: "listening",
+    segments: [
+      { text: "", start: 2330, end: 2334 },
+      { text: "", start: 2334, end: 2339 },
+      { text: "", start: 2339, end: 2346 },
+      { text: "", start: 2346, end: 2352 },
+>>>>>>> 684c1ebab31d45f6e8dc655f712d468335131b6c
       { text: "", start: 2352, end: 2358 }
     ]
   }  

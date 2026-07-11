@@ -131,18 +131,16 @@ const lessonCards = [
   "columns": [
     [
       ["to work", "trabalhar"],
-            ["to sleep", "dormir"],
-
+      ["to sleep", "dormir"],
       ["to study", "estudar"],
-            ["to travel", "viajar"],
+      ["to travel", "viajar"],
       ["to play", "jogar, tocar, brincar"]
     ],
     [
       ["worked", "trabalhou"],
-            ["slept", "dormiu"],
-
+      ["slept", "dormiu"],
       ["studied", "estudou"],
-            ["traveled", "viajou"],
+      ["traveled", "viajou"],
       ["played", "jogou, tocou, brincou"]
     ]
   ]
