@@ -1,19 +1,19 @@
 const lessonTitle = "Lesson 47";
-const currentVideoId = "EmoqeP6OUOc";
+const currentVideoId = "gV-YvBkl8kk";
 
 const timeRanges = [
-  { start: 10, end: 146 },
-  { start: 146 + 10, end: 304 },
-  { start: 304 + 10, end: 475 },
-  { start: 474 + 10, end: 624 }, //We liked the game.
-  { start: 624 + 10, end: 787 }, //I didn't like that.
-  { start: 787 + 10, end: 942 },//Did you go downtown?
-  { start: 942 + 10, end: 1122 },//Didn't she go?
-  { start: 1122 + 10, end: 1366 }, //Verbs
-  { start: 1366 + 10, end: 1958 },//Vocabulary
-  { start: 1958 + 10, end: 2162 },//Expressions
-  { start: 2162 + 10, end: 2614 },//Grammar
-  { start: 2614 + 10, end: 99999 },
+  { start: 10, end: 131 },
+  { start: 131 + 10, end: 269 },
+  { start: 269 + 10, end: 421 },
+  { start: 421 + 10, end: 590 }, //We liked the game.
+  { start: 590 + 10, end: 740 }, //I didn't like that.
+  { start: 740 + 10, end: 851 },//Did you go downtown?
+  { start: 851 + 10, end: 983 },//Didn't she go?
+  { start: 983 + 10, end: 1201 }, //Verbs
+  { start: 1201 + 10, end: 1692 },//Vocabulary
+  { start: 1692 + 10, end: 1838 },//Expressions
+  { start: 1838 + 10, end: 2313 },//Grammar
+  { start: 2313 + 10, end: 99999 },
 ];
 
 const lessonCards = [
@@ -21,18 +21,18 @@ const lessonCards = [
   "title": "Input 47",
   "columns": [
     [
-      ["I work.", "Eu trabalho."],
-      ["I study.", "Eu estudo."],
-      ["I play.", "Eu brinco, jogo, toco."],
-      ["I sleep.", "Eu durmo."],
-      ["I travel.", "Eu viajo."]
+      ["I read.", "Eu leio."],
+      ["I write.", "Eu escrevo."],
+      ["I say.", "Eu digo."],
+      ["I stay.", "Eu fico."],
+      ["I learn.", "Eu aprendo."]
     ],
     [
-      ["I worked.", "Eu trabalhei."],
-      ["I studied.", "Eu estudei."],
-      ["I played.", "Eu brinquei, joguei, toquei."],
-      ["I slept.", "Eu dormi."],
-      ["I traveled.", "Eu viajei."]
+      ["I read.", "Eu li."],
+      ["I wrote.", "Eu escrevi."],
+      ["I said.", "Eu disse."],
+      ["I stayed.", "Eu fiquei."],
+      ["I learned.", "Eu aprendi."]
     ]
   ]
 },
@@ -40,96 +40,84 @@ const lessonCards = [
   "title": "Input 47",
   "columns": [
     [
-      ["He worked a lot today.", "Ele trabalhou muito hoje."],
-      ["They didn't work yesterday.", "Eles não trabalharam ontem."],
-      ["Did she work today?", "Ela trabalhou hoje?"]
+      ["She read the book.", "Ela leu o livro."],
+      ["I didn't read it.", "Eu não li isso."],
+      ["Did you read his email?", "Você leu o email dele?"]
     ],
     [
-      ["He played volleyball.", "Ele jogou vôlei."],
-      ["I didn't play the violin.", "Eu não toquei violino."],
-      ["Did she play checkers?", "Ela jogou damas?"]
+      ["I wrote those cards.", "Eu escrevi aqueles cartões."],
+      ["He didn't write to me.", "Ele não me escreveu."],
+      ["Did you write to him?", "Você escreveu para ele?"]
     ]
   ]
 },
-
 {
   "title": "Input 47",
   "columns": [
     [
-      ["We slept a little last night.", "Nós dormimos um pouco na noite passada."],
-      ["I didn't sleep a lot.", "Eu não dormi muito."],
-      ["Did he sleep at home?", "Ele dormiu em casa?"]
+      ["We stayed until lunch.", "Nós ficamos até o almoço."],
+      ["They didn't stay at the party.", "Eles não ficaram na festa."],
+      ["Did he stay alone?", "Ele ficou sozinho?"]
     ],
     [
-      ["They traveled to the USA.", "Eles viajaram para os Estados Unidos."],
-      ["I didn't travel last year.", "Eu não viajei no ano passado."],
-      ["Did you travel to New York?", "Você viajou para Nova Iorque?"]
+      ["I learned how to play the drums fast.", "Eu aprendi a tocar bateria rápido."],
+      ["Didn't you learn how to speak Spanish yet?", "Você não aprendeu a falar espanhol ainda?"],
+      ["I learned a lot from my English teacher.", "Eu aprendi muito com minha professora de inglês."]
     ]
   ]
 },
-
-
 {
   "title": "Input 47",
   "columns": [
     [
-      ["We studied all day long.", "Nós estudamos o dia todo."],
-      ["I didn't study a lot.", "Eu não estudei muito."],
-      ["Did they study at home?", "Eles estudaram em casa?"]
+      ["She learned Spanish in Spain.", "Ela aprendeu espanhol na Espanha."],
+      ["He wrote me a beautiful letter.", "Ele me escreveu uma linda carta."],
+      ["I read the newspaper this morning.", "Eu li o jornal esta manhã."]
     ],
     [
-      ["They played tennis.", "Eles jogaram tênis."],
-      ["I slept well last night.", "Eu dormi bem na noite passada."],
-      ["We worked with them.", "Nós trabalhamos com eles."]
+      ["He didn't say this to her.", "Ele não disse isso para ela."],
+      ["We didn't learn this expression yet.", "Nós não aprendemos essa expressão ainda."],
+      ["They didn't stay after the party.", "Eles não ficaram depois da festa."]
     ]
   ]
 },
-
-
 {
   "title": "Input 47",
   "columns": [
     [
-      ["She didn't work with me.", "Ela não trabalhou comigo."],
-      ["He didn't study Law.", "Ele não estudou Direito."],
-      ["We didn't travel with them.", "Nós não viajamos com eles."]
+      ["Did you read my email?", "Você leu meu email?"],
+      ["Did you write to her?", "Você escreveu para ela?"],
+      ["Did they learn Italian?", "Eles aprenderam italiano?"]
     ],
     [
-      ["They didn't work with us.", "Eles não trabalharam conosco."],
-      ["He didn't sleep here.", "Ele não dormiu aqui."],
-      ["I didn't take him with me.", "Eu não levei ele comigo."]
+      ["Didn't they stay here with you?", "Eles não ficaram aqui com você?"],
+      ["Didn't you learn it during the class?", "Você não aprendeu isso durante a aula?"],
+      ["Didn't you read my email?", "Você não leu meu email?"]
     ]
   ]
 },
-
 {
   "title": "Input 47",
   "columns": [
     [
-      ["Did you work with her?", "Você trabalhou com ela?"],
-      ["Did she study math?", "Ela estudou matemática?"],
-      ["Did you sleep there?", "Você dormiu lá?"]
-    ],
+      ["I have some friends in Europe.", "Eu tenho alguns amigos na Europa."],
+      ["They studied with some friends.", "Eles estudaram com alguns amigos."]
+     ],
     [
-      ["Did they play last night?", "Eles jogaram na noite passada?"],
-      ["Did you study with them?", "Você estudou com eles?"],
-      ["Did they travel once again?", "Eles viajaram mais de uma vez?"]
-    ]
+      ["She doesn't play any instruments.", "Ela não toca nenhum instrumento."],
+      ["We didn't have any cookies.", "Nós não comemos nenhum biscoito."]    ]
   ]
 },
-
 {
   "title": "Input 47",
   "columns": [
     [
-      ["Didn't you study last semester?", "Você não estudou no semestre passado?"],
-      ["Didn't she travel on her vacation?", "Ela não viajou nas suas férias?"],
-      ["Didn't they work with you?", "Eles não trabalharam com você?"]
+      ["Do you know any foreigners in this city?", "Você conhece algum estrangeiro nesta cidade?"],
+      ["Did they have any time?", "Eles tinham algum tempo?"]
     ],
     [
-      ["Didn't he study Chinese?", "Ele não estudou Chinês?"],
-      ["Didn't he play soccer at school?", "Ele não jogou futebol na escola?"],
-      ["Didn't you sleep at home?", "Você não dormiu em casa?"]
+      ["Didn't she have any money with her?", "Ela não tinha nenhum dinheiro com ela?"],
+      ["Didn't they buy any books?", "Elas não compraram nenhum livro?"]
     ]
   ]
 },
@@ -137,26 +125,22 @@ const lessonCards = [
   "title": "Verbs",
   "columns": [
     [
-      ["to work", "trabalhar"],
-      ["to sleep", "dormir"]
+      ["to read", "ler"],
+            ["to stay", "ficar"],
+
+      ["to write", "escrever"],
+            ["to learn", "aprender"],
+
+      ["to say", "dizer"],
     ],
     [
-      ["worked", "trabalhou"],
-      ["slept", "dormiu"]
-    ],
-    [
-      ["to study", "estudar"],
-      ["to travel", "viajar"]
-    ],
-    [
-      ["studied", "estudou"],
-      ["traveled", "viajou"]
-    ],
-    [
-      ["to play", "jogar, tocar, brincar"]
-    ],
-    [
-      ["played", "jogou, tocou, brincou"]
+      ["read", "leu"],
+            ["stayed", "ficou"],
+
+      ["wrote", "escreveu"],
+            ["learned", "aprendeu"],
+
+      ["said", "disse"]
     ]
   ]
 },
@@ -164,37 +148,37 @@ const lessonCards = [
   "title": "Vocabulary",
   "columns": [
     [
-      ["dentist", "dentista"],
-      ["doctor", "médico"],
-      ["lawyer", "advogado"],
-      ["engineer", "engenheiro"],
-      ["secretary", "secretária"],
-      ["assistant", "assistente"],
-      ["police officer", "policial"],
-      ["mechanic", "mecânico"],
-      ["business", "negócio, comércio"],
-      ["businessman", "executivo"],
-      ["businesswoman", "executiva"],
-      ["administration", "administração"],
-      ["Law", "lei, Direito"],
-      ["hospital", "hospital"],
-      ["restaurant", "restaurante"]
+      ["customer", "freguês"],
+      ["price", "preço"],
+      ["cards", "cartas, baralho"],
+      ["chess", "xadrez"],
+      ["just", "só, apenas"],
+      ["slowly", "devagar, lentamente"],
+      ["quickly", "rapidamente"]
+    ], [
+      ["fast", "rápido"],
+      ["too", "também"],
+      ["also", "também"],
+      ["short", "curto"],
+      ["long", "longo"],
+      ["electric guitar", "guitarra"]
     ],
     [
-      ["factory", "fábrica"],
-      ["flute", "flauta"],
-      ["violin", "violino"],
-      ["field", "campo"],
-      ["court", "quadra"],
-      ["tennis", "tênis"],
-      ["basketball", "basquete"],
-      ["volleyball", "vôlei"],
-      ["checkers", "jogo de damas"],
-      ["soon", "logo, em breve"],
-      ["later", "depois, mais tarde"],
-      ["during", "durante"],
-      ["again", "de novo, novamente, outra vez"],
-      ["who", "quem"]
+      ["drums", "bateria"],
+      ["party", "festa"],
+      ["leisure", "lazer"],
+      ["kitchen", "cozinha"],
+      ["bedroom", "quarto"],
+      ["mall", "shopping"],
+      ["library", "biblioteca"]
+    ],
+    [
+      ["gas station", "posto de gasolina"],
+      ["supermarket", "supermercado"],
+      ["bakery", "padaria"],
+      ["grocery store", "mercearia"],
+      ["snack bar", "lanchonete"],
+      ["line", "fila"]
     ]
   ]
 },
@@ -202,15 +186,13 @@ const lessonCards = [
   "title": "Expressions",
   "columns": [
     [
-      ["once again", "mais uma vez"],
-      ["all day long", "o dia todo"],
-      ["all night long", "a noite toda"],
-      ["to work out", "exercitar-se"]
+      ["some", "algum"],
+      ["any", "algum, nenhum"],
+      ["me too", "eu também"]
     ],
     [
-      ["dentist's office", "consultório odontológico"],
-      ["doctor's office", "consultório médico"],
-      ["How do you spell your name?", "Como se escreve seu nome?"]
+      ["overtime", "hora extra"],
+      ["to take a nap", "tirar um cochilo"]
     ]
   ]
 },
@@ -218,42 +200,44 @@ const lessonCards = [
   "title": "Grammar",
   "columns": [
     [
-      ["me", ""],
-      ["you", ""],
-      ["him", ""],
-      ["her", ""],
-      ["it", ""],
-      ["us", ""],
-      ["you", ""],
-      ["them", ""]
+      ["I have some books.", "Eu tenho alguns livros."],
+      ["Do you have any books?", "Você tem alguns livros?"],
+      ["I don't have any books.", "Eu não tenho nenhum livro."],
+      ["He studies English and also French.", "Ele estuda inglês e francês também."],
+      ["He studies English, too.", "Ele estuda inglês também."],
+      ["", " "],
+
+      ["I want to learn how to cook.", "Eu quero aprender a cozinhar."],
+      ["I learn English from my teacher.", "Eu aprendo inglês com meu professor."]
+
+
     ],
     [
-      ["She wants to take me to Miami.", ""],
-      ["I need to visit you tomorrow.", ""],
-      ["She likes to cook for him.", ""],
-      ["I have to say this to her.", ""],
-      ["I need to wash it.", ""],
-      ["They like to help us.", ""],
-      ["I want to write to you.", ""],
-      ["She needs to talk to them.", ""]
+      ["January", "Janeiro"],
+      ["February", "Fevereiro"],
+      ["March", "Março"],
+      ["April", "Abril"],
+      ["May", "Maio"],
+      ["June", "Junho"],
+      ["July", "Julho"],
+      ["August", "Agosto"],
+      ["September", "Setembro"],
+      ["October", "Outubro"],
+      ["November", "Novembro"],
+      ["December", "Dezembro"]
     ],
-    [
-      ["Who wants to go with me?", ""],
-      ["Who plays the flute in your family?", ""],
-      ["Who spoke in the meeting?", ""],
-      ["Who ate the toast?", ""]
-    ]
+    
   ]
 },
   {
-    title: "Write a question:",
+    title: "Change into Negative:",
     type: "listening",
     segments: [
-      { text: "", start: 2629, end: 2637 },
-      { text: "", start: 2637, end: 2644 },
-      { text: "", start: 2644, end: 2652 },
-      { text: "", start: 2652, end: 2660 },
-      { text: "", start: 2660, end: 2668 }
+      { text: "", start: 2330, end: 2335 },
+      { text: "", start: 2335, end: 2339 },
+      { text: "", start: 2339, end: 2345 },
+      { text: "", start: 2345, end: 2352 },
+      { text: "", start: 2352, end: 2358 }
     ]
   }  
 ];

@@ -30,7 +30,7 @@ const lessonCards = [
       ["I have a small car.", ""],
       ["I don't have a small car.", ""],
       ["Do you have a small car?", ""],
-      ["", ""],
+      ["", " "],
       ["house", ""],
       ["cup", ""],
       ["glass", ""],

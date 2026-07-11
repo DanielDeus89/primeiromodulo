@@ -46,18 +46,18 @@ const lessonCards = [
     [
       ["Do you understand Spanish?", " "],
       ["No, I don't. I don't understand Spanish. I understand only English.", " "],
-      ["", ""],
+      ["", " "],
 
       ["Do you have an email?", " "],
       ["Yes, I do. I have an email.", " "],
-      ["", ""],
+      ["", " "],
 
-      ["Do you w an t to go dow ntow n w ith me now?", " "],
-      ["Sorry, but I have to study English w ith my teacher now.", " "],
-      ["", ""],
+      ["Do you want to go downtown with me now?", " "],
+      ["Sorry, but I have to study English with my teacher now.", " "],
+      ["", " "],
 
-      ["Do you speak English w ith your brother?", " "],
-      ["Yes, I do. I speak English w ith my brother.", " "]
+      ["Do you speak English with your brother?", " "],
+      ["Yes, I do. I speak English with my brother.", " "]
     ]
   ]
 },

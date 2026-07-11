@@ -3,9 +3,9 @@ const currentVideoId = "nyLbLil_U7s";
 
 const timeRanges = [
   { start: 18, end: 40 }, //0
-  { start: 40, end: 72 }, //0
+  { start: 40, end: 74 }, //0
   { start: 90, end: 169 }, //Conversation
-  { start: 169 + 0, end: 248 }, //Fixacão
+  { start: 169 + 0, end: 250 }, //Fixacão
   { start: 248 + 10, end: 340 }, //Passe para o Negativo
   { start: 340 + 10, end: 393 }, //Fixacão
   { start: 393 + 10, end: 509  }, //Passe para o Afirmativo
@@ -25,15 +25,15 @@ const lessonCards = [
   "type": "speak",
   "columns": [
     [
-      ["I read books every day.", ""],
-      ["I don't read books every day.", ""],
-      ["Do you read books every day?", ""],
+      ["I read magazines every day.", ""],
+      ["I don't read magazines every day.", ""],
+      ["Do you read magazines every day?", ""],
 
       ["", " "],
 
       ["emails", ""],
       ["many letters", ""],
-      ["magazines", ""],
+      ["books", ""],
       ["the newspaper", ""]
     ]
   ]
