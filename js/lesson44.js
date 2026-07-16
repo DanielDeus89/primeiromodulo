@@ -117,7 +117,7 @@ const lessonCards = [
   title: "Listening / Change into affirmative:",
   type: "listening",
   segments: [
-    { text: " ", start: 1073, end: 1082 }, //https://youtu.be/yeAbAUL7BWs?t=217
+    { text: " ", start: 1076, end: 1082 }, //https://youtu.be/yeAbAUL7BWs?t=217
     { text: " ", start: 1082, end: 1088 }, //https://youtu.be/yeAbAUL7BWs?t=222
     { text: " ", start: 1088, end: 1093 }, //https://youtu.be/yeAbAUL7BWs?t=229
     { text: " ", start: 1093, end: 1098 }, // https://youtu.be/yeAbAUL7BWs?t=237

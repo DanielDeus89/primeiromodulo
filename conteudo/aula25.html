@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 01 - English Listening Practice</title>
+  <title>Lesson 25 - English Listening Practice</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -28,15 +28,14 @@
       <!-- Texto e botões -->
       <section style="grid-column:1/2;">
         <div style="text-align:center;">
-          <h1 id="lessonTitle" style="margin:0;">Lesson 01</h1>
+          <h1 id="lessonTitle" style="margin:0;"></h1>
           <p class="info-text" style="margin:8px 0 12px 0;">
             💡 Clique nas frases em azul para ouvir a pronúncia em inglês.
           </p>
       <div class="stack-controls" style="margin:0; padding:0;">
-        <button onclick="prevCard()">Anterior</button>
-        <button onclick="back5Seconds()">Voltar 5s</button>
-        <button id="nextBtn" onclick="nextCard()" disabled>Próximo</button>
-        <button id="copyTimeBtn()"  onclick="copyCurrentVideoTime()" >Copiar Tempo</button>
+        <button onclick="prevCard()">⬅️ Anterior</button>
+        <button onclick="back5Seconds()">⏪ Voltar 5s</button>
+        <button id="nextBtn" onclick="nextCard()" disabled>Próximo ➡️</button>
       </div>
       </section>
 
@@ -45,7 +44,7 @@
         <div class="video-container" style="
           width:50%;
           height: 10%;
-          aspect-ratio:16/9;
+          aspect-ratio:20/9;
           background:#000;
           border-radius:10px;
           overflow:hidden;">
@@ -65,22 +64,13 @@
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
-
-    async function copyCurrentVideoTime(){
-
-    const current = Math.round(player.getCurrentTime());
-
-    navigator.clipboard.writeText(current.toString());
-
-    console.log(current);
-}
   </script>
 
   <script src="../js/player.js"></script>
   <script src="../js/engine.js"></script>
   <script src="../js/card.js"></script>
   <script src="../js/5s.js"></script>
-  <script src="../js/lesson01.js"></script>
+  <script src="../js/lesson25.js"></script>
 
 </body>
 </html>
