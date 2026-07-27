@@ -213,6 +213,7 @@ const lessonCards = [
 
     ],
     [
+      ["Months of the year (in)", ""], 
       ["January", "Janeiro"],
       ["February", "Fevereiro"],
       ["March", "Março"],

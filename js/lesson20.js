@@ -2,8 +2,8 @@ const lessonTitle = "Lesson 20";
 const currentVideoId = "Ns6bmXyKRwo";
 
 const timeRanges = [
-  { start: 10, end: 50 }, //0
-  { start: 55, end: 69 }, //0
+  { start: 10, end: 37 }, //0
+  { start: 37, end: 69 }, //0
   { start: 85, end: 173 }, //Conversation
   { start: 173, end: 248 }, //Conversation
   { start: 248 + 10, end: 349 }, //Fixacão
