@@ -1,18 +1,19 @@
-const lessonTitle = "Lesson 49";
-const currentVideoId = "uGRcNpy-9pM";
+const lessonTitle = "Lesson 51";
+const currentVideoId = "z4J_KjAswf8";
 
 const timeRanges = [
-  { start: 10, end: 123 },
-  { start: 123 + 10, end: 308 },
-  { start: 307 + 10, end: 435 },
-  { start: 434 + 10, end: 561 }, //We liked the game.
-  { start: 567 + 10, end: 697 }, //I didn't like that.
-  { start: 697 + 10, end: 758 },//Did you go downtown?
-  { start: 757 + 10, end: 979 },//Didn't she go?
-  { start: 979 + 10, end: 1504 }, //Verbs
-  { start: 1504 + 10, end: 1681 },//Vocabulary
-  { start: 1681 + 10, end: 2240 },//Expressions
-  { start: 2239 + 10, end: 2289 },//Grammar
+  { start: 10, end: 105 },
+  { start: 105, end: 286 },
+  { start: 286, end: 469 },
+  { start: 469, end: 544 }, //We liked the game.
+  { start: 544, end: 623 }, //I didn't like that.
+  { start: 623 + 5, end: 815 },//Did you go downtown?
+  { start: 815, end: 1408 },//Didn't she go?
+  { start: 1408, end: 1580 }, //Verbs
+  { start: 1580, end: 99999999 },//Vocabulary
+  { start: 1681, end: 99999999 },//Expressions
+  { start: 2239, end: 99999999 },//Grammar
+  { start: 2313, end: 99999999 },
 ];
 
 const lessonCards = [
