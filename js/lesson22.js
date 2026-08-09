@@ -2,10 +2,10 @@ const lessonTitle = "Lesson 22";
 const currentVideoId = "TU63Qhj2a-M";
 
 const timeRanges = [
-  { start: 10, end: 34 }, //0
-  { start: 34 + 10, end: 59 }, //0
+  { start: 10, end: 37 }, //0
+  { start: 37, end: 60 }, //0
   { start: 77, end: 160 }, //Conversation
-  { start: 160, end: 244 }, //Conversation
+  { start: 160, end: 243 }, //Conversation
   { start: 244 + 10, end: 356 }, //Fixacão
   { start: 356 + 10, end: 405 }, //Passe para o Negativo
   { start: 405 + 10, end: 519 }, //Fixacão
@@ -16,7 +16,7 @@ const timeRanges = [
   { start: 870 + 10, end: 927 }, //
   { start: 927 + 10, end: 1299 }, //Questions
   { start: 1299 + 10, end: 1718 }, //REsponda
-  { start: 1718 + 10, end: 1779 }, //
+  { start: 1718 + 10, end: 999999 }, //
 ];
 
 const lessonCards = [

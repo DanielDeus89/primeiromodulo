@@ -28,14 +28,15 @@
       <!-- Texto e botões -->
       <section style="grid-column:1/2;">
         <div style="text-align:center;">
-          <h1 id="lessonTitle" style="margin:0;"></h1>
+          <h1 id="lessonTitle" style="margin:0;">Lesson 22</h1>
           <p class="info-text" style="margin:8px 0 12px 0;">
             💡 Clique nas frases em azul para ouvir a pronúncia em inglês.
           </p>
       <div class="stack-controls" style="margin:0; padding:0;">
-        <button onclick="prevCard()">⬅️ Anterior</button>
-        <button onclick="back5Seconds()">⏪ Voltar 5s</button>
-        <button id="nextBtn" onclick="nextCard()" disabled>Próximo ➡️</button>
+        <button onclick="prevCard()">Anterior</button>
+        <button onclick="back5Seconds()">Voltar 5s</button>
+        <button id="nextBtn" onclick="nextCard()" disabled>Próximo</button>
+        <button id="copyTimeBtn()"  onclick="copyCurrentVideoTime()" >Copiar Tempo</button>
       </div>
       </section>
 
@@ -44,7 +45,7 @@
         <div class="video-container" style="
           width:50%;
           height: 10%;
-          aspect-ratio:20/9;
+          aspect-ratio:16/9;
           background:#000;
           border-radius:10px;
           overflow:hidden;">
@@ -64,6 +65,15 @@
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
+
+    async function copyCurrentVideoTime(){
+
+    const current = Math.round(player.getCurrentTime());
+
+    navigator.clipboard.writeText(current.toString());
+
+    console.log(current);
+}
   </script>
 
   <script src="../js/player.js"></script>
