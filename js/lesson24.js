@@ -2,7 +2,7 @@ const lessonTitle = "Lesson 24";
 const currentVideoId = "RiklkEZSkSE";
 
 const timeRanges = [
-  { start: 10, end: 37 }, //0
+  { start: 10, end: 38 }, //0
   { start: 37, end: 69 }, //0
   { start: 132, end: 211 }, //Conversation
   { start: 211, end: 281 }, //Conversation
