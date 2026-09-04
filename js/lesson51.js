@@ -2,110 +2,94 @@ const lessonTitle = "Lesson 51";
 const currentVideoId = "z4J_KjAswf8";
 
 const timeRanges = [
-  { start: 10, end: 105 },
-  { start: 105, end: 286 },
-  { start: 286, end: 469 },
-  { start: 469, end: 544 }, //We liked the game.
-  { start: 544, end: 623 }, //I didn't like that.
-  { start: 623 + 5, end: 815 },//Did you go downtown?
-  { start: 815, end: 1408 },//Didn't she go?
+  { start: 10, end: 106 },
+  { start: 106, end: 287 },
+  { start: 287, end: 470 },
+  { start: 470, end: 543 }, //We liked the game.
+  { start: 543, end: 623 }, //I didn't like that.
+  { start: 629, end: 816 },//Did you go downtown?
+  { start: 816, end: 1408 },//Didn't she go?
   { start: 1408, end: 1580 }, //Verbs
-  { start: 1580, end: 99999999 },//Vocabulary
-  { start: 1681, end: 99999999 },//Expressions
-  { start: 2239, end: 99999999 },//Grammar
-  { start: 2313, end: 99999999 },
+  { start: 1580, end: 2037 },//Vocabulary
+  { start: 2037, end: 2070 }
 ];
 
 const lessonCards = [
 {
-  "title": "Input 49",
+  "title": "Input 51",
   "columns": [
     [
-      ["I do.", "Eu faço."],
-      ["I want.", "Eu quero."],
-      ["I try.", "Eu tento."],
-      ["I start.", "Eu começo."],
-      ["I wait.", "Eu espero."]
+      ["I finish.", "Eu termino."],
+      ["I come.", "Eu venho."],
+      ["I drink.", "Eu bebo."],
+      ["I eat.", "Eu como."],
+      ["I can.", "Eu posso."]
     ],
     [
-      ["I did.", "Eu fiz."],
-      ["I wanted.", "Eu quis."],
-      ["I tried.", "Eu tentei."],
-      ["I started.", "Eu comecei."],
-      ["I waited.", "Eu esperei."]
+      ["I finished.", "Eu terminei."],
+      ["I came.", "Eu vim."],
+      ["I drank.", "Eu bebi."],
+      ["I ate.", "Eu comi."]
     ]
   ]
 },
 {
-  "title": "Input 49",
+  "title": "Input 51",
   "columns": [
     [
-      ["He wanted to talk to you.", "Ele queria conversar com você."],
-      ["They didn't do their homework.", "Eles não fizeram suas lições de casa."],
-      ["Did she wait for them?", "Ela esperou por eles?"],
-      ["Didn't you try the cake?", "Você não experimentou o bolo?"]
+      ["I ate bread for breakfast.", "Eu comi pão no café da manhã."],
+      ["I didn't drink coffee for breakfast.", "Eu não tomei café no café da manhã."],
+      ["Did you come together?", "Vocês vieram juntos?"],
+      ["Didn't they come to the party?", "Eles não vieram para a festa?"]
     ],
     [
-      ["I started in April.", "Eu comecei em abril."],
-      ["He didn't want to go.", "Ele não queria ir."],
-      ["Did she try that dress on?", "Ela provou aquele vestido?"],
-      ["Didn't you do it?", "Você não fez isso?"]
+      ["I came to class early.", "Eu vim para a aula cedo."],
+      ["I didn't finish it.", "Eu não terminei isto."],
+      ["Did she eat her meal?", "Ela comeu sua refeição?"],
+      ["Didn't he finish the test yet?", "Ele não terminou o teste ainda?"]
     ]
   ]
 },
 {
-  "title": "Input 49",
+  "title": "Input 51",
   "columns": [
     [
-      ["I am a teacher.", "Eu sou uma professora."],
-      ["He is hungry.", "Ele está com fome."],
-      ["We are in a hurry.", "Estamos com pressa."]
+      ["Are you a journalist?", "Você é um jornalista?"],
+      ["He is a writer.", "Ele é um escritor."],
+      ["Is she married?", "Ela é casada?"],
+      ["He is not my boyfriend.", "Ele não é meu namorado."],
+      ["Is it healthy?", "É saudável?"]
     ],
     [
-      ["My name is Mary.", "Meu nome é Mary."],
-      ["My cousin is very nice.", "Minha prima é muito legal."],
-      ["They are in a hurry to start the game.", "Eles estão com pressa para começar o jogo."]
+      ["I did it by myself.", "Eu fiz isso sozinha."],
+      ["Did you study by yourself?", "Você estudou sozinho?"],
+      ["Did he go by himself?", "Ele foi sozinho?"],
+      ["She didn't make the cake by herself.", "Ela não fez o bolo sozinha."],
+      ["They learned it by themselves.", "Eles aprenderam sozinhos."]
     ]
   ]
 },
 {
-  "title": "Input 49",
+  "title": "Input 51",
   "columns": [
     [
-      ["I am not tired now.", "Eu não estou cansado agora."],
-      ["He is not upset with his girlfriend.", "Ele não está chateado com sua namorada."],
-      ["She is not at the bakery.", "Ela não está na padaria."]
+      ["I can go with you.", "Eu posso ir com você."],
+      ["Can you help me?", "Você pode me ajudar?"]
     ],
     [
-      ["I am not busy today.", "Eu não estou ocupado hoje."],
-      ["We are not near the gas station.", "Nós não estamos perto do posto de gasolina."],
-      ["They are not far from here.", "Eles não estão longe daqui."]
+      ["What can I do for you?", "O que eu posso fazer por você?"],
+      ["When can you go with me?", "Quando você pode ir comigo?"]
     ]
   ]
 },
 {
-  "title": "Input 49",
+  "title": "Input 51",
   "columns": [
     [
-      ["Are you busy?", "Você está ocupado?"],
-      ["Are we late?", "Nós estamos atrasados?"],
-      ["Are they rich?", "Eles são ricos?"]
-    ],
-    [
-      ["Are you alone?", "Você está sozinho?"],
-      ["Is he a dentist?", "Ele é um dentista?"],
-      ["Is she happy?", "Ela está feliz?"]
-    ]
-  ]
-},
-{
-  "title": "Input 49",
-  "columns": [
-    [
-      ["It's early.", "É cedo."]
-    ],
-    [
-      ["Is it late?", "É tarde?"]
+      ["What time can you go downtown with me?", "A que horas você pode ir ao centro comigo?"],
+      ["He can't talk now.", "Ele não pode falar agora."],
+      ["When can we start?", "Quando nós podemos começar?"],
+      ["Who can read this?", "Quem pode ler isto?"]
     ]
   ]
 },
@@ -113,18 +97,17 @@ const lessonCards = [
   "title": "Verbs",
   "columns": [
     [
-      ["to do", "fazer"],
-      ["to start", "começar"],
-      ["to want", "querer"],
-      ["to wait", "esperar"],
-      ["to try", "tentar"]
+      ["to finish", "terminar"],
+      ["to eat", "comer"],
+      ["to come", "vir"],
+      ["can", "poder"],
+      ["to drink", "beber"]
     ],
     [
-      ["did", "fez"],
-      ["started", "começou"],
-      ["wanted", "quis"],
-      ["waited", "esperou"],
-      ["tried", "tentou"]
+      ["finished", "terminou"],
+      ["ate", "comeu"],
+      ["came", "veio"],
+      ["drank", "bebeu"]
     ]
   ]
 },
@@ -132,98 +115,90 @@ const lessonCards = [
   "title": "Vocabulary",
   "columns": [
     [
-      ["dad", "pai"],
-      ["mom", "mãe"],
-      ["cousin", "primo, prima"],
-      ["furniture", "mobília"],
-      ["television", "televisão"],
-      ["blinds", "persiana"],
-      ["flower", "flor"],
-      ["present", "presente"]
-
-  
-    ],   [
-        ["sandwich", "sanduíche"],
-      ["ice cream", "sorvete"],
-      ["popsicle", "picolé"],
-      ["clothes", "roupas"],
-      ["skirt", "saia"],
-      ["dress", "vestido"],
-      ["blouse", "blusa"],
-      ["pants", "calça"]
+      ["boyfriend", "namorado"],
+      ["girlfriend", "namorada"],
+      ["man", "homem"],
+      ["woman", "mulher"],
+      ["single", "solteiro"],
+      ["married", "casado"],
+      ["rich", "rico"],
+      ["poor", "pobre"],
+      ["meal", "refeição"],
+      ["light", "leve, claro"],
+      ["news", "notícia"]
+    ],    
+    [
+      ["story", "história"],
+      ["novel", "romance"],
+      ["detective", "detetive"],
+      ["journalist", "jornalista"],
+      ["writer", "escritor"],
+      ["executive", "executivo"],
+      ["pretty", "bonita"],
+      ["glad", "contente, alegre"],
+      ["upset", "chateado"],
+      ["busy", "ocupado"],
+      ["tired", "cansado"]
     ],
     [
-      ["shirt", "camisa"],
-      ["shoes", "sapatos"],
-      ["toy", "brinquedo"],
-      ["Christmas", "Natal"],
-      ["almost", "quase"],
-      ["everything", "tudo"],
-      ["happy", "feliz"],
-      ["sad", "triste"]
-
-      
-    ],    [
-     ["bored", "entediado"],
-      ["name", "nome"],
-      ["nickname", "apelido"],
-      ["last name", "sobrenome"],
-      ["clock", "relógio"],
-      ["watch", "relógio de pulso"],
-      ["ticket", "passagem, bilhete"],
-      ["nice", "bom, bonito, legal"]
-    ],
+      ["wise", "sábio"],
+      ["sick", "doente"],
+      ["healthy", "saudável"],
+      ["together", "juntos"],
+      ["whole", "todo, inteiro"],
+      ["couch", "sofá"],
+      ["help", "ajuda"],
+      ["problem", "problema"],
+      ["check", "cheque"],
+      ["checkbook", "talão de cheques"]
+    ]
   ]
 },
 {
   "title": "Expressions",
   "columns": [
     [
-      ["to be hungry", "estar com fome"],
-      ["to be thirsty", "estar com sede"],
-      ["to be in a hurry", "estar com pressa"],
-      ["to be quiet", "estar quieto"]
+      ["this time", "desta vez"],
+      ["first time", "primeira vez"],
+      ["part-time", "meio período"],
+      ["full-time", "período integral"]
     ],
     [
-      ["to be online", "estar online"],
-      ["to be cool", "ficar calmo"],
-      ["sold out", "esgotado, vendido"],
-      ["full name", "nome completo"]
+      ["conference room", "sala de reuniões"],
+      ["conference call", "conferência telefônica"]
     ]
   ]
 },
 {
-  "title": "Grammar: to be - ser, estar",
+  "title": "Grammar",
   "columns": [
     [
-      ["I am.", "Eu sou, estou."],
-      ["You are.", "Você é, está."],
-      ["He is.", "Ele é, está."],
-      ["She is.", "Ela é, está."],
-      ["It is.", "É, está. (neutro)"],
-      ["We are.", "Nós somos, estamos."],
-      ["You are.", "Vocês são, estão."],
-      ["They are.", "Eles são, estão."]
+      ["Aren't you?", "Você não é, não está?"],
+      ["Isn't he?", "Ele não é, não está?"],
+      ["Isn't she?", "Ela não é, não está?"],
+      ["Isn't it?", "Não é, não está?"],
+      ["Aren't we?", "Nós não somos? Não estamos?"],
+      ["Aren't you?", "Vocês não são? Não estão?"],
+      ["Aren't they?", "Eles não são? Não estão?"],
+      [" ", " "],
+
+      ["I can speak German.", "Eu posso falar alemão."],
+      ["I can't play any instrument.", "Eu não consigo tocar nenhum instrumento."],
+      ["Can you come at seven?", "Você pode vir às sete?"]
+
+
     ],
     [
-      ["I'm not.", "Eu não sou, não estou."],
-      ["You're not.", "Você não é, não está."],
-      ["He's not.", "Ele não é, não está."],
-      ["She's not.", "Ela não é, não está."],
-      ["It's not.", "Não é, não está. (neutro)"],
-      ["We're not.", "Nós não somos, não estamos."],
-      ["You're not.", "Vocês não são, não estão."],
-      ["They're not.", "Eles não são, não estão."]
-    ],
-    [
-      ["Am I?", "Eu sou, estou?"],
-      ["Are you?", "Você é, está?"],
-      ["Is he?", "Ele é, está?"],
-      ["Is she?", "Ela é, está?"],
-      ["Is it?", "É, está?"],
-      ["Are we?", "Nós somos, estamos?"],
-      ["Are you?", "Vocês são, estão?"],
-      ["Are they?", "Eles são, estão?"]
+      ["by myself", "sozinho"],
+      ["by yourself", "sozinho"],
+      ["by himself", "sozinho"],
+      ["by herself", "sozinha"],
+      ["by itself", "sozinho"],
+      ["by ourselves", "sozinhos"],
+      ["by yourselves", "sozinhos"],
+      ["by themselves", "sozinhos"]
+
+
     ]
   ]
 },
@@ -231,11 +206,11 @@ const lessonCards = [
     title: "Listening: Answer the Questions",
     type: "listening",
     segments: [
-      { text: "", start: 2256, end: 2263 },
-      { text: "", start: 2263, end: 2266 },
-      { text: "", start: 2266, end: 2273 },
-      { text: "", start: 2273, end: 2280 },
-      { text: "", start: 2280, end: 2280 }
+      { text: "", start: 2043, end: 2046 },
+      { text: "", start: 2046, end: 2052 },
+      { text: "", start: 2052, end: 2057 },
+      { text: "", start: 2057, end: 2062 },
+      { text: "", start: 2062, end: 2070 }
     ]
   }  
 ];
