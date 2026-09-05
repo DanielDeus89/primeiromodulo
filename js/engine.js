@@ -1,181 +1,725 @@
+// engine.js
+
+// ======================================================
+// ESTADO GLOBAL DA AULA
+// ======================================================
+
 let currentIndex = 0;
 let isDevMode = false;
 
-function toggleDevMode() {
-  const checkbox = document.getElementById("devCheckbox");
-  isDevMode = checkbox ? checkbox.checked : false;
+
+// Indica que o arquivo lessonXX.js já foi carregado.
+// O player.js poderá consultar esse valor.
+window.lessonReady = false;
+
+
+// ======================================================
+// INICIALIZAÇÃO DA AULA
+// ======================================================
+
+function initializeLesson() {
+
+  console.log("Inicializando aula...");
+
+
+  // ----------------------------------------------------
+  // VALIDAR DADOS OBRIGATÓRIOS
+  // ----------------------------------------------------
+
+  if (typeof lessonTitle === "undefined") {
+
+    console.error(
+      "lessonTitle não foi definido no arquivo da aula."
+    );
+
+    return;
+  }
+
+
+  if (typeof currentVideoId === "undefined") {
+
+    console.error(
+      "currentVideoId não foi definido no arquivo da aula."
+    );
+
+    return;
+  }
+
+
+  if (
+    typeof lessonCards === "undefined" ||
+    !Array.isArray(lessonCards)
+  ) {
+
+    console.error(
+      "lessonCards não foi definido corretamente."
+    );
+
+    return;
+  }
+
+
+  if (
+    typeof timeRanges === "undefined" ||
+    !Array.isArray(timeRanges)
+  ) {
+
+    console.error(
+      "timeRanges não foi definido corretamente."
+    );
+
+    return;
+  }
+
+
+  // ----------------------------------------------------
+  // RESETAR ESTADO
+  // ----------------------------------------------------
+
+  currentIndex = 0;
+
+
+  // ----------------------------------------------------
+  // ATUALIZAR TÍTULO DO NAVEGADOR
+  // ----------------------------------------------------
+
+  document.title =
+    `${lessonTitle} - English Listening Practice`;
+
+
+  // ----------------------------------------------------
+  // ATUALIZAR INTERFACE
+  // ----------------------------------------------------
+
   updateMainButtons();
-  renderLessonContent();
-}
 
-function prevCard() {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updateMainButtons();
+
+  if (
+    typeof renderLessonContent === "function"
+  ) {
+
     renderLessonContent();
+
   }
+
+
+  // ----------------------------------------------------
+  // MARCAR AULA COMO PRONTA
+  // ----------------------------------------------------
+
+  window.lessonReady = true;
+
+
+  console.log(
+    "Aula carregada:",
+    lessonTitle
+  );
+
+
+  console.log(
+    "Cards:",
+    lessonCards.length
+  );
+
+
+  console.log(
+    "Vídeo:",
+    currentVideoId
+  );
+
+
+  // ----------------------------------------------------
+  // TENTAR INICIALIZAR PLAYER
+  //
+  // A API do YouTube pode já ter carregado
+  // ou ainda pode estar carregando.
+  // ----------------------------------------------------
+
+  if (
+    typeof tryInitializePlayer === "function"
+  ) {
+
+    tryInitializePlayer();
+
+  }
+
 }
 
-function nextCard() {
-  if (!isDevMode) return;
 
-  if (currentIndex < lessonCards.length - 1) {
-    currentIndex++;
-    updateMainButtons();
-    renderLessonContent();
+// ======================================================
+// MODO DESENVOLVEDOR
+// ======================================================
+
+function toggleDevMode() {
+
+  const checkbox =
+    document.getElementById("devCheckbox");
+
+  isDevMode =
+    checkbox ? checkbox.checked : false;
+
+
+  console.log(
+    "Modo desenvolvedor:",
+    isDevMode
+      ? "ATIVADO"
+      : "DESATIVADO"
+  );
+
+
+  // ====================================================
+  // MODO DESENVOLVEDOR ATIVADO
+  // ====================================================
+
+  if (isDevMode) {
+
+    // Pausar o vídeo
+    if (
+      typeof player !== "undefined" &&
+      player &&
+      typeof player.pauseVideo === "function"
+    ) {
+
+      player.pauseVideo();
+
+      console.log(
+        "Vídeo pausado pelo modo desenvolvedor."
+      );
+
+    }
+
   }
+
+
+  // ====================================================
+  // MODO DESENVOLVEDOR DESATIVADO
+  // ====================================================
+
+  else {
+
+    // Continuar o vídeo de onde estava
+    if (
+      typeof player !== "undefined" &&
+      player &&
+      typeof player.playVideo === "function"
+    ) {
+
+      player.playVideo();
+
+      console.log(
+        "Vídeo retomado."
+      );
+
+    }
+
+  }
+
+
+  // Atualizar estado do botão Próximo
+  updateMainButtons();
 }
 
-function back5Seconds() {
-  if (typeof player !== "undefined" && player && typeof player.getCurrentTime === "function") {
-    const currentTime = player.getCurrentTime();
-    const newTime = Math.max(0, currentTime - 5);
-    player.seekTo(newTime, true);
-    player.playVideo();
-  }
-}
+
+// ======================================================
+// ATUALIZAÇÃO DOS BOTÕES
+// ======================================================
 
 function updateMainButtons() {
-  const nextBtn = document.getElementById("nextBtn");
 
-  if (nextBtn) {
-    nextBtn.disabled = !isDevMode || currentIndex === lessonCards.length - 1;
-  }
-}
+  const nextBtn =
+    document.getElementById(
+      "nextBtn"
+    );
 
-function toggleText(button) {
-  const card = button.closest(".listening-card");
-  if (!card) return;
 
-  const isNowVisible = card.classList.toggle("show-text");
-  button.textContent = isNowVisible ? "🙈 Ocultar" : "👁️ Exibir";
-}
+  if (!nextBtn) {
 
-function createTitle(card) {
-  const h2 = document.createElement("h2");
-  h2.className = "section-title lesson-card-title";
+    return;
 
-  const titleSpan = document.createElement("span");
-  titleSpan.className = "lesson-card-title-text";
-  titleSpan.textContent = card.title || "Sem título";
-
-  const playPauseBtn = document.createElement("button");
-  playPauseBtn.className = "mini-control-btn";
-  playPauseBtn.textContent = "▶️";
-
-  h2.appendChild(titleSpan);
-  h2.appendChild(playPauseBtn);
-
-  return h2;
-}
-
-function createListeningContent(card) {
-  const row = document.createElement("div");
-  row.className = "listening-row";
-
-  card.segments.forEach((segment) => {
-    const cardDiv = document.createElement("div");
-    cardDiv.className = "listening-card";
-
-    const playBtn = document.createElement("button");
-    playBtn.className = "segment-btn";
-    playBtn.textContent = "▶️ Ouvir";
-    playBtn.onclick = () => {
-      if (typeof playSegment === "function") {
-        playSegment(segment.start, segment.end);
-      }
-    };
-
-    const toggleBtn = document.createElement("button");
-    toggleBtn.className = "segment-btn";
-    toggleBtn.textContent = "👁️ Exibir";
-    toggleBtn.onclick = function () {
-      toggleText(this);
-    };
-
-    const span = document.createElement("span");
-    span.className = "hidden-text";
-    span.textContent = segment.text || "";
-
-    cardDiv.appendChild(playBtn);
-    cardDiv.appendChild(toggleBtn);
-    cardDiv.appendChild(span);
-
-    row.appendChild(cardDiv);
-  });
-
-  return row;
-}
-
-function createNormalContent(card) {
-  const grid = document.createElement("div");
-  grid.className = "grid2";
-
-  if (!Array.isArray(card.columns)) return grid;
-
-  card.columns.forEach((colData) => {
-    const col = document.createElement("div");
-    col.className = "vocab-col";
-
-    colData.forEach((item) => {
-      const en = item[0];
-      const pt = item[1];
-      const start = item[2];
-      const end = item[3];
-
-      const p = document.createElement("p");
-
-      if (start !== undefined && end !== undefined) {
-        p.innerHTML = `
-          <span class="text-blue" onclick="playSegment(${start}, ${end})" style="cursor:pointer;">
-            ${en}
-          </span>
-          <br>
-          <span class="text-white">${pt}</span>
-        `;
-      } else {
-        p.innerHTML = `
-          <span class="text-blue">${en}</span>
-          <br>
-          <span class="text-white">${pt}</span>
-        `;
-      }
-
-      col.appendChild(p);
-    });
-
-    grid.appendChild(col);
-  });
-
-  return grid;
-}
-
-function renderLessonContent() {
-  document.getElementById("lessonTitle").textContent = lessonTitle;
-
-  const stack = document.querySelector(".card-stack");
-  if (!stack) return;
-
-  stack.innerHTML = "";
-
-  const card = lessonCards[currentIndex];
-  if (!card) return;
-
-  const div = document.createElement("div");
-  div.className = "card active";
-
-  div.appendChild(createTitle(card));
-
-  if (card.type === "listening" && Array.isArray(card.segments)) {
-    div.appendChild(createListeningContent(card));
-  } else {
-    div.appendChild(createNormalContent(card));
   }
 
-  stack.appendChild(div);
+
+  // ----------------------------------------------------
+  // SE A AULA AINDA NÃO CARREGOU
+  // ----------------------------------------------------
+
+  if (
+    typeof lessonCards === "undefined" ||
+    !Array.isArray(lessonCards)
+  ) {
+
+    nextBtn.disabled = true;
+
+    return;
+
+  }
+
+
+  // ----------------------------------------------------
+  // ÚLTIMO CARD
+  // ----------------------------------------------------
+
+  if (
+    currentIndex >=
+    lessonCards.length - 1
+  ) {
+
+    nextBtn.disabled = true;
+
+    return;
+
+  }
+
+
+  // ----------------------------------------------------
+  // MODO DESENVOLVEDOR
+  // ----------------------------------------------------
+
+  if (isDevMode) {
+
+    nextBtn.disabled = false;
+
+    return;
+
+  }
+
+
+  // ----------------------------------------------------
+  // MODO NORMAL
+  //
+  // O botão Próximo será liberado pelo player.js
+  // quando o vídeo atingir o final do timeRange.
+  // ----------------------------------------------------
+
+  nextBtn.disabled = true;
+
 }
 
-window.onload = () => {
+
+// ======================================================
+// LIBERAR BOTÃO PRÓXIMO
+// ======================================================
+
+function unlockNextButton() {
+
+  const nextBtn =
+    document.getElementById(
+      "nextBtn"
+    );
+
+
+  if (!nextBtn) {
+
+    return;
+
+  }
+
+
+  if (
+    typeof lessonCards === "undefined"
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    currentIndex <
+    lessonCards.length - 1
+  ) {
+
+    nextBtn.disabled = false;
+
+  }
+
+}
+
+
+// ======================================================
+// BLOQUEAR BOTÃO PRÓXIMO
+// ======================================================
+
+function lockNextButton() {
+
+  const nextBtn =
+    document.getElementById(
+      "nextBtn"
+    );
+
+
+  if (!nextBtn) {
+
+    return;
+
+  }
+
+
+  if (!isDevMode) {
+
+    nextBtn.disabled = true;
+
+  }
+
+}
+
+
+// ======================================================
+// CARD ANTERIOR
+// ======================================================
+
+function prevCard() {
+
+  if (
+    typeof lessonCards === "undefined"
+  ) {
+
+    return;
+
+  }
+
+
+  // ----------------------------------------------------
+  // JÁ ESTÁ NO PRIMEIRO CARD
+  // ----------------------------------------------------
+
+  if (currentIndex <= 0) {
+
+    return;
+
+  }
+
+
+  // ----------------------------------------------------
+  // CANCELAR SEGMENTO INDIVIDUAL
+  // ----------------------------------------------------
+
+  if (
+    typeof cancelSegmentPlayback ===
+    "function"
+  ) {
+
+    cancelSegmentPlayback();
+
+  }
+
+
+  // ----------------------------------------------------
+  // ALTERAR ÍNDICE
+  // ----------------------------------------------------
+
+  currentIndex--;
+
+
+  console.log(
+    "Card atual:",
+    currentIndex + 1,
+    "/",
+    lessonCards.length
+  );
+
+
+  // ----------------------------------------------------
+  // ATUALIZAR BOTÕES
+  // ----------------------------------------------------
+
   updateMainButtons();
-  renderLessonContent();
-};
+
+
+  // ----------------------------------------------------
+  // RENDERIZAR CARD
+  // ----------------------------------------------------
+
+  if (
+    typeof renderLessonContent ===
+    "function"
+  ) {
+
+    renderLessonContent();
+
+  }
+
+
+  // ----------------------------------------------------
+  // REPRODUZIR RANGE DO CARD
+  // ----------------------------------------------------
+
+  if (
+    typeof playCurrentRange ===
+    "function"
+  ) {
+
+    playCurrentRange();
+
+  }
+
+}
+
+
+// ======================================================
+// PRÓXIMO CARD
+// ======================================================
+
+function nextCard() {
+
+  if (
+    typeof lessonCards === "undefined"
+  ) {
+
+    return;
+
+  }
+
+
+  // ----------------------------------------------------
+  // ÚLTIMO CARD
+  // ----------------------------------------------------
+
+  if (
+    currentIndex >=
+    lessonCards.length - 1
+  ) {
+
+    return;
+
+  }
+
+
+  const nextBtn =
+    document.getElementById(
+      "nextBtn"
+    );
+
+
+  // ----------------------------------------------------
+  // FORA DO MODO DEV,
+  // RESPEITAR BLOQUEIO
+  // ----------------------------------------------------
+
+  if (
+    !isDevMode &&
+    nextBtn &&
+    nextBtn.disabled
+  ) {
+
+    console.log(
+      "Próximo card ainda bloqueado."
+    );
+
+    return;
+
+  }
+
+
+  // ----------------------------------------------------
+  // CANCELAR SEGMENTO
+  // ----------------------------------------------------
+
+  if (
+    typeof cancelSegmentPlayback ===
+    "function"
+  ) {
+
+    cancelSegmentPlayback();
+
+  }
+
+
+  // ----------------------------------------------------
+  // AVANÇAR CARD
+  // ----------------------------------------------------
+
+  currentIndex++;
+
+
+  console.log(
+    "Card atual:",
+    currentIndex + 1,
+    "/",
+    lessonCards.length
+  );
+
+
+  // ----------------------------------------------------
+  // ATUALIZAR INTERFACE
+  // ----------------------------------------------------
+
+  updateMainButtons();
+
+
+  if (
+    typeof renderLessonContent ===
+    "function"
+  ) {
+
+    renderLessonContent();
+
+  }
+
+
+  // ----------------------------------------------------
+  // REPRODUZIR RANGE
+  // ----------------------------------------------------
+
+  if (
+    typeof playCurrentRange ===
+    "function"
+  ) {
+
+    playCurrentRange();
+
+  }
+
+}
+
+
+// ======================================================
+// PEGAR RANGE DO CARD ATUAL
+// ======================================================
+
+function getCurrentRange() {
+
+  if (
+    typeof timeRanges === "undefined" ||
+    !Array.isArray(timeRanges)
+  ) {
+
+    return null;
+
+  }
+
+
+  if (
+    currentIndex < 0 ||
+    currentIndex >= timeRanges.length
+  ) {
+
+    return null;
+
+  }
+
+
+  return timeRanges[currentIndex];
+
+}
+
+
+// ======================================================
+// PEGAR CARD ATUAL
+// ======================================================
+
+function getCurrentCard() {
+
+  if (
+    typeof lessonCards === "undefined" ||
+    !Array.isArray(lessonCards)
+  ) {
+
+    return null;
+
+  }
+
+
+  return (
+    lessonCards[currentIndex] ||
+    null
+  );
+
+}
+
+
+// ======================================================
+// ESTADO DA AULA
+//
+// Útil para testes pelo console.
+// Exemplo:
+//
+// getLessonState()
+// ======================================================
+
+function getLessonState() {
+
+  return {
+
+    lesson:
+      typeof lessonTitle !== "undefined"
+        ? lessonTitle
+        : null,
+
+    video:
+      typeof currentVideoId !== "undefined"
+        ? currentVideoId
+        : null,
+
+    currentIndex:
+      currentIndex,
+
+    currentCard:
+      currentIndex + 1,
+
+    totalCards:
+      typeof lessonCards !== "undefined"
+        ? lessonCards.length
+        : 0,
+
+    isDevMode:
+      isDevMode,
+
+    lessonReady:
+      window.lessonReady,
+
+    range:
+      getCurrentRange()
+
+  };
+
+}
+
+// ======================================================
+// NAVEGAÇÃO PELO TECLADO
+// ======================================================
+
+document.addEventListener("keydown", function (event) {
+
+  // Evita interferir quando estiver digitando
+  // em input, textarea ou select.
+  const tag =
+    event.target.tagName.toLowerCase();
+
+  if (
+    tag === "input" ||
+    tag === "textarea" ||
+    tag === "select"
+  ) {
+    return;
+  }
+
+
+  // ----------------------------------------------------
+  // SETA PARA A DIREITA
+  // Próximo card
+  // ----------------------------------------------------
+
+  if (event.key === "ArrowRight") {
+
+    event.preventDefault();
+
+    nextCard();
+
+  }
+
+
+  // ----------------------------------------------------
+  // SETA PARA A ESQUERDA
+  // Card anterior
+  // ----------------------------------------------------
+
+  if (event.key === "ArrowLeft") {
+
+    event.preventDefault();
+
+    prevCard();
+
+  }
+
+});

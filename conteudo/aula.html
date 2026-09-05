@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    English Listening Practice
+  </title>
+
+
+  <!-- ======================================================
+       FONTE
+  ======================================================= -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+
+  <!-- ======================================================
+       CSS PRINCIPAL
+  ======================================================= -->
+
+  <link
+    rel="stylesheet"
+    href="../css/style.css"
+  />
+
+</head>
+
+
+<body>
+
+
+  <!-- ======================================================
+       MODO DESENVOLVEDOR
+
+       ESCONDIDO POR PADRÃO.
+       APARECE COM DUPLO CLIQUE NO TÍTULO.
+  ======================================================= -->
+
+  <div
+    id="devModeContainer"
+    style="
+      display: none;
+      max-width: 1500px;
+      margin: 15px auto;
+      padding: 0 24px;
+      text-align: center;
+    "
+  >
+
+    <label
+      for="devCheckbox"
+      style="
+        font-weight: 600;
+        cursor: pointer;
+      "
+    >
+
+      <input
+        type="checkbox"
+        id="devCheckbox"
+        onchange="toggleDevMode()"
+      />
+
+      🛠️ Ativar Modo Desenvolvedor
+
+    </label>
+
+  </div>
+
+
+
+  <!-- ======================================================
+       CONTEÚDO PRINCIPAL
+  ======================================================= -->
+
+  <div
+    style="
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    "
+  >
+
+
+    <!-- ====================================================
+         CABEÇALHO
+    ===================================================== -->
+
+    <div
+      style="
+        display: grid;
+        grid-template-columns: 1fr 560px;
+        gap: 24px;
+        align-items: center;
+      "
+    >
+
+
+      <!-- ==================================================
+           TÍTULO + CONTROLES
+      =================================================== -->
+
+      <section
+        style="
+          grid-column: 1 / 2;
+        "
+      >
+
+        <div
+          style="
+            text-align: center;
+          "
+        >
+
+
+          <!-- ==============================================
+               TÍTULO
+
+               DUPLO CLIQUE:
+               MOSTRA / ESCONDE FERRAMENTAS DEV
+          =============================================== -->
+
+          <h1
+            id="lessonTitle"
+            style="
+              margin: 0;
+              user-select: none;
+            "
+          >
+            Carregando aula...
+          </h1>
+
+
+
+          <!-- ==============================================
+               INFORMAÇÃO
+          =============================================== -->
+
+          <p
+            class="info-text"
+            style="
+              margin: 8px 0 12px 0;
+            "
+          >
+            💡 Clique nas frases em azul para ouvir a pronúncia em inglês.
+          </p>
+
+
+
+          <!-- ==============================================
+               BOTÕES PRINCIPAIS
+          =============================================== -->
+
+          <div
+            class="stack-controls"
+            style="
+              margin: 0;
+              padding: 0;
+            "
+          >
+
+
+            <!-- ANTERIOR -->
+
+            <button
+              type="button"
+              onclick="prevCard()"
+            >
+              Anterior
+            </button>
+
+
+
+            <!-- VOLTAR 5 SEGUNDOS -->
+
+            <button
+              type="button"
+              onclick="back5Seconds()"
+            >
+              Voltar 5s
+            </button>
+
+
+
+            <!-- PRÓXIMO -->
+
+            <button
+              type="button"
+              id="nextBtn"
+              onclick="nextCard()"
+              disabled
+            >
+              Próximo
+            </button>
+
+
+
+            <!-- ============================================
+                 COPIAR TEMPO
+
+                 ESCONDIDO POR PADRÃO.
+                 APARECE JUNTO COM DEV.
+            ============================================= -->
+
+            <button
+              type="button"
+              id="copyTimeBtn"
+              onclick="copyCurrentVideoTime()"
+              style="
+                display: none;
+              "
+            >
+              Copiar Tempo
+            </button>
+<div
+  class="font-zoom-controls"
+  style="
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  "
+>
+
+
+</div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ==================================================
+           PLAYER DO YOUTUBE
+      =================================================== -->
+
+      <aside
+        style="
+          grid-column: 2 / 3;
+        "
+      >
+
+
+        <div
+          class="video-container"
+          style="
+            width: 70%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+          "
+        >
+
+          <div
+            id="player"
+            style="
+              width: 100%;
+              height: 100%;
+            "
+          ></div>
+
+        </div>
+
+
+
+        <!-- ================================================
+             STATUS DO PLAYER
+        ================================================= -->
+
+        <div
+          id="videoStatus"
+          style="
+            display: none;
+            margin-top: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+          "
+        ></div>
+
+
+      </aside>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         CARDS DA AULA
+    ===================================================== -->
+
+    <div
+      style="
+        margin-top: 24px;
+      "
+    >
+
+      <div
+        class="card-stack"
+        id="cardStack"
+      ></div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- ======================================================
+       API DO YOUTUBE
+  ======================================================= -->
+
+  <script>
+
+    const youtubeApiScript =
+      document.createElement(
+        "script"
+      );
+
+
+    youtubeApiScript.src =
+      "https://www.youtube.com/iframe_api";
+
+
+    document.head.appendChild(
+      youtubeApiScript
+    );
+
+  </script>
+
+
+
+  <!-- ======================================================
+       COPIAR TEMPO
+  ======================================================= -->
+
+  <script>
+
+    async function copyCurrentVideoTime() {
+
+
+      if (
+
+        typeof player === "undefined" ||
+
+        !player ||
+
+        typeof player.getCurrentTime !==
+          "function"
+
+      ) {
+
+        console.warn(
+          "Player ainda não está pronto."
+        );
+
+        return;
+
+      }
+
+
+
+      const current =
+        Math.round(
+          player.getCurrentTime()
+        );
+
+
+
+      try {
+
+
+        await navigator.clipboard.writeText(
+          current.toString()
+        );
+
+
+        console.log(
+          "Tempo copiado:",
+          current
+        );
+
+
+
+        // ----------------------------------------------
+        // FEEDBACK VISUAL
+        // ----------------------------------------------
+
+        const button =
+          document.getElementById(
+            "copyTimeBtn"
+          );
+
+
+        if (button) {
+
+          const originalText =
+            button.textContent;
+
+
+          button.textContent =
+            `✓ ${current}s`;
+
+
+          setTimeout(
+            function () {
+
+              button.textContent =
+                originalText;
+
+            },
+            1000
+          );
+
+        }
+
+
+      }
+
+
+      catch (error) {
+
+        console.error(
+          "Erro ao copiar tempo:",
+          error
+        );
+
+      }
+
+    }
+
+  </script>
+
+
+
+  <!-- ======================================================
+       SCRIPTS DO SISTEMA
+  ======================================================= -->
+
+  <script
+    src="../js/engine.js"
+  ></script>
+
+
+  <script
+    src="../js/player.js"
+  ></script>
+
+
+  <script
+    src="../js/card.js"
+  ></script>
+
+
+  <script
+    src="../js/5s.js"
+  ></script>
+
+
+
+  <!-- ======================================================
+       SISTEMA DA AULA
+  ======================================================= -->
+
+  <script>
+
+
+    // ======================================================
+    // CARREGAR AULA
+    // ======================================================
+
+    function loadLesson() {
+
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+
+      let lesson =
+        params.get("lesson") || "00";
+
+
+
+      // ----------------------------------------------------
+      // ?lesson=1
+      //
+      // vira:
+      //
+      // 01
+      // ----------------------------------------------------
+
+      if (
+        /^\d+$/.test(lesson)
+      ) {
+
+        lesson =
+          lesson.padStart(
+            2,
+            "0"
+          );
+
+      }
+
+
+
+      console.log(
+        "Carregando Lesson:",
+        lesson
+      );
+
+
+
+      const lessonScript =
+        document.createElement(
+          "script"
+        );
+
+
+      lessonScript.src =
+        `../js/lessons/lesson${lesson}.js`;
+
+
+
+      // ----------------------------------------------------
+      // SUCESSO
+      // ----------------------------------------------------
+
+      lessonScript.onload =
+        function () {
+
+
+          console.log(
+            `Lesson ${lesson} carregada com sucesso.`
+          );
+
+
+          if (
+
+            typeof initializeLesson ===
+              "function"
+
+          ) {
+
+            initializeLesson();
+
+          }
+
+
+          else {
+
+            console.error(
+              "initializeLesson() não encontrada."
+            );
+
+          }
+
+        };
+
+
+
+      // ----------------------------------------------------
+      // ERRO
+      // ----------------------------------------------------
+
+      lessonScript.onerror =
+        function () {
+
+
+          console.error(
+            `Não foi possível carregar lesson${lesson}.js`
+          );
+
+
+          const title =
+            document.getElementById(
+              "lessonTitle"
+            );
+
+
+          if (title) {
+
+            title.textContent =
+              `Aula ${lesson} não encontrada`;
+
+          }
+
+
+
+          const status =
+            document.getElementById(
+              "videoStatus"
+            );
+
+
+          if (status) {
+
+            status.style.display =
+              "block";
+
+
+            status.textContent =
+              "⚠️ Não foi possível carregar o conteúdo desta aula.";
+
+          }
+
+        };
+
+
+
+      document.body.appendChild(
+        lessonScript
+      );
+
+    }
+
+
+
+    // ======================================================
+    // FERRAMENTAS DE DESENVOLVIMENTO
+    //
+    // DUPLO CLIQUE NO TÍTULO:
+    //
+    // MOSTRAR:
+    // → Modo Desenvolvedor
+    // → Copiar Tempo
+    //
+    // ESCONDER:
+    // → Modo Desenvolvedor
+    // → Copiar Tempo
+    // → desativar DEV caso esteja marcado
+    // ======================================================
+
+    const lessonTitleElement =
+      document.getElementById(
+        "lessonTitle"
+      );
+
+
+    const devModeContainer =
+      document.getElementById(
+        "devModeContainer"
+      );
+
+
+    const copyTimeBtn =
+      document.getElementById(
+        "copyTimeBtn"
+      );
+
+
+
+    if (
+
+      lessonTitleElement &&
+
+      devModeContainer &&
+
+      copyTimeBtn
+
+    ) {
+
+
+      lessonTitleElement.addEventListener(
+
+        "dblclick",
+
+        function () {
+
+
+          const estaOculto =
+            window.getComputedStyle(
+              devModeContainer
+            ).display === "none";
+
+
+
+          // ================================================
+          // MOSTRAR
+          // ================================================
+
+          if (estaOculto) {
+
+
+            devModeContainer.style.display =
+              "block";
+
+
+            copyTimeBtn.style.display =
+              "inline-block";
+
+
+            console.log(
+              "Ferramentas DEV exibidas."
+            );
+
+          }
+
+
+
+          // ================================================
+          // ESCONDER
+          // ================================================
+
+          else {
+
+
+            devModeContainer.style.display =
+              "none";
+
+
+            copyTimeBtn.style.display =
+              "none";
+
+
+
+            const checkbox =
+              document.getElementById(
+                "devCheckbox"
+              );
+
+
+
+            // ----------------------------------------------
+            // SE ESTIVER ATIVO
+            // DESLIGAR DEV
+            // ----------------------------------------------
+
+            if (
+
+              checkbox &&
+
+              checkbox.checked
+
+            ) {
+
+
+              checkbox.checked =
+                false;
+
+
+
+              if (
+
+                typeof toggleDevMode ===
+                  "function"
+
+              ) {
+
+                toggleDevMode();
+
+              }
+
+            }
+
+
+
+            console.log(
+              "Ferramentas DEV ocultadas."
+            );
+
+          }
+
+        }
+
+      );
+
+    }
+
+
+
+    // ======================================================
+    // NAVEGAÇÃO PELO TECLADO
+    //
+    // ← ANTERIOR
+    // → PRÓXIMO
+    // ======================================================
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+
+        const tag =
+          event.target.tagName
+            .toLowerCase();
+
+
+
+        // --------------------------------------------------
+        // NÃO INTERFERIR EM CAMPOS
+        // --------------------------------------------------
+
+        if (
+
+          tag === "input" ||
+
+          tag === "textarea" ||
+
+          tag === "select"
+
+        ) {
+
+          return;
+
+        }
+
+
+
+        // --------------------------------------------------
+        // SETA ESQUERDA
+        // --------------------------------------------------
+
+        if (
+          event.key === "ArrowLeft"
+        ) {
+
+          event.preventDefault();
+
+
+          if (
+            typeof prevCard ===
+              "function"
+          ) {
+
+            prevCard();
+
+          }
+
+        }
+
+
+
+        // --------------------------------------------------
+        // SETA DIREITA
+        // --------------------------------------------------
+
+        if (
+          event.key === "ArrowRight"
+        ) {
+
+          event.preventDefault();
+
+
+          if (
+            typeof nextCard ===
+              "function"
+          ) {
+
+            nextCard();
+
+          }
+
+        }
+
+      }
+    );
+
+
+
+    // ======================================================
+    // INICIAR
+    // ======================================================
+
+    loadLesson();
+
+
+  </script>
+
+<script>
+
+  // ======================================================
+  // TAMANHO DAS FRASES AZUIS
+  // ======================================================
+
+  let blueFontZoom = 100;
+
+  const BLUE_FONT_MIN = 60;
+  const BLUE_FONT_MAX = 220;
+  const BLUE_FONT_STEP = 10;
+
+  const BLUE_FONT_BASE = 1.8;
+
+
+  // ======================================================
+  // AUMENTAR
+  // ======================================================
+
+  function increaseBlueFont() {
+
+    if (
+      blueFontZoom >= BLUE_FONT_MAX
+    ) {
+      return;
+    }
+
+    blueFontZoom += BLUE_FONT_STEP;
+
+    applyBlueFontZoom();
+
+  }
+
+
+  // ======================================================
+  // DIMINUIR
+  // ======================================================
+
+  function decreaseBlueFont() {
+
+    if (
+      blueFontZoom <= BLUE_FONT_MIN
+    ) {
+      return;
+    }
+
+    blueFontZoom -= BLUE_FONT_STEP;
+
+    applyBlueFontZoom();
+
+  }
+
+
+  // ======================================================
+  // APLICAR
+  // ======================================================
+
+  function applyBlueFontZoom() {
+
+    const newSize =
+      BLUE_FONT_BASE *
+      (blueFontZoom / 100);
+
+
+    document.documentElement.style.setProperty(
+      "--blue-font-size",
+      `${newSize}em`
+    );
+
+
+    const indicator =
+      document.getElementById(
+        "blueFontZoom"
+      );
+
+
+    if (indicator) {
+
+      indicator.textContent =
+        `${blueFontZoom}%`;
+
+    }
+
+  }
+
+</script>
+</body>
+
+</html>

@@ -1,220 +1,1054 @@
 // player.js
 
-let player;
-let currentIndex = 0;
-let isDevMode = false;
+// ======================================================
+// PLAYER DO YOUTUBE
+// ======================================================
 
-// ==============================
-// YOUTUBE PLAYER
-// ==============================
+let player = null;
+
+
+// ======================================================
+// ESTADO DE CARREGAMENTO
+// ======================================================
+
+// A API do YouTube terminou de carregar?
+let youtubeApiReady = false;
+
+
+// ======================================================
+// CONTROLE DO RANGE PRINCIPAL
+// ======================================================
+
+let rangeMonitor = null;
+
+
+// ======================================================
+// CONTROLE DE SEGMENTOS
+// ======================================================
+
+let segmentMonitor = null;
+
+let isPlayingSegment = false;
+
+let currentSegmentStart = null;
+let currentSegmentEnd = null;
+
+
+// ======================================================
+// CONTROLE DE BUFFERING
+// ======================================================
+
+let bufferingTimer = null;
+
+let recoveryAttempts = 0;
+
+let lastKnownTime = 0;
+
+const BUFFER_TIMEOUT = 5000;
+
+const MAX_RECOVERY_ATTEMPTS = 3;
+
+
+// ======================================================
+// API DO YOUTUBE PRONTA
+// ======================================================
 
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player("player", {
-    height: "360",
-    width: "640",
-    videoId: currentVideoId,
-    playerVars: {
-      rel: 0,
-      modestbranding: 1,
-      controls: 1
-    },
-    events: {
-      onReady: onPlayerReady,
-      onStateChange: onPlayerStateChange
-    }
-  });
+
+  console.log("API do YouTube pronta.");
+
+  youtubeApiReady = true;
+
+  tryInitializePlayer();
+
 }
+
+
+// ======================================================
+// TENTAR INICIALIZAR O PLAYER
+// ======================================================
+
+function tryInitializePlayer() {
+
+  // API do YouTube ainda não carregou
+  if (!youtubeApiReady) {
+
+    console.log(
+      "Aguardando API do YouTube..."
+    );
+
+    return;
+
+  }
+
+
+  // Aula ainda não carregou
+  if (!window.lessonReady) {
+
+    console.log(
+      "Aguardando conteúdo da aula..."
+    );
+
+    return;
+
+  }
+
+
+  // Player já existe
+  if (player) {
+
+    console.log(
+      "Player já inicializado."
+    );
+
+    return;
+
+  }
+
+
+  // Validar vídeo
+  if (
+    typeof currentVideoId === "undefined" ||
+    !currentVideoId
+  ) {
+
+    console.error(
+      "currentVideoId não definido."
+    );
+
+    return;
+
+  }
+
+
+  console.log(
+    "Criando player para vídeo:",
+    currentVideoId
+  );
+
+
+  player = new YT.Player(
+    "player",
+    {
+
+      videoId: currentVideoId,
+
+      playerVars: {
+
+        autoplay: 0,
+
+        controls: 1,
+
+        rel: 0,
+
+        modestbranding: 1,
+
+        playsinline: 1
+
+      },
+
+      events: {
+
+        onReady:
+          onPlayerReady,
+
+        onStateChange:
+          onPlayerStateChange,
+
+        onError:
+          onPlayerError
+
+      }
+
+    }
+  );
+
+}
+
+
+// ======================================================
+// PLAYER PRONTO
+// ======================================================
 
 function onPlayerReady() {
-  player.unMute();
-  seekToCurrentRange();
+
+  console.log(
+    "YouTube Player pronto."
+  );
+
+
+  if (
+    player &&
+    typeof player.unMute ===
+    "function"
+  ) {
+
+    player.unMute();
+
+  }
+
+
+  // Pequeno atraso para garantir
+  // que o player esteja realmente operacional.
+  setTimeout(
+    function () {
+
+      playCurrentRange();
+
+    },
+    300
+  );
+
 }
+
+
+// ======================================================
+// EVENTOS DO PLAYER
+// ======================================================
 
 function onPlayerStateChange(event) {
-  if (event.data === YT.PlayerState.PLAYING) {
-    checkTimeLoop();
+
+  // ----------------------------------------------------
+  // PLAYING
+  // ----------------------------------------------------
+
+  if (
+    event.data ===
+    YT.PlayerState.PLAYING
+  ) {
+
+    clearTimeout(
+      bufferingTimer
+    );
+
+
+    bufferingTimer =
+      null;
+
+
+    recoveryAttempts =
+      0;
+
+
+    if (
+      player &&
+      typeof player.getCurrentTime ===
+      "function"
+    ) {
+
+      lastKnownTime =
+        player.getCurrentTime();
+
+    }
+
+
+    hideVideoStatus();
+
   }
+
+
+  // ----------------------------------------------------
+  // BUFFERING
+  // ----------------------------------------------------
+
+  if (
+    event.data ===
+    YT.PlayerState.BUFFERING
+  ) {
+
+    if (
+      player &&
+      typeof player.getCurrentTime ===
+      "function"
+    ) {
+
+      lastKnownTime =
+        player.getCurrentTime();
+
+    }
+
+
+    showVideoStatus(
+      "⏳ Conexão instável. Carregando vídeo..."
+    );
+
+
+    startBufferRecovery();
+
+  }
+
+
+  // ----------------------------------------------------
+  // ENDED
+  // ----------------------------------------------------
+
+  if (
+    event.data ===
+    YT.PlayerState.ENDED
+  ) {
+
+    stopRangeMonitor();
+
+    cancelSegmentPlayback();
+
+  }
+
 }
 
-// ==============================
-// RENDER DOS CARDS
-// ==============================
 
-function renderCards() {
-  const container = document.getElementById("cardsContainer");
+// ======================================================
+// RECUPERAÇÃO DE BUFFERING
+// ======================================================
 
-  if (!container) {
-    console.error("Elemento #cardsContainer não encontrado no HTML.");
-    return;
-  }
+function startBufferRecovery() {
 
-  container.innerHTML = "";
+  clearTimeout(
+    bufferingTimer
+  );
 
-  lessonCards.forEach((cardData, cardIndex) => {
-    const card = document.createElement("div");
-    card.className = "card";
 
-    let html = `<h2 class="section-title">${cardData.title}</h2>`;
+  bufferingTimer =
+    setTimeout(
+      function () {
 
-    cardData.columns.forEach(column => {
-      html += `<div class="column">`;
+        if (
+          !player ||
+          typeof player.getPlayerState !==
+          "function"
+        ) {
 
-      column.forEach(item => {
-        const english = item[0];
-        const portuguese = item[1];
-        const start = item[2];
-        const end = item[3];
+          return;
 
-        html += `
-          <div class="phrase">
-            <div class="english">${english}</div>
-            <div class="translation">${portuguese}</div>
-        `;
-
-        if (start !== undefined && end !== undefined) {
-          html += `
-            <button class="play-btn" onclick="playSegment(${start}, ${end})">
-              ▶️ Ouvir
-            </button>
-          `;
         }
 
-        html += `</div>`;
-      });
 
-      html += `</div>`;
-    });
+        const state =
+          player.getPlayerState();
 
-    card.innerHTML = html;
-    container.appendChild(card);
-  });
+
+        // Se já saiu do buffering,
+        // não precisa recuperar.
+        if (
+          state !==
+          YT.PlayerState.BUFFERING
+        ) {
+
+          return;
+
+        }
+
+
+        recoveryAttempts++;
+
+
+        console.warn(
+          "Tentativa de recuperação:",
+          recoveryAttempts,
+          "/",
+          MAX_RECOVERY_ATTEMPTS
+        );
+
+
+        // ------------------------------------------------
+        // TENTAR RECUPERAR
+        // ------------------------------------------------
+
+        if (
+          recoveryAttempts <=
+          MAX_RECOVERY_ATTEMPTS
+        ) {
+
+          let recoveryTime =
+            lastKnownTime;
+
+
+          if (
+            typeof player.getCurrentTime ===
+            "function"
+          ) {
+
+            const currentTime =
+              player.getCurrentTime();
+
+
+            if (
+              Number.isFinite(
+                currentTime
+              ) &&
+              currentTime >= 0
+            ) {
+
+              recoveryTime =
+                currentTime;
+
+            }
+
+          }
+
+
+          console.log(
+            "Tentando recuperar em:",
+            recoveryTime
+          );
+
+
+          player.seekTo(
+            recoveryTime,
+            true
+          );
+
+
+          setTimeout(
+            function () {
+
+              if (
+                player &&
+                typeof player.playVideo ===
+                "function"
+              ) {
+
+                player.playVideo();
+
+              }
+
+            },
+            300
+          );
+
+
+          startBufferRecovery();
+
+        }
+
+        // ------------------------------------------------
+        // FALHOU APÓS TODAS AS TENTATIVAS
+        // ------------------------------------------------
+
+        else {
+
+          console.error(
+            "Não foi possível recuperar o vídeo."
+          );
+
+
+          showVideoStatus(
+            "⚠️ Não foi possível continuar o vídeo. Verifique a conexão."
+          );
+
+        }
+
+      },
+      BUFFER_TIMEOUT
+    );
+
 }
 
-// ==============================
-// CONTROLE DOS CARDS
-// ==============================
 
-function toggleDevMode() {
-  isDevMode = document.getElementById("devCheckbox").checked;
-  document.getElementById("nextBtn").disabled = !isDevMode;
+// ======================================================
+// ERRO DO PLAYER
+// ======================================================
+
+function onPlayerError(event) {
+
+  console.error(
+    "Erro no YouTube Player:",
+    event.data
+  );
+
+
+  showVideoStatus(
+    "⚠️ Erro ao carregar o vídeo."
+  );
+
 }
 
-function checkTimeLoop() {
-  const margem = 0.3;
-  const range = timeRanges[currentIndex];
 
-  if (!range) return;
+// ======================================================
+// REPRODUZIR RANGE PRINCIPAL DO CARD
+// ======================================================
 
-  const check = () => {
-    if (!player || player.getPlayerState() !== YT.PlayerState.PLAYING) return;
+function playCurrentRange() {
 
-    const currentTime = player.getCurrentTime();
+  if (
+    !player ||
+    typeof player.seekTo !==
+    "function"
+  ) {
 
-    if (currentTime >= range.end - margem || isDevMode) {
-      player.pauseVideo();
-      document.getElementById("nextBtn").disabled = false;
-      return;
-    }
+    console.warn(
+      "Player ainda não está pronto."
+    );
 
-    requestAnimationFrame(check);
-  };
-
-  requestAnimationFrame(check);
-}
-
-function seekToCurrentRange() {
-  const range = timeRanges[currentIndex];
-
-  if (!range || !player) return;
-
-  player.seekTo(range.start);
-  player.playVideo();
-
-  document.getElementById("nextBtn").disabled = !isDevMode;
-}
-
-function nextCard() {
-  const cards = document.querySelectorAll(".card");
-
-  if (cards.length === 0) return;
-
-  currentIndex = (currentIndex + 1) % cards.length;
-
-  showCard(currentIndex);
-  seekToCurrentRange();
-}
-
-function prevCard() {
-  const cards = document.querySelectorAll(".card");
-
-  if (cards.length === 0) return;
-
-  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-
-  showCard(currentIndex);
-  seekToCurrentRange();
-}
-
-function showCard(index) {
-  const cards = document.querySelectorAll(".card");
-  const total = cards.length;
-
-  if (total === 0) return;
-
-  const prevIndex = (index - 1 + total) % total;
-  const nextIndex = (index + 1) % total;
-
-  cards.forEach((card, i) => {
-    card.classList.remove("active", "next", "prev", "hidden");
-
-    if (i === index) {
-      card.classList.add("active");
-      card.style.zIndex = 2;
-    } else if (i === nextIndex) {
-      card.classList.add("next");
-      card.style.zIndex = 1;
-    } else if (i === prevIndex) {
-      card.classList.add("prev");
-      card.style.zIndex = 1;
-    } else {
-      card.classList.add("hidden");
-      card.style.zIndex = 0;
-    }
-  });
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
-
-// ==============================
-// PLAY POR FRASE
-// ==============================
-
-function playSegment(start, end) {
-  if (!player || typeof player.seekTo !== "function") {
-    console.warn("Player não está pronto ainda.");
     return;
+
   }
 
-  player.seekTo(start);
+
+  if (
+    typeof getCurrentRange !==
+    "function"
+  ) {
+
+    console.error(
+      "getCurrentRange() não encontrada."
+    );
+
+    return;
+
+  }
+
+
+  const range =
+    getCurrentRange();
+
+
+  if (!range) {
+
+    console.warn(
+      "Range atual não encontrado."
+    );
+
+    return;
+
+  }
+
+
+  // Cancela eventual frase individual
+  cancelSegmentPlayback();
+
+
+  // Para monitor anterior
+  stopRangeMonitor();
+
+
+  console.log(
+    "Reproduzindo range principal:",
+    range.start,
+    "até",
+    range.end
+  );
+
+
+  // Bloquear próximo
+  if (
+    typeof lockNextButton ===
+    "function"
+  ) {
+
+    lockNextButton();
+
+  }
+
+
+  // Ir para início do trecho
+  player.seekTo(
+    Number(range.start),
+    true
+  );
+
+
   player.playVideo();
 
-  const duration = (end - start) * 1000;
 
-  setTimeout(() => {
-    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-    }
-  }, duration);
+  // Monitorar final real
+  startRangeMonitor(
+    Number(range.end)
+  );
+
 }
 
-// ==============================
-// INICIALIZAÇÃO
-// ==============================
 
-window.onload = () => {
-  renderCards();
-  showCard(currentIndex);
-};
+// ======================================================
+// MONITOR DO RANGE PRINCIPAL
+// ======================================================
+
+function startRangeMonitor(
+  endTime
+) {
+
+  stopRangeMonitor();
+
+
+  if (
+    !Number.isFinite(
+      endTime
+    )
+  ) {
+
+    console.error(
+      "Fim de range inválido:",
+      endTime
+    );
+
+    return;
+
+  }
+
+
+  rangeMonitor =
+    setInterval(
+      function () {
+
+        if (
+          !player ||
+          typeof player.getCurrentTime !==
+          "function" ||
+          typeof player.getPlayerState !==
+          "function"
+        ) {
+
+          return;
+
+        }
+
+
+        // Uma frase individual está tocando.
+        // Não interferir.
+        if (
+          isPlayingSegment
+        ) {
+
+          return;
+
+        }
+
+
+        const state =
+          player.getPlayerState();
+
+
+        // Durante buffering,
+        // não avaliar final.
+        if (
+          state ===
+          YT.PlayerState.BUFFERING
+        ) {
+
+          return;
+
+        }
+
+
+        const currentTime =
+          player.getCurrentTime();
+
+
+        if (
+          Number.isFinite(
+            currentTime
+          )
+        ) {
+
+          lastKnownTime =
+            currentTime;
+
+        }
+
+
+        // Chegou ao final real do range
+        if (
+          currentTime >=
+          endTime - 0.2
+        ) {
+
+          player.pauseVideo();
+
+
+          stopRangeMonitor();
+
+
+          if (
+            typeof unlockNextButton ===
+            "function"
+          ) {
+
+            unlockNextButton();
+
+          }
+
+
+          console.log(
+            "Fim do range principal."
+          );
+
+        }
+
+      },
+      100
+    );
+
+}
+
+
+// ======================================================
+// PARAR MONITOR DO RANGE
+// ======================================================
+
+function stopRangeMonitor() {
+
+  if (
+    rangeMonitor
+  ) {
+
+    clearInterval(
+      rangeMonitor
+    );
+
+
+    rangeMonitor =
+      null;
+
+  }
+
+}
+
+
+// ======================================================
+// REPRODUZIR FRASE / SEGMENTO
+// ======================================================
+
+function playSegment(
+  start,
+  end
+) {
+
+  if (
+    !player ||
+    typeof player.seekTo !==
+    "function"
+  ) {
+
+    console.warn(
+      "Player ainda não está pronto."
+    );
+
+    return;
+
+  }
+
+
+  start =
+    Number(start);
+
+  end =
+    Number(end);
+
+
+  // ----------------------------------------------------
+  // VALIDAR SEGMENTO
+  // ----------------------------------------------------
+
+  if (
+    !Number.isFinite(start) ||
+    !Number.isFinite(end) ||
+    end <= start
+  ) {
+
+    console.error(
+      "Segmento inválido:",
+      start,
+      end
+    );
+
+    return;
+
+  }
+
+
+  // Cancela segmento anterior
+  cancelSegmentPlayback();
+
+
+  isPlayingSegment =
+    true;
+
+
+  currentSegmentStart =
+    start;
+
+
+  currentSegmentEnd =
+    end;
+
+
+  console.log(
+    "Reproduzindo segmento:",
+    start,
+    "até",
+    end
+  );
+
+
+  // ----------------------------------------------------
+  // IR PARA INÍCIO DA FRASE
+  // ----------------------------------------------------
+
+  player.seekTo(
+    start,
+    true
+  );
+
+
+  player.playVideo();
+
+
+  // ----------------------------------------------------
+  // MONITOR DO TEMPO REAL
+  // ----------------------------------------------------
+
+  segmentMonitor =
+    setInterval(
+      function () {
+
+        if (
+          !player ||
+          typeof player.getCurrentTime !==
+          "function" ||
+          typeof player.getPlayerState !==
+          "function"
+        ) {
+
+          return;
+
+        }
+
+
+        const state =
+          player.getPlayerState();
+
+
+        // Buffering:
+        // não encerrar segmento.
+        if (
+          state ===
+          YT.PlayerState.BUFFERING
+        ) {
+
+          return;
+
+        }
+
+
+        const currentTime =
+          player.getCurrentTime();
+
+
+        if (
+          Number.isFinite(
+            currentTime
+          )
+        ) {
+
+          lastKnownTime =
+            currentTime;
+
+        }
+
+
+        // ------------------------------------------------
+        // FINAL REAL DA FRASE
+        // ------------------------------------------------
+
+        if (
+          currentTime >=
+          currentSegmentEnd - 0.05
+        ) {
+
+          player.pauseVideo();
+
+
+          clearInterval(
+            segmentMonitor
+          );
+
+
+          segmentMonitor =
+            null;
+
+
+          isPlayingSegment =
+            false;
+
+
+          currentSegmentStart =
+            null;
+
+
+          currentSegmentEnd =
+            null;
+
+
+          console.log(
+            "Fim do segmento."
+          );
+
+        }
+
+      },
+      50
+    );
+
+}
+
+
+// ======================================================
+// CANCELAR SEGMENTO
+// ======================================================
+
+function cancelSegmentPlayback() {
+
+  if (
+    segmentMonitor
+  ) {
+
+    clearInterval(
+      segmentMonitor
+    );
+
+
+    segmentMonitor =
+      null;
+
+  }
+
+
+  isPlayingSegment =
+    false;
+
+
+  currentSegmentStart =
+    null;
+
+
+  currentSegmentEnd =
+    null;
+
+}
+
+
+// ======================================================
+// STATUS VISUAL DO PLAYER
+// ======================================================
+
+function showVideoStatus(
+  message
+) {
+
+  const status =
+    document.getElementById(
+      "videoStatus"
+    );
+
+
+  if (!status) {
+
+    return;
+
+  }
+
+
+  status.textContent =
+    message;
+
+
+  status.style.display =
+    "block";
+
+}
+
+
+// ======================================================
+// ESCONDER STATUS
+// ======================================================
+
+function hideVideoStatus() {
+
+  const status =
+    document.getElementById(
+      "videoStatus"
+    );
+
+
+  if (!status) {
+
+    return;
+
+  }
+
+
+  status.textContent =
+    "";
+
+
+  status.style.display =
+    "none";
+
+}
+
+
+// ======================================================
+// DEBUG
+//
+// Pode executar no console:
+//
+// getPlayerState()
+// ======================================================
+
+function getPlayerState() {
+
+  if (!player) {
+
+    return {
+      ready: false,
+      youtubeApiReady:
+        youtubeApiReady,
+      lessonReady:
+        window.lessonReady
+    };
+
+  }
+
+
+  return {
+
+    ready: true,
+
+    youtubeApiReady:
+      youtubeApiReady,
+
+    lessonReady:
+      window.lessonReady,
+
+    video:
+      typeof currentVideoId !==
+      "undefined"
+        ? currentVideoId
+        : null,
+
+    time:
+      typeof player.getCurrentTime ===
+      "function"
+        ? player.getCurrentTime()
+        : null,
+
+    state:
+      typeof player.getPlayerState ===
+      "function"
+        ? player.getPlayerState()
+        : null,
+
+    isPlayingSegment:
+      isPlayingSegment,
+
+    currentSegmentStart:
+      currentSegmentStart,
+
+    currentSegmentEnd:
+      currentSegmentEnd,
+
+    bufferingAttempts:
+      recoveryAttempts
+
+  };
+
+}

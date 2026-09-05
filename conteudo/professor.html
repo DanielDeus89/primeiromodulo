@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Painel do Professor</title>
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+
+      font-family:
+        'Inter',
+        sans-serif;
+
+      background:
+        linear-gradient(
+          to right,
+          #000000,
+          #0f172a
+        );
+
+      color:
+        #e2e8f0;
+
+      min-height:
+        100vh;
+
+      padding:
+        30px;
+
+    }
+
+
+    .teacher-container {
+
+      width:
+        100%;
+
+      max-width:
+        1200px;
+
+      margin:
+        0 auto;
+
+    }
+
+
+    /* ==================================================
+       CABEÇALHO
+    ================================================== */
+
+    .teacher-header {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        20px;
+
+      margin-bottom:
+        25px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .teacher-header h1 {
+
+      font-size:
+        32px;
+
+    }
+
+
+    .teacher-subtitle {
+
+      color:
+        #94a3b8;
+
+      font-size:
+        14px;
+
+      margin-top:
+        5px;
+
+    }
+
+
+    .counter {
+
+      background:
+        #1e293b;
+
+      padding:
+        10px 16px;
+
+      border-radius:
+        8px;
+
+      font-weight:
+        600;
+
+    }
+
+
+
+    /* ==================================================
+       ABAS
+    ================================================== */
+
+    .tabs {
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        10px;
+
+      margin-bottom:
+        25px;
+
+    }
+
+
+    .tab-btn {
+
+      border:
+        none;
+
+      background:
+        #334155;
+
+      color:
+        white;
+
+      padding:
+        10px 18px;
+
+      border-radius:
+        8px;
+
+      cursor:
+        pointer;
+
+      font-size:
+        15px;
+
+      font-weight:
+        600;
+
+      transition:
+        0.2s;
+
+    }
+
+
+    .tab-btn:hover {
+
+      background:
+        #475569;
+
+    }
+
+
+    .tab-btn.active {
+
+      background:
+        #2563eb;
+
+    }
+
+
+
+    /* ==================================================
+       FRASE ATUAL
+    ================================================== */
+
+    .current-practice {
+
+      background:
+        #e0e3e7;
+
+      color:
+        #1e293b;
+
+      border-radius:
+        16px;
+
+      padding:
+        35px;
+
+      min-height:
+        220px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        center;
+
+      align-items:
+        center;
+
+      text-align:
+        center;
+
+      margin-bottom:
+        20px;
+
+      box-shadow:
+        0 4px 15px rgba(
+          0,
+          0,
+          0,
+          0.35
+        );
+
+    }
+
+
+    .section-name {
+
+      font-size:
+        18px;
+
+      font-weight:
+        700;
+
+      color:
+        #475569;
+
+      margin-bottom:
+        20px;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        1px;
+
+    }
+
+
+    #currentPhrase {
+
+      font-size:
+        36px;
+
+      line-height:
+        1.5;
+
+      font-weight:
+        700;
+
+      color:
+        #2c66ad;
+
+      word-break:
+        break-word;
+
+    }
+
+
+
+    /* ==================================================
+       NAVEGAÇÃO
+    ================================================== */
+
+    .navigation {
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      align-items:
+        center;
+
+      gap:
+        15px;
+
+      margin-bottom:
+        30px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .navigation button {
+
+      border:
+        none;
+
+      background:
+        #334155;
+
+      color:
+        white;
+
+      padding:
+        12px 24px;
+
+      border-radius:
+        8px;
+
+      cursor:
+        pointer;
+
+      font-size:
+        16px;
+
+      font-weight:
+        600;
+
+    }
+
+
+    .navigation button:hover {
+
+      background:
+        #475569;
+
+    }
+
+
+    .navigation button:disabled {
+
+      opacity:
+        0.4;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    #phraseCounter {
+
+      min-width:
+        100px;
+
+      text-align:
+        center;
+
+      font-weight:
+        600;
+
+    }
+
+
+
+    /* ==================================================
+       LISTA COMPLETA
+    ================================================== */
+
+    .practice-list-container {
+
+      margin-top:
+        20px;
+
+    }
+
+
+    .practice-list-container h2 {
+
+      margin-bottom:
+        15px;
+
+      font-size:
+        20px;
+
+    }
+
+
+    .practice-list {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        8px;
+
+    }
+
+
+    .practice-item {
+
+      background:
+        #1e293b;
+
+      padding:
+        12px 15px;
+
+      border-radius:
+        8px;
+
+      cursor:
+        pointer;
+
+      transition:
+        0.2s;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+    }
+
+
+    .practice-item:hover {
+
+      background:
+        #334155;
+
+    }
+
+
+    .practice-item.active {
+
+      background:
+        #2563eb;
+
+    }
+
+
+    .practice-number {
+
+      min-width:
+        32px;
+
+      font-weight:
+        700;
+
+      color:
+        #93c5fd;
+
+    }
+
+
+    .practice-item.active
+    .practice-number {
+
+      color:
+        white;
+
+    }
+
+
+
+    /* ==================================================
+       ERRO
+    ================================================== */
+
+    .error {
+
+      background:
+        #7f1d1d;
+
+      padding:
+        20px;
+
+      border-radius:
+        10px;
+
+      text-align:
+        center;
+
+      font-weight:
+        600;
+
+    }
+
+
+
+    /* ==================================================
+       RESPONSIVO
+    ================================================== */
+
+    @media (
+      max-width: 700px
+    ) {
+
+      body {
+
+        padding:
+          15px;
+
+      }
+
+
+      #currentPhrase {
+
+        font-size:
+          26px;
+
+      }
+
+
+      .current-practice {
+
+        padding:
+          25px 15px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div
+    class="teacher-container"
+  >
+
+
+    <!-- ==================================================
+         CABEÇALHO
+    ================================================== -->
+
+    <div
+      class="teacher-header"
+    >
+
+      <div>
+
+        <h1
+          id="teacherLessonTitle"
+        >
+          Carregando...
+        </h1>
+
+        <div
+          class="teacher-subtitle"
+        >
+          Painel do Professor
+        </div>
+
+      </div>
+
+
+      <div
+        class="counter"
+        id="totalCounter"
+      >
+        0 itens
+      </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         ABAS
+    ================================================== -->
+
+    <div
+      class="tabs"
+      id="tabs"
+    ></div>
+
+
+
+    <!-- ==================================================
+         FRASE ATUAL
+    ================================================== -->
+
+    <div
+      class="current-practice"
+    >
+
+      <div
+        class="section-name"
+        id="sectionName"
+      >
+        -
+      </div>
+
+
+      <div
+        id="currentPhrase"
+      >
+        Carregando...
+      </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         NAVEGAÇÃO
+    ================================================== -->
+
+    <div
+      class="navigation"
+    >
+
+      <button
+        type="button"
+        id="prevPhraseBtn"
+        onclick="previousPhrase()"
+      >
+        ← Anterior
+      </button>
+
+
+      <span
+        id="phraseCounter"
+      >
+        0 / 0
+      </span>
+
+
+      <button
+        type="button"
+        id="nextPhraseBtn"
+        onclick="nextPhrase()"
+      >
+        Próxima →
+      </button>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         LISTA
+    ================================================== -->
+
+    <div
+      class="practice-list-container"
+    >
+
+      <h2>
+        Lista da seção
+      </h2>
+
+
+      <div
+        class="practice-list"
+        id="practiceList"
+      ></div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <script>
+
+
+    // ======================================================
+    // ESTADO
+    // ======================================================
+
+    let currentSection =
+      null;
+
+
+    let currentPhraseIndex =
+      0;
+
+
+    let teacherSections =
+      [];
+
+
+
+    // ======================================================
+    // NOMES DAS SEÇÕES
+    // ======================================================
+
+    const sectionLabels = {
+
+      verbs:
+        "Verbs",
+
+      vocabulary:
+        "Vocabulary",
+
+      expressions:
+        "Expressions",
+
+      grammar:
+        "Grammar",
+
+      listening:
+        "Listening"
+
+    };
+
+
+
+    // ======================================================
+    // CARREGAR AULA
+    // ======================================================
+
+    function loadTeacherLesson() {
+
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+
+      let lesson =
+        params.get("lesson") || "01";
+
+
+      if (
+        /^\d+$/.test(
+          lesson
+        )
+      ) {
+
+        lesson =
+          lesson.padStart(
+            2,
+            "0"
+          );
+
+      }
+
+
+
+      console.log(
+        "Carregando painel:",
+        lesson
+      );
+
+
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      script.src =
+        `../js/lessons/lesson${lesson}.js`;
+
+
+
+      script.onload =
+        function () {
+
+          initializeTeacherPanel();
+
+      };
+
+
+      script.onerror =
+        function () {
+
+          showError(
+            `Não foi possível carregar lesson${lesson}.js`
+          );
+
+      };
+
+
+      document.body.appendChild(
+        script
+      );
+
+    }
+
+
+
+    // ======================================================
+    // INICIAR PAINEL
+    // ======================================================
+
+    function initializeTeacherPanel() {
+
+
+      // ----------------------------------------------------
+      // TÍTULO
+      // ----------------------------------------------------
+
+      const title =
+        document.getElementById(
+          "teacherLessonTitle"
+        );
+
+
+      if (
+        typeof lessonTitle !==
+          "undefined"
+      ) {
+
+        title.textContent =
+          `${lessonTitle} - Professor`;
+
+        document.title =
+          `${lessonTitle} - Professor`;
+
+      }
+
+
+
+      // ----------------------------------------------------
+      // VALIDAR teacherPractice
+      // ----------------------------------------------------
+
+      if (
+        typeof teacherPractice ===
+          "undefined"
+      ) {
+
+        showError(
+          "Esta aula não possui teacherPractice."
+        );
+
+        return;
+
+      }
+
+
+
+      // ----------------------------------------------------
+      // DESCOBRIR SEÇÕES EXISTENTES
+      // ----------------------------------------------------
+
+      teacherSections =
+        Object.keys(
+          teacherPractice
+        ).filter(
+          function (section) {
+
+            return (
+
+              Array.isArray(
+                teacherPractice[
+                  section
+                ]
+              ) &&
+
+              teacherPractice[
+                section
+              ].length > 0
+
+            );
+
+          }
+        );
+
+
+
+      if (
+        teacherSections.length === 0
+      ) {
+
+        showError(
+          "Nenhuma prática cadastrada."
+        );
+
+        return;
+
+      }
+
+
+
+      // ----------------------------------------------------
+      // PRIMEIRA SEÇÃO
+      // ----------------------------------------------------
+
+      currentSection =
+        teacherSections[0];
+
+
+      currentPhraseIndex =
+        0;
+
+
+
+      renderTabs();
+
+      renderCurrentSection();
+
+    }
+
+
+
+    // ======================================================
+    // ABAS
+    // ======================================================
+
+    function renderTabs() {
+
+
+      const tabs =
+        document.getElementById(
+          "tabs"
+        );
+
+
+      tabs.innerHTML =
+        "";
+
+
+
+      teacherSections.forEach(
+        function (section) {
+
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.type =
+            "button";
+
+
+          button.className =
+            "tab-btn";
+
+
+          if (
+            section ===
+              currentSection
+          ) {
+
+            button.classList.add(
+              "active"
+            );
+
+          }
+
+
+          button.textContent =
+            sectionLabels[
+              section
+            ] || section;
+
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              selectSection(
+                section
+              );
+
+            }
+          );
+
+
+          tabs.appendChild(
+            button
+          );
+
+        }
+      );
+
+    }
+
+
+
+    // ======================================================
+    // SELECIONAR SEÇÃO
+    // ======================================================
+
+    function selectSection(
+      section
+    ) {
+
+
+      if (
+        !teacherPractice[
+          section
+        ]
+      ) {
+
+        return;
+
+      }
+
+
+      currentSection =
+        section;
+
+
+      currentPhraseIndex =
+        0;
+
+
+      renderTabs();
+
+      renderCurrentSection();
+
+    }
+
+
+
+    // ======================================================
+    // RENDERIZAR SEÇÃO
+    // ======================================================
+
+    function renderCurrentSection() {
+
+
+      const items =
+        teacherPractice[
+          currentSection
+        ];
+
+
+
+      // ----------------------------------------------------
+      // NOME
+      // ----------------------------------------------------
+
+      document.getElementById(
+        "sectionName"
+      ).textContent =
+        sectionLabels[
+          currentSection
+        ] || currentSection;
+
+
+
+      // ----------------------------------------------------
+      // TOTAL
+      // ----------------------------------------------------
+
+      document.getElementById(
+        "totalCounter"
+      ).textContent =
+        `${items.length} itens`;
+
+
+
+      renderCurrentPhrase();
+
+      renderPracticeList();
+
+    }
+
+
+
+    // ======================================================
+    // FRASE ATUAL
+    // ======================================================
+
+    function renderCurrentPhrase() {
+
+
+      const items =
+        teacherPractice[
+          currentSection
+        ];
+
+
+      const current =
+        items[
+          currentPhraseIndex
+        ];
+
+
+
+      document.getElementById(
+        "currentPhrase"
+      ).textContent =
+        current;
+
+
+
+      document.getElementById(
+        "phraseCounter"
+      ).textContent =
+        `${currentPhraseIndex + 1} / ${items.length}`;
+
+
+
+      // ----------------------------------------------------
+      // BOTÕES
+      // ----------------------------------------------------
+
+      document.getElementById(
+        "prevPhraseBtn"
+      ).disabled =
+        currentPhraseIndex === 0;
+
+
+      document.getElementById(
+        "nextPhraseBtn"
+      ).disabled =
+        currentPhraseIndex >=
+        items.length - 1;
+
+
+
+      // ----------------------------------------------------
+      // ATUALIZAR LISTA
+      // ----------------------------------------------------
+
+      updateActiveListItem();
+
+    }
+
+
+
+    // ======================================================
+    // LISTA COMPLETA
+    // ======================================================
+
+    function renderPracticeList() {
+
+
+      const container =
+        document.getElementById(
+          "practiceList"
+        );
+
+
+      container.innerHTML =
+        "";
+
+
+      const items =
+        teacherPractice[
+          currentSection
+        ];
+
+
+
+      items.forEach(
+        function (
+          text,
+          index
+        ) {
+
+
+          const row =
+            document.createElement(
+              "div"
+            );
+
+
+          row.className =
+            "practice-item";
+
+
+          row.dataset.index =
+            index;
+
+
+
+          const number =
+            document.createElement(
+              "span"
+            );
+
+
+          number.className =
+            "practice-number";
+
+
+          number.textContent =
+            `${index + 1}.`;
+
+
+
+          const phrase =
+            document.createElement(
+              "span"
+            );
+
+
+          phrase.textContent =
+            text;
+
+
+
+          row.appendChild(
+            number
+          );
+
+
+          row.appendChild(
+            phrase
+          );
+
+
+
+          row.addEventListener(
+            "click",
+            function () {
+
+              currentPhraseIndex =
+                index;
+
+
+              renderCurrentPhrase();
+
+            }
+          );
+
+
+
+          container.appendChild(
+            row
+          );
+
+        }
+      );
+
+
+      updateActiveListItem();
+
+    }
+
+
+
+    // ======================================================
+    // MARCAR ITEM ATUAL
+    // ======================================================
+
+    function updateActiveListItem() {
+
+
+      const items =
+        document.querySelectorAll(
+          ".practice-item"
+        );
+
+
+      items.forEach(
+        function (item) {
+
+          item.classList.remove(
+            "active"
+          );
+
+      });
+
+
+
+      const active =
+        document.querySelector(
+          `.practice-item[data-index="${currentPhraseIndex}"]`
+        );
+
+
+      if (active) {
+
+        active.classList.add(
+          "active"
+        );
+
+
+        active.scrollIntoView({
+
+          block:
+            "nearest",
+
+          behavior:
+            "smooth"
+
+        });
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // FRASE ANTERIOR
+    // ======================================================
+
+    function previousPhrase() {
+
+
+      if (
+        currentPhraseIndex <= 0
+      ) {
+
+        return;
+
+      }
+
+
+      currentPhraseIndex--;
+
+
+      renderCurrentPhrase();
+
+    }
+
+
+
+    // ======================================================
+    // PRÓXIMA FRASE
+    // ======================================================
+
+    function nextPhrase() {
+
+
+      const items =
+        teacherPractice[
+          currentSection
+        ];
+
+
+      if (
+        currentPhraseIndex >=
+        items.length - 1
+      ) {
+
+        return;
+
+      }
+
+
+      currentPhraseIndex++;
+
+
+      renderCurrentPhrase();
+
+    }
+
+
+
+    // ======================================================
+    // SETAS DO TECLADO
+    //
+    // ← FRASE ANTERIOR
+    // → PRÓXIMA FRASE
+    // ======================================================
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+
+        if (
+          event.key ===
+            "ArrowLeft"
+        ) {
+
+          event.preventDefault();
+
+          previousPhrase();
+
+        }
+
+
+        if (
+          event.key ===
+            "ArrowRight"
+        ) {
+
+          event.preventDefault();
+
+          nextPhrase();
+
+        }
+
+      }
+    );
+
+
+
+    // ======================================================
+    // ERRO
+    // ======================================================
+
+    function showError(
+      message
+    ) {
+
+
+      const container =
+        document.querySelector(
+          ".teacher-container"
+        );
+
+
+      container.innerHTML =
+        `<div class="error">${message}</div>`;
+
+    }
+
+
+
+    // ======================================================
+    // INICIAR
+    // ======================================================
+
+    loadTeacherLesson();
+
+
+  </script>
+
+
+</body>
+
+</html>

@@ -16,7 +16,7 @@ body {
 .card-stack {
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1700px;
   height: auto;
   min-height: 700px;
   margin: 40px auto;
@@ -102,10 +102,14 @@ body {
 
 /* CONTINUAÇÃO DO SEU VISUAL */
 
+:root {
+  --blue-font-size: 1.8em;
+}
+
 .text-blue {
   color: #2c66ad;
   font-weight: bold;
-  font-size: 1.8em;
+  font-size: var(--blue-font-size);
   cursor: pointer;
 }
 
