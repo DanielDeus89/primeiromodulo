@@ -9,8 +9,8 @@ const crypto = require("crypto");
 // CONFIGURAÇÃO
 // ======================================================
 
+// Sessão válida por 4 horas
 const SESSION_DURATION_SECONDS = 4 * 60 * 60;
-// 4 horas
 
 
 // ======================================================
@@ -54,7 +54,7 @@ function createSignature(payload) {
 
 
 // ======================================================
-// CRIAR TOKEN
+// CRIAR TOKEN DA SESSÃO
 // ======================================================
 
 function createSessionToken() {
@@ -67,9 +67,11 @@ function createSessionToken() {
 
   const data = {
 
-    role: "teacher",
+    role:
+      "teacher",
 
-    iat: now,
+    iat:
+      now,
 
     exp:
       now +
@@ -85,7 +87,9 @@ function createSessionToken() {
 
 
   const signature =
-    createSignature(payload);
+    createSignature(
+      payload
+    );
 
 
   return (
@@ -98,7 +102,7 @@ function createSessionToken() {
 
 
 // ======================================================
-// COMPARAÇÃO SEGURA DE SENHA
+// COMPARAÇÃO SEGURA
 // ======================================================
 
 function safeCompare(
@@ -117,13 +121,21 @@ function safeCompare(
 
 
   const receivedBuffer =
-    Buffer.from(received);
+    Buffer.from(
+      received,
+      "utf8"
+    );
 
 
   const expectedBuffer =
-    Buffer.from(expected);
+    Buffer.from(
+      expected,
+      "utf8"
+    );
 
 
+  // timingSafeEqual exige buffers
+  // com o mesmo tamanho.
   if (
     receivedBuffer.length !==
     expectedBuffer.length
@@ -152,7 +164,6 @@ module.exports =
     res
   ) {
 
-
     // ==================================================
     // SOMENTE POST
     // ==================================================
@@ -171,7 +182,8 @@ module.exports =
         .status(405)
         .json({
 
-          success: false,
+          success:
+            false,
 
           message:
             "Método não permitido."
@@ -182,7 +194,7 @@ module.exports =
 
 
     // ==================================================
-    // VALIDAR CONFIGURAÇÃO
+    // VALIDAR VARIÁVEIS DE AMBIENTE
     // ==================================================
 
     if (
@@ -191,7 +203,7 @@ module.exports =
     ) {
 
       console.error(
-        "Variáveis de ambiente não configuradas."
+        "TEACHER_PASSWORD ou SESSION_SECRET não configurados."
       );
 
 
@@ -199,7 +211,8 @@ module.exports =
         .status(500)
         .json({
 
-          success: false,
+          success:
+            false,
 
           message:
             "Servidor não configurado."
@@ -210,7 +223,7 @@ module.exports =
 
 
     // ==================================================
-    // PEGAR SENHA
+    // PEGAR BODY
     // ==================================================
 
     const body =
@@ -238,7 +251,8 @@ module.exports =
         .status(401)
         .json({
 
-          success: false,
+          success:
+            false,
 
           message:
             "Código inválido."
@@ -249,7 +263,7 @@ module.exports =
 
 
     // ==================================================
-    // CRIAR SESSÃO
+    // CRIAR TOKEN
     // ==================================================
 
     const token =
@@ -260,30 +274,21 @@ module.exports =
     // COOKIE
     // ==================================================
 
-    const secure =
-      process.env.NODE_ENV ===
-      "production";
-
-
     const cookie = [
 
       `teacher_session=${token}`,
 
       "HttpOnly",
 
-      "Path=/",
+      "Secure",
 
       "SameSite=Lax",
 
-      `Max-Age=${SESSION_DURATION_SECONDS}`,
+      "Path=/",
 
-      secure
-        ? "Secure"
-        : ""
+      `Max-Age=${SESSION_DURATION_SECONDS}`
 
-    ]
-      .filter(Boolean)
-      .join("; ");
+    ].join("; ");
 
 
     res.setHeader(
@@ -293,14 +298,15 @@ module.exports =
 
 
     // ==================================================
-    // OK
+    // LOGIN OK
     // ==================================================
 
     return res
       .status(200)
       .json({
 
-        success: true,
+        success:
+          true,
 
         role:
           "teacher"

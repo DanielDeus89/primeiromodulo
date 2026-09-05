@@ -119,11 +119,28 @@ function safeCompare(
   valueB
 ) {
 
+  if (
+    typeof valueA !== "string" ||
+    typeof valueB !== "string"
+  ) {
+
+    return false;
+
+  }
+
+
   const a =
-    Buffer.from(valueA);
+    Buffer.from(
+      valueA,
+      "utf8"
+    );
+
 
   const b =
-    Buffer.from(valueB);
+    Buffer.from(
+      valueB,
+      "utf8"
+    );
 
 
   if (
@@ -148,9 +165,7 @@ function safeCompare(
 // VALIDAR TOKEN
 // ======================================================
 
-function validateSessionToken(
-  token
-) {
+function validateSessionToken(token) {
 
   if (!token) {
 
@@ -218,7 +233,10 @@ function validateSessionToken(
       );
 
 
-    // Sessão expirada
+    // ==================================================
+    // SESSÃO EXPIRADA
+    // ==================================================
+
     if (
       !data.exp ||
       data.exp < now
@@ -229,10 +247,12 @@ function validateSessionToken(
     }
 
 
-    // Usuário precisa ser professor
+    // ==================================================
+    // VALIDAR PERFIL
+    // ==================================================
+
     if (
-      data.role !==
-      "teacher"
+      data.role !== "teacher"
     ) {
 
       return null;
@@ -245,6 +265,12 @@ function validateSessionToken(
   }
 
   catch (error) {
+
+    console.error(
+      "Erro ao validar sessão:",
+      error
+    );
+
 
     return null;
 
@@ -262,7 +288,6 @@ module.exports =
     req,
     res
   ) {
-
 
     // ==================================================
     // SOMENTE GET
@@ -282,7 +307,11 @@ module.exports =
         .status(405)
         .json({
 
-          success: false
+          success:
+            false,
+
+          message:
+            "Método não permitido."
 
         });
 
@@ -290,18 +319,27 @@ module.exports =
 
 
     // ==================================================
-    // CONFIGURAÇÃO
+    // VALIDAR CONFIGURAÇÃO
     // ==================================================
 
     if (
       !process.env.SESSION_SECRET
     ) {
 
+      console.error(
+        "SESSION_SECRET não configurado."
+      );
+
+
       return res
         .status(500)
         .json({
 
-          success: false
+          success:
+            false,
+
+          message:
+            "Servidor não configurado."
 
         });
 
@@ -309,7 +347,7 @@ module.exports =
 
 
     // ==================================================
-    // COOKIE
+    // PEGAR COOKIE
     // ==================================================
 
     const cookies =
@@ -336,7 +374,8 @@ module.exports =
         .status(401)
         .json({
 
-          success: false,
+          success:
+            false,
 
           message:
             "Não autorizado."
@@ -347,7 +386,7 @@ module.exports =
 
 
     // ==================================================
-    // MEET
+    // PEGAR GOOGLE MEET
     // ==================================================
 
     const meetUrl =
@@ -356,14 +395,20 @@ module.exports =
 
     if (!meetUrl) {
 
+      console.error(
+        "GOOGLE_MEET_URL não configurado."
+      );
+
+
       return res
         .status(500)
         .json({
 
-          success: false,
+          success:
+            false,
 
           message:
-            "Meet não configurado."
+            "Google Meet não configurado."
 
         });
 
@@ -378,7 +423,11 @@ module.exports =
       .status(200)
       .json({
 
-        success: true,
+        success:
+          true,
+
+        role:
+          session.role,
 
         meetUrl:
           meetUrl
