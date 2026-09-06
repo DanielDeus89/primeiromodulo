@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Portal do Aluno</title>
+
+  <link
+    rel="stylesheet"
+    href="./css/menu.css"
+  />
+
+</head>
+
+
+<body>
+
+
+  <!-- ======================================================
+       BOTÃO DO MENU
+  ======================================================= -->
+
+  <div
+    class="menu-toggle"
+    onclick="toggleSidebar()"
+  >
+    ☰ Aulas
+  </div>
+
+
+
+  <!-- ======================================================
+       MENU LATERAL
+  ======================================================= -->
+
+  <div
+    class="sidebar"
+    id="sidebar"
+  >
+
+    <div
+      class="sidebar-header"
+    >
+
+      <span
+        class="close-btn"
+        onclick="toggleSidebar()"
+      >
+        ✖
+      </span>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         IDENTIFICAÇÃO
+    ===================================================== -->
+
+    <div
+      style="
+        padding: 15px;
+        margin-bottom: 10px;
+        text-align: center;
+        color: white;
+      "
+    >
+
+      <div
+        style="
+          font-size: 28px;
+          margin-bottom: 5px;
+        "
+      >
+        🎓
+      </div>
+
+
+      <div
+        style="
+          font-weight: 600;
+          font-size: 16px;
+        "
+      >
+        Portal do Aluno
+      </div>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         INÍCIO
+    ===================================================== -->
+
+    <ul>
+
+      <li>
+
+        <a
+          href="#"
+          id="homeLink"
+          onclick="mostrarInicio(this); return false;"
+        >
+          🏠 Início
+        </a>
+
+      </li>
+
+    </ul>
+
+
+
+    <!-- ====================================================
+         SEPARADOR
+    ===================================================== -->
+
+    <div
+      style="
+        height: 1px;
+        background: #334155;
+        margin: 10px 15px;
+      "
+    ></div>
+
+
+
+    <!-- ====================================================
+         AULAS E REVIEWS
+    ===================================================== -->
+
+    <ul
+      id="lessonMenu"
+    ></ul>
+
+  </div>
+
+
+
+  <!-- ======================================================
+       CONTEÚDO PRINCIPAL
+  ======================================================= -->
+
+  <div
+    class="main-content"
+  >
+
+
+    <!-- ====================================================
+         DASHBOARD
+    ===================================================== -->
+
+    <div
+      id="studentDashboard"
+      style="
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 50px 30px;
+      "
+    >
+
+
+      <!-- ==================================================
+           CABEÇALHO
+      =================================================== -->
+
+      <div
+        style="
+          margin-bottom: 35px;
+        "
+      >
+
+        <h1
+          style="
+            margin-bottom: 8px;
+          "
+        >
+          Portal do Aluno
+        </h1>
+
+
+        <p
+          style="
+            opacity: 0.8;
+          "
+        >
+          Continue seus estudos e acompanhe seu progresso.
+        </p>
+
+      </div>
+
+
+
+      <!-- ==================================================
+           GRID
+      =================================================== -->
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns:
+            repeat(auto-fit, minmax(230px, 1fr));
+          gap: 20px;
+        "
+      >
+
+
+        <!-- =================================================
+             CONTINUAR AULA
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            ▶️
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Continuar aula
+          </h2>
+
+
+          <p
+            id="lastLessonText"
+            style="
+              color: #cbd5e1;
+              margin-bottom: 18px;
+              font-size: 14px;
+            "
+          >
+            Nenhuma aula iniciada.
+          </p>
+
+
+          <button
+            type="button"
+            id="continueLessonBtn"
+            onclick="continuarUltimaAula()"
+            disabled
+            style="
+              padding: 10px 16px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            Continuar
+          </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MINHAS AULAS
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            📚
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Minhas aulas
+          </h2>
+
+
+          <p
+            style="
+              color: #cbd5e1;
+              margin-bottom: 18px;
+              font-size: 14px;
+            "
+          >
+            Acesse todas as aulas disponíveis.
+          </p>
+
+
+          <button
+            type="button"
+            onclick="toggleSidebar()"
+            style="
+              padding: 10px 16px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            Ver aulas
+          </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROGRESSO
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            📊
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Progresso
+          </h2>
+
+
+          <p
+            id="progressText"
+            style="
+              color: #cbd5e1;
+              margin-bottom: 10px;
+              font-size: 14px;
+            "
+          >
+            0 de 60 aulas concluídas
+          </p>
+
+
+          <div
+            style="
+              width: 100%;
+              height: 10px;
+              background: #334155;
+              border-radius: 10px;
+              overflow: hidden;
+            "
+          >
+
+            <div
+              id="progressBar"
+              style="
+                width: 0%;
+                height: 100%;
+                background: #3b82f6;
+                transition: width 0.4s ease;
+              "
+            ></div>
+
+          </div>
+
+
+          <div
+            id="progressPercent"
+            style="
+              margin-top: 8px;
+              color: #94a3b8;
+              font-size: 13px;
+            "
+          >
+            0%
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EXERCÍCIOS
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            ✏️
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Exercícios
+          </h2>
+
+
+          <p
+            style="
+              color: #cbd5e1;
+              font-size: 14px;
+            "
+          >
+            Em breve você poderá praticar exercícios e acompanhar seus resultados.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         IFRAME
+    ===================================================== -->
+
+    <iframe
+      id="iframeAula"
+      src=""
+      title="Conteúdo da aula"
+      allow="autoplay; fullscreen"
+      style="
+        display: none;
+        width: 100%;
+        height: 100vh;
+        border: none;
+      "
+    ></iframe>
+
+  </div>
+
+
+
+  <!-- ======================================================
+       JAVASCRIPT
+  ======================================================= -->
+
+  <script>
+
+
+    // ======================================================
+    // CONFIGURAÇÕES
+    // ======================================================
+
+    const TOTAL_LESSONS =
+      60;
+
+
+    const LESSONS_PER_REVIEW =
+      6;
+
+
+
+    // ======================================================
+    // ESTADO
+    // ======================================================
+
+    let currentLesson =
+      null;
+
+
+
+    // ======================================================
+    // SIDEBAR
+    // ======================================================
+
+    function toggleSidebar() {
+
+      const sidebar =
+        document.getElementById(
+          "sidebar"
+        );
+
+
+      if (!sidebar) {
+        return;
+      }
+
+
+      sidebar.classList.toggle(
+        "active"
+      );
+
+    }
+
+
+
+    function fecharSidebar() {
+
+      const sidebar =
+        document.getElementById(
+          "sidebar"
+        );
+
+
+      if (!sidebar) {
+        return;
+      }
+
+
+      sidebar.classList.remove(
+        "active"
+      );
+
+    }
+
+
+
+    // ======================================================
+    // FORMATAR NÚMERO
+    // ======================================================
+
+    function formatLessonNumber(
+      number
+    ) {
+
+      return String(
+        number
+      ).padStart(
+        2,
+        "0"
+      );
+
+    }
+
+
+
+    // ======================================================
+    // CRIAR MENU
+    // ======================================================
+
+    function createLessonMenu() {
+
+      const menu =
+        document.getElementById(
+          "lessonMenu"
+        );
+
+
+      if (!menu) {
+        return;
+      }
+
+
+      menu.innerHTML =
+        "";
+
+
+      for (
+        let number = 1;
+        number <= TOTAL_LESSONS;
+        number++
+      ) {
+
+
+        const lessonNumber =
+          formatLessonNumber(
+            number
+          );
+
+
+        createLessonItem(
+          menu,
+          lessonNumber
+        );
+
+
+        // ==================================================
+        // REVIEW A CADA 6 AULAS
+        // ==================================================
+
+        if (
+          number %
+          LESSONS_PER_REVIEW ===
+          0
+        ) {
+
+          const reviewNumber =
+            number /
+            LESSONS_PER_REVIEW;
+
+
+          createReviewItem(
+            menu,
+            reviewNumber
+          );
+
+        }
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // CRIAR ITEM DE AULA
+    // ======================================================
+
+    function createLessonItem(
+      menu,
+      lessonNumber
+    ) {
+
+      const li =
+        document.createElement(
+          "li"
+        );
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.href =
+        "#";
+
+
+      link.textContent =
+        `📘 Aula ${lessonNumber}`;
+
+
+      link.dataset.lesson =
+        lessonNumber;
+
+
+      link.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+
+
+          carregarAula(
+            link,
+            lessonNumber
+          );
+
+        }
+      );
+
+
+      li.appendChild(
+        link
+      );
+
+
+      menu.appendChild(
+        li
+      );
+
+    }
+
+
+
+    // ======================================================
+    // CRIAR REVIEW
+    // ======================================================
+
+    function createReviewItem(
+      menu,
+      reviewNumber
+    ) {
+
+      const li =
+        document.createElement(
+          "li"
+        );
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.href =
+        "#";
+
+
+      const reviewNumberFormatted =
+        formatLessonNumber(
+          reviewNumber
+        );
+
+
+      link.textContent =
+        `📝 Review ${reviewNumberFormatted}`;
+
+
+      link.dataset.review =
+        reviewNumberFormatted;
+
+
+      link.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+
+
+          carregarReview(
+            link,
+            reviewNumber
+          );
+
+        }
+      );
+
+
+      li.appendChild(
+        link
+      );
+
+
+      menu.appendChild(
+        li
+      );
+
+    }
+
+
+
+    // ======================================================
+    // CARREGAR AULA
+    // ======================================================
+
+    function carregarAula(
+      elemento,
+      numero
+    ) {
+
+      currentLesson =
+        numero;
+
+
+      const url =
+        `./conteudo/aula.html?lesson=${numero}`;
+
+
+      abrirConteudo(
+        url
+      );
+
+
+      // ==================================================
+      // ÚLTIMA AULA
+      // ==================================================
+
+      localStorage.setItem(
+        "studentLastLesson",
+        numero
+      );
+
+
+      // ==================================================
+      // REGISTRAR INICIADA
+      // ==================================================
+
+      registrarAulaIniciada(
+        numero
+      );
+
+
+      marcarItemAtivo(
+        elemento
+      );
+
+
+      atualizarDashboard();
+
+      atualizarMenuConcluido();
+
+      fecharSidebar();
+
+    }
+
+
+
+    // ======================================================
+    // CARREGAR REVIEW
+    //
+    // USA O MESMO aula.html
+    // ======================================================
+
+    function carregarReview(
+      elemento,
+      reviewNumber
+    ) {
+
+      const numero =
+        String(
+          reviewNumber
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+      const url =
+        `./conteudo/aula.html?review=${numero}`;
+
+
+      abrirConteudo(
+        url
+      );
+
+
+      marcarItemAtivo(
+        elemento
+      );
+
+
+      fecharSidebar();
+
+    }
+
+
+
+    // ======================================================
+    // ABRIR CONTEÚDO
+    // ======================================================
+
+    function abrirConteudo(
+      url
+    ) {
+
+      const dashboard =
+        document.getElementById(
+          "studentDashboard"
+        );
+
+
+      const iframe =
+        document.getElementById(
+          "iframeAula"
+        );
+
+
+      if (
+        !dashboard ||
+        !iframe
+      ) {
+
+        return;
+
+      }
+
+
+      dashboard.style.display =
+        "none";
+
+
+      iframe.style.display =
+        "block";
+
+
+      iframe.src =
+        url;
+
+    }
+
+
+
+    // ======================================================
+    // MOSTRAR INÍCIO
+    // ======================================================
+
+    function mostrarInicio(
+      elemento
+    ) {
+
+      const dashboard =
+        document.getElementById(
+          "studentDashboard"
+        );
+
+
+      const iframe =
+        document.getElementById(
+          "iframeAula"
+        );
+
+
+      if (
+        !dashboard ||
+        !iframe
+      ) {
+
+        return;
+
+      }
+
+
+      iframe.style.display =
+        "none";
+
+
+      // Parar vídeo/conteúdo
+      iframe.src =
+        "";
+
+
+      dashboard.style.display =
+        "block";
+
+
+      marcarItemAtivo(
+        elemento
+      );
+
+
+      atualizarDashboard();
+
+      atualizarMenuConcluido();
+
+      fecharSidebar();
+
+    }
+
+
+
+    // ======================================================
+    // CONTINUAR ÚLTIMA AULA
+    // ======================================================
+
+    function continuarUltimaAula() {
+
+      let savedPosition =
+        null;
+
+
+      try {
+
+        savedPosition =
+          JSON.parse(
+            localStorage.getItem(
+              "studentLessonPosition"
+            )
+          );
+
+      }
+
+      catch (error) {
+
+        savedPosition =
+          null;
+
+      }
+
+
+      // ====================================================
+      // EXISTE POSIÇÃO EXATA
+      // ====================================================
+
+      if (
+        savedPosition &&
+        savedPosition.lesson
+      ) {
+
+        carregarAula(
+          null,
+          savedPosition.lesson
+        );
+
+
+        return;
+
+      }
+
+
+      // ====================================================
+      // FALLBACK
+      // ====================================================
+
+      const lesson =
+        localStorage.getItem(
+          "studentLastLesson"
+        );
+
+
+      if (!lesson) {
+        return;
+      }
+
+
+      carregarAula(
+        null,
+        lesson
+      );
+
+    }
+
+
+
+    // ======================================================
+    // REGISTRAR AULA INICIADA
+    // ======================================================
+
+    function registrarAulaIniciada(
+      numero
+    ) {
+
+      let lessons =
+        [];
+
+
+      try {
+
+        lessons =
+          JSON.parse(
+            localStorage.getItem(
+              "studentStartedLessons"
+            )
+          ) || [];
+
+      }
+
+      catch (error) {
+
+        lessons =
+          [];
+
+      }
+
+
+      if (
+        !lessons.includes(
+          numero
+        )
+      ) {
+
+        lessons.push(
+          numero
+        );
+
+      }
+
+
+      localStorage.setItem(
+        "studentStartedLessons",
+        JSON.stringify(
+          lessons
+        )
+      );
+
+    }
+
+
+
+    // ======================================================
+    // PEGAR AULAS CONCLUÍDAS
+    // ======================================================
+
+    function getCompletedLessons() {
+
+      let lessons =
+        [];
+
+
+      try {
+
+        lessons =
+          JSON.parse(
+            localStorage.getItem(
+              "studentCompletedLessons"
+            )
+          ) || [];
+
+      }
+
+      catch (error) {
+
+        lessons =
+          [];
+
+      }
+
+
+      if (
+        !Array.isArray(
+          lessons
+        )
+      ) {
+
+        lessons =
+          [];
+
+      }
+
+
+      return lessons;
+
+    }
+
+
+
+    // ======================================================
+    // ATUALIZAR DASHBOARD
+    // ======================================================
+
+    function atualizarDashboard() {
+
+
+      const lastLesson =
+        localStorage.getItem(
+          "studentLastLesson"
+        );
+
+
+      const lastLessonText =
+        document.getElementById(
+          "lastLessonText"
+        );
+
+
+      const continueButton =
+        document.getElementById(
+          "continueLessonBtn"
+        );
+
+
+
+      // ==================================================
+      // POSIÇÃO EXATA
+      // ==================================================
+
+      let savedPosition =
+        null;
+
+
+      try {
+
+        savedPosition =
+          JSON.parse(
+            localStorage.getItem(
+              "studentLessonPosition"
+            )
+          );
+
+      }
+
+      catch (error) {
+
+        savedPosition =
+          null;
+
+      }
+
+
+
+      if (
+        lastLessonText &&
+        continueButton
+      ) {
+
+
+        if (
+          savedPosition &&
+          savedPosition.lesson
+        ) {
+
+          const cardNumber =
+            Number(
+              savedPosition.cardIndex
+            ) + 1;
+
+
+          lastLessonText.innerHTML =
+            `Última aula: Aula ${savedPosition.lesson}<br>` +
+            `Card ${cardNumber}`;
+
+
+          continueButton.disabled =
+            false;
+
+        }
+
+
+        else if (lastLesson) {
+
+          lastLessonText.textContent =
+            `Última aula: Aula ${lastLesson}`;
+
+
+          continueButton.disabled =
+            false;
+
+        }
+
+
+        else {
+
+          lastLessonText.textContent =
+            "Nenhuma aula iniciada.";
+
+
+          continueButton.disabled =
+            true;
+
+        }
+
+      }
+
+
+
+      // ==================================================
+      // PROGRESSO
+      // ==================================================
+
+      const completedLessons =
+        getCompletedLessons();
+
+
+      const completed =
+        completedLessons.length;
+
+
+      const percentage =
+        Math.min(
+          100,
+          Math.round(
+            (
+              completed /
+              TOTAL_LESSONS
+            ) *
+            100
+          )
+        );
+
+
+      const progressText =
+        document.getElementById(
+          "progressText"
+        );
+
+
+      const progressBar =
+        document.getElementById(
+          "progressBar"
+        );
+
+
+      const progressPercent =
+        document.getElementById(
+          "progressPercent"
+        );
+
+
+      if (progressText) {
+
+        progressText.textContent =
+          `${completed} de ${TOTAL_LESSONS} aulas concluídas`;
+
+      }
+
+
+      if (progressBar) {
+
+        progressBar.style.width =
+          `${percentage}%`;
+
+      }
+
+
+      if (progressPercent) {
+
+        progressPercent.textContent =
+          `${percentage}%`;
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // ATUALIZAR MENU CONCLUÍDO
+    // ======================================================
+
+    function atualizarMenuConcluido() {
+
+      const completedLessons =
+        getCompletedLessons();
+
+
+      const links =
+        document.querySelectorAll(
+          "#lessonMenu a[data-lesson]"
+        );
+
+
+      links.forEach(
+        function (link) {
+
+          const lesson =
+            link.dataset.lesson;
+
+
+          if (
+            completedLessons.includes(
+              lesson
+            )
+          ) {
+
+            link.textContent =
+              `✅ Aula ${lesson}`;
+
+          }
+
+          else {
+
+            link.textContent =
+              `📘 Aula ${lesson}`;
+
+          }
+
+        }
+      );
+
+    }
+
+
+
+    // ======================================================
+    // RECEBER EVENTOS DA AULA
+    // ======================================================
+
+    window.addEventListener(
+      "message",
+      function (event) {
+
+        const data =
+          event.data;
+
+
+        if (!data) {
+          return;
+        }
+
+
+        // ==================================================
+        // AULA CONCLUÍDA
+        // ==================================================
+
+        if (
+          data.type ===
+            "LESSON_COMPLETED"
+        ) {
+
+          console.log(
+            "Aula concluída:",
+            data.lesson
+          );
+
+
+          atualizarDashboard();
+
+          atualizarMenuConcluido();
+
+        }
+
+
+        // ==================================================
+        // POSIÇÃO SALVA
+        // ==================================================
+
+        if (
+          data.type ===
+            "LESSON_POSITION"
+        ) {
+
+          atualizarDashboard();
+
+        }
+
+      }
+    );
+
+
+
+    // ======================================================
+    // MARCAR ITEM ATIVO
+    // ======================================================
+
+    function marcarItemAtivo(
+      elemento
+    ) {
+
+      const links =
+        document.querySelectorAll(
+          ".sidebar a"
+        );
+
+
+      links.forEach(
+        function (link) {
+
+          link.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+      if (elemento) {
+
+        elemento.classList.add(
+          "active"
+        );
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // INICIALIZAÇÃO
+    // ======================================================
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        createLessonMenu();
+
+        atualizarDashboard();
+
+        atualizarMenuConcluido();
+
+
+        const home =
+          document.getElementById(
+            "homeLink"
+          );
+
+
+        if (home) {
+
+          home.classList.add(
+            "active"
+          );
+
+        }
+
+      }
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>

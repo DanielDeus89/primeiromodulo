@@ -1,15 +1,18 @@
+// ======================================================
 // engine.js
+// ======================================================
+
 
 // ======================================================
 // ESTADO GLOBAL DA AULA
 // ======================================================
 
 let currentIndex = 0;
+
 let isDevMode = false;
 
 
-// Indica que o arquivo lessonXX.js já foi carregado.
-// O player.js poderá consultar esse valor.
+// Indica que o arquivo lessonXX.js já foi carregado
 window.lessonReady = false;
 
 
@@ -19,83 +22,187 @@ window.lessonReady = false;
 
 function initializeLesson() {
 
-  console.log("Inicializando aula...");
+  console.log(
+    "Inicializando aula..."
+  );
 
 
-  // ----------------------------------------------------
-  // VALIDAR DADOS OBRIGATÓRIOS
-  // ----------------------------------------------------
+  // ====================================================
+  // VALIDAR DADOS
+  // ====================================================
 
-  if (typeof lessonTitle === "undefined") {
+  if (
+    typeof lessonTitle ===
+    "undefined"
+  ) {
 
     console.error(
-      "lessonTitle não foi definido no arquivo da aula."
+      "lessonTitle não definido."
     );
 
     return;
-  }
 
-
-  if (typeof currentVideoId === "undefined") {
-
-    console.error(
-      "currentVideoId não foi definido no arquivo da aula."
-    );
-
-    return;
   }
 
 
   if (
-    typeof lessonCards === "undefined" ||
-    !Array.isArray(lessonCards)
+    typeof currentVideoId ===
+    "undefined"
   ) {
 
     console.error(
-      "lessonCards não foi definido corretamente."
+      "currentVideoId não definido."
     );
 
     return;
+
   }
 
 
   if (
-    typeof timeRanges === "undefined" ||
-    !Array.isArray(timeRanges)
+    typeof lessonCards ===
+    "undefined" ||
+    !Array.isArray(
+      lessonCards
+    )
   ) {
 
     console.error(
-      "timeRanges não foi definido corretamente."
+      "lessonCards não definido corretamente."
     );
 
+    return;
+
+  }
+
+
+  if (
+    typeof timeRanges ===
+    "undefined" ||
+    !Array.isArray(
+      timeRanges
+    )
+  ) {
+
+    console.error(
+      "timeRanges não definido corretamente."
+    );
+
+    return;
+
+  }
+
+// ======================================================
+// SALVAR PROGRESSO DO CARD ATUAL
+// ======================================================
+
+function saveCurrentLessonPosition() {
+
+  if (
+    typeof lessonTitle === "undefined"
+  ) {
     return;
   }
 
 
-  // ----------------------------------------------------
-  // RESETAR ESTADO
-  // ----------------------------------------------------
+  const match =
+    String(
+      lessonTitle
+    ).match(
+      /\d+/
+    );
+
+
+  if (!match) {
+    return;
+  }
+
+
+  const lessonNumber =
+    match[0].padStart(
+      2,
+      "0"
+    );
+
+
+  const progressData = {
+
+    lesson:
+      lessonNumber,
+
+    cardIndex:
+      currentIndex,
+
+    updatedAt:
+      Date.now()
+
+  };
+
+
+  localStorage.setItem(
+    "studentLessonPosition",
+    JSON.stringify(
+      progressData
+    )
+  );
+
+
+  // Avisar aluno.html
+  if (
+    window.parent &&
+    window.parent !== window
+  ) {
+
+    window.parent.postMessage(
+      {
+
+        type:
+          "LESSON_POSITION",
+
+        lesson:
+          lessonNumber,
+
+        cardIndex:
+          currentIndex
+
+      },
+      "*"
+    );
+
+  }
+
+
+  console.log(
+    "Posição salva:",
+    progressData
+  );
+
+}
+  // ====================================================
+  // RESET
+  // ====================================================
 
   currentIndex = 0;
 
 
-  // ----------------------------------------------------
-  // ATUALIZAR TÍTULO DO NAVEGADOR
-  // ----------------------------------------------------
+  // ====================================================
+  // TÍTULO
+  // ====================================================
 
   document.title =
     `${lessonTitle} - English Listening Practice`;
 
 
-  // ----------------------------------------------------
-  // ATUALIZAR INTERFACE
-  // ----------------------------------------------------
+  // ====================================================
+  // INTERFACE
+  // ====================================================
 
   updateMainButtons();
 
 
   if (
-    typeof renderLessonContent === "function"
+    typeof renderLessonContent ===
+    "function"
   ) {
 
     renderLessonContent();
@@ -103,9 +210,9 @@ function initializeLesson() {
   }
 
 
-  // ----------------------------------------------------
-  // MARCAR AULA COMO PRONTA
-  // ----------------------------------------------------
+  // ====================================================
+  // AULA PRONTA
+  // ====================================================
 
   window.lessonReady = true;
 
@@ -117,7 +224,7 @@ function initializeLesson() {
 
 
   console.log(
-    "Cards:",
+    "Total de cards:",
     lessonCards.length
   );
 
@@ -128,15 +235,13 @@ function initializeLesson() {
   );
 
 
-  // ----------------------------------------------------
-  // TENTAR INICIALIZAR PLAYER
-  //
-  // A API do YouTube pode já ter carregado
-  // ou ainda pode estar carregando.
-  // ----------------------------------------------------
+  // ====================================================
+  // TENTAR INICIAR PLAYER
+  // ====================================================
 
   if (
-    typeof tryInitializePlayer === "function"
+    typeof tryInitializePlayer ===
+    "function"
   ) {
 
     tryInitializePlayer();
@@ -153,10 +258,15 @@ function initializeLesson() {
 function toggleDevMode() {
 
   const checkbox =
-    document.getElementById("devCheckbox");
+    document.getElementById(
+      "devCheckbox"
+    );
+
 
   isDevMode =
-    checkbox ? checkbox.checked : false;
+    checkbox
+      ? checkbox.checked
+      : false;
 
 
   console.log(
@@ -168,60 +278,56 @@ function toggleDevMode() {
 
 
   // ====================================================
-  // MODO DESENVOLVEDOR ATIVADO
+  // DEV ATIVADO
+  // PAUSAR VÍDEO
   // ====================================================
 
   if (isDevMode) {
 
-    // Pausar o vídeo
     if (
-      typeof player !== "undefined" &&
+      typeof player !==
+        "undefined" &&
       player &&
-      typeof player.pauseVideo === "function"
+      typeof player.pauseVideo ===
+        "function"
     ) {
 
       player.pauseVideo();
 
-      console.log(
-        "Vídeo pausado pelo modo desenvolvedor."
-      );
-
     }
 
   }
 
 
   // ====================================================
-  // MODO DESENVOLVEDOR DESATIVADO
+  // DEV DESATIVADO
+  // RETOMAR VÍDEO
   // ====================================================
 
   else {
 
-    // Continuar o vídeo de onde estava
     if (
-      typeof player !== "undefined" &&
+      typeof player !==
+        "undefined" &&
       player &&
-      typeof player.playVideo === "function"
+      typeof player.playVideo ===
+        "function"
     ) {
 
       player.playVideo();
-
-      console.log(
-        "Vídeo retomado."
-      );
 
     }
 
   }
 
 
-  // Atualizar estado do botão Próximo
   updateMainButtons();
+
 }
 
 
 // ======================================================
-// ATUALIZAÇÃO DOS BOTÕES
+// ATUALIZAR BOTÃO PRÓXIMO
 // ======================================================
 
 function updateMainButtons() {
@@ -239,13 +345,16 @@ function updateMainButtons() {
   }
 
 
-  // ----------------------------------------------------
-  // SE A AULA AINDA NÃO CARREGOU
-  // ----------------------------------------------------
+  // ====================================================
+  // AULA AINDA NÃO CARREGOU
+  // ====================================================
 
   if (
-    typeof lessonCards === "undefined" ||
-    !Array.isArray(lessonCards)
+    typeof lessonCards ===
+      "undefined" ||
+    !Array.isArray(
+      lessonCards
+    )
   ) {
 
     nextBtn.disabled = true;
@@ -255,9 +364,9 @@ function updateMainButtons() {
   }
 
 
-  // ----------------------------------------------------
+  // ====================================================
   // ÚLTIMO CARD
-  // ----------------------------------------------------
+  // ====================================================
 
   if (
     currentIndex >=
@@ -271,9 +380,9 @@ function updateMainButtons() {
   }
 
 
-  // ----------------------------------------------------
-  // MODO DESENVOLVEDOR
-  // ----------------------------------------------------
+  // ====================================================
+  // DEV ATIVO
+  // ====================================================
 
   if (isDevMode) {
 
@@ -284,12 +393,9 @@ function updateMainButtons() {
   }
 
 
-  // ----------------------------------------------------
+  // ====================================================
   // MODO NORMAL
-  //
-  // O botão Próximo será liberado pelo player.js
-  // quando o vídeo atingir o final do timeRange.
-  // ----------------------------------------------------
+  // ====================================================
 
   nextBtn.disabled = true;
 
@@ -297,7 +403,7 @@ function updateMainButtons() {
 
 
 // ======================================================
-// LIBERAR BOTÃO PRÓXIMO
+// LIBERAR PRÓXIMO
 // ======================================================
 
 function unlockNextButton() {
@@ -316,7 +422,8 @@ function unlockNextButton() {
 
 
   if (
-    typeof lessonCards === "undefined"
+    typeof lessonCards ===
+      "undefined"
   ) {
 
     return;
@@ -337,7 +444,7 @@ function unlockNextButton() {
 
 
 // ======================================================
-// BLOQUEAR BOTÃO PRÓXIMO
+// BLOQUEAR PRÓXIMO
 // ======================================================
 
 function lockNextButton() {
@@ -371,7 +478,8 @@ function lockNextButton() {
 function prevCard() {
 
   if (
-    typeof lessonCards === "undefined"
+    typeof lessonCards ===
+      "undefined"
   ) {
 
     return;
@@ -379,24 +487,22 @@ function prevCard() {
   }
 
 
-  // ----------------------------------------------------
-  // JÁ ESTÁ NO PRIMEIRO CARD
-  // ----------------------------------------------------
-
-  if (currentIndex <= 0) {
+  if (
+    currentIndex <= 0
+  ) {
 
     return;
 
   }
 
 
-  // ----------------------------------------------------
-  // CANCELAR SEGMENTO INDIVIDUAL
-  // ----------------------------------------------------
+  // ====================================================
+  // CANCELAR SEGMENTO
+  // ====================================================
 
   if (
     typeof cancelSegmentPlayback ===
-    "function"
+      "function"
   ) {
 
     cancelSegmentPlayback();
@@ -404,9 +510,9 @@ function prevCard() {
   }
 
 
-  // ----------------------------------------------------
-  // ALTERAR ÍNDICE
-  // ----------------------------------------------------
+  // ====================================================
+  // DIMINUIR ÍNDICE
+  // ====================================================
 
   currentIndex--;
 
@@ -419,20 +525,16 @@ function prevCard() {
   );
 
 
-  // ----------------------------------------------------
-  // ATUALIZAR BOTÕES
-  // ----------------------------------------------------
+  // ====================================================
+  // INTERFACE
+  // ====================================================
 
   updateMainButtons();
 
 
-  // ----------------------------------------------------
-  // RENDERIZAR CARD
-  // ----------------------------------------------------
-
   if (
     typeof renderLessonContent ===
-    "function"
+      "function"
   ) {
 
     renderLessonContent();
@@ -440,13 +542,13 @@ function prevCard() {
   }
 
 
-  // ----------------------------------------------------
-  // REPRODUZIR RANGE DO CARD
-  // ----------------------------------------------------
+  // ====================================================
+  // PLAY DO RANGE
+  // ====================================================
 
   if (
     typeof playCurrentRange ===
-    "function"
+      "function"
   ) {
 
     playCurrentRange();
@@ -463,7 +565,8 @@ function prevCard() {
 function nextCard() {
 
   if (
-    typeof lessonCards === "undefined"
+    typeof lessonCards ===
+      "undefined"
   ) {
 
     return;
@@ -471,9 +574,9 @@ function nextCard() {
   }
 
 
-  // ----------------------------------------------------
+  // ====================================================
   // ÚLTIMO CARD
-  // ----------------------------------------------------
+  // ====================================================
 
   if (
     currentIndex >=
@@ -491,10 +594,10 @@ function nextCard() {
     );
 
 
-  // ----------------------------------------------------
-  // FORA DO MODO DEV,
+  // ====================================================
+  // FORA DO DEV,
   // RESPEITAR BLOQUEIO
-  // ----------------------------------------------------
+  // ====================================================
 
   if (
     !isDevMode &&
@@ -511,13 +614,13 @@ function nextCard() {
   }
 
 
-  // ----------------------------------------------------
+  // ====================================================
   // CANCELAR SEGMENTO
-  // ----------------------------------------------------
+  // ====================================================
 
   if (
     typeof cancelSegmentPlayback ===
-    "function"
+      "function"
   ) {
 
     cancelSegmentPlayback();
@@ -525,9 +628,9 @@ function nextCard() {
   }
 
 
-  // ----------------------------------------------------
-  // AVANÇAR CARD
-  // ----------------------------------------------------
+  // ====================================================
+  // AVANÇAR
+  // ====================================================
 
   currentIndex++;
 
@@ -540,16 +643,16 @@ function nextCard() {
   );
 
 
-  // ----------------------------------------------------
-  // ATUALIZAR INTERFACE
-  // ----------------------------------------------------
+  // ====================================================
+  // INTERFACE
+  // ====================================================
 
   updateMainButtons();
 
 
   if (
     typeof renderLessonContent ===
-    "function"
+      "function"
   ) {
 
     renderLessonContent();
@@ -557,13 +660,13 @@ function nextCard() {
   }
 
 
-  // ----------------------------------------------------
-  // REPRODUZIR RANGE
-  // ----------------------------------------------------
+  // ====================================================
+  // RANGE
+  // ====================================================
 
   if (
     typeof playCurrentRange ===
-    "function"
+      "function"
   ) {
 
     playCurrentRange();
@@ -574,14 +677,17 @@ function nextCard() {
 
 
 // ======================================================
-// PEGAR RANGE DO CARD ATUAL
+// PEGAR RANGE ATUAL
 // ======================================================
 
 function getCurrentRange() {
 
   if (
-    typeof timeRanges === "undefined" ||
-    !Array.isArray(timeRanges)
+    typeof timeRanges ===
+      "undefined" ||
+    !Array.isArray(
+      timeRanges
+    )
   ) {
 
     return null;
@@ -591,7 +697,8 @@ function getCurrentRange() {
 
   if (
     currentIndex < 0 ||
-    currentIndex >= timeRanges.length
+    currentIndex >=
+      timeRanges.length
   ) {
 
     return null;
@@ -599,7 +706,9 @@ function getCurrentRange() {
   }
 
 
-  return timeRanges[currentIndex];
+  return timeRanges[
+    currentIndex
+  ];
 
 }
 
@@ -611,8 +720,11 @@ function getCurrentRange() {
 function getCurrentCard() {
 
   if (
-    typeof lessonCards === "undefined" ||
-    !Array.isArray(lessonCards)
+    typeof lessonCards ===
+      "undefined" ||
+    !Array.isArray(
+      lessonCards
+    )
   ) {
 
     return null;
@@ -621,20 +733,144 @@ function getCurrentCard() {
 
 
   return (
-    lessonCards[currentIndex] ||
-    null
+    lessonCards[
+      currentIndex
+    ] || null
   );
 
 }
 
 
 // ======================================================
+// MARCAR AULA COMO CONCLUÍDA
+// ======================================================
+
+function markLessonCompleted() {
+
+  if (
+    typeof lessonTitle ===
+      "undefined"
+  ) {
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // EXTRAIR NÚMERO
+  //
+  // Lesson 01 -> 01
+  // ====================================================
+
+  const match =
+    String(
+      lessonTitle
+    ).match(
+      /\d+/
+    );
+
+
+  if (!match) {
+
+    return;
+
+  }
+
+
+  const lessonNumber =
+    match[0].padStart(
+      2,
+      "0"
+    );
+
+
+  // ====================================================
+  // PEGAR AULAS CONCLUÍDAS
+  // ====================================================
+
+  let completedLessons =
+    [];
+
+
+  try {
+
+    completedLessons =
+      JSON.parse(
+        localStorage.getItem(
+          "studentCompletedLessons"
+        )
+      ) || [];
+
+  }
+
+  catch (error) {
+
+    completedLessons =
+      [];
+
+  }
+
+
+  // ====================================================
+  // SALVAR SE AINDA NÃO EXISTIR
+  // ====================================================
+
+  if (
+    !completedLessons.includes(
+      lessonNumber
+    )
+  ) {
+
+    completedLessons.push(
+      lessonNumber
+    );
+
+
+    localStorage.setItem(
+      "studentCompletedLessons",
+      JSON.stringify(
+        completedLessons
+      )
+    );
+
+
+    console.log(
+      `Lesson ${lessonNumber} concluída.`
+    );
+
+  }
+
+
+  // ====================================================
+  // AVISAR aluno.html
+  // ====================================================
+
+  if (
+    window.parent &&
+    window.parent !== window
+  ) {
+
+    window.parent.postMessage(
+      {
+
+        type:
+          "LESSON_COMPLETED",
+
+        lesson:
+          lessonNumber
+
+      },
+      "*"
+    );
+
+  }
+
+}
+
+
+// ======================================================
 // ESTADO DA AULA
-//
-// Útil para testes pelo console.
-// Exemplo:
-//
-// getLessonState()
 // ======================================================
 
 function getLessonState() {
@@ -642,12 +878,14 @@ function getLessonState() {
   return {
 
     lesson:
-      typeof lessonTitle !== "undefined"
+      typeof lessonTitle !==
+        "undefined"
         ? lessonTitle
         : null,
 
     video:
-      typeof currentVideoId !== "undefined"
+      typeof currentVideoId !==
+        "undefined"
         ? currentVideoId
         : null,
 
@@ -658,7 +896,8 @@ function getLessonState() {
       currentIndex + 1,
 
     totalCards:
-      typeof lessonCards !== "undefined"
+      typeof lessonCards !==
+        "undefined"
         ? lessonCards.length
         : 0,
 
@@ -675,51 +914,62 @@ function getLessonState() {
 
 }
 
+
 // ======================================================
 // NAVEGAÇÃO PELO TECLADO
 // ======================================================
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener(
+  "keydown",
+  function (event) {
 
-  // Evita interferir quando estiver digitando
-  // em input, textarea ou select.
-  const tag =
-    event.target.tagName.toLowerCase();
+    const tag =
+      event.target.tagName
+        .toLowerCase();
 
-  if (
-    tag === "input" ||
-    tag === "textarea" ||
-    tag === "select"
-  ) {
-    return;
+
+    // Não interferir em campos
+    if (
+      tag === "input" ||
+      tag === "textarea" ||
+      tag === "select"
+    ) {
+
+      return;
+
+    }
+
+
+    // ==================================================
+    // SETA ESQUERDA
+    // ==================================================
+
+    if (
+      event.key ===
+        "ArrowLeft"
+    ) {
+
+      event.preventDefault();
+
+      prevCard();
+
+    }
+
+
+    // ==================================================
+    // SETA DIREITA
+    // ==================================================
+
+    if (
+      event.key ===
+        "ArrowRight"
+    ) {
+
+      event.preventDefault();
+
+      nextCard();
+
+    }
+
   }
-
-
-  // ----------------------------------------------------
-  // SETA PARA A DIREITA
-  // Próximo card
-  // ----------------------------------------------------
-
-  if (event.key === "ArrowRight") {
-
-    event.preventDefault();
-
-    nextCard();
-
-  }
-
-
-  // ----------------------------------------------------
-  // SETA PARA A ESQUERDA
-  // Card anterior
-  // ----------------------------------------------------
-
-  if (event.key === "ArrowLeft") {
-
-    event.preventDefault();
-
-    prevCard();
-
-  }
-
-});
+);
