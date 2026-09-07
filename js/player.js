@@ -348,6 +348,13 @@ function executeTeacherPlayerCommand(
 // PROFESSOR - VOLTAR 5 SEGUNDOS
 // ======================================================
 
+// ======================================================
+// PROFESSOR - VOLTAR 5 SEGUNDOS
+//
+// VOLTA 5 SEGUNDOS E DÁ PLAY AUTOMATICAMENTE
+// NÃO ULTRAPASSA O INÍCIO DO CARD ATUAL
+// ======================================================
+
 function teacherBack5Seconds() {
 
   if (
@@ -361,6 +368,128 @@ function teacherBack5Seconds() {
     return;
 
   }
+
+
+
+  // ====================================================
+  // TEMPO ATUAL
+  // ====================================================
+
+  const currentTime =
+    Number(
+      player.getCurrentTime()
+    );
+
+
+  if (
+    !Number.isFinite(
+      currentTime
+    )
+  ) {
+
+    return;
+
+  }
+
+
+
+  // ====================================================
+  // LIMITE INFERIOR
+  //
+  // NÃO DEIXAR VOLTAR PARA O CARD ANTERIOR
+  // ====================================================
+
+  let minimumTime =
+    0;
+
+
+  if (
+    typeof getCurrentRange ===
+      "function"
+  ) {
+
+    const range =
+      getCurrentRange();
+
+
+    if (
+      range &&
+      Number.isFinite(
+        Number(
+          range.start
+        )
+      )
+    ) {
+
+      minimumTime =
+        Number(
+          range.start
+        );
+
+    }
+
+  }
+
+
+
+  // ====================================================
+  // CALCULAR NOVO TEMPO
+  // ====================================================
+
+  const newTime =
+    Math.max(
+      minimumTime,
+      currentTime - 5
+    );
+
+
+
+  // ====================================================
+  // VOLTAR
+  // ====================================================
+
+  player.seekTo(
+    newTime,
+    true
+  );
+
+
+  lastKnownTime =
+    newTime;
+
+
+
+  // ====================================================
+  // DAR PLAY AUTOMATICAMENTE
+  // ====================================================
+
+  setTimeout(
+    function () {
+
+      if (
+        player &&
+        typeof player.playVideo ===
+          "function"
+      ) {
+
+        player.playVideo();
+
+      }
+
+    },
+    150
+  );
+
+
+
+  console.log(
+    "Professor voltou 5 segundos e iniciou reprodução:",
+    currentTime,
+    "→",
+    newTime
+  );
+
+}
 
 
   const currentTime =
