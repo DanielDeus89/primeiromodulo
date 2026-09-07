@@ -1005,7 +1005,74 @@
 
       </div>
 
+<!-- ====================================================
+     CONTROLES DO PLAYER DO ALUNO
+===================================================== -->
 
+<div
+  style="
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  "
+>
+
+  <button
+    type="button"
+    onclick="sendPlayerCommand('BACK_5')"
+    class="card-nav-button"
+  >
+    ⏪ Voltar 5s
+  </button>
+
+
+  <button
+    type="button"
+    onclick="sendPlayerCommand('TOGGLE_PLAY')"
+    class="card-nav-button"
+  >
+    ⏯ Pausar / Continuar
+  </button>
+
+
+  <button
+    type="button"
+    onclick="sendPlayerCommand('SET_SPEED', 0.5)"
+    class="card-nav-button"
+  >
+    0.5x
+  </button>
+
+
+  <button
+    type="button"
+    onclick="sendPlayerCommand('SET_SPEED', 0.75)"
+    class="card-nav-button"
+  >
+    0.75x
+  </button>
+
+
+  <button
+    type="button"
+    onclick="sendPlayerCommand('SET_SPEED', 1)"
+    class="card-nav-button"
+  >
+    1.0x
+  </button>
+
+
+  <button
+    type="button"
+    onclick="sendPlayerCommand('SET_SPEED', 1.25)"
+    class="card-nav-button"
+  >
+    1.25x
+  </button>
+
+</div>
 
       <div
         class="practice-list"
