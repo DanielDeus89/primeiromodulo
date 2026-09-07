@@ -1905,6 +1905,79 @@ function changeTeacherLesson(
     )
   );
 
+  // ======================================================
+// RECEBER COMANDOS DO PROFESSOR
+// ======================================================
+
+if (
+  portalTeacherChannel
+) {
+
+  portalTeacherChannel.onmessage =
+    function (event) {
+
+      const data =
+        event.data;
+
+
+      if (!data) {
+
+        return;
+
+      }
+
+
+      // ==================================================
+      // SOMENTE COMANDO DO PROFESSOR
+      // ==================================================
+
+      if (
+        data.source !==
+        "teacher"
+      ) {
+
+        return;
+
+      }
+
+
+      // ==================================================
+      // TROCAR LESSON
+      // ==================================================
+
+      if (
+        data.type ===
+        "LESSON_CHANGE"
+      ) {
+
+        const lesson =
+          String(
+            data.lesson
+          ).padStart(
+            2,
+            "0"
+          );
+
+
+        console.log(
+          "Professor solicitou troca de Lesson:",
+          lesson
+        );
+
+
+        carregarAula(
+          null,
+          lesson
+        );
+
+
+        return;
+
+      }
+
+    };
+
+}
 
   // ====================================================
   // TROCAR A PRÓPRIA TELA DO PROFESSOR
