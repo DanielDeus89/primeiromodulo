@@ -28,7 +28,7 @@ const timeRanges = [
 
   { start: 1380, end: 1614 },
 
-  { start: 1614, end: 99999 }
+  { start: 1614, end: 1653 }
 
 ];
 

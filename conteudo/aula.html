@@ -42,9 +42,6 @@
 
   <!-- ======================================================
        MODO DESENVOLVEDOR
-
-       ESCONDIDO POR PADRÃO.
-       APARECE COM DUPLO CLIQUE NO TÍTULO.
   ======================================================= -->
 
   <div
@@ -124,28 +121,35 @@
         >
 
 
-          <!-- ==============================================
+          <!-- =================================================
                TÍTULO
 
-               DUPLO CLIQUE:
-               MOSTRA / ESCONDE FERRAMENTAS DEV
-          =============================================== -->
+               IMPORTANTE:
+               O ID NÃO PODE SER lessonTitle.
+
+               Os arquivos lessonXX.js e reviewXX.js usam:
+
+               const lessonTitle = "Lesson 01";
+               const lessonTitle = "Review 01";
+
+               Por isso usamos lessonTitleElement.
+          ================================================== -->
 
           <h1
-            id="lessonTitle"
+            id="lessonTitleElement"
             style="
               margin: 0;
               user-select: none;
             "
           >
-            Carregando aula...
+            Carregando conteúdo...
           </h1>
 
 
 
-          <!-- ==============================================
+          <!-- =================================================
                INFORMAÇÃO
-          =============================================== -->
+          ================================================== -->
 
           <p
             class="info-text"
@@ -158,9 +162,9 @@
 
 
 
-          <!-- ==============================================
+          <!-- =================================================
                BOTÕES PRINCIPAIS
-          =============================================== -->
+          ================================================== -->
 
           <div
             class="stack-controls"
@@ -206,12 +210,12 @@
 
 
 
-            <!-- ============================================
+            <!-- =================================================
                  COPIAR TEMPO
 
                  ESCONDIDO POR PADRÃO.
                  APARECE JUNTO COM DEV.
-            ============================================= -->
+            ================================================== -->
 
             <button
               type="button"
@@ -223,17 +227,7 @@
             >
               Copiar Tempo
             </button>
-<div
-  class="font-zoom-controls"
-  style="
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  "
->
 
-
-</div>
 
           </div>
 
@@ -278,9 +272,9 @@
 
 
 
-        <!-- ================================================
+        <!-- =================================================
              STATUS DO PLAYER
-        ================================================= -->
+        ================================================== -->
 
         <div
           id="videoStatus"
@@ -375,12 +369,10 @@
       }
 
 
-
       const current =
         Math.round(
           player.getCurrentTime()
         );
-
 
 
       try {
@@ -396,11 +388,6 @@
           current
         );
 
-
-
-        // ----------------------------------------------
-        // FEEDBACK VISUAL
-        // ----------------------------------------------
 
         const button =
           document.getElementById(
@@ -429,7 +416,6 @@
           );
 
         }
-
 
       }
 
@@ -475,17 +461,23 @@
 
 
   <!-- ======================================================
-       SISTEMA DA AULA
+       CARREGADOR DA AULA / REVIEW
   ======================================================= -->
 
   <script>
 
 
     // ======================================================
-    // CARREGAR AULA
+    // CARREGAR CONTEÚDO
+    //
+    // SUPORTA:
+    //
+    // aula.html?lesson=01
+    //
+    // aula.html?review=01
     // ======================================================
 
-    function loadLesson() {
+    function loadContent() {
 
 
       const params =
@@ -495,69 +487,348 @@
 
 
       let lesson =
-        params.get("lesson") || "00";
+        params.get(
+          "lesson"
+        );
+
+
+      let review =
+        params.get(
+          "review"
+        );
+
+
+      let scriptPath =
+        null;
+
+
+      let contentName =
+        null;
 
 
 
-      // ----------------------------------------------------
-      // ?lesson=1
-      //
-      // vira:
-      //
-      // 01
-      // ----------------------------------------------------
+      // ====================================================
+      // LESSON
+      // ====================================================
 
-      if (
-        /^\d+$/.test(lesson)
-      ) {
+      if (lesson) {
 
-        lesson =
-          lesson.padStart(
-            2,
-            "0"
-          );
+
+        if (
+          /^\d+$/.test(
+            lesson
+          )
+        ) {
+
+          lesson =
+            lesson.padStart(
+              2,
+              "0"
+            );
+
+        }
+
+
+        scriptPath =
+          `../js/lessons/lesson${lesson}.js`;
+
+
+        contentName =
+          `Lesson ${lesson}`;
+
+
+        console.log(
+          "======================================"
+        );
+
+
+        console.log(
+          "Tipo: LESSON"
+        );
+
+
+        console.log(
+          "Número:",
+          lesson
+        );
+
+
+        console.log(
+          "Arquivo:",
+          scriptPath
+        );
+
+
+        console.log(
+          "======================================"
+        );
 
       }
 
 
 
-      console.log(
-        "Carregando Lesson:",
-        lesson
-      );
+      // ====================================================
+      // REVIEW
+      // ====================================================
+
+      else if (review) {
+
+
+        if (
+          /^\d+$/.test(
+            review
+          )
+        ) {
+
+          review =
+            review.padStart(
+              2,
+              "0"
+            );
+
+        }
+
+
+        scriptPath =
+          `../js/reviews/review${review}.js`;
+
+
+        contentName =
+          `Review ${review}`;
+
+
+        console.log(
+          "======================================"
+        );
+
+
+        console.log(
+          "Tipo: REVIEW"
+        );
+
+
+        console.log(
+          "Número:",
+          review
+        );
+
+
+        console.log(
+          "Arquivo:",
+          scriptPath
+        );
+
+
+        console.log(
+          "======================================"
+        );
+
+      }
 
 
 
-      const lessonScript =
+      // ====================================================
+      // SEM PARÂMETRO
+      // ====================================================
+
+      else {
+
+
+        console.error(
+          "Nenhuma Lesson ou Review informada."
+        );
+
+
+        showContentError(
+          "Nenhuma Lesson ou Review informada."
+        );
+
+
+        return;
+
+      }
+
+
+
+      // ====================================================
+      // CRIAR SCRIPT
+      // ====================================================
+
+      const contentScript =
         document.createElement(
           "script"
         );
 
 
-      lessonScript.src =
-        `../js/lessons/lesson${lesson}.js`;
+      contentScript.src =
+        scriptPath;
 
 
 
-      // ----------------------------------------------------
-      // SUCESSO
-      // ----------------------------------------------------
+      // ====================================================
+      // CARREGADO
+      // ====================================================
 
-      lessonScript.onload =
+      contentScript.onload =
         function () {
 
 
           console.log(
-            `Lesson ${lesson} carregada com sucesso.`
+            `${contentName} carregado com sucesso.`
           );
 
 
-          if (
 
+          // =================================================
+          // VALIDAR lessonTitle
+          // =================================================
+
+          if (
+            typeof lessonTitle !==
+              "string"
+          ) {
+
+
+            console.error(
+              "lessonTitle inválido:",
+              typeof lessonTitle
+            );
+
+
+            showContentError(
+              "lessonTitle não definido corretamente."
+            );
+
+
+            return;
+
+          }
+
+
+
+          // =================================================
+          // VALIDAR VIDEO
+          // =================================================
+
+          if (
+            typeof currentVideoId ===
+              "undefined" ||
+            !currentVideoId
+          ) {
+
+
+            showContentError(
+              "currentVideoId não definido."
+            );
+
+
+            return;
+
+          }
+
+
+
+          // =================================================
+          // VALIDAR CARDS
+          // =================================================
+
+          if (
+            typeof lessonCards ===
+              "undefined" ||
+            !Array.isArray(
+              lessonCards
+            )
+          ) {
+
+
+            showContentError(
+              "lessonCards não definido corretamente."
+            );
+
+
+            return;
+
+          }
+
+
+
+          // =================================================
+          // VALIDAR RANGES
+          // =================================================
+
+          if (
+            typeof timeRanges ===
+              "undefined" ||
+            !Array.isArray(
+              timeRanges
+            )
+          ) {
+
+
+            showContentError(
+              "timeRanges não definido corretamente."
+            );
+
+
+            return;
+
+          }
+
+
+
+          // =================================================
+          // TÍTULO
+          // =================================================
+
+          const titleElement =
+            document.getElementById(
+              "lessonTitleElement"
+            );
+
+
+          if (titleElement) {
+
+            titleElement.textContent =
+              lessonTitle;
+
+          }
+
+
+
+          console.log(
+            "Título:",
+            lessonTitle
+          );
+
+
+          console.log(
+            "Vídeo:",
+            currentVideoId
+          );
+
+
+          console.log(
+            "Cards:",
+            lessonCards.length
+          );
+
+
+          console.log(
+            "Ranges:",
+            timeRanges.length
+          );
+
+
+
+          // =================================================
+          // INICIALIZAR ENGINE
+          // =================================================
+
+          if (
             typeof initializeLesson ===
               "function"
-
           ) {
+
 
             initializeLesson();
 
@@ -566,7 +837,8 @@
 
           else {
 
-            console.error(
+
+            showContentError(
               "initializeLesson() não encontrada."
             );
 
@@ -576,57 +848,29 @@
 
 
 
-      // ----------------------------------------------------
-      // ERRO
-      // ----------------------------------------------------
+      // ====================================================
+      // ERRO AO CARREGAR JS
+      // ====================================================
 
-      lessonScript.onerror =
+      contentScript.onerror =
         function () {
 
 
           console.error(
-            `Não foi possível carregar lesson${lesson}.js`
+            "Não foi possível carregar:",
+            scriptPath
           );
 
 
-          const title =
-            document.getElementById(
-              "lessonTitle"
-            );
-
-
-          if (title) {
-
-            title.textContent =
-              `Aula ${lesson} não encontrada`;
-
-          }
-
-
-
-          const status =
-            document.getElementById(
-              "videoStatus"
-            );
-
-
-          if (status) {
-
-            status.style.display =
-              "block";
-
-
-            status.textContent =
-              "⚠️ Não foi possível carregar o conteúdo desta aula.";
-
-          }
+          showContentError(
+            `Não foi possível carregar ${contentName}.`
+          );
 
         };
 
 
-
       document.body.appendChild(
-        lessonScript
+        contentScript
       );
 
     }
@@ -634,23 +878,61 @@
 
 
     // ======================================================
+    // ERRO VISUAL
+    // ======================================================
+
+    function showContentError(
+      message
+    ) {
+
+
+      console.error(
+        message
+      );
+
+
+      const titleElement =
+        document.getElementById(
+          "lessonTitleElement"
+        );
+
+
+      if (titleElement) {
+
+        titleElement.textContent =
+          "Conteúdo não encontrado";
+
+      }
+
+
+      const status =
+        document.getElementById(
+          "videoStatus"
+        );
+
+
+      if (status) {
+
+        status.style.display =
+          "block";
+
+
+        status.textContent =
+          `⚠️ ${message}`;
+
+      }
+
+    }
+
+
+
+    // ======================================================
     // FERRAMENTAS DE DESENVOLVIMENTO
-    //
-    // DUPLO CLIQUE NO TÍTULO:
-    //
-    // MOSTRAR:
-    // → Modo Desenvolvedor
-    // → Copiar Tempo
-    //
-    // ESCONDER:
-    // → Modo Desenvolvedor
-    // → Copiar Tempo
-    // → desativar DEV caso esteja marcado
     // ======================================================
 
     const lessonTitleElement =
       document.getElementById(
-        "lessonTitle"
+        "lessonTitleElement"
       );
 
 
@@ -688,13 +970,14 @@
           const estaOculto =
             window.getComputedStyle(
               devModeContainer
-            ).display === "none";
+            ).display ===
+            "none";
 
 
 
-          // ================================================
+          // =================================================
           // MOSTRAR
-          // ================================================
+          // =================================================
 
           if (estaOculto) {
 
@@ -715,9 +998,9 @@
 
 
 
-          // ================================================
+          // =================================================
           // ESCONDER
-          // ================================================
+          // =================================================
 
           else {
 
@@ -730,18 +1013,11 @@
               "none";
 
 
-
             const checkbox =
               document.getElementById(
                 "devCheckbox"
               );
 
-
-
-            // ----------------------------------------------
-            // SE ESTIVER ATIVO
-            // DESLIGAR DEV
-            // ----------------------------------------------
 
             if (
 
@@ -756,7 +1032,6 @@
                 false;
 
 
-
               if (
 
                 typeof toggleDevMode ===
@@ -769,7 +1044,6 @@
               }
 
             }
-
 
 
             console.log(
@@ -787,189 +1061,15 @@
 
 
     // ======================================================
-    // NAVEGAÇÃO PELO TECLADO
-    //
-    // ← ANTERIOR
-    // → PRÓXIMO
-    // ======================================================
-
-    document.addEventListener(
-      "keydown",
-      function (event) {
-
-
-        const tag =
-          event.target.tagName
-            .toLowerCase();
-
-
-
-        // --------------------------------------------------
-        // NÃO INTERFERIR EM CAMPOS
-        // --------------------------------------------------
-
-        if (
-
-          tag === "input" ||
-
-          tag === "textarea" ||
-
-          tag === "select"
-
-        ) {
-
-          return;
-
-        }
-
-
-
-        // --------------------------------------------------
-        // SETA ESQUERDA
-        // --------------------------------------------------
-
-        if (
-          event.key === "ArrowLeft"
-        ) {
-
-          event.preventDefault();
-
-
-          if (
-            typeof prevCard ===
-              "function"
-          ) {
-
-            prevCard();
-
-          }
-
-        }
-
-
-
-        // --------------------------------------------------
-        // SETA DIREITA
-        // --------------------------------------------------
-
-        if (
-          event.key === "ArrowRight"
-        ) {
-
-          event.preventDefault();
-
-
-          if (
-            typeof nextCard ===
-              "function"
-          ) {
-
-            nextCard();
-
-          }
-
-        }
-
-      }
-    );
-
-
-
-    // ======================================================
     // INICIAR
     // ======================================================
 
-    loadLesson();
+    loadContent();
 
 
   </script>
 
-<script>
 
-  // ======================================================
-  // TAMANHO DAS FRASES AZUIS
-  // ======================================================
-
-  let blueFontZoom = 100;
-
-  const BLUE_FONT_MIN = 60;
-  const BLUE_FONT_MAX = 220;
-  const BLUE_FONT_STEP = 10;
-
-  const BLUE_FONT_BASE = 1.8;
-
-
-  // ======================================================
-  // AUMENTAR
-  // ======================================================
-
-  function increaseBlueFont() {
-
-    if (
-      blueFontZoom >= BLUE_FONT_MAX
-    ) {
-      return;
-    }
-
-    blueFontZoom += BLUE_FONT_STEP;
-
-    applyBlueFontZoom();
-
-  }
-
-
-  // ======================================================
-  // DIMINUIR
-  // ======================================================
-
-  function decreaseBlueFont() {
-
-    if (
-      blueFontZoom <= BLUE_FONT_MIN
-    ) {
-      return;
-    }
-
-    blueFontZoom -= BLUE_FONT_STEP;
-
-    applyBlueFontZoom();
-
-  }
-
-
-  // ======================================================
-  // APLICAR
-  // ======================================================
-
-  function applyBlueFontZoom() {
-
-    const newSize =
-      BLUE_FONT_BASE *
-      (blueFontZoom / 100);
-
-
-    document.documentElement.style.setProperty(
-      "--blue-font-size",
-      `${newSize}em`
-    );
-
-
-    const indicator =
-      document.getElementById(
-        "blueFontZoom"
-      );
-
-
-    if (indicator) {
-
-      indicator.textContent =
-        `${blueFontZoom}%`;
-
-    }
-
-  }
-
-</script>
 </body>
 
 </html>

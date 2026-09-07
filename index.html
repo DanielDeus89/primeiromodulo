@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   />
 
-  <title>Menu de Aulas</title>
+  <title>Portal do Aluno</title>
 
   <link
     rel="stylesheet"
@@ -31,7 +31,7 @@
     class="menu-toggle"
     onclick="toggleSidebar()"
   >
-    ☰ Menu
+    ☰ Aulas
   </div>
 
 
@@ -61,46 +61,35 @@
 
 
     <!-- ====================================================
-         MODO PROFESSOR
+         IDENTIFICAÇÃO
     ===================================================== -->
 
     <div
       style="
-        padding: 10px;
+        padding: 15px;
         margin-bottom: 10px;
+        text-align: center;
+        color: white;
       "
     >
 
-      <button
-        type="button"
-        id="teacherLoginBtn"
-        onclick="showTeacherLogin()"
+      <div
         style="
-          width: 100%;
-          padding: 10px;
-          border: none;
-          border-radius: 8px;
-          background: #334155;
-          color: white;
-          cursor: pointer;
-          font-weight: 600;
+          font-size: 28px;
+          margin-bottom: 5px;
         "
       >
-        🔐 Modo Professor
-      </button>
+        🎓
+      </div>
 
 
       <div
-        id="teacherStatus"
         style="
-          display: none;
-          margin-top: 8px;
-          font-size: 13px;
-          text-align: center;
-          color: #86efac;
+          font-weight: 600;
+          font-size: 16px;
         "
       >
-        ✓ Professor autenticado
+        Portal do Aluno
       </div>
 
     </div>
@@ -108,7 +97,43 @@
 
 
     <!-- ====================================================
-         AULAS 01 ATÉ 60
+         INÍCIO
+    ===================================================== -->
+
+    <ul>
+
+      <li>
+
+        <a
+          href="#"
+          id="homeLink"
+          onclick="mostrarInicio(this); return false;"
+        >
+          🏠 Início
+        </a>
+
+      </li>
+
+    </ul>
+
+
+
+    <!-- ====================================================
+         SEPARADOR
+    ===================================================== -->
+
+    <div
+      style="
+        height: 1px;
+        background: #334155;
+        margin: 10px 15px;
+      "
+    ></div>
+
+
+
+    <!-- ====================================================
+         AULAS E REVIEWS
     ===================================================== -->
 
     <ul
@@ -120,153 +145,348 @@
 
 
   <!-- ======================================================
-       TELA PRINCIPAL / ALUNO
+       CONTEÚDO PRINCIPAL
   ======================================================= -->
 
   <div
     class="main-content"
   >
 
+
+    <!-- ====================================================
+         DASHBOARD
+    ===================================================== -->
+
+    <div
+      id="studentDashboard"
+      style="
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 50px 30px;
+      "
+    >
+
+
+      <!-- ==================================================
+           CABEÇALHO
+      =================================================== -->
+
+      <div
+        style="
+          margin-bottom: 35px;
+        "
+      >
+
+        <h1
+          style="
+            margin-bottom: 8px;
+          "
+        >
+          Portal do Aluno
+        </h1>
+
+
+        <p
+          style="
+            opacity: 0.8;
+          "
+        >
+          Continue seus estudos e acompanhe seu progresso.
+        </p>
+
+      </div>
+
+
+
+      <!-- ==================================================
+           GRID
+      =================================================== -->
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns:
+            repeat(auto-fit, minmax(230px, 1fr));
+          gap: 20px;
+        "
+      >
+
+
+        <!-- =================================================
+             CONTINUAR AULA
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            ▶️
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Continuar aula
+          </h2>
+
+
+          <p
+            id="lastLessonText"
+            style="
+              color: #cbd5e1;
+              margin-bottom: 18px;
+              font-size: 14px;
+            "
+          >
+            Nenhuma aula iniciada.
+          </p>
+
+
+          <button
+            type="button"
+            id="continueLessonBtn"
+            onclick="continuarUltimaAula()"
+            disabled
+            style="
+              padding: 10px 16px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            Continuar
+          </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MINHAS AULAS
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            📚
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Minhas aulas
+          </h2>
+
+
+          <p
+            style="
+              color: #cbd5e1;
+              margin-bottom: 18px;
+              font-size: 14px;
+            "
+          >
+            Acesse todas as aulas disponíveis.
+          </p>
+
+
+          <button
+            type="button"
+            onclick="toggleSidebar()"
+            style="
+              padding: 10px 16px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            Ver aulas
+          </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROGRESSO
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            📊
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Progresso
+          </h2>
+
+
+          <p
+            id="progressText"
+            style="
+              color: #cbd5e1;
+              margin-bottom: 10px;
+              font-size: 14px;
+            "
+          >
+            0 de 60 aulas concluídas
+          </p>
+
+
+          <div
+            style="
+              width: 100%;
+              height: 10px;
+              background: #334155;
+              border-radius: 10px;
+              overflow: hidden;
+            "
+          >
+
+            <div
+              id="progressBar"
+              style="
+                width: 0%;
+                height: 100%;
+                background: #3b82f6;
+                transition: width 0.4s ease;
+              "
+            ></div>
+
+          </div>
+
+
+          <div
+            id="progressPercent"
+            style="
+              margin-top: 8px;
+              color: #94a3b8;
+              font-size: 13px;
+            "
+          >
+            0%
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EXERCÍCIOS
+        ================================================== -->
+
+        <div
+          style="
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 25px;
+            color: white;
+          "
+        >
+
+          <div
+            style="
+              font-size: 32px;
+              margin-bottom: 12px;
+            "
+          >
+            ✏️
+          </div>
+
+
+          <h2
+            style="
+              font-size: 18px;
+              margin-bottom: 8px;
+            "
+          >
+            Exercícios
+          </h2>
+
+
+          <p
+            style="
+              color: #cbd5e1;
+              font-size: 14px;
+            "
+          >
+            Em breve você poderá praticar exercícios e acompanhar seus resultados.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ====================================================
+         IFRAME
+    ===================================================== -->
+
     <iframe
       id="iframeAula"
       src=""
       title="Conteúdo da aula"
       allow="autoplay; fullscreen"
-    ></iframe>
-
-  </div>
-
-
-
-  <!-- ======================================================
-       LOGIN DO PROFESSOR
-  ======================================================= -->
-
-  <div
-    id="teacherLoginOverlay"
-    style="
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      z-index: 5000;
-      align-items: center;
-      justify-content: center;
-    "
-  >
-
-    <div
       style="
-        width: 90%;
-        max-width: 380px;
-        background: #1e293b;
-        border-radius: 12px;
-        padding: 28px;
-        color: white;
-        box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+        display: none;
+        width: 100%;
+        height: 100vh;
+        border: none;
       "
-    >
-
-      <h2
-        style="
-          margin-bottom: 10px;
-          text-align: center;
-        "
-      >
-        🔐 Acesso do Professor
-      </h2>
-
-
-      <p
-        style="
-          margin-bottom: 20px;
-          text-align: center;
-          color: #cbd5e1;
-          font-size: 14px;
-        "
-      >
-        Digite o código de acesso.
-      </p>
-
-
-      <input
-        type="password"
-        id="teacherPassword"
-        placeholder="Código de acesso"
-        autocomplete="current-password"
-        style="
-          width: 100%;
-          padding: 12px;
-          margin-bottom: 12px;
-          border: 1px solid #475569;
-          border-radius: 8px;
-          background: #0f172a;
-          color: white;
-          font-size: 16px;
-          outline: none;
-        "
-      />
-
-
-      <div
-        id="teacherLoginError"
-        style="
-          display: none;
-          margin-bottom: 12px;
-          color: #fca5a5;
-          font-size: 13px;
-          text-align: center;
-        "
-      >
-        Código inválido.
-      </div>
-
-
-      <div
-        style="
-          display: flex;
-          gap: 10px;
-        "
-      >
-
-        <button
-          type="button"
-          onclick="closeTeacherLogin()"
-          style="
-            flex: 1;
-            padding: 11px;
-            border: none;
-            border-radius: 8px;
-            background: #475569;
-            color: white;
-            cursor: pointer;
-          "
-        >
-          Cancelar
-        </button>
-
-
-        <button
-          type="button"
-          id="teacherEnterBtn"
-          onclick="authenticateTeacher()"
-          style="
-            flex: 1;
-            padding: 11px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-          "
-        >
-          Entrar
-        </button>
-
-      </div>
-
-    </div>
+    ></iframe>
 
   </div>
 
@@ -283,9 +503,12 @@
     // CONFIGURAÇÕES
     // ======================================================
 
-    const TOTAL_LESSONS = 60;
+    const TOTAL_LESSONS =
+      60;
 
-    const LESSONS_PER_REVIEW = 6;
+
+    const LESSONS_PER_REVIEW =
+      6;
 
 
 
@@ -293,17 +516,8 @@
     // ESTADO
     // ======================================================
 
-    let teacherMode = false;
-
-    let teacherTab = null;
-
-    let meetTab = null;
-
-    let meetOpened = false;
-
-    let currentLesson = null;
-
-    let googleMeetUrl = null;
+    let currentLesson =
+      null;
 
 
 
@@ -357,9 +571,13 @@
     // FORMATAR NÚMERO
     // ======================================================
 
-    function formatLessonNumber(number) {
+    function formatLessonNumber(
+      number
+    ) {
 
-      return String(number).padStart(
+      return String(
+        number
+      ).padStart(
         2,
         "0"
       );
@@ -385,8 +603,8 @@
       }
 
 
-      menu.innerHTML = "";
-
+      menu.innerHTML =
+        "";
 
 
       for (
@@ -406,7 +624,6 @@
           menu,
           lessonNumber
         );
-
 
 
         // ==================================================
@@ -438,7 +655,7 @@
 
 
     // ======================================================
-    // CRIAR AULA
+    // CRIAR ITEM DE AULA
     // ======================================================
 
     function createLessonItem(
@@ -458,11 +675,16 @@
         );
 
 
-      link.href = "#";
+      link.href =
+        "#";
 
 
       link.textContent =
         `📘 Aula ${lessonNumber}`;
+
+
+      link.dataset.lesson =
+        lessonNumber;
 
 
       link.addEventListener(
@@ -474,16 +696,21 @@
 
           carregarAula(
             link,
-            `aula${lessonNumber}`
+            lessonNumber
           );
 
         }
       );
 
 
-      li.appendChild(link);
+      li.appendChild(
+        link
+      );
 
-      menu.appendChild(li);
+
+      menu.appendChild(
+        li
+      );
 
     }
 
@@ -510,13 +737,22 @@
         );
 
 
-      link.href = "#";
+      link.href =
+        "#";
+
+
+      const reviewNumberFormatted =
+        formatLessonNumber(
+          reviewNumber
+        );
 
 
       link.textContent =
-        `📘 Review ${formatLessonNumber(
-          reviewNumber
-        )}`;
+        `📝 Review ${reviewNumberFormatted}`;
+
+
+      link.dataset.review =
+        reviewNumberFormatted;
 
 
       link.addEventListener(
@@ -526,128 +762,111 @@
           event.preventDefault();
 
 
-          carregarAula(
+          carregarReview(
             link,
-            `review${reviewNumber}`
+            reviewNumber
           );
 
         }
       );
 
 
-      li.appendChild(link);
+      li.appendChild(
+        link
+      );
 
-      menu.appendChild(li);
+
+      menu.appendChild(
+        li
+      );
 
     }
 
 
 
     // ======================================================
-    // CARREGAR AULA / REVIEW
+    // CARREGAR AULA
     // ======================================================
 
     function carregarAula(
       elemento,
-      aula
+      numero
     ) {
 
-      let url = null;
+      currentLesson =
+        numero;
+
+
+      const url =
+        `./conteudo/aula.html?lesson=${numero}`;
+
+
+      abrirConteudo(
+        url
+      );
+
+
+      // ==================================================
+      // ÚLTIMA AULA
+      // ==================================================
+
+      localStorage.setItem(
+        "studentLastLesson",
+        numero
+      );
+
+
+      // ==================================================
+      // REGISTRAR INICIADA
+      // ==================================================
+
+      registrarAulaIniciada(
+        numero
+      );
+
+
+      marcarItemAtivo(
+        elemento
+      );
+
+
+      atualizarDashboard();
+
+      atualizarMenuConcluido();
+
+      fecharSidebar();
+
+    }
 
 
 
-      // ====================================================
-      // REVIEW
-      // ====================================================
+    // ======================================================
+    // CARREGAR REVIEW
+    //
+    // USA O MESMO aula.html
+    // ======================================================
 
-      if (
-        aula.startsWith(
-          "review"
-        )
-      ) {
+    function carregarReview(
+      elemento,
+      reviewNumber
+    ) {
 
-        url =
-          `./conteudo/${aula}.html`;
-
-
-        carregarNoIframe(
-          url
+      const numero =
+        String(
+          reviewNumber
+        ).padStart(
+          2,
+          "0"
         );
 
-      }
+
+      const url =
+        `./conteudo/aula.html?review=${numero}`;
 
 
-
-      // ====================================================
-      // AULA
-      // ====================================================
-
-      else if (
-        aula.startsWith(
-          "aula"
-        )
-      ) {
-
-
-        const numero =
-          aula.replace(
-            "aula",
-            ""
-          );
-
-
-        currentLesson =
-          numero;
-
-
-
-        // ==================================================
-        // TELA DO ALUNO
-        // ==================================================
-
-        url =
-          `./conteudo/aula.html?lesson=${numero}`;
-
-
-        carregarNoIframe(
-          url
-        );
-
-
-
-        // ==================================================
-        // PROFESSOR AUTENTICADO?
-        //
-        // Só então mexemos na aba do professor.
-        // ==================================================
-
-        if (teacherMode) {
-
-          atualizarAmbienteProfessor(
-            numero
-          );
-
-        }
-
-      }
-
-
-
-      // ====================================================
-      // INVÁLIDO
-      // ====================================================
-
-      else {
-
-        console.error(
-          "Tipo inválido:",
-          aula
-        );
-
-        return;
-
-      }
-
+      abrirConteudo(
+        url
+      );
 
 
       marcarItemAtivo(
@@ -662,12 +881,18 @@
 
 
     // ======================================================
-    // IFRAME DO ALUNO
+    // ABRIR CONTEÚDO
     // ======================================================
 
-    function carregarNoIframe(
+    function abrirConteudo(
       url
     ) {
+
+      const dashboard =
+        document.getElementById(
+          "studentDashboard"
+        );
+
 
       const iframe =
         document.getElementById(
@@ -675,9 +900,22 @@
         );
 
 
-      if (!iframe) {
+      if (
+        !dashboard ||
+        !iframe
+      ) {
+
         return;
+
       }
+
+
+      dashboard.style.display =
+        "none";
+
+
+      iframe.style.display =
+        "block";
 
 
       iframe.src =
@@ -688,7 +926,542 @@
 
 
     // ======================================================
-    // ITEM ATIVO
+    // MOSTRAR INÍCIO
+    // ======================================================
+
+    function mostrarInicio(
+      elemento
+    ) {
+
+      const dashboard =
+        document.getElementById(
+          "studentDashboard"
+        );
+
+
+      const iframe =
+        document.getElementById(
+          "iframeAula"
+        );
+
+
+      if (
+        !dashboard ||
+        !iframe
+      ) {
+
+        return;
+
+      }
+
+
+      iframe.style.display =
+        "none";
+
+
+      // Parar vídeo/conteúdo
+      iframe.src =
+        "";
+
+
+      dashboard.style.display =
+        "block";
+
+
+      marcarItemAtivo(
+        elemento
+      );
+
+
+      atualizarDashboard();
+
+      atualizarMenuConcluido();
+
+      fecharSidebar();
+
+    }
+
+
+
+    // ======================================================
+    // CONTINUAR ÚLTIMA AULA
+    // ======================================================
+
+    function continuarUltimaAula() {
+
+      let savedPosition =
+        null;
+
+
+      try {
+
+        savedPosition =
+          JSON.parse(
+            localStorage.getItem(
+              "studentLessonPosition"
+            )
+          );
+
+      }
+
+      catch (error) {
+
+        savedPosition =
+          null;
+
+      }
+
+
+      // ====================================================
+      // EXISTE POSIÇÃO EXATA
+      // ====================================================
+
+      if (
+        savedPosition &&
+        savedPosition.lesson
+      ) {
+
+        carregarAula(
+          null,
+          savedPosition.lesson
+        );
+
+
+        return;
+
+      }
+
+
+      // ====================================================
+      // FALLBACK
+      // ====================================================
+
+      const lesson =
+        localStorage.getItem(
+          "studentLastLesson"
+        );
+
+
+      if (!lesson) {
+        return;
+      }
+
+
+      carregarAula(
+        null,
+        lesson
+      );
+
+    }
+
+
+
+    // ======================================================
+    // REGISTRAR AULA INICIADA
+    // ======================================================
+
+    function registrarAulaIniciada(
+      numero
+    ) {
+
+      let lessons =
+        [];
+
+
+      try {
+
+        lessons =
+          JSON.parse(
+            localStorage.getItem(
+              "studentStartedLessons"
+            )
+          ) || [];
+
+      }
+
+      catch (error) {
+
+        lessons =
+          [];
+
+      }
+
+
+      if (
+        !lessons.includes(
+          numero
+        )
+      ) {
+
+        lessons.push(
+          numero
+        );
+
+      }
+
+
+      localStorage.setItem(
+        "studentStartedLessons",
+        JSON.stringify(
+          lessons
+        )
+      );
+
+    }
+
+
+
+    // ======================================================
+    // PEGAR AULAS CONCLUÍDAS
+    // ======================================================
+
+    function getCompletedLessons() {
+
+      let lessons =
+        [];
+
+
+      try {
+
+        lessons =
+          JSON.parse(
+            localStorage.getItem(
+              "studentCompletedLessons"
+            )
+          ) || [];
+
+      }
+
+      catch (error) {
+
+        lessons =
+          [];
+
+      }
+
+
+      if (
+        !Array.isArray(
+          lessons
+        )
+      ) {
+
+        lessons =
+          [];
+
+      }
+
+
+      return lessons;
+
+    }
+
+
+
+    // ======================================================
+    // ATUALIZAR DASHBOARD
+    // ======================================================
+
+    function atualizarDashboard() {
+
+
+      const lastLesson =
+        localStorage.getItem(
+          "studentLastLesson"
+        );
+
+
+      const lastLessonText =
+        document.getElementById(
+          "lastLessonText"
+        );
+
+
+      const continueButton =
+        document.getElementById(
+          "continueLessonBtn"
+        );
+
+
+
+      // ==================================================
+      // POSIÇÃO EXATA
+      // ==================================================
+
+      let savedPosition =
+        null;
+
+
+      try {
+
+        savedPosition =
+          JSON.parse(
+            localStorage.getItem(
+              "studentLessonPosition"
+            )
+          );
+
+      }
+
+      catch (error) {
+
+        savedPosition =
+          null;
+
+      }
+
+
+
+      if (
+        lastLessonText &&
+        continueButton
+      ) {
+
+
+       if (
+  savedPosition &&
+  savedPosition.lesson
+) {
+
+  const cardNumber =
+    Number(
+      savedPosition.cardIndex
+    ) + 1;
+
+
+  const totalCards =
+    Number(
+      savedPosition.totalCards
+    ) || 0;
+
+
+  if (totalCards > 0) {
+
+    lastLessonText.innerHTML =
+      `Última aula: Aula ${savedPosition.lesson}<br>` +
+      `Card ${cardNumber} de ${totalCards}`;
+
+  }
+
+  else {
+
+    lastLessonText.innerHTML =
+      `Última aula: Aula ${savedPosition.lesson}<br>` +
+      `Card ${cardNumber}`;
+
+  }
+
+
+  continueButton.disabled =
+    false;
+
+}
+
+
+        else if (lastLesson) {
+
+          lastLessonText.textContent =
+            `Última aula: Aula ${lastLesson}`;
+
+
+          continueButton.disabled =
+            false;
+
+        }
+
+
+        else {
+
+          lastLessonText.textContent =
+            "Nenhuma aula iniciada.";
+
+
+          continueButton.disabled =
+            true;
+
+        }
+
+      }
+
+
+
+      // ==================================================
+      // PROGRESSO
+      // ==================================================
+
+      const completedLessons =
+        getCompletedLessons();
+
+
+      const completed =
+        completedLessons.length;
+
+
+      const percentage =
+        Math.min(
+          100,
+          Math.round(
+            (
+              completed /
+              TOTAL_LESSONS
+            ) *
+            100
+          )
+        );
+
+
+      const progressText =
+        document.getElementById(
+          "progressText"
+        );
+
+
+      const progressBar =
+        document.getElementById(
+          "progressBar"
+        );
+
+
+      const progressPercent =
+        document.getElementById(
+          "progressPercent"
+        );
+
+
+      if (progressText) {
+
+        progressText.textContent =
+          `${completed} de ${TOTAL_LESSONS} aulas concluídas`;
+
+      }
+
+
+      if (progressBar) {
+
+        progressBar.style.width =
+          `${percentage}%`;
+
+      }
+
+
+      if (progressPercent) {
+
+        progressPercent.textContent =
+          `${percentage}%`;
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // ATUALIZAR MENU CONCLUÍDO
+    // ======================================================
+
+    function atualizarMenuConcluido() {
+
+      const completedLessons =
+        getCompletedLessons();
+
+
+      const links =
+        document.querySelectorAll(
+          "#lessonMenu a[data-lesson]"
+        );
+
+
+      links.forEach(
+        function (link) {
+
+          const lesson =
+            link.dataset.lesson;
+
+
+          if (
+            completedLessons.includes(
+              lesson
+            )
+          ) {
+
+            link.textContent =
+              `✅ Aula ${lesson}`;
+
+          }
+
+          else {
+
+            link.textContent =
+              `📘 Aula ${lesson}`;
+
+          }
+
+        }
+      );
+
+    }
+
+
+
+    // ======================================================
+    // RECEBER EVENTOS DA AULA
+    // ======================================================
+
+    window.addEventListener(
+      "message",
+      function (event) {
+
+        const data =
+          event.data;
+
+
+        if (!data) {
+          return;
+        }
+
+
+        // ==================================================
+        // AULA CONCLUÍDA
+        // ==================================================
+
+        if (
+          data.type ===
+            "LESSON_COMPLETED"
+        ) {
+
+          console.log(
+            "Aula concluída:",
+            data.lesson
+          );
+
+
+          atualizarDashboard();
+
+          atualizarMenuConcluido();
+
+        }
+
+
+        // ==================================================
+        // POSIÇÃO SALVA
+        // ==================================================
+
+        if (
+          data.type ===
+            "LESSON_POSITION"
+        ) {
+
+          atualizarDashboard();
+
+        }
+
+      }
+    );
+
+
+
+    // ======================================================
+    // MARCAR ITEM ATIVO
     // ======================================================
 
     function marcarItemAtivo(
@@ -725,521 +1498,6 @@
 
 
     // ======================================================
-    // MOSTRAR LOGIN
-    // ======================================================
-
-    function showTeacherLogin() {
-
-      if (teacherMode) {
-
-        alert(
-          "Modo Professor já está ativo."
-        );
-
-        return;
-
-      }
-
-
-      const overlay =
-        document.getElementById(
-          "teacherLoginOverlay"
-        );
-
-
-      const password =
-        document.getElementById(
-          "teacherPassword"
-        );
-
-
-      const error =
-        document.getElementById(
-          "teacherLoginError"
-        );
-
-
-      error.style.display =
-        "none";
-
-
-      password.value =
-        "";
-
-
-      overlay.style.display =
-        "flex";
-
-
-      setTimeout(
-        function () {
-
-          password.focus();
-
-        },
-        50
-      );
-
-    }
-
-
-
-    // ======================================================
-    // FECHAR LOGIN
-    // ======================================================
-
-    function closeTeacherLogin() {
-
-      const overlay =
-        document.getElementById(
-          "teacherLoginOverlay"
-        );
-
-
-      overlay.style.display =
-        "none";
-
-    }
-
-
-
-    // ======================================================
-    // AUTENTICAR PROFESSOR
-    // ======================================================
-
-    async function authenticateTeacher() {
-
-      const passwordInput =
-        document.getElementById(
-          "teacherPassword"
-        );
-
-
-      const errorElement =
-        document.getElementById(
-          "teacherLoginError"
-        );
-
-
-      const button =
-        document.getElementById(
-          "teacherEnterBtn"
-        );
-
-
-      const password =
-        passwordInput.value.trim();
-
-
-      if (!password) {
-
-        errorElement.textContent =
-          "Digite o código de acesso.";
-
-
-        errorElement.style.display =
-          "block";
-
-
-        return;
-
-      }
-
-
-
-      button.disabled = true;
-
-      button.textContent =
-        "Validando...";
-
-
-      errorElement.style.display =
-        "none";
-
-
-
-      try {
-
-
-        // ==================================================
-        // SENHA É VALIDADA NO SERVIDOR
-        //
-        // NÃO EXISTE SENHA DENTRO DESTE HTML.
-        // ==================================================
-
-        const response =
-          await fetch(
-            "/api/teacher-login",
-            {
-
-              method: "POST",
-
-              credentials: "include",
-
-              headers: {
-
-                "Content-Type":
-                  "application/json"
-
-              },
-
-              body:
-                JSON.stringify({
-
-                  password:
-                    password
-
-                })
-
-            }
-          );
-
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Senha inválida"
-          );
-
-        }
-
-
-
-        const data =
-          await response.json();
-
-
-
-        if (!data.success) {
-
-          throw new Error(
-            "Senha inválida"
-          );
-
-        }
-
-
-
-        // ==================================================
-        // AUTORIZADO
-        // ==================================================
-
-        teacherMode =
-          true;
-
-
-
-        closeTeacherLogin();
-
-
-
-        document.getElementById(
-          "teacherStatus"
-        ).style.display =
-          "block";
-
-
-
-        document.getElementById(
-          "teacherLoginBtn"
-        ).textContent =
-          "🔓 Modo Professor Ativo";
-
-
-
-        // ==================================================
-        // BUSCAR DADOS PROTEGIDOS
-        // ==================================================
-
-        await carregarDadosProfessor();
-
-
-
-        alert(
-          "Modo Professor ativado.\n\n" +
-          "Ao selecionar uma aula, o painel do professor e o Google Meet serão abertos."
-        );
-
-
-      }
-
-      catch (error) {
-
-
-        console.error(
-          error
-        );
-
-
-        errorElement.textContent =
-          "Código de acesso inválido.";
-
-
-        errorElement.style.display =
-          "block";
-
-      }
-
-      finally {
-
-
-        button.disabled =
-          false;
-
-
-        button.textContent =
-          "Entrar";
-
-      }
-
-    }
-
-
-
-    // ======================================================
-    // DADOS PROTEGIDOS DO PROFESSOR
-    //
-    // Meet URL não fica neste HTML.
-    // ======================================================
-
-    async function carregarDadosProfessor() {
-
-      try {
-
-
-        const response =
-          await fetch(
-            "/api/teacher-info",
-            {
-
-              method: "GET",
-
-              credentials:
-                "include"
-
-            }
-          );
-
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Não autorizado"
-          );
-
-        }
-
-
-
-        const data =
-          await response.json();
-
-
-
-        googleMeetUrl =
-          data.meetUrl || null;
-
-
-      }
-
-      catch (error) {
-
-
-        console.error(
-          "Erro ao carregar dados do professor:",
-          error
-        );
-
-
-        googleMeetUrl =
-          null;
-
-      }
-
-    }
-
-
-
-    // ======================================================
-    // AMBIENTE DO PROFESSOR
-    // ======================================================
-
-    function atualizarAmbienteProfessor(
-      numero
-    ) {
-
-
-      if (!teacherMode) {
-
-        return;
-
-      }
-
-
-
-      const teacherUrl =
-        `./conteudo/professor.html?lesson=${numero}`;
-
-
-
-      // ====================================================
-      // PROFESSOR
-      //
-      // Sempre acompanha a Lesson atual.
-      // ====================================================
-
-      if (
-        !teacherTab ||
-        teacherTab.closed
-      ) {
-
-
-        teacherTab =
-          window.open(
-            teacherUrl,
-            "teacherPanel"
-          );
-
-      }
-
-
-      else {
-
-
-        try {
-
-
-          teacherTab.location.href =
-            teacherUrl;
-
-
-        }
-
-        catch (error) {
-
-
-          console.warn(
-            "Não foi possível atualizar o professor.",
-            error
-          );
-
-        }
-
-      }
-
-
-
-      // ====================================================
-      // GOOGLE MEET
-      //
-      // ABRE SOMENTE UMA VEZ.
-      //
-      // Depois disso NÃO mudamos URL,
-      // NÃO damos focus,
-      // NÃO damos reload.
-      // ====================================================
-
-      if (
-        !meetOpened &&
-        googleMeetUrl
-      ) {
-
-
-        meetTab =
-          window.open(
-            googleMeetUrl,
-            "googleMeet"
-          );
-
-
-
-        if (meetTab) {
-
-
-          meetOpened =
-            true;
-
-
-          console.log(
-            "Google Meet aberto."
-          );
-
-        }
-
-
-        else {
-
-
-          console.warn(
-            "Google Meet bloqueado pelo navegador."
-          );
-
-        }
-
-      }
-
-    }
-
-
-
-    // ======================================================
-    // ENTER NO CAMPO DE SENHA
-    // ======================================================
-
-    document
-      .getElementById(
-        "teacherPassword"
-      )
-      .addEventListener(
-        "keydown",
-        function (event) {
-
-
-          if (
-            event.key ===
-            "Enter"
-          ) {
-
-
-            event.preventDefault();
-
-
-            authenticateTeacher();
-
-          }
-
-        }
-      );
-
-
-
-    // ======================================================
-    // ESC FECHA LOGIN
-    // ======================================================
-
-    document.addEventListener(
-      "keydown",
-      function (event) {
-
-
-        if (
-          event.key ===
-          "Escape"
-        ) {
-
-
-          closeTeacherLogin();
-
-        }
-
-      }
-    );
-
-
-
-    // ======================================================
     // INICIALIZAÇÃO
     // ======================================================
 
@@ -1247,9 +1505,26 @@
       "DOMContentLoaded",
       function () {
 
-
         createLessonMenu();
 
+        atualizarDashboard();
+
+        atualizarMenuConcluido();
+
+
+        const home =
+          document.getElementById(
+            "homeLink"
+          );
+
+
+        if (home) {
+
+          home.classList.add(
+            "active"
+          );
+
+        }
 
       }
     );

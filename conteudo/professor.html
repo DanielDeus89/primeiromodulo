@@ -21,12 +21,29 @@
 
   <style>
 
+
+    /* ======================================================
+       RESET
+    ======================================================= */
+
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+
+      box-sizing:
+        border-box;
+
+      margin:
+        0;
+
+      padding:
+        0;
+
     }
 
+
+
+    /* ======================================================
+       BODY
+    ======================================================= */
 
     body {
 
@@ -53,6 +70,11 @@
     }
 
 
+
+    /* ======================================================
+       CONTAINER
+    ======================================================= */
+
     .teacher-container {
 
       width:
@@ -67,9 +89,10 @@
     }
 
 
-    /* ==================================================
+
+    /* ======================================================
        CABEÇALHO
-    ================================================== */
+    ======================================================= */
 
     .teacher-header {
 
@@ -94,12 +117,14 @@
     }
 
 
+
     .teacher-header h1 {
 
       font-size:
         32px;
 
     }
+
 
 
     .teacher-subtitle {
@@ -114,6 +139,25 @@
         5px;
 
     }
+
+
+
+    .counter-group {
+
+      display:
+        flex;
+
+      gap:
+        10px;
+
+      align-items:
+        center;
+
+      flex-wrap:
+        wrap;
+
+    }
+
 
 
     .counter {
@@ -134,9 +178,9 @@
 
 
 
-    /* ==================================================
+    /* ======================================================
        ABAS
-    ================================================== */
+    ======================================================= */
 
     .tabs {
 
@@ -153,6 +197,7 @@
         25px;
 
     }
+
 
 
     .tab-btn {
@@ -187,12 +232,14 @@
     }
 
 
+
     .tab-btn:hover {
 
       background:
         #475569;
 
     }
+
 
 
     .tab-btn.active {
@@ -204,9 +251,9 @@
 
 
 
-    /* ==================================================
+    /* ======================================================
        FRASE ATUAL
-    ================================================== */
+    ======================================================= */
 
     .current-practice {
 
@@ -254,6 +301,7 @@
     }
 
 
+
     .section-name {
 
       font-size:
@@ -277,6 +325,7 @@
     }
 
 
+
     #currentPhrase {
 
       font-size:
@@ -298,9 +347,9 @@
 
 
 
-    /* ==================================================
+    /* ======================================================
        NAVEGAÇÃO
-    ================================================== */
+    ======================================================= */
 
     .navigation {
 
@@ -323,6 +372,7 @@
         wrap;
 
     }
+
 
 
     .navigation button {
@@ -354,12 +404,14 @@
     }
 
 
+
     .navigation button:hover {
 
       background:
         #475569;
 
     }
+
 
 
     .navigation button:disabled {
@@ -371,6 +423,7 @@
         not-allowed;
 
     }
+
 
 
     #phraseCounter {
@@ -388,9 +441,9 @@
 
 
 
-    /* ==================================================
-       LISTA COMPLETA
-    ================================================== */
+    /* ======================================================
+       LISTA
+    ======================================================= */
 
     .practice-list-container {
 
@@ -398,6 +451,7 @@
         20px;
 
     }
+
 
 
     .practice-list-container h2 {
@@ -409,6 +463,7 @@
         20px;
 
     }
+
 
 
     .practice-list {
@@ -423,6 +478,7 @@
         8px;
 
     }
+
 
 
     .practice-item {
@@ -454,6 +510,7 @@
     }
 
 
+
     .practice-item:hover {
 
       background:
@@ -462,12 +519,14 @@
     }
 
 
+
     .practice-item.active {
 
       background:
         #2563eb;
 
     }
+
 
 
     .practice-number {
@@ -484,6 +543,7 @@
     }
 
 
+
     .practice-item.active
     .practice-number {
 
@@ -494,9 +554,9 @@
 
 
 
-    /* ==================================================
+    /* ======================================================
        ERRO
-    ================================================== */
+    ======================================================= */
 
     .error {
 
@@ -519,9 +579,9 @@
 
 
 
-    /* ==================================================
+    /* ======================================================
        RESPONSIVO
-    ================================================== */
+    ======================================================= */
 
     @media (
       max-width: 700px
@@ -552,6 +612,7 @@
 
     }
 
+
   </style>
 
 </head>
@@ -567,11 +628,12 @@
 
     <!-- ==================================================
          CABEÇALHO
-    ================================================== -->
+    =================================================== -->
 
     <div
       class="teacher-header"
     >
+
 
       <div>
 
@@ -580,6 +642,7 @@
         >
           Carregando...
         </h1>
+
 
         <div
           class="teacher-subtitle"
@@ -590,12 +653,34 @@
       </div>
 
 
+
+      <!-- ==================================================
+           CONTADORES
+      =================================================== -->
+
       <div
-        class="counter"
-        id="totalCounter"
+        class="counter-group"
       >
-        0 itens
+
+
+        <div
+          class="counter"
+          id="cardCounter"
+        >
+          Card - / -
+        </div>
+
+
+        <div
+          class="counter"
+          id="totalCounter"
+        >
+          0 itens
+        </div>
+
+
       </div>
+
 
     </div>
 
@@ -603,7 +688,7 @@
 
     <!-- ==================================================
          ABAS
-    ================================================== -->
+    =================================================== -->
 
     <div
       class="tabs"
@@ -614,11 +699,12 @@
 
     <!-- ==================================================
          FRASE ATUAL
-    ================================================== -->
+    =================================================== -->
 
     <div
       class="current-practice"
     >
+
 
       <div
         class="section-name"
@@ -634,17 +720,19 @@
         Carregando...
       </div>
 
+
     </div>
 
 
 
     <!-- ==================================================
          NAVEGAÇÃO
-    ================================================== -->
+    =================================================== -->
 
     <div
       class="navigation"
     >
+
 
       <button
         type="button"
@@ -670,17 +758,19 @@
         Próxima →
       </button>
 
+
     </div>
 
 
 
     <!-- ==================================================
          LISTA
-    ================================================== -->
+    =================================================== -->
 
     <div
       class="practice-list-container"
     >
+
 
       <h2>
         Lista da seção
@@ -691,6 +781,7 @@
         class="practice-list"
         id="practiceList"
       ></div>
+
 
     </div>
 
@@ -716,6 +807,21 @@
 
     let teacherSections =
       [];
+
+
+    let currentTeacherLesson =
+      null;
+
+
+
+    // ======================================================
+    // SINCRONIZAÇÃO
+    // ======================================================
+
+    const teacherSyncChannel =
+      new BroadcastChannel(
+        "teacherLessonSync"
+      );
 
 
 
@@ -745,6 +851,204 @@
 
 
     // ======================================================
+    // ATUALIZAR CARD NO PAINEL
+    // ======================================================
+
+    function updateTeacherCard(
+      state
+    ) {
+
+
+      if (!state) {
+
+        return;
+
+      }
+
+
+      const cardCounter =
+        document.getElementById(
+          "cardCounter"
+        );
+
+
+      if (!cardCounter) {
+
+        return;
+
+      }
+
+
+      const currentCard =
+        Number(
+          state.currentCard
+        ) || 1;
+
+
+      const totalCards =
+        Number(
+          state.totalCards
+        ) || 0;
+
+
+      if (
+        totalCards > 0
+      ) {
+
+        cardCounter.textContent =
+          `Card ${currentCard} de ${totalCards}`;
+
+      }
+
+      else {
+
+        cardCounter.textContent =
+          `Card ${currentCard}`;
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // RECEBER ESTADO DO ALUNO
+    // ======================================================
+
+    function handleTeacherSync(
+      state
+    ) {
+
+
+      if (!state) {
+
+        return;
+
+      }
+
+
+      console.log(
+        "Sincronização recebida:",
+        state
+      );
+
+
+      // ====================================================
+      // IGNORAR REVIEW NESTE MOMENTO
+      // ====================================================
+
+      if (
+        state.type !==
+        "lesson"
+      ) {
+
+        return;
+
+      }
+
+
+      // ====================================================
+      // ALUNO TROCOU DE AULA
+      // ====================================================
+
+      if (
+        state.number &&
+        currentTeacherLesson &&
+        state.number !==
+          currentTeacherLesson
+      ) {
+
+
+        console.log(
+          "Aluno mudou para Lesson:",
+          state.number
+        );
+
+
+        window.location.href =
+          `professor.html?lesson=${state.number}`;
+
+
+        return;
+
+      }
+
+
+      // ====================================================
+      // MESMA AULA
+      // ====================================================
+
+      updateTeacherCard(
+        state
+      );
+
+    }
+
+
+
+    // ======================================================
+    // ESCUTAR ALUNO EM TEMPO REAL
+    // ======================================================
+
+    teacherSyncChannel.onmessage =
+      function (event) {
+
+
+        handleTeacherSync(
+          event.data
+        );
+
+      };
+
+
+
+    // ======================================================
+    // CARREGAR ÚLTIMO ESTADO DO ALUNO
+    // ======================================================
+
+    function loadLastTeacherSyncState() {
+
+
+      try {
+
+
+        const state =
+          JSON.parse(
+            localStorage.getItem(
+              "teacherLessonSyncState"
+            )
+          );
+
+
+        if (!state) {
+
+          return;
+
+        }
+
+
+        handleTeacherSync(
+          state
+        );
+
+      }
+
+
+      catch (error) {
+
+
+        console.warn(
+          "Erro ao carregar sincronização:",
+          error
+        );
+
+      }
+
+    }
+
+
+
+    // ======================================================
     // CARREGAR AULA
     // ======================================================
 
@@ -758,7 +1062,9 @@
 
 
       let lesson =
-        params.get("lesson") || "01";
+        params.get(
+          "lesson"
+        ) || "01";
 
 
       if (
@@ -776,12 +1082,18 @@
       }
 
 
+      // ====================================================
+      // REGISTRAR AULA ATUAL DO PROFESSOR
+      // ====================================================
+
+      currentTeacherLesson =
+        lesson;
+
 
       console.log(
         "Carregando painel:",
         lesson
       );
-
 
 
       const script =
@@ -794,23 +1106,37 @@
         `../js/lessons/lesson${lesson}.js`;
 
 
+      // ====================================================
+      // SUCESSO
+      // ====================================================
 
       script.onload =
         function () {
 
+
+          console.log(
+            `Lesson ${lesson} carregada no professor.`
+          );
+
+
           initializeTeacherPanel();
 
-      };
+        };
 
+
+      // ====================================================
+      // ERRO
+      // ====================================================
 
       script.onerror =
         function () {
+
 
           showError(
             `Não foi possível carregar lesson${lesson}.js`
           );
 
-      };
+        };
 
 
       document.body.appendChild(
@@ -828,9 +1154,9 @@
     function initializeTeacherPanel() {
 
 
-      // ----------------------------------------------------
+      // ====================================================
       // TÍTULO
-      // ----------------------------------------------------
+      // ====================================================
 
       const title =
         document.getElementById(
@@ -840,11 +1166,13 @@
 
       if (
         typeof lessonTitle !==
-          "undefined"
+        "undefined"
       ) {
+
 
         title.textContent =
           `${lessonTitle} - Professor`;
+
 
         document.title =
           `${lessonTitle} - Professor`;
@@ -853,18 +1181,20 @@
 
 
 
-      // ----------------------------------------------------
+      // ====================================================
       // VALIDAR teacherPractice
-      // ----------------------------------------------------
+      // ====================================================
 
       if (
         typeof teacherPractice ===
-          "undefined"
+        "undefined"
       ) {
+
 
         showError(
           "Esta aula não possui teacherPractice."
         );
+
 
         return;
 
@@ -872,15 +1202,16 @@
 
 
 
-      // ----------------------------------------------------
-      // DESCOBRIR SEÇÕES EXISTENTES
-      // ----------------------------------------------------
+      // ====================================================
+      // DESCOBRIR SEÇÕES
+      // ====================================================
 
       teacherSections =
         Object.keys(
           teacherPractice
         ).filter(
           function (section) {
+
 
             return (
 
@@ -900,14 +1231,16 @@
         );
 
 
-
       if (
-        teacherSections.length === 0
+        teacherSections.length ===
+        0
       ) {
+
 
         showError(
           "Nenhuma prática cadastrada."
         );
+
 
         return;
 
@@ -915,9 +1248,9 @@
 
 
 
-      // ----------------------------------------------------
+      // ====================================================
       // PRIMEIRA SEÇÃO
-      // ----------------------------------------------------
+      // ====================================================
 
       currentSection =
         teacherSections[0];
@@ -928,9 +1261,22 @@
 
 
 
+      // ====================================================
+      // RENDER
+      // ====================================================
+
       renderTabs();
 
+
       renderCurrentSection();
+
+
+
+      // ====================================================
+      // CARREGAR CARD ATUAL DO ALUNO
+      // ====================================================
+
+      loadLastTeacherSyncState();
 
     }
 
@@ -953,7 +1299,6 @@
         "";
 
 
-
       teacherSections.forEach(
         function (section) {
 
@@ -974,7 +1319,7 @@
 
           if (
             section ===
-              currentSection
+            currentSection
           ) {
 
             button.classList.add(
@@ -993,6 +1338,7 @@
           button.addEventListener(
             "click",
             function () {
+
 
               selectSection(
                 section
@@ -1043,6 +1389,7 @@
 
       renderTabs();
 
+
       renderCurrentSection();
 
     }
@@ -1062,10 +1409,21 @@
         ];
 
 
+      if (
+        !Array.isArray(
+          items
+        )
+      ) {
 
-      // ----------------------------------------------------
-      // NOME
-      // ----------------------------------------------------
+        return;
+
+      }
+
+
+
+      // ====================================================
+      // NOME DA SEÇÃO
+      // ====================================================
 
       document.getElementById(
         "sectionName"
@@ -1076,9 +1434,9 @@
 
 
 
-      // ----------------------------------------------------
+      // ====================================================
       // TOTAL
-      // ----------------------------------------------------
+      // ====================================================
 
       document.getElementById(
         "totalCounter"
@@ -1088,6 +1446,7 @@
 
 
       renderCurrentPhrase();
+
 
       renderPracticeList();
 
@@ -1108,18 +1467,28 @@
         ];
 
 
+      if (
+        !Array.isArray(
+          items
+        ) ||
+        items.length === 0
+      ) {
+
+        return;
+
+      }
+
+
       const current =
         items[
           currentPhraseIndex
         ];
 
 
-
       document.getElementById(
         "currentPhrase"
       ).textContent =
         current;
-
 
 
       document.getElementById(
@@ -1129,14 +1498,15 @@
 
 
 
-      // ----------------------------------------------------
+      // ====================================================
       // BOTÕES
-      // ----------------------------------------------------
+      // ====================================================
 
       document.getElementById(
         "prevPhraseBtn"
       ).disabled =
-        currentPhraseIndex === 0;
+        currentPhraseIndex ===
+        0;
 
 
       document.getElementById(
@@ -1146,10 +1516,6 @@
         items.length - 1;
 
 
-
-      // ----------------------------------------------------
-      // ATUALIZAR LISTA
-      // ----------------------------------------------------
 
       updateActiveListItem();
 
@@ -1179,6 +1545,16 @@
           currentSection
         ];
 
+
+      if (
+        !Array.isArray(
+          items
+        )
+      ) {
+
+        return;
+
+      }
 
 
       items.forEach(
@@ -1244,6 +1620,7 @@
             "click",
             function () {
 
+
               currentPhraseIndex =
                 index;
 
@@ -1252,7 +1629,6 @@
 
             }
           );
-
 
 
           container.appendChild(
@@ -1285,12 +1661,13 @@
       items.forEach(
         function (item) {
 
+
           item.classList.remove(
             "active"
           );
 
-      });
-
+        }
+      );
 
 
       const active =
@@ -1301,20 +1678,23 @@
 
       if (active) {
 
+
         active.classList.add(
           "active"
         );
 
 
-        active.scrollIntoView({
+        active.scrollIntoView(
+          {
 
-          block:
-            "nearest",
+            block:
+              "nearest",
 
-          behavior:
-            "smooth"
+            behavior:
+              "smooth"
 
-        });
+          }
+        );
 
       }
 
@@ -1330,7 +1710,8 @@
 
 
       if (
-        currentPhraseIndex <= 0
+        currentPhraseIndex <=
+        0
       ) {
 
         return;
@@ -1361,6 +1742,17 @@
 
 
       if (
+        !Array.isArray(
+          items
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      if (
         currentPhraseIndex >=
         items.length - 1
       ) {
@@ -1380,10 +1772,7 @@
 
 
     // ======================================================
-    // SETAS DO TECLADO
-    //
-    // ← FRASE ANTERIOR
-    // → PRÓXIMA FRASE
+    // NAVEGAÇÃO PELO TECLADO
     // ======================================================
 
     document.addEventListener(
@@ -1391,24 +1780,60 @@
       function (event) {
 
 
+        const target =
+          event.target;
+
+
+        const tag =
+          target &&
+          target.tagName
+            ? target.tagName.toLowerCase()
+            : "";
+
+
         if (
-          event.key ===
-            "ArrowLeft"
+          tag === "input" ||
+          tag === "textarea" ||
+          tag === "select"
         ) {
 
+          return;
+
+        }
+
+
+
+        // ==================================================
+        // ESQUERDA
+        // ==================================================
+
+        if (
+          event.key ===
+          "ArrowLeft"
+        ) {
+
+
           event.preventDefault();
+
 
           previousPhrase();
 
         }
 
 
+
+        // ==================================================
+        // DIREITA
+        // ==================================================
+
         if (
           event.key ===
-            "ArrowRight"
+          "ArrowRight"
         ) {
 
+
           event.preventDefault();
+
 
           nextPhrase();
 
@@ -1432,6 +1857,13 @@
         document.querySelector(
           ".teacher-container"
         );
+
+
+      if (!container) {
+
+        return;
+
+      }
 
 
       container.innerHTML =
