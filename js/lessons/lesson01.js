@@ -218,6 +218,7 @@ const lessonCards = [
 
       ],
 
+
       [
 
         ["to eat", "comer"]
@@ -436,10 +437,9 @@ const lessonCards = [
 //
 // PAINEL DO PROFESSOR
 //
-// ESTE CONTEÚDO NÃO SERÁ MOSTRADO
-// NA TELA PRINCIPAL DA AULA.
+// CONTEÚDO ADICIONAL PARA TREINO ORAL.
 //
-// professor.html irá utilizar este objeto.
+// NÃO ALTERA O CONTEÚDO DO ALUNO.
 //
 // ======================================================
 // ======================================================
@@ -449,8 +449,6 @@ const teacherPractice = {
 
   // ====================================================
   // VERBS
-  //
-  // EXERCÍCIO ORAL DO PROFESSOR
   // ====================================================
 
   verbs: [
@@ -481,9 +479,6 @@ const teacherPractice = {
 
   // ====================================================
   // VOCABULARY
-  //
-  // FRASES PARA O PROFESSOR TREINAR
-  // COM O ALUNO
   // ====================================================
 
   vocabulary: [
@@ -576,10 +571,6 @@ const teacherPractice = {
 
   // ====================================================
   // LISTENING
-  //
-  // PODEMOS EXIBIR TAMBÉM NO PAINEL
-  // DO PROFESSOR PARA ELE SABER
-  // O QUE VEM NO FINAL DA AULA.
   // ====================================================
 
   listening: [
@@ -595,5 +586,82 @@ const teacherPractice = {
     "I eat bread and meat."
 
   ]
+
+};
+
+
+
+// ======================================================
+// MAPA DE TREINO DO PROFESSOR POR CARD
+//
+// IMPORTANTE:
+//
+// O CARD DO PROFESSOR SEMPRE É O MESMO CARD DO ALUNO.
+//
+// cardIndex começa em 0:
+//
+// Card 01 = 0
+// Card 02 = 1
+// Card 03 = 2
+// Card 04 = 3
+// Card 05 = 4
+// Card 06 = 5
+// Card 07 = 6
+// Card 08 = 7
+//
+// SOMENTE OS CARDS QUE POSSUEM TREINO ADICIONAL
+// PRECISAM APARECER AQUI.
+// ======================================================
+
+const teacherPracticeByCard = {
+
+
+  // ====================================================
+  // CARD 04
+  // VERBS
+  // ====================================================
+
+  3:
+    teacherPractice.verbs,
+
+
+
+  // ====================================================
+  // CARD 05
+  // VOCABULARY
+  // ====================================================
+
+  4:
+    teacherPractice.vocabulary,
+
+
+
+  // ====================================================
+  // CARD 06
+  // EXPRESSIONS
+  // ====================================================
+
+  5:
+    teacherPractice.expressions,
+
+
+
+  // ====================================================
+  // CARD 07
+  // GRAMMAR
+  // ====================================================
+
+  6:
+    teacherPractice.grammar,
+
+
+
+  // ====================================================
+  // CARD 08
+  // LISTENING
+  // ====================================================
+
+  7:
+    teacherPractice.listening
 
 };

@@ -10,7 +10,9 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Painel do Professor</title>
+  <title>
+    Painel do Professor
+  </title>
 
 
   <link
@@ -48,7 +50,7 @@
     body {
 
       font-family:
-        'Inter',
+        "Inter",
         sans-serif;
 
       background:
@@ -150,9 +152,6 @@
       gap:
         10px;
 
-      align-items:
-        center;
-
       flex-wrap:
         wrap;
 
@@ -179,81 +178,214 @@
 
 
     /* ======================================================
-       ABAS
+       CARD PRINCIPAL
     ======================================================= */
 
-    .tabs {
+    .lesson-card {
 
-      display:
-        flex;
+      background:
+        #e2e8f0;
 
-      flex-wrap:
-        wrap;
+      color:
+        #0f172a;
 
-      gap:
-        10px;
+      border-radius:
+        16px;
+
+      padding:
+        30px;
 
       margin-bottom:
         25px;
 
+      box-shadow:
+        0 4px 18px rgba(
+          0,
+          0,
+          0,
+          0.35
+        );
+
     }
 
 
 
-    .tab-btn {
+    .lesson-card-title {
 
-      border:
-        none;
-
-      background:
-        #334155;
-
-      color:
-        white;
-
-      padding:
-        10px 18px;
-
-      border-radius:
-        8px;
-
-      cursor:
-        pointer;
+      text-align:
+        center;
 
       font-size:
-        15px;
+        26px;
 
-      font-weight:
-        600;
+      margin-bottom:
+        25px;
 
-      transition:
-        0.2s;
-
-    }
-
-
-
-    .tab-btn:hover {
-
-      background:
-        #475569;
-
-    }
-
-
-
-    .tab-btn.active {
-
-      background:
-        #2563eb;
+      color:
+        #1e293b;
 
     }
 
 
 
     /* ======================================================
-       FRASE ATUAL
+       COLUNAS DO CARD
     ======================================================= */
+
+    .lesson-columns {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            250px,
+            1fr
+          )
+        );
+
+      gap:
+        25px;
+
+    }
+
+
+
+    .lesson-column {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        15px;
+
+    }
+
+
+
+    .lesson-item {
+
+      padding:
+        10px 12px;
+
+      border-radius:
+        8px;
+
+      background:
+        #f8fafc;
+
+    }
+
+
+
+    .lesson-english {
+
+      color:
+        #2563eb;
+
+      font-size:
+        22px;
+
+      font-weight:
+        700;
+
+      line-height:
+        1.4;
+
+    }
+
+
+
+    .lesson-portuguese {
+
+      color:
+        #475569;
+
+      font-size:
+        15px;
+
+      margin-top:
+        4px;
+
+    }
+
+
+
+    /* ======================================================
+       LISTENING
+    ======================================================= */
+
+    .listening-list {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        12px;
+
+    }
+
+
+
+    .listening-item {
+
+      background:
+        #f8fafc;
+
+      padding:
+        14px;
+
+      border-radius:
+        8px;
+
+      color:
+        #2563eb;
+
+      font-size:
+        20px;
+
+      font-weight:
+        600;
+
+    }
+
+
+
+    /* ======================================================
+       TREINO DO PROFESSOR
+    ======================================================= */
+
+    .teacher-practice-container {
+
+      display:
+        none;
+
+      margin-top:
+        30px;
+
+    }
+
+
+
+    .teacher-practice-title {
+
+      font-size:
+        22px;
+
+      margin-bottom:
+        18px;
+
+    }
+
+
 
     .current-practice {
 
@@ -270,7 +402,7 @@
         35px;
 
       min-height:
-        220px;
+        190px;
 
       display:
         flex;
@@ -302,25 +434,25 @@
 
 
 
-    .section-name {
+    .practice-label {
 
       font-size:
-        18px;
-
-      font-weight:
-        700;
+        15px;
 
       color:
-        #475569;
-
-      margin-bottom:
-        20px;
+        #64748b;
 
       text-transform:
         uppercase;
 
+      font-weight:
+        700;
+
       letter-spacing:
         1px;
+
+      margin-bottom:
+        18px;
 
     }
 
@@ -329,7 +461,7 @@
     #currentPhrase {
 
       font-size:
-        36px;
+        34px;
 
       line-height:
         1.5;
@@ -348,7 +480,7 @@
 
 
     /* ======================================================
-       NAVEGAÇÃO
+       NAVEGAÇÃO DO TREINO
     ======================================================= */
 
     .navigation {
@@ -366,7 +498,7 @@
         15px;
 
       margin-bottom:
-        30px;
+        25px;
 
       flex-wrap:
         wrap;
@@ -442,29 +574,8 @@
 
 
     /* ======================================================
-       LISTA
+       LISTA DE TREINO
     ======================================================= */
-
-    .practice-list-container {
-
-      margin-top:
-        20px;
-
-    }
-
-
-
-    .practice-list-container h2 {
-
-      margin-bottom:
-        15px;
-
-      font-size:
-        20px;
-
-    }
-
-
 
     .practice-list {
 
@@ -495,17 +606,17 @@
       cursor:
         pointer;
 
-      transition:
-        0.2s;
-
       display:
         flex;
+
+      gap:
+        12px;
 
       align-items:
         center;
 
-      gap:
-        12px;
+      transition:
+        0.2s;
 
     }
 
@@ -534,11 +645,11 @@
       min-width:
         32px;
 
-      font-weight:
-        700;
-
       color:
         #93c5fd;
+
+      font-weight:
+        700;
 
     }
 
@@ -549,6 +660,34 @@
 
       color:
         white;
+
+    }
+
+
+
+    /* ======================================================
+       SEM TREINO
+    ======================================================= */
+
+    .no-practice {
+
+      background:
+        #1e293b;
+
+      color:
+        #94a3b8;
+
+      border-radius:
+        10px;
+
+      padding:
+        18px;
+
+      text-align:
+        center;
+
+      margin-top:
+        20px;
 
     }
 
@@ -595,6 +734,14 @@
       }
 
 
+      .teacher-header h1 {
+
+        font-size:
+          25px;
+
+      }
+
+
       #currentPhrase {
 
         font-size:
@@ -603,10 +750,10 @@
       }
 
 
-      .current-practice {
+      .lesson-english {
 
-        padding:
-          25px 15px;
+        font-size:
+          19px;
 
       }
 
@@ -626,9 +773,9 @@
   >
 
 
-    <!-- ==================================================
+    <!-- ====================================================
          CABEÇALHO
-    =================================================== -->
+    ===================================================== -->
 
     <div
       class="teacher-header"
@@ -654,10 +801,6 @@
 
 
 
-      <!-- ==================================================
-           CONTADORES
-      =================================================== -->
-
       <div
         class="counter-group"
       >
@@ -673,9 +816,9 @@
 
         <div
           class="counter"
-          id="totalCounter"
+          id="contentCounter"
         >
-          0 itens
+          -
         </div>
 
 
@@ -686,95 +829,107 @@
 
 
 
-    <!-- ==================================================
-         ABAS
-    =================================================== -->
+    <!-- ====================================================
+         MESMO CARD DO ALUNO
+    ===================================================== -->
 
     <div
-      class="tabs"
-      id="tabs"
-    ></div>
-
-
-
-    <!-- ==================================================
-         FRASE ATUAL
-    =================================================== -->
-
-    <div
-      class="current-practice"
+      class="lesson-card"
+      id="lessonCard"
     >
 
 
-      <div
-        class="section-name"
-        id="sectionName"
-      >
-        -
-      </div>
-
-
-      <div
-        id="currentPhrase"
+      <h2
+        class="lesson-card-title"
+        id="lessonCardTitle"
       >
         Carregando...
+      </h2>
+
+
+      <div
+        id="lessonCardContent"
+      ></div>
+
+
+    </div>
+
+
+
+    <!-- ====================================================
+         TREINO ADICIONAL DO PROFESSOR
+    ===================================================== -->
+
+    <div
+      class="teacher-practice-container"
+      id="teacherPracticeContainer"
+    >
+
+
+      <h2
+        class="teacher-practice-title"
+      >
+        Treino do Professor
+      </h2>
+
+
+
+      <div
+        class="current-practice"
+      >
+
+
+        <div
+          class="practice-label"
+          id="practiceLabel"
+        >
+          Prática oral
+        </div>
+
+
+        <div
+          id="currentPhrase"
+        >
+          -
+        </div>
+
+
       </div>
 
 
-    </div>
 
-
-
-    <!-- ==================================================
-         NAVEGAÇÃO
-    =================================================== -->
-
-    <div
-      class="navigation"
-    >
-
-
-      <button
-        type="button"
-        id="prevPhraseBtn"
-        onclick="previousPhrase()"
+      <div
+        class="navigation"
       >
-        ← Anterior
-      </button>
 
 
-      <span
-        id="phraseCounter"
-      >
-        0 / 0
-      </span>
+        <button
+          type="button"
+          id="prevPhraseBtn"
+          onclick="previousPhrase()"
+        >
+          ← Anterior
+        </button>
 
 
-      <button
-        type="button"
-        id="nextPhraseBtn"
-        onclick="nextPhrase()"
-      >
-        Próxima →
-      </button>
+        <span
+          id="phraseCounter"
+        >
+          0 / 0
+        </span>
 
 
-    </div>
+        <button
+          type="button"
+          id="nextPhraseBtn"
+          onclick="nextPhrase()"
+        >
+          Próxima →
+        </button>
 
 
+      </div>
 
-    <!-- ==================================================
-         LISTA
-    =================================================== -->
-
-    <div
-      class="practice-list-container"
-    >
-
-
-      <h2>
-        Lista da seção
-      </h2>
 
 
       <div
@@ -783,6 +938,19 @@
       ></div>
 
 
+    </div>
+
+
+
+    <!-- ====================================================
+         SEM TREINO EXTRA
+    ===================================================== -->
+
+    <div
+      class="no-practice"
+      id="noPracticeMessage"
+    >
+      Este card não possui treino adicional para o professor.
     </div>
 
 
@@ -797,25 +965,25 @@
     // ESTADO
     // ======================================================
 
-    let currentSection =
+    let currentTeacherLesson =
       null;
+
+
+    let currentCardIndex =
+      0;
+
+
+    let currentPractice =
+      [];
 
 
     let currentPhraseIndex =
       0;
 
 
-    let teacherSections =
-      [];
-
-
-    let currentTeacherLesson =
-      null;
-
-
 
     // ======================================================
-    // SINCRONIZAÇÃO
+    // CANAL DE SINCRONIZAÇÃO
     // ======================================================
 
     const teacherSyncChannel =
@@ -826,230 +994,7 @@
 
 
     // ======================================================
-    // NOMES DAS SEÇÕES
-    // ======================================================
-
-    const sectionLabels = {
-
-      verbs:
-        "Verbs",
-
-      vocabulary:
-        "Vocabulary",
-
-      expressions:
-        "Expressions",
-
-      grammar:
-        "Grammar",
-
-      listening:
-        "Listening"
-
-    };
-
-
-
-    // ======================================================
-    // ATUALIZAR CARD NO PAINEL
-    // ======================================================
-
-    function updateTeacherCard(
-      state
-    ) {
-
-
-      if (!state) {
-
-        return;
-
-      }
-
-
-      const cardCounter =
-        document.getElementById(
-          "cardCounter"
-        );
-
-
-      if (!cardCounter) {
-
-        return;
-
-      }
-
-
-      const currentCard =
-        Number(
-          state.currentCard
-        ) || 1;
-
-
-      const totalCards =
-        Number(
-          state.totalCards
-        ) || 0;
-
-
-      if (
-        totalCards > 0
-      ) {
-
-        cardCounter.textContent =
-          `Card ${currentCard} de ${totalCards}`;
-
-      }
-
-      else {
-
-        cardCounter.textContent =
-          `Card ${currentCard}`;
-
-      }
-
-    }
-
-
-
-    // ======================================================
-    // RECEBER ESTADO DO ALUNO
-    // ======================================================
-
-    function handleTeacherSync(
-      state
-    ) {
-
-
-      if (!state) {
-
-        return;
-
-      }
-
-
-      console.log(
-        "Sincronização recebida:",
-        state
-      );
-
-
-      // ====================================================
-      // IGNORAR REVIEW NESTE MOMENTO
-      // ====================================================
-
-      if (
-        state.type !==
-        "lesson"
-      ) {
-
-        return;
-
-      }
-
-
-      // ====================================================
-      // ALUNO TROCOU DE AULA
-      // ====================================================
-
-      if (
-        state.number &&
-        currentTeacherLesson &&
-        state.number !==
-          currentTeacherLesson
-      ) {
-
-
-        console.log(
-          "Aluno mudou para Lesson:",
-          state.number
-        );
-
-
-        window.location.href =
-          `professor.html?lesson=${state.number}`;
-
-
-        return;
-
-      }
-
-
-      // ====================================================
-      // MESMA AULA
-      // ====================================================
-
-      updateTeacherCard(
-        state
-      );
-
-    }
-
-
-
-    // ======================================================
-    // ESCUTAR ALUNO EM TEMPO REAL
-    // ======================================================
-
-    teacherSyncChannel.onmessage =
-      function (event) {
-
-
-        handleTeacherSync(
-          event.data
-        );
-
-      };
-
-
-
-    // ======================================================
-    // CARREGAR ÚLTIMO ESTADO DO ALUNO
-    // ======================================================
-
-    function loadLastTeacherSyncState() {
-
-
-      try {
-
-
-        const state =
-          JSON.parse(
-            localStorage.getItem(
-              "teacherLessonSyncState"
-            )
-          );
-
-
-        if (!state) {
-
-          return;
-
-        }
-
-
-        handleTeacherSync(
-          state
-        );
-
-      }
-
-
-      catch (error) {
-
-
-        console.warn(
-          "Erro ao carregar sincronização:",
-          error
-        );
-
-      }
-
-    }
-
-
-
-    // ======================================================
-    // CARREGAR AULA
+    // CARREGAR LESSON
     // ======================================================
 
     function loadTeacherLesson() {
@@ -1082,16 +1027,12 @@
       }
 
 
-      // ====================================================
-      // REGISTRAR AULA ATUAL DO PROFESSOR
-      // ====================================================
-
       currentTeacherLesson =
         lesson;
 
 
       console.log(
-        "Carregando painel:",
+        "Carregando Professor:",
         lesson
       );
 
@@ -1106,10 +1047,6 @@
         `../js/lessons/lesson${lesson}.js`;
 
 
-      // ====================================================
-      // SUCESSO
-      // ====================================================
-
       script.onload =
         function () {
 
@@ -1123,10 +1060,6 @@
 
         };
 
-
-      // ====================================================
-      // ERRO
-      // ====================================================
 
       script.onerror =
         function () {
@@ -1148,15 +1081,44 @@
 
 
     // ======================================================
-    // INICIAR PAINEL
+    // INICIALIZAR
     // ======================================================
 
     function initializeTeacherPanel() {
 
 
-      // ====================================================
-      // TÍTULO
-      // ====================================================
+      if (
+        typeof lessonTitle !==
+          "string"
+      ) {
+
+        showError(
+          "lessonTitle não encontrado."
+        );
+
+
+        return;
+
+      }
+
+
+      if (
+        typeof lessonCards ===
+          "undefined" ||
+        !Array.isArray(
+          lessonCards
+        )
+      ) {
+
+        showError(
+          "lessonCards não encontrado."
+        );
+
+
+        return;
+
+      }
+
 
       const title =
         document.getElementById(
@@ -1164,214 +1126,139 @@
         );
 
 
+      title.textContent =
+        `${lessonTitle} - Professor`;
+
+
+      document.title =
+        `${lessonTitle} - Professor`;
+
+
+
+      // ====================================================
+      // PEGAR ÚLTIMO ESTADO DO ALUNO
+      // ====================================================
+
+      const savedState =
+        getLastTeacherSyncState();
+
+
       if (
-        typeof lessonTitle !==
-        "undefined"
+        savedState &&
+        savedState.type === "lesson" &&
+        savedState.number ===
+          currentTeacherLesson
       ) {
 
+        currentCardIndex =
+          Number(
+            savedState.cardIndex
+          ) || 0;
 
-        title.textContent =
-          `${lessonTitle} - Professor`;
+      }
 
+      else {
 
-        document.title =
-          `${lessonTitle} - Professor`;
+        currentCardIndex =
+          0;
 
       }
 
 
 
       // ====================================================
-      // VALIDAR teacherPractice
+      // VALIDAR CARD
       // ====================================================
 
       if (
-        typeof teacherPractice ===
-        "undefined"
+        currentCardIndex < 0 ||
+        currentCardIndex >=
+          lessonCards.length
       ) {
 
-
-        showError(
-          "Esta aula não possui teacherPractice."
-        );
-
-
-        return;
+        currentCardIndex =
+          0;
 
       }
 
 
-
-      // ====================================================
-      // DESCOBRIR SEÇÕES
-      // ====================================================
-
-      teacherSections =
-        Object.keys(
-          teacherPractice
-        ).filter(
-          function (section) {
-
-
-            return (
-
-              Array.isArray(
-                teacherPractice[
-                  section
-                ]
-              ) &&
-
-              teacherPractice[
-                section
-              ].length > 0
-
-            );
-
-          }
-        );
-
-
-      if (
-        teacherSections.length ===
-        0
-      ) {
-
-
-        showError(
-          "Nenhuma prática cadastrada."
-        );
-
-
-        return;
-
-      }
-
-
-
-      // ====================================================
-      // PRIMEIRA SEÇÃO
-      // ====================================================
-
-      currentSection =
-        teacherSections[0];
-
-
-      currentPhraseIndex =
-        0;
-
-
-
-      // ====================================================
-      // RENDER
-      // ====================================================
-
-      renderTabs();
-
-
-      renderCurrentSection();
-
-
-
-      // ====================================================
-      // CARREGAR CARD ATUAL DO ALUNO
-      // ====================================================
-
-      loadLastTeacherSyncState();
+      renderTeacherCard();
 
     }
 
 
 
     // ======================================================
-    // ABAS
+    // ÚLTIMO ESTADO SALVO
     // ======================================================
 
-    function renderTabs() {
+    function getLastTeacherSyncState() {
 
 
-      const tabs =
-        document.getElementById(
-          "tabs"
+      try {
+
+
+        return JSON.parse(
+          localStorage.getItem(
+            "teacherLessonSyncState"
+          )
         );
 
 
-      tabs.innerHTML =
-        "";
+      }
+
+      catch (error) {
 
 
-      teacherSections.forEach(
-        function (section) {
+        console.warn(
+          "Erro ao ler sincronização:",
+          error
+        );
 
 
-          const button =
-            document.createElement(
-              "button"
-            );
+        return null;
 
-
-          button.type =
-            "button";
-
-
-          button.className =
-            "tab-btn";
-
-
-          if (
-            section ===
-            currentSection
-          ) {
-
-            button.classList.add(
-              "active"
-            );
-
-          }
-
-
-          button.textContent =
-            sectionLabels[
-              section
-            ] || section;
-
-
-          button.addEventListener(
-            "click",
-            function () {
-
-
-              selectSection(
-                section
-              );
-
-            }
-          );
-
-
-          tabs.appendChild(
-            button
-          );
-
-        }
-      );
+      }
 
     }
 
 
 
     // ======================================================
-    // SELECIONAR SEÇÃO
+    // RECEBER SINCRONIZAÇÃO
     // ======================================================
 
-    function selectSection(
-      section
+    teacherSyncChannel.onmessage =
+      function (event) {
+
+
+        handleTeacherSync(
+          event.data
+        );
+
+      };
+
+
+
+    // ======================================================
+    // PROCESSAR SINCRONIZAÇÃO
+    // ======================================================
+
+    function handleTeacherSync(
+      state
     ) {
 
 
+      if (!state) {
+
+        return;
+
+      }
+
+
       if (
-        !teacherPractice[
-          section
-        ]
+        state.type !==
+        "lesson"
       ) {
 
         return;
@@ -1379,39 +1266,47 @@
       }
 
 
-      currentSection =
-        section;
-
-
-      currentPhraseIndex =
-        0;
-
-
-      renderTabs();
-
-
-      renderCurrentSection();
-
-    }
+      console.log(
+        "Sincronização recebida:",
+        state
+      );
 
 
 
-    // ======================================================
-    // RENDERIZAR SEÇÃO
-    // ======================================================
+      // ====================================================
+      // MUDOU DE LESSON
+      // ====================================================
 
-    function renderCurrentSection() {
+      if (
+        state.number &&
+        state.number !==
+          currentTeacherLesson
+      ) {
 
 
-      const items =
-        teacherPractice[
-          currentSection
-        ];
+        window.location.href =
+          `professor.html?lesson=${state.number}`;
+
+
+        return;
+
+      }
+
+
+
+      // ====================================================
+      // MESMA LESSON
+      // ====================================================
+
+      const newCardIndex =
+        Number(
+          state.cardIndex
+        );
 
 
       if (
-        !Array.isArray(
-          items
+        !Number.isInteger(
+          newCardIndex
         )
       ) {
 
@@ -1420,29 +1315,510 @@
       }
 
 
+      if (
+        newCardIndex < 0 ||
+        typeof lessonCards ===
+          "undefined" ||
+        newCardIndex >=
+          lessonCards.length
+      ) {
+
+        return;
+
+      }
+
 
       // ====================================================
-      // NOME DA SEÇÃO
+      // CARD MUDOU
+      // ====================================================
+
+      if (
+        newCardIndex !==
+        currentCardIndex
+      ) {
+
+
+        currentCardIndex =
+          newCardIndex;
+
+
+        currentPhraseIndex =
+          0;
+
+
+        renderTeacherCard();
+
+      }
+
+
+      else {
+
+
+        updateCardCounter();
+
+      }
+
+    }
+
+
+
+    // ======================================================
+    // RENDERIZAR CARD
+    // ======================================================
+
+    function renderTeacherCard() {
+
+
+      const card =
+        lessonCards[
+          currentCardIndex
+        ];
+
+
+      if (!card) {
+
+        return;
+
+      }
+
+
+      // ====================================================
+      // TÍTULO
       // ====================================================
 
       document.getElementById(
-        "sectionName"
+        "lessonCardTitle"
       ).textContent =
-        sectionLabels[
-          currentSection
-        ] || currentSection;
+        card.title ||
+        `Card ${currentCardIndex + 1}`;
 
 
 
       // ====================================================
-      // TOTAL
+      // CONTADOR
       // ====================================================
+
+      updateCardCounter();
+
+
+
+      // ====================================================
+      // CONTEÚDO
+      // ====================================================
+
+      const content =
+        document.getElementById(
+          "lessonCardContent"
+        );
+
+
+      content.innerHTML =
+        "";
+
+
+
+      // ====================================================
+      // LISTENING
+      // ====================================================
+
+      if (
+        card.type ===
+          "listening"
+      ) {
+
+
+        renderListeningCard(
+          card,
+          content
+        );
+
+      }
+
+
+      // ====================================================
+      // CARD NORMAL
+      // ====================================================
+
+      else {
+
+
+        renderNormalCard(
+          card,
+          content
+        );
+
+      }
+
+
+
+      // ====================================================
+      // TREINO DO PROFESSOR
+      // ====================================================
+
+      loadTeacherPracticeForCurrentCard();
+
+    }
+
+
+
+    // ======================================================
+    // CONTADOR DO CARD
+    // ======================================================
+
+    function updateCardCounter() {
+
+
+      const counter =
+        document.getElementById(
+          "cardCounter"
+        );
+
+
+      if (!counter) {
+
+        return;
+
+      }
+
+
+      counter.textContent =
+        `Card ${currentCardIndex + 1} de ${lessonCards.length}`;
+
+    }
+
+
+
+    // ======================================================
+    // CARD NORMAL
+    // ======================================================
+
+    function renderNormalCard(
+      card,
+      container
+    ) {
+
+
+      const grid =
+        document.createElement(
+          "div"
+        );
+
+
+      grid.className =
+        "lesson-columns";
+
+
+      if (
+        !Array.isArray(
+          card.columns
+        )
+      ) {
+
+        container.appendChild(
+          grid
+        );
+
+
+        return;
+
+      }
+
+
+      card.columns.forEach(
+        function (columnData) {
+
+
+          const column =
+            document.createElement(
+              "div"
+            );
+
+
+          column.className =
+            "lesson-column";
+
+
+          if (
+            !Array.isArray(
+              columnData
+            )
+          ) {
+
+            grid.appendChild(
+              column
+            );
+
+
+            return;
+
+          }
+
+
+          columnData.forEach(
+            function (item) {
+
+
+              if (
+                !Array.isArray(
+                  item
+                )
+              ) {
+
+                return;
+
+              }
+
+
+              const english =
+                item[0] ||
+                "";
+
+
+              const portuguese =
+                item[1] ||
+                "";
+
+
+              const row =
+                document.createElement(
+                  "div"
+                );
+
+
+              row.className =
+                "lesson-item";
+
+
+              const englishElement =
+                document.createElement(
+                  "div"
+                );
+
+
+              englishElement.className =
+                "lesson-english";
+
+
+              englishElement.textContent =
+                english;
+
+
+              row.appendChild(
+                englishElement
+              );
+
+
+              if (portuguese) {
+
+
+                const portugueseElement =
+                  document.createElement(
+                    "div"
+                  );
+
+
+                portugueseElement.className =
+                  "lesson-portuguese";
+
+
+                portugueseElement.textContent =
+                  portuguese;
+
+
+                row.appendChild(
+                  portugueseElement
+                );
+
+              }
+
+
+              column.appendChild(
+                row
+              );
+
+            }
+          );
+
+
+          grid.appendChild(
+            column
+          );
+
+        }
+      );
+
+
+      container.appendChild(
+        grid
+      );
+
+    }
+
+
+
+    // ======================================================
+    // LISTENING
+    // ======================================================
+
+    function renderListeningCard(
+      card,
+      container
+    ) {
+
+
+      const list =
+        document.createElement(
+          "div"
+        );
+
+
+      list.className =
+        "listening-list";
+
+
+      if (
+        Array.isArray(
+          card.segments
+        )
+      ) {
+
+
+        card.segments.forEach(
+          function (segment) {
+
+
+            const row =
+              document.createElement(
+                "div"
+              );
+
+
+            row.className =
+              "listening-item";
+
+
+            row.textContent =
+              segment.text ||
+              "";
+
+
+            list.appendChild(
+              row
+            );
+
+          }
+        );
+
+      }
+
+
+      container.appendChild(
+        list
+      );
+
+    }
+
+
+
+    // ======================================================
+    // TREINO DO CARD ATUAL
+    // ======================================================
+
+    function loadTeacherPracticeForCurrentCard() {
+
+
+      const practiceContainer =
+        document.getElementById(
+          "teacherPracticeContainer"
+        );
+
+
+      const noPractice =
+        document.getElementById(
+          "noPracticeMessage"
+        );
+
+
+      currentPractice =
+        [];
+
+
+      // ====================================================
+      // EXISTE teacherPracticeByCard?
+      // ====================================================
+
+      if (
+        typeof teacherPracticeByCard !==
+          "undefined" &&
+        teacherPracticeByCard &&
+        Array.isArray(
+          teacherPracticeByCard[
+            currentCardIndex
+          ]
+        )
+      ) {
+
+
+        currentPractice =
+          teacherPracticeByCard[
+            currentCardIndex
+          ];
+
+
+      }
+
+
+
+      // ====================================================
+      // SEM TREINO
+      // ====================================================
+
+      if (
+        currentPractice.length ===
+        0
+      ) {
+
+
+        practiceContainer.style.display =
+          "none";
+
+
+        noPractice.style.display =
+          "block";
+
+
+        document.getElementById(
+          "contentCounter"
+        ).textContent =
+          "Sem treino extra";
+
+
+        return;
+
+      }
+
+
+
+      // ====================================================
+      // COM TREINO
+      // ====================================================
+
+      practiceContainer.style.display =
+        "block";
+
+
+      noPractice.style.display =
+        "none";
+
 
       document.getElementById(
-        "totalCounter"
+        "contentCounter"
       ).textContent =
-        `${items.length} itens`;
+        `${currentPractice.length} treinos`;
 
+
+      currentPhraseIndex =
+        0;
 
 
       renderCurrentPhrase();
@@ -1461,17 +1837,12 @@
     function renderCurrentPhrase() {
 
 
-      const items =
-        teacherPractice[
-          currentSection
-        ];
-
-
       if (
         !Array.isArray(
-          items
+          currentPractice
         ) ||
-        items.length === 0
+        currentPractice.length ===
+          0
       ) {
 
         return;
@@ -1479,28 +1850,40 @@
       }
 
 
-      const current =
-        items[
-          currentPhraseIndex
-        ];
+      if (
+        currentPhraseIndex < 0
+      ) {
+
+        currentPhraseIndex =
+          0;
+
+      }
+
+
+      if (
+        currentPhraseIndex >=
+        currentPractice.length
+      ) {
+
+        currentPhraseIndex =
+          currentPractice.length - 1;
+
+      }
 
 
       document.getElementById(
         "currentPhrase"
       ).textContent =
-        current;
+        currentPractice[
+          currentPhraseIndex
+        ];
 
 
       document.getElementById(
         "phraseCounter"
       ).textContent =
-        `${currentPhraseIndex + 1} / ${items.length}`;
+        `${currentPhraseIndex + 1} / ${currentPractice.length}`;
 
-
-
-      // ====================================================
-      // BOTÕES
-      // ====================================================
 
       document.getElementById(
         "prevPhraseBtn"
@@ -1513,18 +1896,17 @@
         "nextPhraseBtn"
       ).disabled =
         currentPhraseIndex >=
-        items.length - 1;
+        currentPractice.length - 1;
 
 
-
-      updateActiveListItem();
+      updateActivePracticeItem();
 
     }
 
 
 
     // ======================================================
-    // LISTA COMPLETA
+    // LISTA DE TREINO
     // ======================================================
 
     function renderPracticeList() {
@@ -1540,24 +1922,7 @@
         "";
 
 
-      const items =
-        teacherPractice[
-          currentSection
-        ];
-
-
-      if (
-        !Array.isArray(
-          items
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      items.forEach(
+      currentPractice.forEach(
         function (
           text,
           index
@@ -1615,7 +1980,6 @@
           );
 
 
-
           row.addEventListener(
             "click",
             function () {
@@ -1639,17 +2003,17 @@
       );
 
 
-      updateActiveListItem();
+      updateActivePracticeItem();
 
     }
 
 
 
     // ======================================================
-    // MARCAR ITEM ATUAL
+    // ITEM ATIVO
     // ======================================================
 
-    function updateActiveListItem() {
+    function updateActivePracticeItem() {
 
 
       const items =
@@ -1710,8 +2074,10 @@
 
 
       if (
+        currentPractice.length ===
+          0 ||
         currentPhraseIndex <=
-        0
+          0
       ) {
 
         return;
@@ -1735,26 +2101,11 @@
     function nextPhrase() {
 
 
-      const items =
-        teacherPractice[
-          currentSection
-        ];
-
-
       if (
-        !Array.isArray(
-          items
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      if (
+        currentPractice.length ===
+          0 ||
         currentPhraseIndex >=
-        items.length - 1
+          currentPractice.length - 1
       ) {
 
         return;
@@ -1772,7 +2123,14 @@
 
 
     // ======================================================
-    // NAVEGAÇÃO PELO TECLADO
+    // TECLADO
+    //
+    // IMPORTANTE:
+    //
+    // AS SETAS CONTROLAM APENAS AS FRASES DE TREINO.
+    // NÃO MUDAM O CARD DO PROFESSOR.
+    //
+    // O CARD É CONTROLADO PELO ALUNO.
     // ======================================================
 
     document.addEventListener(
@@ -1802,11 +2160,6 @@
         }
 
 
-
-        // ==================================================
-        // ESQUERDA
-        // ==================================================
-
         if (
           event.key ===
           "ArrowLeft"
@@ -1820,11 +2173,6 @@
 
         }
 
-
-
-        // ==================================================
-        // DIREITA
-        // ==================================================
 
         if (
           event.key ===
