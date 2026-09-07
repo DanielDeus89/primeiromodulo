@@ -15,92 +15,28 @@ let isDevMode = false;
 // Conteúdo da Lesson / Review já foi carregado?
 window.lessonReady = false;
 
+
 // ======================================================
-// SINCRONIZAÇÃO COM PAINEL DO PROFESSOR
+// CONTROLE DE SINCRONIZAÇÃO
+// ======================================================
+
+// Evita retransmitir uma alteração que acabou de chegar
+// do painel do professor.
+let applyingTeacherSync = false;
+
+
+// ======================================================
+// CANAL ALUNO <-> PROFESSOR
 // ======================================================
 
 const teacherSyncChannel =
-  new BroadcastChannel(
-    "teacherLessonSync"
-  );
-
-
-// ======================================================
-// ENVIAR ESTADO PARA O PROFESSOR
-// ======================================================
-
-function syncTeacherPanel() {
-
-  const content =
-    getCurrentContentInfo();
-
-
-  if (!content) {
-
-    return;
-
-  }
-
-
-  const state = {
-
-    type:
-      content.type,
-
-    number:
-      content.number,
-
-    title:
-      content.title,
-
-    cardIndex:
-      currentIndex,
-
-    currentCard:
-      currentIndex + 1,
-
-    totalCards:
-      typeof lessonCards !==
-        "undefined" &&
-      Array.isArray(
-        lessonCards
+  typeof BroadcastChannel !== "undefined"
+    ? new BroadcastChannel(
+        "teacherLessonSync"
       )
-        ? lessonCards.length
-        : 0,
-
-    updatedAt:
-      Date.now()
-
-  };
+    : null;
 
 
-  // ====================================================
-  // GUARDAR ÚLTIMO ESTADO
-  // ====================================================
-
-  localStorage.setItem(
-    "teacherLessonSyncState",
-    JSON.stringify(
-      state
-    )
-  );
-
-
-  // ====================================================
-  // ENVIAR PARA ABA DO PROFESSOR
-  // ====================================================
-
-  teacherSyncChannel.postMessage(
-    state
-  );
-
-
-  console.log(
-    "Professor sincronizado:",
-    state
-  );
-
-}
 
 // ======================================================
 // IDENTIFICAR CONTEÚDO ATUAL
@@ -199,6 +135,412 @@ function getCurrentContentInfo() {
 }
 
 
+
+// ======================================================
+// SINCRONIZAR PROFESSOR
+//
+// ENVIA O CARD ATUAL DO ALUNO PARA O PROFESSOR.
+//
+// SOMENTE LESSON.
+// ======================================================
+
+function syncTeacherPanel() {
+
+  // ====================================================
+  // ALTERAÇÃO VEIO DO PROFESSOR
+  //
+  // NÃO DEVOLVER A MESMA MENSAGEM.
+  // ====================================================
+
+  if (
+    applyingTeacherSync
+  ) {
+
+    return;
+
+  }
+
+
+  const content =
+    getCurrentContentInfo();
+
+
+  if (!content) {
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // PROFESSOR ATUALMENTE SINCRONIZA APENAS LESSONS
+  // ====================================================
+
+  if (
+    content.type !==
+    "lesson"
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    typeof lessonCards ===
+      "undefined" ||
+    !Array.isArray(
+      lessonCards
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const state = {
+
+    source:
+      "student",
+
+    type:
+      "lesson",
+
+    number:
+      content.number,
+
+    title:
+      content.title,
+
+    cardIndex:
+      currentIndex,
+
+    currentCard:
+      currentIndex + 1,
+
+    totalCards:
+      lessonCards.length,
+
+    updatedAt:
+      Date.now()
+
+  };
+
+
+  // ====================================================
+  // SALVAR ÚLTIMO ESTADO
+  // ====================================================
+
+  localStorage.setItem(
+    "teacherLessonSyncState",
+    JSON.stringify(
+      state
+    )
+  );
+
+
+  // ====================================================
+  // ENVIAR PARA PROFESSOR
+  // ====================================================
+
+  if (
+    teacherSyncChannel
+  ) {
+
+    teacherSyncChannel.postMessage(
+      state
+    );
+
+  }
+
+
+  console.log(
+    "Professor sincronizado:",
+    state
+  );
+
+}
+
+
+
+// ======================================================
+// RECEBER ALTERAÇÃO DO PROFESSOR
+// ======================================================
+
+function handleTeacherCardSync(
+  state
+) {
+
+  if (!state) {
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // SOMENTE MENSAGEM DO PROFESSOR
+  // ====================================================
+
+  if (
+    state.source !==
+    "teacher"
+  ) {
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // SOMENTE LESSON
+  // ====================================================
+
+  if (
+    state.type !==
+    "lesson"
+  ) {
+
+    return;
+
+  }
+
+
+  const content =
+    getCurrentContentInfo();
+
+
+  if (!content) {
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // ALUNO PRECISA ESTAR EM LESSON
+  // ====================================================
+
+  if (
+    content.type !==
+    "lesson"
+  ) {
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // PRECISA SER A MESMA AULA
+  // ====================================================
+
+  if (
+    state.number !==
+    content.number
+  ) {
+
+    console.warn(
+      "Professor enviou card de outra Lesson:",
+      state.number,
+      "Aluno está na:",
+      content.number
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    typeof lessonCards ===
+      "undefined" ||
+    !Array.isArray(
+      lessonCards
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const newCardIndex =
+    Number(
+      state.cardIndex
+    );
+
+
+  // ====================================================
+  // VALIDAR ÍNDICE
+  // ====================================================
+
+  if (
+    !Number.isInteger(
+      newCardIndex
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    newCardIndex < 0 ||
+    newCardIndex >=
+      lessonCards.length
+  ) {
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // JÁ ESTÁ NO MESMO CARD
+  // ====================================================
+
+  if (
+    newCardIndex ===
+    currentIndex
+  ) {
+
+    return;
+
+  }
+
+
+  console.log(
+    "Professor solicitou mudança:",
+    "Card",
+    currentIndex + 1,
+    "→",
+    newCardIndex + 1
+  );
+
+
+  // ====================================================
+  // EVITAR LOOP
+  // ====================================================
+
+  applyingTeacherSync =
+    true;
+
+
+  try {
+
+
+    // ==================================================
+    // CANCELAR SEGMENTO INDIVIDUAL
+    // ==================================================
+
+    if (
+      typeof cancelSegmentPlayback ===
+        "function"
+    ) {
+
+      cancelSegmentPlayback();
+
+    }
+
+
+    // ==================================================
+    // ALTERAR CARD
+    // ==================================================
+
+    currentIndex =
+      newCardIndex;
+
+
+    // ==================================================
+    // SALVAR PROGRESSO
+    // ==================================================
+
+    saveCurrentLessonPosition();
+
+
+    // ==================================================
+    // ATUALIZAR INTERFACE
+    // ==================================================
+
+    updateMainButtons();
+
+
+    if (
+      typeof renderLessonContent ===
+        "function"
+    ) {
+
+      renderLessonContent();
+
+    }
+
+
+    // ==================================================
+    // INICIAR RANGE DO NOVO CARD
+    // ==================================================
+
+    if (
+      typeof playCurrentRange ===
+        "function"
+    ) {
+
+      playCurrentRange();
+
+    }
+
+
+    console.log(
+      "Aluno sincronizado pelo professor:",
+      "Card",
+      currentIndex + 1,
+      "/",
+      lessonCards.length
+    );
+
+
+  }
+
+  finally {
+
+
+    // ==================================================
+    // LIBERAR NOVAS SINCRONIZAÇÕES
+    // ==================================================
+
+    applyingTeacherSync =
+      false;
+
+  }
+
+}
+
+
+
+// ======================================================
+// ESCUTAR PROFESSOR
+// ======================================================
+
+if (
+  teacherSyncChannel
+) {
+
+  teacherSyncChannel.onmessage =
+    function (event) {
+
+      handleTeacherCardSync(
+        event.data
+      );
+
+    };
+
+}
+
+
+
 // ======================================================
 // SALVAR POSIÇÃO ATUAL
 //
@@ -218,10 +560,26 @@ function saveCurrentLessonPosition() {
   }
 
 
-  // Não salvar Review como progresso de aula
+  // ====================================================
+  // NÃO SALVAR REVIEW COMO PROGRESSO DE LESSON
+  // ====================================================
+
   if (
     content.type !==
     "lesson"
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    typeof lessonCards ===
+      "undefined" ||
+    !Array.isArray(
+      lessonCards
+    )
   ) {
 
     return;
@@ -275,9 +633,8 @@ function saveCurrentLessonPosition() {
         cardIndex:
           currentIndex,
 
-
-      totalCards:
-        lessonCards.length
+        totalCards:
+          lessonCards.length
 
       },
       "*"
@@ -292,6 +649,7 @@ function saveCurrentLessonPosition() {
   );
 
 }
+
 
 
 // ======================================================
@@ -313,7 +671,10 @@ function restoreCurrentLessonPosition() {
   }
 
 
-  // Reviews sempre começam no Card 1
+  // ====================================================
+  // REVIEWS SEMPRE COMEÇAM NO CARD 1
+  // ====================================================
+
   if (
     content.type !==
     "lesson"
@@ -385,6 +746,7 @@ function restoreCurrentLessonPosition() {
 }
 
 
+
 // ======================================================
 // INICIALIZAÇÃO
 // ======================================================
@@ -411,6 +773,7 @@ function initializeLesson() {
       "lessonTitle não definido corretamente."
     );
 
+
     return;
 
   }
@@ -429,6 +792,7 @@ function initializeLesson() {
     console.error(
       "currentVideoId não definido."
     );
+
 
     return;
 
@@ -451,6 +815,7 @@ function initializeLesson() {
       "lessonCards não definido corretamente."
     );
 
+
     return;
 
   }
@@ -472,13 +837,14 @@ function initializeLesson() {
       "timeRanges não definido corretamente."
     );
 
+
     return;
 
   }
 
 
   // ====================================================
-  // AVISO DE DIFERENÇA ENTRE CARDS E RANGES
+  // AVISO CARDS X RANGES
   // ====================================================
 
   if (
@@ -489,11 +855,13 @@ function initializeLesson() {
     console.warn(
       "Quantidade de ranges diferente da quantidade de cards.",
       {
+
         cards:
           lessonCards.length,
 
         ranges:
           timeRanges.length
+
       }
     );
 
@@ -525,7 +893,7 @@ function initializeLesson() {
 
   if (
     typeof renderLessonContent ===
-    "function"
+      "function"
   ) {
 
     renderLessonContent();
@@ -540,9 +908,20 @@ function initializeLesson() {
   window.lessonReady =
     true;
 
-    syncTeacherPanel();
 
-    saveCurrentLessonPosition();
+  // ====================================================
+  // SALVAR POSIÇÃO INICIAL
+  // ====================================================
+
+  saveCurrentLessonPosition();
+
+
+  // ====================================================
+  // SINCRONIZAR PROFESSOR
+  // ====================================================
+
+  syncTeacherPanel();
+
 
   console.log(
     "Conteúdo carregado:",
@@ -570,7 +949,7 @@ function initializeLesson() {
 
   if (
     typeof tryInitializePlayer ===
-    "function"
+      "function"
   ) {
 
     tryInitializePlayer();
@@ -578,6 +957,7 @@ function initializeLesson() {
   }
 
 }
+
 
 
 // ======================================================
@@ -653,6 +1033,7 @@ function toggleDevMode() {
 }
 
 
+
 // ======================================================
 // ATUALIZAR BOTÕES
 // ======================================================
@@ -683,12 +1064,16 @@ function updateMainButtons() {
     nextBtn.disabled =
       true;
 
+
     return;
 
   }
 
 
-  // Último card
+  // ====================================================
+  // ÚLTIMO CARD
+  // ====================================================
+
   if (
     currentIndex >=
     lessonCards.length - 1
@@ -697,16 +1082,21 @@ function updateMainButtons() {
     nextBtn.disabled =
       true;
 
+
     return;
 
   }
 
 
-  // DEV libera navegação
+  // ====================================================
+  // DEV LIBERA NAVEGAÇÃO
+  // ====================================================
+
   if (isDevMode) {
 
     nextBtn.disabled =
       false;
+
 
     return;
 
@@ -717,6 +1107,7 @@ function updateMainButtons() {
     true;
 
 }
+
 
 
 // ======================================================
@@ -764,6 +1155,7 @@ function unlockNextButton() {
 }
 
 
+
 // ======================================================
 // BLOQUEAR PRÓXIMO
 // ======================================================
@@ -791,6 +1183,7 @@ function lockNextButton() {
   }
 
 }
+
 
 
 // ======================================================
@@ -821,15 +1214,23 @@ function prevCard() {
   }
 
 
+  // ====================================================
+  // CANCELAR SEGMENTO
+  // ====================================================
+
   if (
     typeof cancelSegmentPlayback ===
-    "function"
+      "function"
   ) {
 
     cancelSegmentPlayback();
 
   }
 
+
+  // ====================================================
+  // ALTERAR CARD
+  // ====================================================
 
   currentIndex--;
 
@@ -838,9 +1239,14 @@ function prevCard() {
   // SALVAR POSIÇÃO
   // ====================================================
 
-  syncTeacherPanel();
-
   saveCurrentLessonPosition();
+
+
+  // ====================================================
+  // SINCRONIZAR PROFESSOR
+  // ====================================================
+
+  syncTeacherPanel();
 
 
   console.log(
@@ -851,12 +1257,16 @@ function prevCard() {
   );
 
 
+  // ====================================================
+  // INTERFACE
+  // ====================================================
+
   updateMainButtons();
 
 
   if (
     typeof renderLessonContent ===
-    "function"
+      "function"
   ) {
 
     renderLessonContent();
@@ -864,9 +1274,13 @@ function prevCard() {
   }
 
 
+  // ====================================================
+  // VÍDEO
+  // ====================================================
+
   if (
     typeof playCurrentRange ===
-    "function"
+      "function"
   ) {
 
     playCurrentRange();
@@ -874,6 +1288,7 @@ function prevCard() {
   }
 
 }
+
 
 
 // ======================================================
@@ -925,14 +1340,19 @@ function nextCard() {
       "Próximo card ainda bloqueado."
     );
 
+
     return;
 
   }
 
 
+  // ====================================================
+  // CANCELAR SEGMENTO
+  // ====================================================
+
   if (
     typeof cancelSegmentPlayback ===
-    "function"
+      "function"
   ) {
 
     cancelSegmentPlayback();
@@ -940,9 +1360,11 @@ function nextCard() {
   }
 
 
-  currentIndex++;
+  // ====================================================
+  // ALTERAR CARD
+  // ====================================================
 
-  syncTeacherPanel();
+  currentIndex++;
 
 
   // ====================================================
@@ -950,6 +1372,13 @@ function nextCard() {
   // ====================================================
 
   saveCurrentLessonPosition();
+
+
+  // ====================================================
+  // SINCRONIZAR PROFESSOR
+  // ====================================================
+
+  syncTeacherPanel();
 
 
   console.log(
@@ -960,12 +1389,16 @@ function nextCard() {
   );
 
 
+  // ====================================================
+  // INTERFACE
+  // ====================================================
+
   updateMainButtons();
 
 
   if (
     typeof renderLessonContent ===
-    "function"
+      "function"
   ) {
 
     renderLessonContent();
@@ -973,9 +1406,13 @@ function nextCard() {
   }
 
 
+  // ====================================================
+  // VÍDEO
+  // ====================================================
+
   if (
     typeof playCurrentRange ===
-    "function"
+      "function"
   ) {
 
     playCurrentRange();
@@ -983,6 +1420,7 @@ function nextCard() {
   }
 
 }
+
 
 
 // ======================================================
@@ -1022,6 +1460,7 @@ function getCurrentRange() {
 }
 
 
+
 // ======================================================
 // CARD ATUAL
 // ======================================================
@@ -1050,6 +1489,7 @@ function getCurrentCard() {
 }
 
 
+
 // ======================================================
 // MARCAR LESSON COMO CONCLUÍDA
 //
@@ -1070,7 +1510,7 @@ function markLessonCompleted() {
 
 
   // ====================================================
-  // REVIEW NÃO MARCA LESSON COMO CONCLUÍDA
+  // REVIEW NÃO CONTA COMO LESSON
   // ====================================================
 
   if (
@@ -1128,7 +1568,7 @@ function markLessonCompleted() {
 
 
   // ====================================================
-  // SALVAR
+  // SALVAR CONCLUSÃO
   // ====================================================
 
   if (
@@ -1158,7 +1598,7 @@ function markLessonCompleted() {
 
 
   // ====================================================
-  // LIMPAR POSIÇÃO SALVA DESSA AULA
+  // LIMPAR POSIÇÃO DA AULA CONCLUÍDA
   // ====================================================
 
   try {
@@ -1222,6 +1662,7 @@ function markLessonCompleted() {
 }
 
 
+
 // ======================================================
 // ESTADO / DEBUG
 // ======================================================
@@ -1270,12 +1711,16 @@ function getLessonState() {
     lessonReady:
       window.lessonReady,
 
+    applyingTeacherSync:
+      applyingTeacherSync,
+
     range:
       getCurrentRange()
 
   };
 
 }
+
 
 
 // ======================================================

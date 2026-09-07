@@ -152,6 +152,9 @@
       gap:
         10px;
 
+      align-items:
+        center;
+
       flex-wrap:
         wrap;
 
@@ -172,6 +175,58 @@
 
       font-weight:
         600;
+
+    }
+
+
+
+    /* ======================================================
+       BOTÕES DE CARD
+    ======================================================= */
+
+    .card-nav-button {
+
+      border:
+        none;
+
+      background:
+        #334155;
+
+      color:
+        white;
+
+      padding:
+        10px 14px;
+
+      border-radius:
+        8px;
+
+      cursor:
+        pointer;
+
+      font-weight:
+        600;
+
+    }
+
+
+
+    .card-nav-button:hover {
+
+      background:
+        #475569;
+
+    }
+
+
+
+    .card-nav-button:disabled {
+
+      opacity:
+        0.4;
+
+      cursor:
+        not-allowed;
 
     }
 
@@ -229,7 +284,7 @@
 
 
     /* ======================================================
-       COLUNAS DO CARD
+       COLUNAS
     ======================================================= */
 
     .lesson-columns {
@@ -480,7 +535,7 @@
 
 
     /* ======================================================
-       NAVEGAÇÃO DO TREINO
+       NAVEGAÇÃO DAS FRASES
     ======================================================= */
 
     .navigation {
@@ -806,12 +861,32 @@
       >
 
 
+        <button
+          type="button"
+          id="prevCardBtn"
+          class="card-nav-button"
+          onclick="previousTeacherCard()"
+        >
+          ← Card
+        </button>
+
+
         <div
           class="counter"
           id="cardCounter"
         >
           Card - / -
         </div>
+
+
+        <button
+          type="button"
+          id="nextCardBtn"
+          class="card-nav-button"
+          onclick="nextTeacherCard()"
+        >
+          Card →
+        </button>
 
 
         <div
@@ -830,7 +905,7 @@
 
 
     <!-- ====================================================
-         MESMO CARD DO ALUNO
+         CARD ATUAL
     ===================================================== -->
 
     <div
@@ -857,7 +932,7 @@
 
 
     <!-- ====================================================
-         TREINO ADICIONAL DO PROFESSOR
+         TREINO DO PROFESSOR
     ===================================================== -->
 
     <div
@@ -987,9 +1062,174 @@
     // ======================================================
 
     const teacherSyncChannel =
-      new BroadcastChannel(
-        "teacherLessonSync"
+      typeof BroadcastChannel !==
+        "undefined"
+        ? new BroadcastChannel(
+            "teacherLessonSync"
+          )
+        : null;
+
+
+
+    // ======================================================
+    // CARD ANTERIOR PELO PROFESSOR
+    // ======================================================
+
+    function previousTeacherCard() {
+
+      if (
+        typeof lessonCards ===
+          "undefined" ||
+        !Array.isArray(
+          lessonCards
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        currentCardIndex <= 0
+      ) {
+
+        return;
+
+      }
+
+
+      currentCardIndex--;
+
+
+      currentPhraseIndex =
+        0;
+
+
+      renderTeacherCard();
+
+
+      sendTeacherCardToStudent();
+
+    }
+
+
+
+    // ======================================================
+    // PRÓXIMO CARD PELO PROFESSOR
+    // ======================================================
+
+    function nextTeacherCard() {
+
+      if (
+        typeof lessonCards ===
+          "undefined" ||
+        !Array.isArray(
+          lessonCards
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        currentCardIndex >=
+        lessonCards.length - 1
+      ) {
+
+        return;
+
+      }
+
+
+      currentCardIndex++;
+
+
+      currentPhraseIndex =
+        0;
+
+
+      renderTeacherCard();
+
+
+      sendTeacherCardToStudent();
+
+    }
+
+
+
+    // ======================================================
+    // ENVIAR CARD PARA O ALUNO
+    // ======================================================
+
+    function sendTeacherCardToStudent() {
+
+      if (
+        typeof lessonCards ===
+          "undefined" ||
+        !Array.isArray(
+          lessonCards
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      const state = {
+
+        source:
+          "teacher",
+
+        type:
+          "lesson",
+
+        number:
+          currentTeacherLesson,
+
+        cardIndex:
+          currentCardIndex,
+
+        currentCard:
+          currentCardIndex + 1,
+
+        totalCards:
+          lessonCards.length,
+
+        updatedAt:
+          Date.now()
+
+      };
+
+
+      localStorage.setItem(
+        "teacherLessonSyncState",
+        JSON.stringify(
+          state
+        )
       );
+
+
+      if (
+        teacherSyncChannel
+      ) {
+
+        teacherSyncChannel.postMessage(
+          state
+        );
+
+      }
+
+
+      console.log(
+        "Professor alterou card:",
+        state
+      );
+
+    }
 
 
 
@@ -998,7 +1238,6 @@
     // ======================================================
 
     function loadTeacherLesson() {
-
 
       const params =
         new URLSearchParams(
@@ -1050,7 +1289,6 @@
       script.onload =
         function () {
 
-
           console.log(
             `Lesson ${lesson} carregada no professor.`
           );
@@ -1063,7 +1301,6 @@
 
       script.onerror =
         function () {
-
 
           showError(
             `Não foi possível carregar lesson${lesson}.js`
@@ -1085,7 +1322,6 @@
     // ======================================================
 
     function initializeTeacherPanel() {
-
 
       if (
         typeof lessonTitle !==
@@ -1126,8 +1362,12 @@
         );
 
 
-      title.textContent =
-        `${lessonTitle} - Professor`;
+      if (title) {
+
+        title.textContent =
+          `${lessonTitle} - Professor`;
+
+      }
 
 
       document.title =
@@ -1136,7 +1376,7 @@
 
 
       // ====================================================
-      // PEGAR ÚLTIMO ESTADO DO ALUNO
+      // PEGAR ÚLTIMO ESTADO
       // ====================================================
 
       const savedState =
@@ -1145,7 +1385,8 @@
 
       if (
         savedState &&
-        savedState.type === "lesson" &&
+        savedState.type ===
+          "lesson" &&
         savedState.number ===
           currentTeacherLesson
       ) {
@@ -1164,11 +1405,6 @@
 
       }
 
-
-
-      // ====================================================
-      // VALIDAR CARD
-      // ====================================================
 
       if (
         currentCardIndex < 0 ||
@@ -1194,9 +1430,7 @@
 
     function getLastTeacherSyncState() {
 
-
       try {
-
 
         return JSON.parse(
           localStorage.getItem(
@@ -1204,11 +1438,9 @@
           )
         );
 
-
       }
 
       catch (error) {
-
 
         console.warn(
           "Erro ao ler sincronização:",
@@ -1228,15 +1460,20 @@
     // RECEBER SINCRONIZAÇÃO
     // ======================================================
 
-    teacherSyncChannel.onmessage =
-      function (event) {
+    if (
+      teacherSyncChannel
+    ) {
 
+      teacherSyncChannel.onmessage =
+        function (event) {
 
-        handleTeacherSync(
-          event.data
-        );
+          handleTeacherSync(
+            event.data
+          );
 
-      };
+        };
+
+    }
 
 
 
@@ -1248,7 +1485,6 @@
       state
     ) {
 
-
       if (!state) {
 
         return;
@@ -1257,8 +1493,18 @@
 
 
       if (
+        state.source !==
+          "student"
+      ) {
+
+        return;
+
+      }
+
+
+      if (
         state.type !==
-        "lesson"
+          "lesson"
       ) {
 
         return;
@@ -1267,10 +1513,9 @@
 
 
       console.log(
-        "Sincronização recebida:",
+        "Sincronização recebida do aluno:",
         state
       );
-
 
 
       // ====================================================
@@ -1283,7 +1528,6 @@
           currentTeacherLesson
       ) {
 
-
         window.location.href =
           `professor.html?lesson=${state.number}`;
 
@@ -1291,7 +1535,6 @@
         return;
 
       }
-
 
 
       // ====================================================
@@ -1328,15 +1571,10 @@
       }
 
 
-      // ====================================================
-      // CARD MUDOU
-      // ====================================================
-
       if (
         newCardIndex !==
         currentCardIndex
       ) {
-
 
         currentCardIndex =
           newCardIndex;
@@ -1350,9 +1588,7 @@
 
       }
 
-
       else {
-
 
         updateCardCounter();
 
@@ -1368,7 +1604,6 @@
 
     function renderTeacherCard() {
 
-
       const card =
         lessonCards[
           currentCardIndex
@@ -1382,29 +1617,23 @@
       }
 
 
-      // ====================================================
-      // TÍTULO
-      // ====================================================
-
-      document.getElementById(
-        "lessonCardTitle"
-      ).textContent =
-        card.title ||
-        `Card ${currentCardIndex + 1}`;
+      const title =
+        document.getElementById(
+          "lessonCardTitle"
+        );
 
 
+      if (title) {
 
-      // ====================================================
-      // CONTADOR
-      // ====================================================
+        title.textContent =
+          card.title ||
+          `Card ${currentCardIndex + 1}`;
+
+      }
+
 
       updateCardCounter();
 
-
-
-      // ====================================================
-      // CONTEÚDO
-      // ====================================================
 
       const content =
         document.getElementById(
@@ -1412,20 +1641,21 @@
         );
 
 
+      if (!content) {
+
+        return;
+
+      }
+
+
       content.innerHTML =
         "";
 
-
-
-      // ====================================================
-      // LISTENING
-      // ====================================================
 
       if (
         card.type ===
           "listening"
       ) {
-
 
         renderListeningCard(
           card,
@@ -1434,13 +1664,7 @@
 
       }
 
-
-      // ====================================================
-      // CARD NORMAL
-      // ====================================================
-
       else {
-
 
         renderNormalCard(
           card,
@@ -1450,11 +1674,6 @@
       }
 
 
-
-      // ====================================================
-      // TREINO DO PROFESSOR
-      // ====================================================
-
       loadTeacherPracticeForCurrentCard();
 
     }
@@ -1462,11 +1681,10 @@
 
 
     // ======================================================
-    // CONTADOR DO CARD
+    // CONTADOR / BOTÕES DOS CARDS
     // ======================================================
 
     function updateCardCounter() {
-
 
       const counter =
         document.getElementById(
@@ -1474,15 +1692,55 @@
         );
 
 
-      if (!counter) {
+      const prevButton =
+        document.getElementById(
+          "prevCardBtn"
+        );
 
-        return;
+
+      const nextButton =
+        document.getElementById(
+          "nextCardBtn"
+        );
+
+
+      if (
+        counter &&
+        typeof lessonCards !==
+          "undefined" &&
+        Array.isArray(
+          lessonCards
+        )
+      ) {
+
+        counter.textContent =
+          `Card ${currentCardIndex + 1} de ${lessonCards.length}`;
 
       }
 
 
-      counter.textContent =
-        `Card ${currentCardIndex + 1} de ${lessonCards.length}`;
+      if (prevButton) {
+
+        prevButton.disabled =
+          currentCardIndex <= 0;
+
+      }
+
+
+      if (
+        nextButton &&
+        typeof lessonCards !==
+          "undefined" &&
+        Array.isArray(
+          lessonCards
+        )
+      ) {
+
+        nextButton.disabled =
+          currentCardIndex >=
+          lessonCards.length - 1;
+
+      }
 
     }
 
@@ -1496,7 +1754,6 @@
       card,
       container
     ) {
-
 
       const grid =
         document.createElement(
@@ -1527,7 +1784,6 @@
       card.columns.forEach(
         function (columnData) {
 
-
           const column =
             document.createElement(
               "div"
@@ -1556,7 +1812,6 @@
 
           columnData.forEach(
             function (item) {
-
 
               if (
                 !Array.isArray(
@@ -1609,7 +1864,6 @@
 
 
               if (portuguese) {
-
 
                 const portugueseElement =
                   document.createElement(
@@ -1665,7 +1919,6 @@
       container
     ) {
 
-
       const list =
         document.createElement(
           "div"
@@ -1682,10 +1935,8 @@
         )
       ) {
 
-
         card.segments.forEach(
           function (segment) {
-
 
             const row =
               document.createElement(
@@ -1726,7 +1977,6 @@
 
     function loadTeacherPracticeForCurrentCard() {
 
-
       const practiceContainer =
         document.getElementById(
           "teacherPracticeContainer"
@@ -1739,13 +1989,15 @@
         );
 
 
+      const contentCounter =
+        document.getElementById(
+          "contentCounter"
+        );
+
+
       currentPractice =
         [];
 
-
-      // ====================================================
-      // EXISTE teacherPracticeByCard?
-      // ====================================================
 
       if (
         typeof teacherPracticeByCard !==
@@ -1758,39 +2010,41 @@
         )
       ) {
 
-
         currentPractice =
           teacherPracticeByCard[
             currentCardIndex
           ];
 
-
       }
 
-
-
-      // ====================================================
-      // SEM TREINO
-      // ====================================================
 
       if (
         currentPractice.length ===
         0
       ) {
 
+        if (practiceContainer) {
 
-        practiceContainer.style.display =
-          "none";
+          practiceContainer.style.display =
+            "none";
+
+        }
 
 
-        noPractice.style.display =
-          "block";
+        if (noPractice) {
+
+          noPractice.style.display =
+            "block";
+
+        }
 
 
-        document.getElementById(
-          "contentCounter"
-        ).textContent =
-          "Sem treino extra";
+        if (contentCounter) {
+
+          contentCounter.textContent =
+            "Sem treino extra";
+
+        }
 
 
         return;
@@ -1798,23 +2052,28 @@
       }
 
 
+      if (practiceContainer) {
 
-      // ====================================================
-      // COM TREINO
-      // ====================================================
+        practiceContainer.style.display =
+          "block";
 
-      practiceContainer.style.display =
-        "block";
-
-
-      noPractice.style.display =
-        "none";
+      }
 
 
-      document.getElementById(
-        "contentCounter"
-      ).textContent =
-        `${currentPractice.length} treinos`;
+      if (noPractice) {
+
+        noPractice.style.display =
+          "none";
+
+      }
+
+
+      if (contentCounter) {
+
+        contentCounter.textContent =
+          `${currentPractice.length} treinos`;
+
+      }
 
 
       currentPhraseIndex =
@@ -1835,7 +2094,6 @@
     // ======================================================
 
     function renderCurrentPhrase() {
-
 
       if (
         !Array.isArray(
@@ -1871,32 +2129,64 @@
       }
 
 
-      document.getElementById(
-        "currentPhrase"
-      ).textContent =
-        currentPractice[
-          currentPhraseIndex
-        ];
+      const currentPhrase =
+        document.getElementById(
+          "currentPhrase"
+        );
 
 
-      document.getElementById(
-        "phraseCounter"
-      ).textContent =
-        `${currentPhraseIndex + 1} / ${currentPractice.length}`;
+      const phraseCounter =
+        document.getElementById(
+          "phraseCounter"
+        );
 
 
-      document.getElementById(
-        "prevPhraseBtn"
-      ).disabled =
-        currentPhraseIndex ===
-        0;
+      const prevPhraseBtn =
+        document.getElementById(
+          "prevPhraseBtn"
+        );
 
 
-      document.getElementById(
-        "nextPhraseBtn"
-      ).disabled =
-        currentPhraseIndex >=
-        currentPractice.length - 1;
+      const nextPhraseBtn =
+        document.getElementById(
+          "nextPhraseBtn"
+        );
+
+
+      if (currentPhrase) {
+
+        currentPhrase.textContent =
+          currentPractice[
+            currentPhraseIndex
+          ];
+
+      }
+
+
+      if (phraseCounter) {
+
+        phraseCounter.textContent =
+          `${currentPhraseIndex + 1} / ${currentPractice.length}`;
+
+      }
+
+
+      if (prevPhraseBtn) {
+
+        prevPhraseBtn.disabled =
+          currentPhraseIndex ===
+          0;
+
+      }
+
+
+      if (nextPhraseBtn) {
+
+        nextPhraseBtn.disabled =
+          currentPhraseIndex >=
+          currentPractice.length - 1;
+
+      }
 
 
       updateActivePracticeItem();
@@ -1911,11 +2201,17 @@
 
     function renderPracticeList() {
 
-
       const container =
         document.getElementById(
           "practiceList"
         );
+
+
+      if (!container) {
+
+        return;
+
+      }
 
 
       container.innerHTML =
@@ -1927,7 +2223,6 @@
           text,
           index
         ) {
-
 
           const row =
             document.createElement(
@@ -1984,7 +2279,6 @@
             "click",
             function () {
 
-
               currentPhraseIndex =
                 index;
 
@@ -2015,7 +2309,6 @@
 
     function updateActivePracticeItem() {
 
-
       const items =
         document.querySelectorAll(
           ".practice-item"
@@ -2024,7 +2317,6 @@
 
       items.forEach(
         function (item) {
-
 
           item.classList.remove(
             "active"
@@ -2041,7 +2333,6 @@
 
 
       if (active) {
-
 
         active.classList.add(
           "active"
@@ -2072,7 +2363,6 @@
 
     function previousPhrase() {
 
-
       if (
         currentPractice.length ===
           0 ||
@@ -2100,7 +2390,6 @@
 
     function nextPhrase() {
 
-
       if (
         currentPractice.length ===
           0 ||
@@ -2125,18 +2414,18 @@
     // ======================================================
     // TECLADO
     //
-    // IMPORTANTE:
+    // SETAS CONTROLAM SOMENTE AS FRASES DE TREINO.
     //
-    // AS SETAS CONTROLAM APENAS AS FRASES DE TREINO.
-    // NÃO MUDAM O CARD DO PROFESSOR.
+    // OS CARDS PODEM SER CONTROLADOS:
+    // - PELO ALUNO
+    // - PELO PROFESSOR
     //
-    // O CARD É CONTROLADO PELO ALUNO.
+    // SINCRONIZAÇÃO BIDIRECIONAL.
     // ======================================================
 
     document.addEventListener(
       "keydown",
       function (event) {
-
 
         const target =
           event.target;
@@ -2165,7 +2454,6 @@
           "ArrowLeft"
         ) {
 
-
           event.preventDefault();
 
 
@@ -2178,7 +2466,6 @@
           event.key ===
           "ArrowRight"
         ) {
-
 
           event.preventDefault();
 
@@ -2199,7 +2486,6 @@
     function showError(
       message
     ) {
-
 
       const container =
         document.querySelector(
