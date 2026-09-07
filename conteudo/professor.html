@@ -949,6 +949,46 @@
       </div>
 
 
+      <!-- ====================================================
+     SELEÇÃO DE LESSON
+===================================================== -->
+
+<div
+  style="
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  "
+>
+
+  <span
+    style="
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 600;
+    "
+  >
+    Aula:
+  </span>
+
+
+  <select
+    id="teacherLessonSelect"
+    onchange="changeTeacherLesson(this.value)"
+    style="
+      background: #1e293b;
+      color: white;
+      border: 1px solid #475569;
+      padding: 9px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    "
+  >
+  </select>
+
+</div>
 
       <div
         class="counter-group"
@@ -1566,7 +1606,76 @@
       );
 
     }
+// ======================================================
+// CRIAR LISTA DE LESSONS
+// ======================================================
 
+function createTeacherLessonSelector() {
+
+  const select =
+    document.getElementById(
+      "teacherLessonSelect"
+    );
+
+
+  if (!select) {
+
+    return;
+
+  }
+
+
+  select.innerHTML =
+    "";
+
+
+  for (
+    let number = 1;
+    number <= 60;
+    number++
+  ) {
+
+    const lesson =
+      String(
+        number
+      ).padStart(
+        2,
+        "0"
+      );
+
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+
+    option.value =
+      lesson;
+
+
+    option.textContent =
+      `Lesson ${lesson}`;
+
+
+    if (
+      lesson ===
+      currentTeacherLesson
+    ) {
+
+      option.selected =
+        true;
+
+    }
+
+
+    select.appendChild(
+      option
+    );
+
+  }
+
+}
 
 
     // ======================================================
@@ -1692,12 +1801,119 @@
       // RENDERIZAR
       // ====================================================
 
+      createTeacherLessonSelector();
+
       renderTeacherCard();
 
     }
 
 
+// ======================================================
+// PROFESSOR ALTERAR LESSON
+// ======================================================
 
+function changeTeacherLesson(
+  lesson
+) {
+
+  lesson =
+    String(
+      lesson
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  if (
+    lesson ===
+    currentTeacherLesson
+  ) {
+
+    return;
+
+  }
+
+
+  console.log(
+    "Professor alterando Lesson:",
+    currentTeacherLesson,
+    "→",
+    lesson
+  );
+
+
+  // ====================================================
+  // ENVIAR ORDEM AO ALUNO
+  // ====================================================
+
+  const state = {
+
+    source:
+      "teacher",
+
+    type:
+      "LESSON_CHANGE",
+
+    lesson:
+      lesson,
+
+    cardIndex:
+      0,
+
+    updatedAt:
+      Date.now()
+
+  };
+
+
+  if (
+    teacherSyncChannel
+  ) {
+
+    teacherSyncChannel.postMessage(
+      state
+    );
+
+  }
+
+
+  localStorage.setItem(
+    "teacherLessonSyncState",
+    JSON.stringify(
+      {
+
+        source:
+          "teacher",
+
+        type:
+          "lesson",
+
+        number:
+          lesson,
+
+        cardIndex:
+          0,
+
+        currentCard:
+          1,
+
+        updatedAt:
+          Date.now()
+
+      }
+    )
+  );
+
+
+  // ====================================================
+  // TROCAR A PRÓPRIA TELA DO PROFESSOR
+  // ====================================================
+
+  window.location.href =
+    `professor.html?lesson=${lesson}`;
+
+}
     // ======================================================
     // PEGAR ÚLTIMO ESTADO
     // ======================================================
