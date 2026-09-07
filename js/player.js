@@ -10,6 +10,7 @@
 let player = null;
 
 
+
 // ======================================================
 // ESTADO DE CARREGAMENTO
 // ======================================================
@@ -17,11 +18,13 @@ let player = null;
 let youtubeApiReady = false;
 
 
+
 // ======================================================
 // CONTROLE DO RANGE PRINCIPAL
 // ======================================================
 
 let rangeMonitor = null;
+
 
 
 // ======================================================
@@ -37,6 +40,7 @@ let currentSegmentStart = null;
 let currentSegmentEnd = null;
 
 
+
 // ======================================================
 // CONTROLE DE BUFFERING
 // ======================================================
@@ -47,9 +51,598 @@ let recoveryAttempts = 0;
 
 let lastKnownTime = 0;
 
+
 const BUFFER_TIMEOUT = 5000;
 
 const MAX_RECOVERY_ATTEMPTS = 3;
+
+
+
+// ======================================================
+// VELOCIDADE ATUAL
+// ======================================================
+
+let currentPlaybackRate = 1;
+
+
+
+// ======================================================
+// CANAL DE CONTROLE DO PROFESSOR
+//
+// IMPORTANTE:
+//
+// engine.js também utiliza o canal:
+// teacherLessonSync
+//
+// Aqui utilizamos OUTRO objeto BroadcastChannel
+// com o mesmo nome.
+//
+// Assim:
+// - engine.js recebe comandos de CARD
+// - player.js recebe comandos de PLAYER
+// ======================================================
+
+const playerControlChannel =
+  typeof BroadcastChannel !==
+    "undefined"
+    ? new BroadcastChannel(
+        "teacherLessonSync"
+      )
+    : null;
+
+
+
+// ======================================================
+// RECEBER COMANDO DO PROFESSOR
+// ======================================================
+
+if (
+  playerControlChannel
+) {
+
+  playerControlChannel.onmessage =
+    function (event) {
+
+      const data =
+        event.data;
+
+
+      if (!data) {
+
+        return;
+
+      }
+
+
+      // ==================================================
+      // SOMENTE COMANDO DO PROFESSOR
+      // ==================================================
+
+      if (
+        data.source !==
+        "teacher"
+      ) {
+
+        return;
+
+      }
+
+
+      // ==================================================
+      // SOMENTE PLAYER COMMAND
+      // ==================================================
+
+      if (
+        data.type !==
+        "PLAYER_COMMAND"
+      ) {
+
+        return;
+
+      }
+
+
+      // ==================================================
+      // VALIDAR LESSON
+      // ==================================================
+
+      if (
+        !isPlayerCommandForCurrentLesson(
+          data
+        )
+      ) {
+
+        console.warn(
+          "Comando ignorado. Pertence a outra Lesson.",
+          data.lesson
+        );
+
+
+        return;
+
+      }
+
+
+      console.log(
+        "Comando recebido do professor:",
+        data
+      );
+
+
+      executeTeacherPlayerCommand(
+        data.command,
+        data.value
+      );
+
+    };
+
+}
+
+
+
+// ======================================================
+// VERIFICAR SE O COMANDO É DA LESSON ATUAL
+// ======================================================
+
+function isPlayerCommandForCurrentLesson(
+  data
+) {
+
+  // ====================================================
+  // SEM LESSON NO COMANDO
+  //
+  // Aceitar por compatibilidade.
+  // ====================================================
+
+  if (
+    !data.lesson
+  ) {
+
+    return true;
+
+  }
+
+
+  // ====================================================
+  // USAR FUNÇÃO DO ENGINE
+  // ====================================================
+
+  if (
+    typeof getCurrentContentInfo ===
+      "function"
+  ) {
+
+    const content =
+      getCurrentContentInfo();
+
+
+    if (!content) {
+
+      return false;
+
+    }
+
+
+    if (
+      content.type !==
+      "lesson"
+    ) {
+
+      return false;
+
+    }
+
+
+    return (
+      content.number ===
+      String(
+        data.lesson
+      ).padStart(
+        2,
+        "0"
+      )
+    );
+
+  }
+
+
+  return true;
+
+}
+
+
+
+// ======================================================
+// EXECUTAR COMANDO DO PROFESSOR
+// ======================================================
+
+function executeTeacherPlayerCommand(
+  command,
+  value
+) {
+
+  if (
+    !player
+  ) {
+
+    console.warn(
+      "Player ainda não está pronto."
+    );
+
+
+    return;
+
+  }
+
+
+  // ====================================================
+  // VOLTAR 5 SEGUNDOS
+  // ====================================================
+
+  if (
+    command ===
+    "BACK_5"
+  ) {
+
+    teacherBack5Seconds();
+
+
+    return;
+
+  }
+
+
+
+  // ====================================================
+  // PAUSAR / CONTINUAR
+  // ====================================================
+
+  if (
+    command ===
+    "TOGGLE_PLAY"
+  ) {
+
+    teacherTogglePlay();
+
+
+    return;
+
+  }
+
+
+
+  // ====================================================
+  // ALTERAR VELOCIDADE
+  // ====================================================
+
+  if (
+    command ===
+    "SET_SPEED"
+  ) {
+
+    teacherSetPlaybackRate(
+      value
+    );
+
+
+    return;
+
+  }
+
+
+
+  // ====================================================
+  // COMANDO DESCONHECIDO
+  // ====================================================
+
+  console.warn(
+    "Comando do professor desconhecido:",
+    command
+  );
+
+}
+
+
+
+// ======================================================
+// PROFESSOR - VOLTAR 5 SEGUNDOS
+// ======================================================
+
+function teacherBack5Seconds() {
+
+  if (
+    !player ||
+    typeof player.getCurrentTime !==
+      "function" ||
+    typeof player.seekTo !==
+      "function"
+  ) {
+
+    return;
+
+  }
+
+
+  const currentTime =
+    Number(
+      player.getCurrentTime()
+    );
+
+
+  if (
+    !Number.isFinite(
+      currentTime
+    )
+  ) {
+
+    return;
+
+  }
+
+
+
+  // ====================================================
+  // NÃO VOLTAR PARA O CARD ANTERIOR
+  //
+  // O limite inferior será o início do range atual.
+  // ====================================================
+
+  let minimumTime = 0;
+
+
+  if (
+    typeof getCurrentRange ===
+      "function"
+  ) {
+
+    const range =
+      getCurrentRange();
+
+
+    if (
+      range &&
+      Number.isFinite(
+        Number(
+          range.start
+        )
+      )
+    ) {
+
+      minimumTime =
+        Number(
+          range.start
+        );
+
+    }
+
+  }
+
+
+  const newTime =
+    Math.max(
+      minimumTime,
+      currentTime - 5
+    );
+
+
+  player.seekTo(
+    newTime,
+    true
+  );
+
+
+  lastKnownTime =
+    newTime;
+
+
+  console.log(
+    "Professor voltou 5 segundos:",
+    currentTime,
+    "→",
+    newTime
+  );
+
+}
+
+
+
+// ======================================================
+// PROFESSOR - PAUSAR / CONTINUAR
+// ======================================================
+
+function teacherTogglePlay() {
+
+  if (
+    !player ||
+    typeof player.getPlayerState !==
+      "function"
+  ) {
+
+    return;
+
+  }
+
+
+  const state =
+    player.getPlayerState();
+
+
+
+  // ====================================================
+  // ESTÁ TOCANDO
+  // ====================================================
+
+  if (
+    state ===
+    YT.PlayerState.PLAYING
+  ) {
+
+    if (
+      typeof player.pauseVideo ===
+        "function"
+    ) {
+
+      player.pauseVideo();
+
+    }
+
+
+    console.log(
+      "Vídeo pausado pelo professor."
+    );
+
+
+    return;
+
+  }
+
+
+
+  // ====================================================
+  // PAUSADO / CUED / OUTRO ESTADO
+  // ====================================================
+
+  if (
+    typeof player.playVideo ===
+      "function"
+  ) {
+
+    player.playVideo();
+
+  }
+
+
+  console.log(
+    "Vídeo retomado pelo professor."
+  );
+
+}
+
+
+
+// ======================================================
+// PROFESSOR - VELOCIDADE
+// ======================================================
+
+function teacherSetPlaybackRate(
+  value
+) {
+
+  const rate =
+    Number(
+      value
+    );
+
+
+  // ====================================================
+  // VELOCIDADES PERMITIDAS
+  // ====================================================
+
+  const allowedRates = [
+
+    0.5,
+
+    0.75,
+
+    1,
+
+    1.25
+
+  ];
+
+
+  if (
+    !allowedRates.includes(
+      rate
+    )
+  ) {
+
+    console.warn(
+      "Velocidade inválida:",
+      value
+    );
+
+
+    return;
+
+  }
+
+
+  if (
+    !player ||
+    typeof player.setPlaybackRate !==
+      "function"
+  ) {
+
+    console.warn(
+      "Player não permite alterar velocidade."
+    );
+
+
+    return;
+
+  }
+
+
+
+  // ====================================================
+  // VERIFICAR VELOCIDADES DISPONÍVEIS
+  // ====================================================
+
+  if (
+    typeof player.getAvailablePlaybackRates ===
+      "function"
+  ) {
+
+    const availableRates =
+      player.getAvailablePlaybackRates();
+
+
+    if (
+      Array.isArray(
+        availableRates
+      ) &&
+      availableRates.length > 0 &&
+      !availableRates.includes(
+        rate
+      )
+    ) {
+
+      console.warn(
+        "Velocidade não disponível neste vídeo:",
+        rate,
+        availableRates
+      );
+
+
+      return;
+
+    }
+
+  }
+
+
+
+  // ====================================================
+  // APLICAR
+  // ====================================================
+
+  player.setPlaybackRate(
+    rate
+  );
+
+
+  currentPlaybackRate =
+    rate;
+
+
+  console.log(
+    "Velocidade alterada pelo professor:",
+    `${rate}x`
+  );
+
+}
+
 
 
 // ======================================================
@@ -63,12 +656,14 @@ function onYouTubeIframeAPIReady() {
   );
 
 
-  youtubeApiReady = true;
+  youtubeApiReady =
+    true;
 
 
   tryInitializePlayer();
 
 }
+
 
 
 // ======================================================
@@ -77,19 +672,24 @@ function onYouTubeIframeAPIReady() {
 
 function tryInitializePlayer() {
 
+
   // ====================================================
   // API AINDA NÃO CARREGOU
   // ====================================================
 
-  if (!youtubeApiReady) {
+  if (
+    !youtubeApiReady
+  ) {
 
     console.log(
       "Aguardando API do YouTube..."
     );
 
+
     return;
 
   }
+
 
 
   // ====================================================
@@ -104,24 +704,30 @@ function tryInitializePlayer() {
       "Aguardando conteúdo da aula..."
     );
 
+
     return;
 
   }
+
 
 
   // ====================================================
   // PLAYER JÁ EXISTE
   // ====================================================
 
-  if (player) {
+  if (
+    player
+  ) {
 
     console.log(
       "Player já inicializado."
     );
 
+
     return;
 
   }
+
 
 
   // ====================================================
@@ -137,6 +743,7 @@ function tryInitializePlayer() {
     console.error(
       "currentVideoId não definido."
     );
+
 
     return;
 
@@ -184,6 +791,9 @@ function tryInitializePlayer() {
           onStateChange:
             onPlayerStateChange,
 
+          onPlaybackRateChange:
+            onPlaybackRateChange,
+
           onError:
             onPlayerError
 
@@ -193,6 +803,7 @@ function tryInitializePlayer() {
     );
 
 }
+
 
 
 // ======================================================
@@ -217,8 +828,27 @@ function onPlayerReady() {
   }
 
 
+
   // ====================================================
-  // INICIAR PRIMEIRO RANGE
+  // APLICAR VELOCIDADE PADRÃO
+  // ====================================================
+
+  if (
+    player &&
+    typeof player.setPlaybackRate ===
+      "function"
+  ) {
+
+    player.setPlaybackRate(
+      currentPlaybackRate
+    );
+
+  }
+
+
+
+  // ====================================================
+  // INICIAR RANGE
   // ====================================================
 
   setTimeout(
@@ -233,6 +863,42 @@ function onPlayerReady() {
 }
 
 
+
+// ======================================================
+// ALTERAÇÃO DA VELOCIDADE
+// ======================================================
+
+function onPlaybackRateChange(
+  event
+) {
+
+  const rate =
+    Number(
+      event.data
+    );
+
+
+  if (
+    Number.isFinite(
+      rate
+    )
+  ) {
+
+    currentPlaybackRate =
+      rate;
+
+
+    console.log(
+      "Velocidade atual:",
+      `${rate}x`
+    );
+
+  }
+
+}
+
+
+
 // ======================================================
 // EVENTOS DO PLAYER
 // ======================================================
@@ -240,6 +906,7 @@ function onPlayerReady() {
 function onPlayerStateChange(
   event
 ) {
+
 
   // ====================================================
   // PLAYING
@@ -280,6 +947,7 @@ function onPlayerStateChange(
   }
 
 
+
   // ====================================================
   // BUFFERING
   // ====================================================
@@ -311,6 +979,7 @@ function onPlayerStateChange(
   }
 
 
+
   // ====================================================
   // ENDED
   // ====================================================
@@ -322,11 +991,13 @@ function onPlayerStateChange(
 
     stopRangeMonitor();
 
+
     cancelSegmentPlayback();
 
   }
 
 }
+
 
 
 // ======================================================
@@ -359,6 +1030,7 @@ function startBufferRecovery() {
           player.getPlayerState();
 
 
+
         // ==================================================
         // JÁ SAIU DO BUFFERING
         // ==================================================
@@ -382,6 +1054,7 @@ function startBufferRecovery() {
           "/",
           MAX_RECOVERY_ATTEMPTS
         );
+
 
 
         // ==================================================
@@ -456,6 +1129,7 @@ function startBufferRecovery() {
         }
 
 
+
         // ==================================================
         // FALHOU
         // ==================================================
@@ -480,6 +1154,7 @@ function startBufferRecovery() {
 }
 
 
+
 // ======================================================
 // ERRO DO PLAYER
 // ======================================================
@@ -501,6 +1176,7 @@ function onPlayerError(
 }
 
 
+
 // ======================================================
 // REPRODUZIR RANGE PRINCIPAL
 // ======================================================
@@ -517,6 +1193,7 @@ function playCurrentRange() {
       "Player ainda não está pronto."
     );
 
+
     return;
 
   }
@@ -531,6 +1208,7 @@ function playCurrentRange() {
       "getCurrentRange() não encontrada."
     );
 
+
     return;
 
   }
@@ -540,15 +1218,19 @@ function playCurrentRange() {
     getCurrentRange();
 
 
-  if (!range) {
+  if (
+    !range
+  ) {
 
     console.warn(
       "Range atual não encontrado."
     );
 
+
     return;
 
   }
+
 
 
   // ====================================================
@@ -556,6 +1238,7 @@ function playCurrentRange() {
   // ====================================================
 
   cancelSegmentPlayback();
+
 
 
   // ====================================================
@@ -573,6 +1256,7 @@ function playCurrentRange() {
   );
 
 
+
   // ====================================================
   // BLOQUEAR PRÓXIMO
   // ====================================================
@@ -587,6 +1271,7 @@ function playCurrentRange() {
   }
 
 
+
   // ====================================================
   // SEEK
   // ====================================================
@@ -599,7 +1284,26 @@ function playCurrentRange() {
   );
 
 
+
+  // ====================================================
+  // PRESERVAR VELOCIDADE
+  // ====================================================
+
+  if (
+    typeof player.setPlaybackRate ===
+      "function"
+  ) {
+
+    player.setPlaybackRate(
+      currentPlaybackRate
+    );
+
+  }
+
+
+
   player.playVideo();
+
 
 
   // ====================================================
@@ -613,6 +1317,7 @@ function playCurrentRange() {
   );
 
 }
+
 
 
 // ======================================================
@@ -637,6 +1342,7 @@ function startRangeMonitor(
       endTime
     );
 
+
     return;
 
   }
@@ -659,6 +1365,7 @@ function startRangeMonitor(
         }
 
 
+
         // ==================================================
         // NÃO INTERFERIR DURANTE SEGMENTO
         // ==================================================
@@ -674,6 +1381,7 @@ function startRangeMonitor(
 
         const state =
           player.getPlayerState();
+
 
 
         // ==================================================
@@ -706,6 +1414,7 @@ function startRangeMonitor(
         }
 
 
+
         // ==================================================
         // FIM DO RANGE
         // ==================================================
@@ -721,8 +1430,9 @@ function startRangeMonitor(
           stopRangeMonitor();
 
 
+
           // =================================================
-          // VERIFICAR SE É ÚLTIMO CARD
+          // VERIFICAR ÚLTIMO CARD
           // =================================================
 
           const isLastCard =
@@ -739,6 +1449,7 @@ function startRangeMonitor(
 
             currentIndex ===
               lessonCards.length - 1;
+
 
 
           // =================================================
@@ -774,8 +1485,9 @@ function startRangeMonitor(
           }
 
 
+
           // =================================================
-          // AINDA EXISTEM OUTROS CARDS
+          // LIBERAR PRÓXIMO
           // =================================================
 
           if (
@@ -801,6 +1513,7 @@ function startRangeMonitor(
 }
 
 
+
 // ======================================================
 // PARAR MONITOR DO RANGE
 // ======================================================
@@ -824,6 +1537,7 @@ function stopRangeMonitor() {
 }
 
 
+
 // ======================================================
 // REPRODUZIR SEGMENTO
 // ======================================================
@@ -843,17 +1557,23 @@ function playSegment(
       "Player ainda não está pronto."
     );
 
+
     return;
 
   }
 
 
   start =
-    Number(start);
+    Number(
+      start
+    );
 
 
   end =
-    Number(end);
+    Number(
+      end
+    );
+
 
 
   // ====================================================
@@ -876,9 +1596,11 @@ function playSegment(
       end
     );
 
+
     return;
 
   }
+
 
 
   // ====================================================
@@ -908,6 +1630,7 @@ function playSegment(
   );
 
 
+
   // ====================================================
   // SEEK
   // ====================================================
@@ -918,7 +1641,25 @@ function playSegment(
   );
 
 
+
+  // ====================================================
+  // PRESERVAR VELOCIDADE
+  // ====================================================
+
+  if (
+    typeof player.setPlaybackRate ===
+      "function"
+  ) {
+
+    player.setPlaybackRate(
+      currentPlaybackRate
+    );
+
+  }
+
+
   player.playVideo();
+
 
 
   // ====================================================
@@ -944,6 +1685,7 @@ function playSegment(
 
         const state =
           player.getPlayerState();
+
 
 
         // ==================================================
@@ -974,6 +1716,7 @@ function playSegment(
             currentTime;
 
         }
+
 
 
         // ==================================================
@@ -1022,6 +1765,7 @@ function playSegment(
 }
 
 
+
 // ======================================================
 // CANCELAR SEGMENTO
 // ======================================================
@@ -1057,6 +1801,7 @@ function cancelSegmentPlayback() {
 }
 
 
+
 // ======================================================
 // STATUS VISUAL
 // ======================================================
@@ -1071,7 +1816,9 @@ function showVideoStatus(
     );
 
 
-  if (!status) {
+  if (
+    !status
+  ) {
 
     return;
 
@@ -1088,6 +1835,7 @@ function showVideoStatus(
 }
 
 
+
 // ======================================================
 // ESCONDER STATUS
 // ======================================================
@@ -1100,7 +1848,9 @@ function hideVideoStatus() {
     );
 
 
-  if (!status) {
+  if (
+    !status
+  ) {
 
     return;
 
@@ -1117,13 +1867,16 @@ function hideVideoStatus() {
 }
 
 
+
 // ======================================================
 // DEBUG
 // ======================================================
 
 function getPlayerState() {
 
-  if (!player) {
+  if (
+    !player
+  ) {
 
     return {
 
@@ -1134,7 +1887,10 @@ function getPlayerState() {
         youtubeApiReady,
 
       lessonReady:
-        window.lessonReady
+        window.lessonReady,
+
+      playbackRate:
+        currentPlaybackRate
 
     };
 
@@ -1169,6 +1925,12 @@ function getPlayerState() {
         "function"
         ? player.getPlayerState()
         : null,
+
+    playbackRate:
+      typeof player.getPlaybackRate ===
+        "function"
+        ? player.getPlaybackRate()
+        : currentPlaybackRate,
 
     isPlayingSegment:
       isPlayingSegment,
