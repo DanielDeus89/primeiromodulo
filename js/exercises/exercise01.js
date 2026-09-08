@@ -1111,10 +1111,10 @@ const lessonExercises = [
         audio: {
 
           start:
-            null,
+            1620,
 
           end:
-            null
+            1625
 
         },
 
@@ -1143,10 +1143,10 @@ const lessonExercises = [
         audio: {
 
           start:
-            null,
+            1625,
 
           end:
-            null
+            1631
 
         },
 
@@ -1175,10 +1175,10 @@ const lessonExercises = [
         audio: {
 
           start:
-            null,
+            1631,
 
           end:
-            null
+            1638
 
         },
 
@@ -1207,10 +1207,10 @@ const lessonExercises = [
         audio: {
 
           start:
-            null,
+            1638,
 
           end:
-            null
+            1646
 
         },
 
