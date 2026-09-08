@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercícios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Inter",sans-serif;background:linear-gradient(to right,#000,#0f172a);color:#e2e8f0;min-height:100vh;padding:30px}
+    button,input,textarea{font-family:inherit}
+    .container{width:100%;max-width:1100px;margin:0 auto}
+    .header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:25px}
+    .header h1{font-size:32px;margin-bottom:6px}.subtitle{color:#94a3b8;font-size:14px}
+    .status{display:flex;gap:10px;flex-wrap:wrap}.box{background:#1e293b;padding:10px 16px;border-radius:8px;font-weight:600;font-size:14px}
+    .progress-wrap{margin-bottom:25px}.progress-info{display:flex;justify-content:space-between;margin-bottom:8px;color:#cbd5e1;font-size:14px}.track{height:10px;background:#1e293b;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:#3b82f6;transition:.25s}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}.tab{border:none;background:#334155;color:#fff;padding:11px 18px;border-radius:8px;cursor:pointer;font-weight:600}.tab:hover{background:#475569}.tab.active{background:#2563eb}
+    .section{background:#e2e8f0;color:#0f172a;border-radius:16px;padding:28px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:25px}.section-title{font-size:26px;margin-bottom:6px}.instructions{color:#64748b;font-size:14px}.counter{background:#cbd5e1;padding:8px 12px;border-radius:8px;font-weight:700;font-size:13px}
+    .questions{display:flex;flex-direction:column;gap:16px}.question{background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:18px}.question.correct{border-color:#16a34a;background:#f0fdf4}.question.incorrect{border-color:#dc2626;background:#fef2f2}.question.manual{border-color:#d97706;background:#fffbeb}
+    .qnum{font-weight:700;color:#2563eb;margin-bottom:10px}.prompt{font-size:18px;line-height:1.6;font-weight:600;margin-bottom:14px}.input,.textarea,.inline{width:100%;border:2px solid #cbd5e1;border-radius:8px;padding:11px 12px;font-size:16px;outline:none;background:#fff;color:#0f172a}.input:focus,.textarea:focus,.inline:focus{border-color:#2563eb}.textarea{min-height:90px;resize:vertical}.complete-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;line-height:2.4;font-size:18px;font-weight:600}.inline{width:150px;display:inline-block}
+    .feedback{margin-top:10px;font-size:14px;font-weight:600}.feedback.correct{color:#15803d}.feedback.incorrect{color:#b91c1c}.feedback.manual{color:#b45309}
+    .listen-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.listen-btn{border:none;background:#2563eb;color:#fff;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}.listen-btn:disabled{opacity:.45;cursor:not-allowed}.warning{color:#b45309;font-size:13px;font-weight:600}
+    .actions{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:25px}.group{display:flex;gap:10px;flex-wrap:wrap}.action{border:none;padding:12px 18px;border-radius:8px;cursor:pointer;font-size:15px;font-weight:700}.primary{background:#2563eb;color:#fff}.secondary{background:#334155;color:#fff}.success{background:#16a34a;color:#fff}.action:disabled{opacity:.4;cursor:not-allowed}
+    .result{display:none;margin-top:25px;background:#1e293b;border-radius:14px;padding:22px;color:#fff}.result h2{margin-bottom:15px}.result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.result-item{background:#334155;border-radius:10px;padding:16px}.result-value{font-size:26px;font-weight:700;margin-top:5px}
+    .error{background:#7f1d1d;color:#fff;padding:20px;border-radius:10px;text-align:center;font-weight:600}
+    @media(max-width:700px){body{padding:15px}.header h1{font-size:26px}.section{padding:18px}.prompt{font-size:16px}.inline{width:120px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="pageTitle">Carregando exercícios...</h1>
+        <div class="subtitle" id="subtitle">Aguarde.</div>
+      </div>
+      <div class="status">
+        <div class="box" id="sectionStatus">Seção 0 / 0</div>
+        <div class="box" id="scoreStatus">0%</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-info"><span>Progresso dos exercícios</span><span id="progressText">0%</span></div>
+      <div class="track"><div class="bar" id="progressBar"></div></div>
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+
+    <div class="section" id="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title" id="sectionTitle">-</h2>
+          <p class="instructions" id="sectionInstructions">-</p>
+        </div>
+        <div class="counter" id="questionCounter">0 questões</div>
+      </div>
+
+      <div class="questions" id="questionList"></div>
+
+      <div class="actions">
+        <div class="group">
+          <button class="action secondary" id="prevBtn" onclick="previousSection()">← Seção anterior</button>
+          <button class="action primary" onclick="checkCurrentSection()">Verificar respostas</button>
+        </div>
+        <div class="group">
+          <button class="action secondary" id="nextBtn" onclick="nextSection()">Próxima seção →</button>
+          <button class="action success" id="finishBtn" onclick="finishExercise()" style="display:none">Finalizar exercícios</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="result" id="resultPanel">
+      <h2>Resultado</h2>
+      <div class="result-grid">
+        <div class="result-item"><div>Acertos automáticos</div><div class="result-value" id="resultCorrect">0</div></div>
+        <div class="result-item"><div>Questões corrigidas</div><div class="result-value" id="resultAutomatic">0</div></div>
+        <div class="result-item"><div>Revisão manual</div><div class="result-value" id="resultManual">0</div></div>
+        <div class="result-item"><div>Aproveitamento</div><div class="result-value" id="resultPercentage">0%</div></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+let currentExerciseLesson=null;
+let currentSectionIndex=0;
+let exerciseAnswers={};
+let sectionResults={};
+
+function loadExercise(){
+  const params=new URLSearchParams(window.location.search);
+  let lesson=params.get("lesson")||"01";
+  if(/^\d+$/.test(lesson)) lesson=lesson.padStart(2,"0");
+  currentExerciseLesson=lesson;
+  console.log("Carregando Exercise:",lesson);
+  const script=document.createElement("script");
+  script.src=`../js/exercises/exercise${lesson}.js`;
+  script.onload=function(){console.log(`Exercise ${lesson} carregado.`);initializeExercise();};
+  script.onerror=function(){showError(`Não foi possível carregar exercise${lesson}.js`);};
+  document.body.appendChild(script);
+}
+
+function initializeExercise(){
+  if(typeof lessonExercises==="undefined"||!Array.isArray(lessonExercises)){showError("lessonExercises não encontrado.");return;}
+  document.getElementById("pageTitle").textContent=typeof exerciseTitle==="string"?exerciseTitle:`Exercise ${currentExerciseLesson}`;
+  document.getElementById("subtitle").textContent=`Lesson ${currentExerciseLesson} • ${lessonExercises.length} seções`;
+  document.title=`Exercise ${currentExerciseLesson}`;
+  restoreProgress();
+  renderTabs();
+  renderCurrentSection();
+  updateGlobalProgress();
+}
+
+function renderTabs(){
+  const tabs=document.getElementById("tabs");tabs.innerHTML="";
+  lessonExercises.forEach(function(section,index){
+    const btn=document.createElement("button");btn.type="button";btn.className="tab"+(index===currentSectionIndex?" active":"");btn.textContent=section.title||`Seção ${index+1}`;
+    btn.onclick=function(){saveCurrentInputs();currentSectionIndex=index;renderTabs();renderCurrentSection();};
+    tabs.appendChild(btn);
+  });
+}
+
+function renderCurrentSection(){
+  const section=lessonExercises[currentSectionIndex];if(!section)return;
+  document.getElementById("sectionTitle").textContent=section.title||`Seção ${currentSectionIndex+1}`;
+  document.getElementById("sectionInstructions").textContent=section.instructions||"";
+  document.getElementById("questionCounter").textContent=`${section.questions.length} questões`;
+  document.getElementById("sectionStatus").textContent=`Seção ${currentSectionIndex+1} / ${lessonExercises.length}`;
+  const list=document.getElementById("questionList");list.innerHTML="";
+  section.questions.forEach(q=>list.appendChild(createQuestionElement(section,q)));
+  updateButtons();updateGlobalProgress();
+}
+
+function createQuestionElement(section,q){
+  const card=document.createElement("div");card.className="question";card.dataset.questionId=q.id;
+  const n=document.createElement("div");n.className="qnum";n.textContent=`Questão ${q.number}`;card.appendChild(n);
+  if(section.type==="complete") renderComplete(card,q);
+  else if(section.type==="listening") renderListening(card,q);
+  else renderText(card,q);
+  const fb=document.createElement("div");fb.className="feedback";fb.id=`feedback-${q.id}`;card.appendChild(fb);
+  applySavedResult(card,q.id);return card;
+}
+
+function renderComplete(card,q){
+  const wrap=document.createElement("div");wrap.className="complete-line";
+  const parts=q.prompt.split("______");
+  parts.forEach(function(part,index){
+    const span=document.createElement("span");span.textContent=part;wrap.appendChild(span);
+    if(index<parts.length-1){
+      const input=document.createElement("input");input.type="text";input.className="inline";input.dataset.questionId=q.id;input.dataset.fieldIndex=index;
+      const saved=getSavedAnswer(q.id);if(Array.isArray(saved)&&typeof saved[index]==="string")input.value=saved[index];
+      wrap.appendChild(input);
+    }
+  });
+  card.appendChild(wrap);
+}
+
+function renderText(card,q){
+  const p=document.createElement("div");p.className="prompt";p.textContent=q.prompt||"";card.appendChild(p);
+  let input;
+  if(q.answerType==="textarea"){input=document.createElement("textarea");input.className="textarea";}else{input=document.createElement("input");input.type="text";input.className="input";}
+  input.dataset.questionId=q.id;const saved=getSavedAnswer(q.id);if(typeof saved==="string")input.value=saved;card.appendChild(input);
+}
+
+function renderListening(card,q){
+  const row=document.createElement("div");row.className="listen-row";
+  const btn=document.createElement("button");btn.type="button";btn.className="listen-btn";btn.textContent="▶ Ouvir";
+  const hasAudio=q.audio&&q.audio.start!==null&&q.audio.end!==null&&Number.isFinite(Number(q.audio.start))&&Number.isFinite(Number(q.audio.end));
+  btn.disabled=!hasAudio;
+  if(hasAudio) btn.onclick=function(){console.log("Listening:",q.audio.start,q.audio.end);alert("O player do Listening será conectado na próxima etapa.");};
+  row.appendChild(btn);
+  if(!hasAudio){const w=document.createElement("span");w.className="warning";w.textContent="Áudio ainda não configurado.";row.appendChild(w);}
+  card.appendChild(row);
+  const input=document.createElement("textarea");input.className="textarea";input.dataset.questionId=q.id;input.placeholder="Digite aqui o que você ouviu...";const saved=getSavedAnswer(q.id);if(typeof saved==="string")input.value=saved;card.appendChild(input);
+}
+
+function saveCurrentInputs(){
+  const section=lessonExercises[currentSectionIndex];if(!section)return;
+  section.questions.forEach(function(q){
+    if(section.type==="complete"){
+      const inputs=document.querySelectorAll(`[data-question-id="${q.id}"][data-field-index]`);
+      exerciseAnswers[q.id]=Array.from(inputs).map(i=>i.value);
+    }else{
+      const input=document.querySelector(`[data-question-id="${q.id}"]:not(.question)`);if(input)exerciseAnswers[q.id]=input.value;
+    }
+  });
+  saveProgress();
+}
+
+function normalizeAnswer(v){return String(v||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[.,!?]/g,"").replace(/\s+/g," ");}
+function isAcceptedAnswer(v,accepted){const n=normalizeAnswer(v);return (accepted||[]).some(a=>normalizeAnswer(a)===n);}
+
+function checkCurrentSection(){
+  saveCurrentInputs();const section=lessonExercises[currentSectionIndex];if(!section)return;
+  section.questions.forEach(function(q){
+    const card=document.querySelector(`.question[data-question-id="${q.id}"]`);const fb=document.getElementById(`feedback-${q.id}`);if(!card||!fb)return;
+    card.classList.remove("correct","incorrect","manual");fb.className="feedback";
+    if(q.manualReview===true||section.correctionMode==="manual"){
+      card.classList.add("manual");fb.classList.add("manual");fb.textContent="Resposta registrada. Esta questão será revisada manualmente.";sectionResults[q.id]={status:"manual"};return;
+    }
+    if(section.type==="complete"){
+      const answers=exerciseAnswers[q.id]||[];let ok=true;
+      q.fields.forEach((field,index)=>{if(!isAcceptedAnswer(answers[index],field.acceptedAnswers))ok=false;});
+      if(ok){card.classList.add("correct");fb.classList.add("correct");fb.textContent="✓ Correto";sectionResults[q.id]={status:"correct"};}
+      else{card.classList.add("incorrect");fb.classList.add("incorrect");fb.textContent="✗ Verifique sua resposta.";sectionResults[q.id]={status:"incorrect"};}
+      return;
+    }
+    if(Array.isArray(q.acceptedAnswers)&&q.acceptedAnswers.length){
+      const ok=isAcceptedAnswer(exerciseAnswers[q.id]||"",q.acceptedAnswers);
+      if(ok){card.classList.add("correct");fb.classList.add("correct");fb.textContent="✓ Correto";sectionResults[q.id]={status:"correct"};}
+      else{card.classList.add("incorrect");fb.classList.add("incorrect");fb.textContent="✗ Verifique sua resposta.";sectionResults[q.id]={status:"incorrect"};}
+      return;
+    }
+    card.classList.add("manual");fb.classList.add("manual");fb.textContent="Resposta registrada para revisão.";sectionResults[q.id]={status:"manual"};
+  });
+  saveProgress();updateGlobalProgress();
+}
+
+function applySavedResult(card,id){
+  const r=sectionResults[id];if(!r)return;const fb=card.querySelector(".feedback");if(!fb)return;
+  if(r.status==="correct"){card.classList.add("correct");fb.classList.add("correct");fb.textContent="✓ Correto";}
+  if(r.status==="incorrect"){card.classList.add("incorrect");fb.classList.add("incorrect");fb.textContent="✗ Verifique sua resposta.";}
+  if(r.status==="manual"){card.classList.add("manual");fb.classList.add("manual");fb.textContent="Resposta registrada para revisão.";}
+}
+
+function nextSection(){saveCurrentInputs();if(currentSectionIndex>=lessonExercises.length-1)return;currentSectionIndex++;renderTabs();renderCurrentSection();window.scrollTo({top:0,behavior:"smooth"});}
+function previousSection(){saveCurrentInputs();if(currentSectionIndex<=0)return;currentSectionIndex--;renderTabs();renderCurrentSection();window.scrollTo({top:0,behavior:"smooth"});}
+
+function updateButtons(){
+  document.getElementById("prevBtn").disabled=currentSectionIndex===0;
+  const last=currentSectionIndex>=lessonExercises.length-1;
+  document.getElementById("nextBtn").style.display=last?"none":"inline-block";
+  document.getElementById("finishBtn").style.display=last?"inline-block":"none";
+}
+
+function updateGlobalProgress(){
+  let total=0,answered=0,automatic=0,correct=0;
+  lessonExercises.forEach(section=>section.questions.forEach(q=>{
+    total++;const a=exerciseAnswers[q.id];
+    if(Array.isArray(a)){if(a.some(v=>String(v).trim()!==""))answered++;}
+    else if(typeof a==="string"&&a.trim()!=="")answered++;
+    const r=sectionResults[q.id];if(r&&(r.status==="correct"||r.status==="incorrect"))automatic++;if(r&&r.status==="correct")correct++;
+  }));
+  const progress=total?Math.round(answered/total*100):0;const score=automatic?Math.round(correct/automatic*100):0;
+  document.getElementById("progressBar").style.width=`${progress}%`;document.getElementById("progressText").textContent=`${progress}%`;document.getElementById("scoreStatus").textContent=`${score}%`;
+}
+
+function finishExercise(){
+  saveCurrentInputs();checkCurrentSection();let correct=0,automatic=0,manual=0;
+  Object.values(sectionResults).forEach(r=>{if(r.status==="correct"){correct++;automatic++;}else if(r.status==="incorrect")automatic++;else if(r.status==="manual")manual++;});
+  const percentage=automatic?Math.round(correct/automatic*100):0;
+  document.getElementById("resultCorrect").textContent=correct;document.getElementById("resultAutomatic").textContent=automatic;document.getElementById("resultManual").textContent=manual;document.getElementById("resultPercentage").textContent=`${percentage}%`;document.getElementById("resultPanel").style.display="block";
+  localStorage.setItem(`studentExerciseResult_${currentExerciseLesson}`,JSON.stringify({lesson:currentExerciseLesson,correct,automatic,manual,percentage,completedAt:Date.now()}));
+  document.getElementById("resultPanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function storageKey(){return `studentExerciseProgress_${currentExerciseLesson}`;}
+function saveProgress(){if(!currentExerciseLesson)return;localStorage.setItem(storageKey(),JSON.stringify({lesson:currentExerciseLesson,sectionIndex:currentSectionIndex,answers:exerciseAnswers,results:sectionResults,updatedAt:Date.now()}));}
+function restoreProgress(){try{const s=JSON.parse(localStorage.getItem(storageKey()));if(!s)return;if(s.answers&&typeof s.answers==="object")exerciseAnswers=s.answers;if(s.results&&typeof s.results==="object")sectionResults=s.results;if(Number.isInteger(s.sectionIndex)&&s.sectionIndex>=0&&s.sectionIndex<lessonExercises.length)currentSectionIndex=s.sectionIndex;}catch(e){console.warn("Erro ao restaurar exercícios:",e);}}
+function getSavedAnswer(id){return exerciseAnswers[id];}
+function showError(message){const c=document.querySelector(".container");if(c)c.innerHTML=`<div class="error">${message}</div>`;}
+window.addEventListener("beforeunload",saveCurrentInputs);
+loadExercise();
+</script>
+</body>
+</html>
