@@ -39,24 +39,24 @@ const lessonCards = [
   "type": "conversation",
   "columns": [
     [
-      ["Is he near the office?", ""],
-      ["Are you near the office?", ""],
-      ["Yes, I am. I'm near the office.", ""],
-      ["Yes, he is. He is near the office.", ""],
+      ["Is he going to Europe?", ""],
+      ["Are you going to Europe?", ""],
+      ["No, I'm not. I'm not going to Europe.", ""],
+      ["No, he isn't. He isn't going to Europe.", ""],
 
       ["", " "],
 
-      ["Isn't she married?", ""],
-      ["Aren't you married?", ""],
-      ["No, I'm not. I'm single.", ""],
-      ["No, she isn't. She is single.", ""],
+      ["Didn't she have anything for breakfast?", ""],
+      ["Didn't you have anything for breakfast?", ""],
+      ["Yes, I did. I had some pancakes for breakfast.", ""],
+      ["Yes, she did. She had some pancakes for breakfast.", ""],
 
       ["", " "],
 
-      ["Can he play the guitar?", ""],
-      ["Can you play the guitar?", ""],
-      ["Yes, I can. I can play the guitar.", ""],
-      ["Yes, he can. He can play the guitar.", ""]
+      ["What is he studying now?", ""],
+      ["What are you studying now?", ""],
+      ["I'm studying math.", ""],
+      ["He is studying math.", ""]
     ]
   ]
 },
@@ -105,17 +105,16 @@ const lessonCards = [
   "title": "Questions in Trio",
   "columns": [
     [
-      ["Isn't he a writer?", ""],
-      ["What time did she come to class today?", ""],
-      ["Can he go to the mall with you today?", ""],
-      ["Can she speak Spanish?", ""],
-      ["Is he a businessman?", ""],
-      ["Did she come to class by herself?", ""],
-      ["What did he eat for breakfast this morning?", ""],
-      ["Isn't her birthday in July?", ""],
-      ["Did he read any books this week?", ""],
-      ["Is she sick today?", ""],
-      ["Did he write any emails this morning?", ""]
+      ["Where is his father working?", ""],
+      ["When did she learn how to drive?", ""],
+      ["Is he studying English by himself?", ""],
+      ["Did she have to work yesterday?", ""],
+      ["Doesn't his mom like flowers?", ""],
+      ["Is she learning English fast?", ""],
+      ["Is he studying anything now?", ""],
+      ["Does she know if Brazil has a lot of large cities?", ""],
+      ["Isn't he usually busy in the morning?", ""],
+      ["Is she working full-time or part-time?", ""]
     ]
   ]
 },

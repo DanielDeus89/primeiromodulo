@@ -2,7 +2,7 @@ const lessonTitle = "Lesson 53";
 const currentVideoId = "HXkbBr5fXtY";
 
 const timeRanges = [
-  { start: 10, end: 108 },
+  { start: 8, end: 108 },
   { start: 108, end: 321 },
   { start: 321, end: 568 },
   { start: 568, end: 971 }, //We liked the game. 330 571

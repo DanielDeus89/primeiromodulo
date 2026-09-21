@@ -2,103 +2,98 @@ const lessonTitle = "Lesson 55";
 const currentVideoId = "-zftAhX2E_M";
 
 const timeRanges = [
-  { start: 10, end: 108 },
-  { start: 108, end: 321 },
-  { start: 321, end: 568 },
-  { start: 568, end: 971 }, //We liked the game. 330 571
-  { start: 971, end: 1024 }, //I didn't like that. 
-  { start: 1029, end: 1296 },//Did you go downtown?
-  { start: 1304, end: 2307 },//Didn't she go?
-  { start: 2313, end: 2558 }, //Verbs
-  { start: 2576, end: 3326 },//Vocabulary
-  { start: 3335, end: 3365 }
+  { start: 10, end: 99999 },
+  { start: 108, end: 99999 },
+  { start: 321, end: 99999 },
+  { start: 568, end: 99999971 }, //We liked the game. 330 571
+  { start: 971, end: 99999 }, //I didn't like that. 
+  { start: 1029, end: 99999 },//Did you go downtown?
+  { start: 1304, end: 99999 },//Didn't she go?
+  { start: 2313, end: 99999 }, //Verbs
+  { start: 2576, end: 99999 },//Vocabulary
+  { start: 3335, end: 99999 }
 ];
 
 const lessonCards = [
 {
-  "title": "Input 53",
+  "title": "Input 55",
   "columns": [
     [
-      ["I have.", "Eu tenho."],
-      ["I speak.", "Eu falo."],
-      ["I visit.", "Eu visito."],
-      ["I help.", "Eu ajudo."],
-      ["I drive.", "Eu dirijo."]
+      ["I live.", "Eu moro, vivo."],
+      ["I understand.", "Eu entendo."],
+      ["I open.", "Eu abro."],
+      ["I close.", "Eu fecho."],
+      ["I would.", "Condicional."]
     ],
     [
-      ["I had.", "Eu tive."],
-      ["I spoke.", "Eu falei."],
-      ["I visited.", "Eu visitei."],
-      ["I helped.", "Eu ajudei."],
-      ["I drove.", "Eu dirigi."]
+      ["I lived.", "Eu morei, vivi."],
+      ["I understood.", "Eu entendi."],
+      ["I opened.", "Eu abri."],
+      ["I closed.", "Eu fechei."]
     ]
   ]
 },
 {
-  "title": "Input 53",
+  "title": "Input 55",
   "columns": [
     [
-      ["I visited him yesterday.", "Eu o visitei ontem."],
-      ["He didn't help me.", "Ele não me ajudou."],
-      ["Did you speak English with him?", "Você falou inglês com ele?"],
-      ["Didn't you visit your parents on Sunday?", "Você não visitou seus pais no domingo?"]
+      ["I closed the store at 6 p.m.", "Eu fechei a loja às 6 h."],
+      ["We didn't understand the exercise.", "Nós não entendemos o exercício."],
+      ["Did you understand the film?", "Você entendeu o filme?"],
+      ["Didn't he live by himself?", "Ele não morou sozinho?"]
     ],
     [
-      ["She drove from Miami to Orlando.", "Ela dirigiu de Miami a Orlando."],
-      ["They didn't have much time.", "Eles não tiveram muito tempo."],
-      ["Didn't you help them?", "Você não os ajudou?"],
-      ["Didn't he have to work yesterday?", "Ele não teve que trabalhar ontem?"]
+      ["She lived in France for many years.", "Ela morou na França por muitos anos."],
+      ["They didn't open it yet.", "Eles não abriram ainda."],
+      ["Did you close the room?", "Você fechou a sala?"],
+      ["Didn't she understand the class?", "Ela não entendeu a aula?"]
     ]
   ]
 },
 {
-  "title": "Input 53",
+  "title": "Input 55",
   "columns": [
     [
-      ["He had something to say to you.", "Ele tinha algo a dizer para você."],
-      ["Did you have anything to read?", "Você tinha alguma coisa para ler?"],
-      ["I didn't have anything to study today.", "Não tive nada para estudar hoje."],
-      ["She wanted nothing from the drugstore.", "Ela não queria nada da farmácia."]
+      ["Did you start working out?", "Você começou a fazer exercícios?"],
+      ["We didn't start playing the game yet.", "Nós não começamos a jogar o jogo ainda."],
+      ["Did you finish studying your lessons?", "Você terminou de estudar suas lições?"],
+      ["I finished studying an hour ago.", "Eu terminei de estudar há uma hora."]
     ],
     [
-      ["She has something to say.", "Ela tem algo para dizer."],
-      ["Does he have anything to do now?", "Ele tem algo para fazer agora?"],
-      ["She didn't eat anything last night.", "Ela não comeu nada na noite passada."],
-      ["He said nothing at the meeting.", "Ele não disse nada na reunião."]
+      ["Did she start working at the hospital?", "Ela começou a trabalhar no hospital?"],
+      ["She started working here this week.", "Ela começou a trabalhar aqui esta semana."],
+      ["Did he finish writing the book?", "Ele terminou de escrever o livro?"],
+      ["He didn't finish it yet.", "Ele não terminou ainda."]
     ]
   ]
 },
 {
-  "title": "Input 53",
+  "title": "Input 55",
   "columns": [
     [
-      ["I am living here now.", "Estou morando aqui agora."],
-      ["She is doing her homework.", "Ela está fazendo sua lição de casa."],
-      ["He is having a sandwich at the snack bar.", "Ele está comendo um sanduíche na lanchonete."],
-      ["The class is starting now.", "A aula está começando agora."],
-      ["We are driving home now.", "Nós estamos dirigindo para casa agora."],
-      ["Are they buying new furniture?", "Eles estão comprando mobília nova?"]
+      ["Aren't you working full time?", "Você não está trabalhando período integral?"],
+      ["Isn't he reading this book?", "Ele não está lendo este livro?"]
     ],
     [
-      ["I am not sleeping well.", "Eu não estou dormindo bem."],
-      ["Are you studying by yourself?", "Você está estudando sozinho?"],
-      ["She is not going with the kids.", "Ela não está indo com as crianças."],
-      ["It is not working anymore.", "Não está funcionando mais."],
-      ["We aren't writing a novel.", "Nós não estamos escrevendo um romance."],
-      ["Are they selling the house?", "Eles estão vendendo a casa?"]
+      ["Aren't the kids studying math?", "As crianças não estão estudando matemática?"],
+      ["Aren't we going there?", "Não estamos indo lá?"]
     ]
   ]
 },
 {
-  "title": "Input 53",
+  "title": "Input 55",
   "columns": [
     [
-            ["She doesn't know if he is married.", "Ela não sabe se ele é casado."]
-
+      ["Would you like to go now?", "Você gostaria de ir agora?"],
+      ["I would like to talk to you.", "Eu gostaria de conversar com você."],
+      ["I wouldn't like to talk to her.", "Eu não gostaria de conversar com ela."],
+      ["Would you like to talk to me?", "Você gostaria de conversar comigo?"]
     ],
     [
-            ["I don't know if they are coming.", "Eu não sei se eles estão vindo."]
-
+      ["I wouldn't like to live here.", "Eu não gostaria de morar aqui."],
+      ["I wouldn't like to go at night.", "Eu não gostaria de ir à noite."],
+      ["I would like to talk to him.", "Eu gostaria de conversar com ele."],
+      ["I would like to start today.", "Eu gostaria de começar hoje."]
     ]
   ]
 },
@@ -106,18 +101,16 @@ const lessonCards = [
   "title": "Verbs",
   "columns": [
     [
-      ["to have", "ter"],
-      ["to help", "ajudar"],
-      ["to speak", "falar"],
-      ["to drive", "dirigir"],
-      ["to visit", "visitar"]
+      ["to live", "morar, viver"],
+      ["to close", "fechar"],
+      ["to understand", "entender"],
+      ["to open", "abrir"]
     ],
     [
-      ["had", "teve"],
-      ["helped", "ajudou"],
-      ["spoke", "falou"],
-      ["drove", "dirigiu"],
-      ["visited", "visitou"]
+      ["lived", "morou, viveu"],
+      ["closed", "fechou"],
+      ["understood", "entendeu"],
+      ["opened", "abriu"]
     ]
   ]
 },
@@ -125,53 +118,33 @@ const lessonCards = [
   "title": "Vocabulary",
   "columns": [
     [
-      ["bottle", "garrafa"],
-      ["can", "lata"],
-      ["straw", "canudo"],
-      ["box", "caixa"],
-      ["package", "pacote"],
-      ["bag", "saco, sacola"],
-      ["peach", "pêssego"],
-      ["cookie", "bolacha"],
-      ["address", "endereço"],
-      ["block", "quadra, quarteirão"],
-      ["middle", "meio"],
-      ["street", "rua"],
-      ["road", "estrada"]
+      ["exercise", "exercício"],
+      ["film", "filme"],
+      ["concert", "concerto, show"],
+      ["play", "peça de teatro"],
+      ["theater", "teatro"],
+      ["pilot", "piloto"],
+      ["driver", "motorista"],
+      ["accident", "acidente"],
+      ["truck", "caminhão"],
+      ["garage", "garagem"],
+      ["room", "sala"],
+      ["bathroom", "banheiro"],
+      ["living room", "sala de estar"]
     ],
     [
-      ["already", "já"],
-      ["ago", "atrás"],
-      ["while", "enquanto"],
-      ["hour", "hora"],
-      ["if", "se"],
-      ["own", "próprio"],
-      ["owner", "proprietário, dono"],
-      ["people", "pessoas"],
-      ["foreign", "estrangeiro"],
-      ["foreigner", "estrangeiro"],
-      ["kid", "criança"],
-      ["grandpa", "vovô"],
-      ["grandma", "vovó"]
-    ],
-    [
-      ["grandfather", "avô"],
-      ["grandmother", "avó"],
-      ["grandparents", "avós"],
-      ["grandson", "neto"],
-      ["granddaughter", "neta"],
-      ["grandchildren", "netos"],
-      ["health", "saúde"],
-      ["continent", "continente"],
-      ["Asia", "Ásia"],
-      ["Africa", "África"],
-      ["North America", "América do Norte"],
-      ["South America", "América do Sul"],
-      ["Antarctica", "Antártica"]
-    ],
-    [
-      ["Europe", "Europa"],
-      ["Australia", "Austrália"]
+      ["dining room", "sala de jantar"],
+      ["fireplace", "lareira"],
+      ["wood", "madeira"],
+      ["expensive", "caro"],
+      ["cheap", "barato"],
+      ["difficult", "difícil"],
+      ["easy", "fácil"],
+      ["simple", "simples"],
+      ["complicated", "complicado"],
+      ["smart", "esperto"],
+      ["word", "palavra"],
+      ["secret", "segredo"]
     ]
   ]
 },
@@ -179,16 +152,14 @@ const lessonCards = [
   "title": "Expressions",
   "columns": [
     [
-      ["something", "alguma coisa, algo"],
-      ["anything", "alguma coisa, nada"],
-      ["nothing", "nada"],
-      ["anymore", "não mais"]
+      ["too much", "demais"],
+      ["too little", "muito pouco"],
+      ["too late", "tarde demais"]
     ],
     [
-      ["so", "então, por isso, tão"],
-      ["so far", "até agora"],
-      ["close to", "perto de"],
-      ["right now", "agora mesmo"]
+      ["congratulations", "parabéns"],
+      ["awesome", "impressionante"],
+      ["good job", "bom trabalho"]
     ]
   ]
 },
@@ -196,42 +167,17 @@ const lessonCards = [
   "title": "Grammar",
   "columns": [
     [
-      ["I'm studying.", "Eu estou estudando."],
-      ["You're sleeping.", "Você está dormindo."],
-      ["He's helping.", "Ele está ajudando."],
-      ["She's writing.", "Ela está escrevendo."],
-      ["It's starting.", "Está começando."],
-      ["We're going.", "Nós estamos indo."],
-      ["You're finishing.", "Vocês estão terminando."],
-      ["They're closing.", "Eles estão fechando."]
+      ["He started working.", "Ele começou a trabalhar."],
+      ["I started playing.", "Eu comecei a jogar."],
+      ["She wants to start writing.", "Ela quer começar a escrever."],
+      ["He finished reading.", "Ele terminou de ler."],
+      ["They finished eating.", "Eles terminaram de comer."]
     ],
     [
-      ["I'm not studying.", "Eu não estou estudando."],
-      ["You're not sleeping.", "Você não está dormindo."],
-      ["He's not helping.", "Ele não está ajudando."],
-      ["She's not writing.", "Ela não está escrevendo."],
-      ["It's not starting.", "Não está começando."],
-      ["We're not going.", "Nós não estamos indo."],
-      ["You're not finishing.", "Vocês não estão terminando."],
-      ["They're not closing.", "Eles não estão fechando."]
-    ],
-    [
-      ["Am I studying?", "Eu estou estudando?"],
-      ["Are you sleeping?", "Você está dormindo?"],
-      ["Is he helping?", "Ele está ajudando?"],
-      ["Is she writing?", "Ela está escrevendo?"],
-      ["Is it starting?", "Está começando?"],
-      ["Are we going?", "Nós estamos indo?"],
-      ["Are you finishing?", "Vocês estão terminando?"],
-      ["Are they closing?", "Eles estão fechando?"]
-    ],
-    [
-      ["I have something.", "Eu tenho alguma coisa."],
-      ["Do you have anything?", "Você tem alguma coisa?"],
-      ["I don't have anything.", "Não tenho nada."],
-      ["I have nothing.", "Não tenho nada."],
-      ["I like to read anything.", "Eu gosto de ler qualquer coisa."],
-      ["I don't live there anymore.", "Eu não moro mais lá."]
+      ["Aren't you working on weekends?", "Você não está trabalhando nos finais de semana?"],
+      ["Isn't she going to the mall?", "Ela não está indo ao shopping?"],
+      ["Aren't they studying for the test?", "Eles não estão estudando para o teste?"],
+      ["Aren't they helping you?", "Eles não estão te ajudando?"]
     ]
   ]
 },

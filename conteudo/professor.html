@@ -1802,117 +1802,13 @@ function createTeacherLessonSelector() {
       // ====================================================
 
       createTeacherLessonSelector();
-
+      
       renderTeacherCard();
 
     }
 
 
-// ======================================================
-// PROFESSOR ALTERAR LESSON
-// ======================================================
 
-function changeTeacherLesson(
-  lesson
-) {
-
-  lesson =
-    String(
-      lesson
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  if (
-    lesson ===
-    currentTeacherLesson
-  ) {
-
-    return;
-
-  }
-
-
-  console.log(
-    "Professor alterando Lesson:",
-    currentTeacherLesson,
-    "→",
-    lesson
-  );
-
-
-  // ====================================================
-  // ENVIAR ORDEM AO ALUNO
-  // ====================================================
-
-  const state = {
-
-    source:
-      "teacher",
-
-    type:
-      "LESSON_CHANGE",
-
-    lesson:
-      lesson,
-
-    cardIndex:
-      0,
-
-    updatedAt:
-      Date.now()
-
-  };
-
-
-  if (
-    teacherSyncChannel
-  ) {
-
-    teacherSyncChannel.postMessage(
-      state
-    );
-
-  }
-
-
-  localStorage.setItem(
-    "teacherLessonSyncState",
-    JSON.stringify(
-      {
-
-        source:
-          "teacher",
-
-        type:
-          "lesson",
-
-        number:
-          lesson,
-
-        cardIndex:
-          0,
-
-        currentCard:
-          1,
-
-        updatedAt:
-          Date.now()
-
-      }
-    )
-  );
-
-  // ====================================================
-  // TROCAR A PRÓPRIA TELA DO PROFESSOR
-  // ====================================================
-
-  window.location.href =
-    `professor.html?lesson=${lesson}`;
-
-}
     // ======================================================
     // PEGAR ÚLTIMO ESTADO
     // ======================================================
