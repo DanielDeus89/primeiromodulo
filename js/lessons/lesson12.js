@@ -136,10 +136,10 @@ const lessonCards = [
   "segments": [
     {
       "start": 1453,
-      "end": 1457
+      "end": 1458
     },
     {
-      "start": 1457,
+      "start": 1458,
       "end": 1463
     },
     {

@@ -17,7 +17,7 @@ const timeRanges = [
   { start: 924 + 5, end: 1276 }, //Questions
   { start: 1276 + 5, end: 1678 }, //REsponda
   { start: 1678 + 5, end: 1737 }, //
-  { start: 1737 + 5, end: 1737 }, //
+  { start: 1737 + 5, end: 1791 }, //
 ];
 
 const lessonCards = [
@@ -128,21 +128,24 @@ const lessonCards = [
   type: "listening",
   segments: [
     { text: " ", start: 1688, end: 1694 }, //https://youtu.be/yeAbAUL7BWs?t=217
-    { text: " ", start: 1694 + 5, end: 1702 }, //https://youtu.be/yeAbAUL7BWs?t=242
-    { text: " ", start: 1702 + 5, end: 1714 }, //https://youtu.be/yeAbAUL7BWs?t=249
-    { text: " ", start: 1714 + 5, end: 1726 }, // https://youtu.be/yeAbAUL7BWs?t=237
-    { text: " ", start: 1726 + 5, end: 1737 } //https://youtu.be/yeAbAUL7BWs?t=241 
+    { text: " ", start: 1694, end: 1702 }, //https://youtu.be/yeAbAUL7BWs?t=242
+    { text: " ", start: 1702, end: 1714 }, //https://youtu.be/yeAbAUL7BWs?t=249
+    { text: " ", start: 1714, end: 1726 }, // https://youtu.be/yeAbAUL7BWs?t=237
+    { text: " ", start: 1726, end: 1737 } //https://youtu.be/yeAbAUL7BWs?t=241 
   ]
 },
 {
-  title: "Listening & Comprehension",
-  type: "listening",
-  segments: [
-    { text: " ", start: 1688, end: 1694 }, //https://youtu.be/yeAbAUL7BWs?t=217
-    { text: " ", start: 1694 + 5, end: 1702 }, //https://youtu.be/yeAbAUL7BWs?t=242
-    { text: " ", start: 1702 + 5, end: 1714 }, //https://youtu.be/yeAbAUL7BWs?t=249
-    { text: " ", start: 1714 + 5, end: 1726 }, // https://youtu.be/yeAbAUL7BWs?t=237
-    { text: " ", start: 1726 + 5, end: 1737 } //https://youtu.be/yeAbAUL7BWs?t=241 
+  "title": "Culture - Mother's and Father's Day",
+  "columns": [
+    [
+      ["In the United States, Mother's Day is celebrated on the second Sunday in May.", "Nos Estados Unidos, o Dia das Mães é celebrado no segundo domingo de maio.", 1754, 1760],
+      ["Father's Day is celebrated on the third Sunday in June.", "O Dia dos Pais é celebrado no terceiro domingo de junho.", 1760, 1765],
+      ["In schools, teachers help the children prepare cards for mom and dad on these dates.", "Nas escolas, os professores ajudam as crianças a fazer cartões para a mãe e para o pai nestas datas.", 1765, 1773],
+      ["Some children give their parents small gifts.", "Algumas crianças dão a seus pais pequenas lembranças.", 1765, 1777],
+      ["They usually make these gifts themselves at school.", "Geralmente elas mesmas fazem essas lembranças na escola.", 1777, 1782],
+      ["Others prefer to buy a gift.", "Outros preferem comprar um presente.", 1782, 1785],
+      ["Adults usually visit or call their parents on the telephone on these dates.", "Adultos geralmente visitam ou telefonam para seus pais nessas datas.", 1785, 1791],
+    ]
   ]
 },
 ];
