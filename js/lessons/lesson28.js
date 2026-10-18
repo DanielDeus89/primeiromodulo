@@ -1,47 +1,58 @@
-const lessonTitle = "Lesson 08";
-const currentVideoId = "WnEDZUQ2c5g";
+const lessonTitle = "Lesson 28";
+const currentVideoId = "5_8vYlndeGo";
 
 const timeRanges = [
-  { start: 10, end: 52 }, //0
-  { start: 52, end: 67 }, //0
-  { start: 88, end: 237 }, //0Conversation
-  { start: 247, end: 329 }, //0Fixacão
-  { start: 339, end: 382 }, //0Passe para o Negativo
-  { start: 392, end: 477 }, //0Fixacão
-  { start: 487, end: 521 }, //0Passe para o Afirmativo
-  { start: 531, end: 610 }, //0Fixacão
-  { start: 620, end: 652 }, //0Passe para o Interrogativo
-  { start: 662, end: 742 }, //0Fixacão
-  { start: 752, end: 795 }, //0
-  { start: 805, end: 1077 }, //0Questions
-  { start: 1077, end: 1299 }, //REsponda
-  { start: 1305, end: 1349 }, //0
-  { start: 1359, end: 1386 }, //0
-
+  { start: 10, end: 45 }, //0
+  { start: 45, end: 89 }, //0
+  { start: 108, end: 192 }, //Conversation
+  { start: 192, end: 272 }, //Conversation
+  { start: 272 + 10, end: 392 }, //Fixacão
+  { start: 392 + 5, end: 446 }, //Passe para o Negativo
+  { start: 446 + 5, end: 561 }, //Fixacão
+  { start: 561 + 5, end: 619  }, //Passe para o Afirmativo
+  { start: 619 + 5, end: 716 }, //Fixacão
+  { start: 716 + 5, end: 768 }, //Passe para o Interrogativo
+  { start: 768 + 5, end: 866 }, //Fixacão
+  { start: 866 + 5, end: 924 }, //
+  { start: 924 + 5, end: 1276 }, //Questions
+  { start: 1276 + 5, end: 1678 }, //REsponda
+  { start: 1678 + 5, end: 1737 }, //
+  { start: 1737 + 5, end: 1737 }, //
 ];
 
 const lessonCards = [
+{
+  "title": "Speak Right Now",
+  "type": "speak",
+  "columns": [
+    [
+    ]
+  ]
+},
 {
   "title": "Make your own Senteces",
   "columns": [
   ]
 },
 {
-  "title": "Speak Right Now",
-  "type": "speak",
+  "title": "Conversation",
+  "type": "conversation",
   "columns": [
     [
-      ["I play the violin.", ""],
-      ["I don't play the violin.", ""],
-      ["Do you play the violin?", ""],
-      ["", ""],
-      ["guitar", ""],
-      ["chess", ""],
-      ["piano", ""],
-      ["basketball", ""],
-      ["volleyball", ""],
-      ["tennis", ""],
-      ["soccer", ""]
+      ["When does your brother have a test at school?", ""],
+      ["He has a test on Monday.", ""],
+      ["", " "],
+
+      ["When does your son have to go to the dentist?", ""],
+      ["He has to go to the dentist on Thursday.", ""],
+      ["", " "],
+
+      ["When do your friends go to the mall?", ""],
+      ["They go to the mall on Saturdays.", ""],
+      ["", " "],
+
+      ["Do you have many CDs at home?", ""],
+      ["Yes, I do. I have many CDs and some DVDs, too.", ""]
     ]
   ]
 },
@@ -50,71 +61,58 @@ const lessonCards = [
   "type": "conversation",
   "columns": [
     [
-      ["Do you want to go to the movies with me tomorrow?", " "],
-      ["Yes, I do. I want to go to the movies with you tomorrow.", " "],
-      ["", ""],
-
-      ["Do you want to sleep or study English now?", " "],
-      ["I want to study English now.", " "],
-      ["", ""],
-
-      ["Do you drink coffee or tea in the morning?", " "],
-      ["I like to drink coffee and milk in the morning.", " "],
-      ["", ""],
-
-      ["What do you like to eat for breakfast?", " "],
-      ["I like to eat only bread and ham for breakfast.", " "]
+      
     ]
   ]
 },
 {
-  "title": "Fixacão",
+  "title": "Fixacão - 1",
   "columns": []  
 },
 {
-  "title": "Passe para o Negativo", 
+  "title": "Passe para o Afirmativo - 6", 
   "columns": []  
 },
 {
-  "title": "Fixacão",
+  "title": "Fixacão - 11",
   "columns": []  
 },
 {
-  "title": "Passe para o Interrogativo", 
+  "title": "Passe para o Nagativo - 16", 
   "columns": []  
 },
 {
-  "title": "Fixacão",
+  "title": "Fixacão - 21",
   "columns": []  
 },
 {
-  "title": "Passe para o Afirmativo ",
+  "title": "Passe para o negativo - 26",
   "columns": []  
 },
 {
-  "title": "Fixacão",
+  "title": "Fixacão - 31", //aqui
   "columns": []  
 },
 {
-  "title": "Passe para o Negativo", 
+  "title": "Passe para o Interrogativo - 36", 
   "columns": []  
 },
 {
   "title": "Questions",
   "columns": [
     [
-      ["What do you like to eat for breakfast?", ""],
-      ["Do you want to go downtown with me today?", ""],
-      ["Do you study in the morning or in the afternoon?", ""],
-      ["Do you like your neighbor?", ""],
-      ["Do you want to drink juice now?", ""],
-      ["How do you spell your name?", ""],
-      ["Do you study English at night?", ""],
-      ["Do you drink a cup of tea in the afternoon?", ""],
-      ["Do you play the piano?", ""],
-      ["Do you like to drink coffee or juice for breakfast?", ""],
-      ["Do you work at a bank or a store?", ""],
-      ["What do you like to play?", ""]
+      ["How many children does your neighbor have?", ""],
+      ["When do you have English classes?", ""],
+      ["Does your sister have classes on Thursdays?", ""],
+      ["What days does the teacher work?", ""],
+      ["Where do you like to go on your vacation?", ""],
+      ["What do you do on Saturdays?", ""],
+      ["Does your mother make bread at home?", ""],
+      ["Do you make ice cream at home?", ""],
+      ["Do you have a lot of relatives in the USA?", ""],
+      ["Where do your relatives live?", ""],
+      ["Does your brother live in a house?", ""],
+      ["How much money do you need to buy a CD?", ""]
     ]
   ]
 },
@@ -126,155 +124,27 @@ const lessonCards = [
   ]
 },
 {
-  "title": "Listening",
-  "type": "listening",
-  "segments": [
-    {
-      "start": 1309,
-      "end": 1315
-    },
-    {
-      "start": 1315,
-      "end": 1323
-    },
-    {
-      "start": 1323,
-      "end": 1330
-    },
-    {
-      "start": 1330,
-      "end": 1340
-    },
-    {
-      "start": 1340,
-      "end": 1349
-    }
+  title: "Listening & Comprehension",
+  type: "listening",
+  segments: [
+    { text: " ", start: 1688, end: 1694 }, //https://youtu.be/yeAbAUL7BWs?t=217
+    { text: " ", start: 1694 + 5, end: 1702 }, //https://youtu.be/yeAbAUL7BWs?t=242
+    { text: " ", start: 1702 + 5, end: 1714 }, //https://youtu.be/yeAbAUL7BWs?t=249
+    { text: " ", start: 1714 + 5, end: 1726 }, // https://youtu.be/yeAbAUL7BWs?t=237
+    { text: " ", start: 1726 + 5, end: 1737 } //https://youtu.be/yeAbAUL7BWs?t=241 
   ]
 },
 {
-  "title": "Culture - Labor Day",
-  "columns": [
-    [
-      ["Labor Day is celebrated", "O dia do trabalho é celebrado", 1368, 1371],
-      ["on the first Monday in September.", "na primeira segunda-feira de setembro.", 1370, 1373],
-      ["It is a holiday in honor of labor.", "É um feriado em homenagem ao trabalho.", 1372, 1376],
-      ["Most businesses close,", "A maioria das empresas fecham,", 1376, 1378],
-      ["and there are activities", "e há atividades", 1378, 1380],
-      ["such as speeches,", "como discursos,", 1379, 1381],
-      ["sports events, parades,", "eventos esportivos, paradas,", 1380, 1384],
-      ["and picnics.", "e piqueniques.", 1383, 1386]
-    ]
+  title: "Listening & Comprehension",
+  type: "listening",
+  segments: [
+    { text: " ", start: 1688, end: 1694 }, //https://youtu.be/yeAbAUL7BWs?t=217
+    { text: " ", start: 1694 + 5, end: 1702 }, //https://youtu.be/yeAbAUL7BWs?t=242
+    { text: " ", start: 1702 + 5, end: 1714 }, //https://youtu.be/yeAbAUL7BWs?t=249
+    { text: " ", start: 1714 + 5, end: 1726 }, // https://youtu.be/yeAbAUL7BWs?t=237
+    { text: " ", start: 1726 + 5, end: 1737 } //https://youtu.be/yeAbAUL7BWs?t=241 
   ]
-}  
+},
 ];
 
 
-
-function loadLessonContent() {
-  document.getElementById("lessonTitle").textContent = lessonTitle;
-  const stack = document.querySelector(".card-stack");
-  stack.innerHTML = "";
-
-  lessonCards.forEach((card, index) => {
-    const div = document.createElement("div");
-    div.className = "card";
-
-    if (index === 0) div.classList.add("active");
-
-    // TÍTULO COM BOTÃO PLAY/PAUSE DENTRO
-    if (card.title) {
-      const h2 = document.createElement("h2");
-      h2.className = "section-title";
-      h2.style.display = "flex";
-      h2.style.justifyContent = "space-between";
-      h2.style.alignItems = "center";
-      h2.style.gap = "10px";
-
-      const titleSpan = document.createElement("span");
-      titleSpan.textContent = card.title;
-
-      const btnPlayPause = document.createElement("button");
-      btnPlayPause.textContent = "▶️";
-      btnPlayPause.style.background = "#111";
-      btnPlayPause.style.color = "#fff";
-      btnPlayPause.style.border = "none";
-      btnPlayPause.style.borderRadius = "6px";
-      btnPlayPause.style.padding = "6px 10px";
-      btnPlayPause.style.cursor = "pointer";
-      btnPlayPause.style.fontSize = "14px";
-      btnPlayPause.style.flexShrink = "0";
-
-      btnPlayPause.onclick = () => {
-        if (typeof player === "undefined" || !player) return;
-
-        const state = player.getPlayerState();
-
-        if (state === 1) {
-          player.pauseVideo();
-          btnPlayPause.textContent = "▶️";
-        } else {
-          player.playVideo();
-          btnPlayPause.textContent = "⏸";
-        }
-      };
-
-      h2.appendChild(titleSpan);
-      h2.appendChild(btnPlayPause);
-      div.appendChild(h2);
-    }
-
-    // CARD DE LISTENING
-    if (card.type === "listening" && Array.isArray(card.segments)) {
-      const row = document.createElement("div");
-      row.className = "listening-row";
-
-      card.segments.forEach((segment) => {
-        const cardDiv = document.createElement("div");
-        cardDiv.className = "listening-card";
-
-        const playBtn = document.createElement("button");
-        playBtn.textContent = "▶️ Ouvir";
-        playBtn.onclick = () => playSegment(segment.start, segment.end);
-
-        const toggleBtn = document.createElement("button");
-        toggleBtn.textContent = "👁️ Exibir";
-        toggleBtn.onclick = function () {
-          toggleText(this);
-        };
-
-        const span = document.createElement("span");
-        span.className = "hidden-text";
-        span.textContent = segment.text;
-
-        cardDiv.appendChild(playBtn);
-        cardDiv.appendChild(toggleBtn);
-        cardDiv.appendChild(span);
-        row.appendChild(cardDiv);
-      });
-
-      div.appendChild(row);
-      stack.appendChild(div);
-      return;
-    }
-
-    // CARDS NORMAIS
-    const grid = document.createElement("div");
-    grid.className = "grid2";
-
-    card.columns.forEach((colData) => {
-      const col = document.createElement("div");
-      col.className = "vocab-col";
-
-      colData.forEach(([en, pt]) => {
-        const p = document.createElement("p");
-        p.innerHTML = `<span class="text-blue">${en}</span><br><span class="text-white">${pt}</span>`;
-        col.appendChild(p);
-      });
-
-      grid.appendChild(col);
-    });
-
-    div.appendChild(grid);
-    stack.appendChild(div);
-  });
-}
