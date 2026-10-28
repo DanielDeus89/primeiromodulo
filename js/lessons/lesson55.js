@@ -2,16 +2,16 @@ const lessonTitle = "Lesson 55";
 const currentVideoId = "-zftAhX2E_M";
 
 const timeRanges = [
-  { start: 10, end: 99999 },
-  { start: 108, end: 99999 },
-  { start: 321, end: 99999 },
-  { start: 568, end: 99999971 }, //We liked the game. 330 571
-  { start: 971, end: 99999 }, //I didn't like that. 
-  { start: 1029, end: 99999 },//Did you go downtown?
-  { start: 1304, end: 99999 },//Didn't she go?
-  { start: 2313, end: 99999 }, //Verbs
-  { start: 2576, end: 99999 },//Vocabulary
-  { start: 3335, end: 99999 }
+  { start: 10, end: 129 },
+  { start: 129 + 10, end: 335 },
+  { start: 335 + 10, end: 571 },
+  { start: 571 + 10, end: 702 }, //We liked the game. 330 571
+  { start: 702 + 10, end: 911 }, //I didn't like that. 
+  { start: 911 + 10, end: 1170 },//Did you go downtown?
+  { start: 1170 + 10, end: 1839 },//Didn't she go?
+  { start: 1839 + 10, end: 2018 }, //Verbs
+  { start: 2018 + 10, end: 2455 },//Vocabulary
+  { start: 2455 + 10, end: 2502 }
 ];
 
 const lessonCards = [
@@ -185,10 +185,11 @@ const lessonCards = [
     title: "Listening: Change intou interrogative:",
     type: "listening",
     segments: [
-      { text: "", start: 3341, end: 3346 },
-      { text: "", start: 3346, end: 3353 },
-      { text: "", start: 3353, end: 3359 },
-      { text: "", start: 3359, end: 3365 }
+      { text: "", start: 2468, end: 2473 },
+      { text: "", start: 2473, end: 2480 },
+      { text: "", start: 2480, end: 2487 },
+      { text: "", start: 2487, end: 2494 },
+      { text: "", start: 2494, end: 2502 }
     ]
   }  
 ];

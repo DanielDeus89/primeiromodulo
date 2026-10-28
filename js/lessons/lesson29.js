@@ -2,14 +2,13 @@ const lessonTitle = "Lesson 29";
 const currentVideoId = "LJ33O9W6bsw";
 
 const timeRanges = [
-  { start: 10, end: 999999 },
-  { start: 225 + 5, end: 999999 },
-  { start: 424 + 5, end: 999999 },
-  { start: 690 + 5, end: 999999 },
-  { start: 853 + 5, end: 999999 },
-  { start: 1319 + 5, end: 999999 },
-  { start: 1482 + 5, end: 999999 },
-  { start: 2135 + 5, end: 999999 },
+  { start: 10, end: 253 },
+  { start: 253 + 10, end: 551 },
+  { start: 551 + 10, end: 700 },
+  { start: 700 + 10, end: 1228 },
+  { start: 1228 + 10, end: 1396 },
+  { start: 1396 + 10, end: 1904 },
+  { start: 1904, end: 1953 }
 ];
 
 const lessonCards = [
@@ -17,12 +16,14 @@ const lessonCards = [
   "title": "Input 29",
   "columns": [
     [
+      ["I finish.", "Eu xxxxxx."],
       ["She finishes.", "Ela termina."],
       ["The meeting finishes at 6 o'clock.", "A reunião termina às 6 h."],
       ["The class finishes at 9 o'clock.", "A aula termina às 9 h."],
       ["The game finishes at 9:45 p.m.", "O jogo termina às 21h45."]
     ],
     [
+      ["I try.", "Ele xxxxxxx."],
       ["He tries.", "Ele tenta."],
       ["He tries to play soccer every day.", "Ele tenta jogar futebol todos os dias."],
       ["She tries to study every week.", "Ela tenta estudar todas as semanas."],
@@ -37,9 +38,9 @@ const lessonCards = [
     [
       ["How does she go there?", "Como ela vai lá?"],
       ["She goes to work by car.", "Ela vai ao trabalho de carro."],
-      ["He goes to school by bus.", "Ele vai à escola de ônibus."],
+      ["SHe goes to school by bus.", "Ela vai à escola de ônibus."],
       ["She goes to the park by bicycle.", "Ela vai ao parque de bicicleta."],
-      ["He goes to the beach by motorcycle.", "Ele vai à praia de moto."]
+      ["sHe goes to the beach by motorcycle.", "Ela vai à praia de moto."]
     ],
     [
       ["How do they come here?", "Como eles vêm aqui?"],
@@ -122,11 +123,11 @@ const lessonCards = [
     title: "Listening",
     type: "listening",
     segments: [
-      { text: "", start: 2149, end: 2156 },
-      { text: "", start: 2156, end: 2163 },
-      { text: "", start: 2163, end: 2172 },
-      { text: "", start: 2172, end: 2181 },
-      { text: "", start: 2181, end: 2191 }
+      { text: "", start: 1915, end: 1923 },
+      { text: "", start: 1923, end: 1928 },
+      { text: "", start: 1928, end: 1936 },
+      { text: "", start: 1936, end: 1944 },
+      { text: "", start: 1944, end: 1953 }
     ]
   }  
 ];

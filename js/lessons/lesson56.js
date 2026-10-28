@@ -2,22 +2,22 @@ const lessonTitle = "Lesson 56";
 const currentVideoId = "Wgk8vCp3uRo";
 
 const timeRanges = [
-  { start: 10, end: 33 }, //0
-  { start: 33, end: 53 }, //0
-  { start: 88, end: 130 }, //Conversation
-  { start: 130, end: 168 }, //Conversation   155 103 159
-  { start: 168 + 5, end: 259 }, //Fixacão 280w
-  { start: 259 + 5, end: 306 }, //Passe para o Negativo
-  { start: 306 + 5, end: 395 }, //Fixacão
-  { start: 395 + 5, end: 448  }, //Passe para o Afirmativo
-  { start: 448 + 5, end: 530 }, //Fixacão
-  { start: 530 + 5, end: 572 }, //Passe para o Interrogativo
-  { start: 572 + 5, end: 657 }, //Fixacão
-  { start: 657 + 5, end: 701 }, //
-  { start: 701 + 5, end: 837 }, //Questions
-  { start: 837 + 5, end: 913 }, //REsponda
-  { start: 954, end: 991 },
-  { start: 1003, end: 9999999 }
+  { start: 10, end: 36 }, //0
+  { start: 36, end: 75 }, //0
+  { start: 118, end: 178 }, //Conversation
+  { start: 178, end: 232 }, //Conversation   155 103 159
+  { start: 232 + 5, end: 325 }, //Fixacão 280w
+  { start: 325 + 5, end: 383 }, //Passe para o Negativo
+  { start: 383 + 5, end: 475 }, //Fixacão
+  { start: 475 + 5, end: 531  }, //Passe para o Afirmativo
+  { start: 531 + 5, end: 622 }, //Fixacão
+  { start: 622 + 5, end: 670 }, //Passe para o Interrogativo
+  { start: 670 + 5, end: 776 }, //Fixacão
+  { start: 776 + 5, end: 821 }, //
+  { start: 821 + 5, end: 983 }, //Questions
+  { start: 983 + 5, end: 1060 }, //REsponda
+  { start: 1102, end: 1148 },
+
 ];
 
 const lessonCards = [
@@ -130,20 +130,11 @@ const lessonCards = [
   title: "Listening: Change into Negative",
   type: "listening",
   segments: [
-    { text: " ", start: 957, end: 963 }, //https://youtu.be/yeAbAUL7BWs?t=217
-    { text: " ", start: 963, end: 968 }, //https://youtu.be/yeAbAUL7BWs?t=222
-    { text: " ", start: 968, end: 975 }, //https://youtu.be/yeAbAUL7BWs?t=229
-    { text: " ", start: 975, end: 982 }, // https://youtu.be/yeAbAUL7BWs?t=237
-    { text: " ", start: 982, end: 991 } //https://youtu.be/yeAbAUL7BWs?t=241 
+    { text: " ", start: 1106, end: 1114 }, //https://youtu.be/yeAbAUL7BWs?t=217
+    { text: " ", start: 1114, end: 1123 }, //https://youtu.be/yeAbAUL7BWs?t=222
+    { text: " ", start: 1123, end: 1132 }, //https://youtu.be/yeAbAUL7BWs?t=229
+    { text: " ", start: 1132, end: 1140 }, // https://youtu.be/yeAbAUL7BWs?t=237
+    { text: " ", start: 1140, end: 1148 } //https://youtu.be/yeAbAUL7BWs?t=241 
   ]
-},
-{
-  "title": "Conversation in Trio",
-  "type": "conversation",
-  "columns": [
-    [
-    
-    ]
-  ]
-},
+}
 ];

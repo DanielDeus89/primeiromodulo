@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal do Aluno</title>
   <link rel="stylesheet" href="./css/menu.css" />
+  <style>
+    .module-heading { margin: 0 0 16px; font-size: 18px; color: #e2e8f0; }
+    .module-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:34px; }
+    .module-card { text-align:left;border:1px solid #334155;border-radius:14px;background:#1e293b;color:#f8fafc;padding:20px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s; }
+    .module-card:hover { background:#273449;transform:translateY(-2px); }
+    .module-card.active { border:2px solid #60a5fa;background:#1e3a5f;padding:19px; }
+    .module-card .module-icon { display:block;font-size:25px;margin-bottom:12px; }
+    .module-card strong { display:block;font-size:17px;margin-bottom:7px; }
+    .module-card small { color:#cbd5e1; }
+    .module-card .module-progress { display:block;margin-top:11px;font-size:12px;color:#93c5fd; }
+    .sidebar-module-title { padding:12px 16px;color:#93c5fd;font-weight:700;font-size:14px; }
+    .sidebar-module-picker { display:block;width:calc(100% - 30px);margin:0 15px 8px;padding:10px;border:1px solid #475569;border-radius:8px;background:#1e293b;color:white; }
+    @media(max-width:720px) { .module-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:420px) { .module-grid { grid-template-columns:1fr; } }
+  </style>
 </head>
 <body>
 
@@ -46,6 +61,8 @@
 
     <div style="height:1px;background:#334155;margin:10px 15px;"></div>
 
+    <div class="sidebar-module-title">Módulo selecionado</div>
+    <select id="sidebarModuleSelect" class="sidebar-module-picker" onchange="selecionarModulo(this.value)"></select>
     <ul id="lessonMenu"></ul>
   </div>
 
@@ -56,6 +73,9 @@
         <p style="opacity:0.8;">Continue seus estudos e acompanhe seu progresso.</p>
       </div>
 
+      <h2 class="module-heading">Escolha seu módulo</h2>
+      <div id="moduleGrid" class="module-grid"></div>
+      <h2 id="selectedModuleHeading" class="module-heading">Módulo 01</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;">
         <div style="background:#1e293b;border-radius:14px;padding:25px;color:white;">
           <div style="font-size:32px;margin-bottom:12px;">▶️</div>
@@ -106,8 +126,79 @@
   </div>
 
 <script>
-const TOTAL_LESSONS = 60;
+const TOTAL_LESSONS = 360;
+const LESSONS_PER_MODULE = 60;
 const LESSONS_PER_REVIEW = 6;
+const MODULES = Array.from({length: 6}, (_, index) => ({
+  id: index + 1,
+  startLesson: index * LESSONS_PER_MODULE + 1,
+  endLesson: (index + 1) * LESSONS_PER_MODULE
+}));
+
+function getModuleByLesson(lesson) {
+  const number = Number(lesson);
+  return MODULES.find(item => number >= item.startLesson && number <= item.endLesson) || null;
+}
+
+function readStoredJSON(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key));
+    return value == null ? fallback : value;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+const storedModule = Number(localStorage.getItem("studentSelectedModule"));
+const initialLessonModule = getModuleByLesson(localStorage.getItem("studentLastLesson"));
+let selectedModule = MODULES.some(item => item.id === storedModule)
+  ? storedModule : (initialLessonModule ? initialLessonModule.id : 1);
+
+function getModuleLastLesson(moduleId) {
+  const saved = Number(localStorage.getItem(`studentModuleLastLesson_${moduleId}`));
+  if (getModuleByLesson(saved)?.id === moduleId) return saved;
+  const legacy = Number(localStorage.getItem("studentLastLesson"));
+  return getModuleByLesson(legacy)?.id === moduleId ? legacy : null;
+}
+
+function getModulePosition(moduleId) {
+  const position = readStoredJSON("studentLessonPosition", null);
+  return position && getModuleByLesson(position.lesson)?.id === moduleId ? position : null;
+}
+
+function selecionarModulo(moduleId) {
+  const module = MODULES.find(item => item.id === Number(moduleId));
+  if (!module) return;
+  selectedModule = module.id;
+  localStorage.setItem("studentSelectedModule", String(selectedModule));
+  createLessonMenu();
+  renderModuleCards();
+  atualizarDashboard();
+  atualizarMenuConcluido();
+}
+
+function renderModuleCards() {
+  const grid = document.getElementById("moduleGrid");
+  const heading = document.getElementById("selectedModuleHeading");
+  const selector = document.getElementById("sidebarModuleSelect");
+  if (heading) heading.textContent = `Módulo ${formatLessonNumber(selectedModule)} · Aulas ${(selectedModule-1)*60+1}–${selectedModule*60}`;
+  if (selector) selector.value = String(selectedModule);
+  if (!grid) return;
+  grid.innerHTML = "";
+  const completed = new Set(getCompletedLessons().map(Number));
+  MODULES.forEach(module => {
+    const count = Array.from({length: LESSONS_PER_MODULE}, (_, i) => module.startLesson + i)
+      .filter(lesson => completed.has(lesson)).length;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `module-card${selectedModule === module.id ? " active" : ""}`;
+    button.setAttribute("aria-pressed", String(selectedModule === module.id));
+    button.innerHTML = `<span class="module-icon">📚</span><strong>Módulo ${formatLessonNumber(module.id)}</strong><small>Aulas ${module.startLesson}–${module.endLesson} · 10 revisões</small><span class="module-progress">${count} de 60 aulas concluídas</span>`;
+    button.addEventListener("click", () => selecionarModulo(module.id));
+    grid.appendChild(button);
+  });
+}
+
 
 let currentLesson = null;
 
@@ -138,7 +229,8 @@ function createLessonMenu() {
   if (!menu) return;
   menu.innerHTML = "";
 
-  for (let number = 1; number <= TOTAL_LESSONS; number++) {
+  const module = MODULES[selectedModule - 1];
+  for (let number = module.startLesson; number <= module.endLesson; number++) {
     const lessonNumber = formatLessonNumber(number);
     createLessonItem(menu, lessonNumber);
 
@@ -184,6 +276,9 @@ function createReviewItem(menu, reviewNumber) {
 }
 
 function carregarAula(elemento, numero) {
+  const module = getModuleByLesson(numero);
+  if (!module) return;
+  if (selectedModule !== module.id) selecionarModulo(module.id);
   currentLesson = numero;
 
   // Abertura do professor/Meet acontece dentro do clique do usuário.
@@ -194,6 +289,7 @@ function carregarAula(elemento, numero) {
   abrirConteudo(`./conteudo/aula.html?lesson=${numero}`);
 
   localStorage.setItem("studentLastLesson", numero);
+  localStorage.setItem(`studentModuleLastLesson_${module.id}`, String(numero));
   registrarAulaIniciada(numero);
   marcarItemAtivo(elemento);
   atualizarDashboard();
@@ -330,22 +426,13 @@ function mostrarInicio(elemento) {
 }
 
 function continuarUltimaAula() {
-  let savedPosition = null;
-
-  try {
-    savedPosition = JSON.parse(localStorage.getItem("studentLessonPosition"));
-  } catch (error) {
-    savedPosition = null;
-  }
-
+  const savedPosition = getModulePosition(selectedModule);
   if (savedPosition && savedPosition.lesson) {
     carregarAula(null, savedPosition.lesson);
     return;
   }
-
-  const lesson = localStorage.getItem("studentLastLesson");
-  if (!lesson) return;
-  carregarAula(null, lesson);
+  const lesson = getModuleLastLesson(selectedModule);
+  if (lesson) carregarAula(null, lesson);
 }
 
 function registrarAulaIniciada(numero) {
@@ -381,63 +468,50 @@ function getCompletedLessons() {
 }
 
 function atualizarDashboard() {
-  const lastLesson = localStorage.getItem("studentLastLesson");
+  const lastLesson = getModuleLastLesson(selectedModule);
   const lastLessonText = document.getElementById("lastLessonText");
   const continueButton = document.getElementById("continueLessonBtn");
-
-  let savedPosition = null;
-
-  try {
-    savedPosition = JSON.parse(localStorage.getItem("studentLessonPosition"));
-  } catch (error) {
-    savedPosition = null;
-  }
+  const savedPosition = getModulePosition(selectedModule);
 
   if (lastLessonText && continueButton) {
     if (savedPosition && savedPosition.lesson) {
       const cardNumber = Number(savedPosition.cardIndex) + 1;
       const totalCards = Number(savedPosition.totalCards) || 0;
-
-      if (totalCards > 0) {
-        lastLessonText.innerHTML =
-          `Última aula: Aula ${savedPosition.lesson}<br>` +
-          `Card ${cardNumber} de ${totalCards}`;
-      } else {
-        lastLessonText.innerHTML =
-          `Última aula: Aula ${savedPosition.lesson}<br>` +
-          `Card ${cardNumber}`;
-      }
-
+      lastLessonText.innerHTML = `Última aula: Aula ${savedPosition.lesson}<br>Card ${cardNumber}` +
+        (totalCards > 0 ? ` de ${totalCards}` : "");
       continueButton.disabled = false;
     } else if (lastLesson) {
-      lastLessonText.textContent = `Última aula: Aula ${lastLesson}`;
+      lastLessonText.textContent = `Última aula: Aula ${formatLessonNumber(lastLesson)}`;
       continueButton.disabled = false;
     } else {
-      lastLessonText.textContent = "Nenhuma aula iniciada.";
+      lastLessonText.textContent = "Nenhuma aula iniciada neste módulo.";
       continueButton.disabled = true;
     }
   }
 
-  const completedLessons = getCompletedLessons();
-  const completed = completedLessons.length;
-  const percentage = Math.min(100, Math.round((completed / TOTAL_LESSONS) * 100));
-
+  const module = MODULES[selectedModule - 1];
+  const completedSet = new Set(getCompletedLessons().map(Number));
+  let completed = 0;
+  for (let lesson = module.startLesson; lesson <= module.endLesson; lesson++) {
+    if (completedSet.has(lesson)) completed++;
+  }
+  const percentage = Math.round((completed / LESSONS_PER_MODULE) * 100);
   const progressText = document.getElementById("progressText");
   const progressBar = document.getElementById("progressBar");
   const progressPercent = document.getElementById("progressPercent");
-
-  if (progressText) progressText.textContent = `${completed} de ${TOTAL_LESSONS} aulas concluídas`;
+  if (progressText) progressText.textContent = `${completed} de 60 aulas concluídas`;
   if (progressBar) progressBar.style.width = `${percentage}%`;
   if (progressPercent) progressPercent.textContent = `${percentage}%`;
+  renderModuleCards();
 }
 
 function atualizarMenuConcluido() {
-  const completedLessons = getCompletedLessons();
+  const completedLessons = new Set(getCompletedLessons().map(Number));
   const links = document.querySelectorAll("#lessonMenu a[data-lesson]");
 
   links.forEach(function (link) {
     const lesson = link.dataset.lesson;
-    link.textContent = completedLessons.includes(lesson)
+    link.textContent = completedLessons.has(Number(lesson))
       ? `✅ Aula ${lesson}`
       : `📘 Aula ${lesson}`;
   });
@@ -668,6 +742,15 @@ document.addEventListener("keydown", function (event) {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+  const moduleSelector = document.getElementById("sidebarModuleSelect");
+  if (moduleSelector) {
+    MODULES.forEach(module => {
+      const option = document.createElement("option");
+      option.value = String(module.id);
+      option.textContent = `Módulo ${formatLessonNumber(module.id)} · ${module.startLesson}–${module.endLesson}`;
+      moduleSelector.appendChild(option);
+    });
+  }
   createLessonMenu();
   atualizarDashboard();
   atualizarMenuConcluido();

@@ -118,27 +118,38 @@ const lessonCards = [
       ["I do many things during the day.", "Eu faço muitas coisas durante o dia."],
       ["I have to do this.", "Eu tenho que fazer isso."],
       [" ", " "],
+      ["Days of the Week ", "(on) "],
+
       ["Sunday", "domingo"],
       ["Monday", "segunda-feira"],
       ["Tuesday", "terça-feira"],
       ["Wednesday", "quarta-feira"],
       [" ", " "],
-      ["to do the homework", "fazer a lição de casa"],
-      ["to do a favor", "fazer um favor"]
+      [" to do", " "],
+
+      ["the homework", "fazer a lição de casa"],
+      ["a favor", "fazer um favor"],
+      ["the dishes", "lavar as louças"],
+      ["a backup", "fazer um backup"]
+
+
     ],
     [
       ["She likes to make cakes.", "Ela gosta de fazer bolos."],
       ["I make the bed for my children.", "Eu arrumo a cama para meus filhos."],
       [" ", " "],
+      [" ", " "],
+
       ["Thursday", "quinta-feira"],
       ["Friday", "sexta-feira"],
       ["Saturday", "sábado"],
       [" ", " "],
       [" ", " "],
-      ["to make the bed", "arrumar a cama"],
-      ["to make cookies", "fazer biscoitos"],
-      ["to make toys", "fazer brinquedos"],
-      ["to make a backup", "fazer um backup"]
+      [" ", " "],
+      ["to make", " "],
+      ["the bed", "arrumar a cama"],
+      ["cookies", "fazer biscoitos"],
+      ["toys", "fazer brinquedos"]
         ]
   ]
 },
