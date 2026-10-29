@@ -68,7 +68,7 @@ const MAX_RECOVERY_ATTEMPTS = 3;
 // CONFIGURAÇÕES GLOBAIS DO PLAYER
 // ======================================================
 
-const DEFAULT_PLAYBACK_SPEED = 1;
+const DEFAULT_PLAYBACK_SPEED = 1.25;
 
 let currentPlaybackRate = DEFAULT_PLAYBACK_SPEED;
 
