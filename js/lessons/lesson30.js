@@ -33,25 +33,26 @@ const lessonCards = [
   "columns": [
   ]
 },
+
 {
   "title": "Conversation",
   "type": "conversation",
   "columns": [
     [
-      ["When does your brother have a test at school?", ""],
-      ["He has a test on Monday.", ""],
+      ["What does the waiter do on Sundays?", ""],
+      ["He works at the restaurant all day long.", ""],
       ["", " "],
 
-      ["When does your son have to go to the dentist?", ""],
-      ["He has to go to the dentist on Thursday.", ""],
+      ["Does your sister know how to make a cake?", ""],
+      ["Yes, she does. She knows how to make a cake very well.", ""],
       ["", " "],
 
-      ["When do your friends go to the mall?", ""],
-      ["They go to the mall on Saturdays.", ""],
+      ["Do they have to do homework every day?", ""],
+      ["Yes, they do. They have to do homework every day.", ""],
       ["", " "],
 
-      ["Do you have many CDs at home?", ""],
-      ["Yes, I do. I have many CDs and some DVDs, too.", ""]
+      ["What does she do when she goes home after work?", ""],
+      ["She makes dinner and does the dishes.", ""]
     ]
   ]
 },
@@ -100,18 +101,18 @@ const lessonCards = [
   "title": "Questions",
   "columns": [
     [
-      ["How many children does your neighbor have?", ""],
-      ["When do you have English classes?", ""],
-      ["Does your sister have classes on Thursdays?", ""],
-      ["What days does the teacher work?", ""],
-      ["Where do you like to go on your vacation?", ""],
-      ["What do you do on Saturdays?", ""],
-      ["Does your mother make bread at home?", ""],
-      ["Do you make ice cream at home?", ""],
-      ["Do you have a lot of relatives in the USA?", ""],
-      ["Where do your relatives live?", ""],
-      ["Does your brother live in a house?", ""],
-      ["How much money do you need to buy a CD?", ""]
+      ["How do you go to school every day?", ""],
+      ["What time do you get up in the morning?", ""],
+      ["How much work do you have to do this week?", ""],
+      ["Where do you want to go next week?", ""],
+      ["What time does your class start?", ""],
+      ["How many CDs do you have at home?", ""],
+      ["Does the teacher speak English well?", ""],
+      ["Do you like to read books?", ""],
+      ["How do you spell your name?", ""],
+      ["What restaurant do you like in this city?", ""],
+      ["What do you like to do in the morning?", ""],
+      ["What does your sister like to read?", ""]
     ]
   ]
 },
