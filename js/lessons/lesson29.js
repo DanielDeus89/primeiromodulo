@@ -123,8 +123,8 @@ const lessonCards = [
     title: "Listening",
     type: "listening",
     segments: [
-      { text: "", start: 1915, end: 1923 },
-      { text: "", start: 1923, end: 1928 },
+      { text: "", start: 1914, end: 1921 },
+      { text: "", start: 1921, end: 1928 },
       { text: "", start: 1928, end: 1936 },
       { text: "", start: 1936, end: 1944 },
       { text: "", start: 1944, end: 1953 }
