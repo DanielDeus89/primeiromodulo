@@ -449,6 +449,23 @@
   ></script>
 
 
+  <!-- Dicionário compartilhado entre todos os módulos -->
+  <script src="../js/vocabulary.js"></script>
+
+  <!-- Exemplos específicos: carregar somente quando existir arquivo da aula -->
+  <script>
+    (function () {
+      const lesson = new URLSearchParams(location.search).get("lesson");
+      if (!lesson || !/^\d+$/.test(lesson)) return;
+      const script = document.createElement("script");
+      script.src = "../js/vocabulary/vocabulary" + Number(lesson) + ".js";
+      script.onerror = function () {
+        // Aula sem exemplos locais: o dicionário continua funcionando.
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
+
   <script
     src="../js/card.js"
   ></script>

@@ -32,7 +32,8 @@ const lessonCards = [
       ["shelf", "prateleira"],
       ["bench", "banco, assento"],
       ["stool", "banquinho"],
-      ["teapot", "bule de chá"],
+      ["teapot", "bule de chá"]
+    ], [
       ["apron", "avental"],
       ["saucer", "pires"],
       ["faucet", "torneira"],
@@ -44,8 +45,10 @@ const lessonCards = [
       ["roof", "telhado"],
       ["ceiling", "teto"],
       ["cellar", "porão, adega"],
-      ["basement", "subsolo, porão"],
-      ["star", "estrela"],
+      ["basement", "subsolo, porão"]
+ 
+    ] ,   [
+     ["star", "estrela"],
       ["sky", "céu"],
       ["heaven", "céu, paraíso"],
       ["rocket", "foguete"]
@@ -157,7 +160,8 @@ const lessonCards = [
       ["shelf", "prateleira"],
       ["bench", "banco, assento"],
       ["stool", "banquinho"],
-      ["teapot", "bule de chá"],
+      ["teapot", "bule de chá"]
+    ], [
       ["apron", "avental"],
       ["saucer", "pires"],
       ["faucet", "torneira"],
@@ -169,8 +173,10 @@ const lessonCards = [
       ["roof", "telhado"],
       ["ceiling", "teto"],
       ["cellar", "porão, adega"],
-      ["basement", "subsolo, porão"],
-      ["star", "estrela"],
+      ["basement", "subsolo, porão"]
+ 
+    ] ,   [
+     ["star", "estrela"],
       ["sky", "céu"],
       ["heaven", "céu, paraíso"],
       ["rocket", "foguete"]
