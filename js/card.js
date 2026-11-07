@@ -8,7 +8,7 @@
 // CONFIGURAÇÕES GERAIS DO VOCABULÁRIO
 // ======================================================
 
-const VOCABULARY_SPEECH_RATE = 0.70;
+const VOCABULARY_SPEECH_RATE = 1.00;
 
 
 // ======================================================
@@ -165,19 +165,6 @@ async function showVocabularyDefinition(
   translation
 ) {
 
-  if (
-    typeof fetchVocabularyDefinition !== "function"
-  ) {
-
-    console.error(
-      "fetchVocabularyDefinition() não encontrada."
-    );
-
-    return;
-
-  }
-
-
   // ====================================================
   // GARANTIR MODAL
   // ====================================================
@@ -239,6 +226,17 @@ async function showVocabularyDefinition(
 
 
   // ====================================================
+  // CONTROLE DE CONSULTAS SIMULTÂNEAS
+  // ====================================================
+
+  const requestId = String(
+    Number(modal.dataset.requestId || 0) + 1
+  );
+
+  modal.dataset.requestId = requestId;
+
+
+  // ====================================================
   // CONTEÚDO INICIAL
   // ====================================================
 
@@ -258,14 +256,34 @@ async function showVocabularyDefinition(
 
 
   // ====================================================
-  // CONTROLE DE CONSULTAS SIMULTÂNEAS
+  // CARREGAR EXEMPLOS INDEPENDENTEMENTE DA DEFINIÇÃO
   // ====================================================
 
-  const requestId = String(
-    Number(modal.dataset.requestId || 0) + 1
+  renderVocabularyExamples(
+    word,
+    examplesElement,
+    requestId
   );
 
-  modal.dataset.requestId = requestId;
+
+  // ====================================================
+  // VERIFICAR FUNÇÃO DO DICIONÁRIO
+  // ====================================================
+
+  if (
+    typeof fetchVocabularyDefinition !== "function"
+  ) {
+
+    console.error(
+      "fetchVocabularyDefinition() não encontrada."
+    );
+
+    definitionElement.textContent =
+      "Serviço de definição indisponível.";
+
+    return;
+
+  }
 
 
   try {
@@ -283,9 +301,11 @@ async function showVocabularyDefinition(
     }
 
     if (!data || typeof data !== "object") {
+
       throw new Error(
         "Resposta inválida da API do dicionário."
       );
+
     }
 
 
@@ -314,16 +334,6 @@ async function showVocabularyDefinition(
       definitionElement
     );
 
-
-    // ==================================================
-    // EXEMPLOS DA LESSON
-    // ==================================================
-
-    renderVocabularyExamples(
-      word,
-      examplesElement
-    );
-
   } catch (error) {
 
     if (modal.dataset.requestId !== requestId) {
@@ -337,16 +347,6 @@ async function showVocabularyDefinition(
 
     definitionElement.textContent =
       "Não foi possível carregar a definição.";
-
-
-    // ==================================================
-    // EXIBIR EXEMPLOS MESMO SE A API FALHAR
-    // ==================================================
-
-    renderVocabularyExamples(
-      word,
-      examplesElement
-    );
 
   }
 
@@ -381,7 +381,6 @@ function renderClickableDefinition(
 
 
   parts.forEach(function (part) {
-
 
     // ==================================================
     // É PALAVRA?
@@ -479,7 +478,6 @@ function renderClickableDefinition(
 
     }
 
-
     // ==================================================
     // PONTUAÇÃO / ESPAÇO
     // ==================================================
@@ -542,7 +540,6 @@ function formatPartOfSpeech(type) {
 
 function getLessonVocabularySource() {
 
-
   // ====================================================
   // PADRÃO RECOMENDADO
   // ====================================================
@@ -576,7 +573,7 @@ function getLessonVocabularySource() {
 
 
 // ======================================================
-// PEGAR EXEMPLOS
+// PEGAR EXEMPLOS MANUAIS
 // ======================================================
 
 function getVocabularyExamples(word) {
@@ -608,12 +605,92 @@ function getVocabularyExamples(word) {
 
 
 // ======================================================
-// RENDERIZAR EXEMPLOS
+// VALIDAR SE A CONSULTA AINDA É ATUAL
 // ======================================================
 
-function renderVocabularyExamples(
+function isVocabularyRequestCurrent(
+  container,
+  requestId
+) {
+
+  const modal = document.getElementById(
+    "vocabularyModal"
+  );
+
+  return Boolean(
+    modal &&
+    container &&
+    container.isConnected &&
+    modal.style.display !== "none" &&
+    modal.dataset.requestId === requestId
+  );
+
+}
+
+
+// ======================================================
+// NORMALIZAR EXEMPLOS RETORNADOS PELA API
+// ======================================================
+
+function normalizeVocabularyExamples(result) {
+
+  const rawExamples = Array.isArray(result)
+    ? result
+    : (
+        result &&
+        Array.isArray(result.examples)
+          ? result.examples
+          : []
+      );
+
+  const levels = ["B1", "B2", "C1"];
+
+  const normalized = [];
+
+  levels.forEach(function (level) {
+
+    const example = rawExamples.find(function (item) {
+
+      return (
+        item &&
+        String(item.level || "")
+          .toUpperCase() === level
+      );
+
+    });
+
+    if (
+      example &&
+      typeof example.text === "string" &&
+      example.text.trim()
+    ) {
+
+      normalized.push({
+
+        level: level,
+
+        text: example.text.trim()
+
+      });
+
+    }
+
+  });
+
+  return normalized;
+
+}
+
+
+// ======================================================
+// RENDERIZAR EXEMPLOS
+// EXEMPLOS MANUAIS + GEMINI AI
+// ======================================================
+
+async function renderVocabularyExamples(
   word,
-  container
+  container,
+  requestId
 ) {
 
   if (!container) {
@@ -622,11 +699,122 @@ function renderVocabularyExamples(
 
   container.innerHTML = "";
 
-  const examples = getVocabularyExamples(word);
+
+  // ====================================================
+  // 1. VERIFICAR EXEMPLOS MANUAIS
+  // ====================================================
+
+  let examples = getVocabularyExamples(word);
+
+  const hasManualExamples =
+    examples.length > 0;
 
 
   // ====================================================
-  // SEM EXEMPLOS
+  // 2. CONSULTAR GEMINI SE NÃO HOUVER EXEMPLOS
+  // ====================================================
+
+  if (!hasManualExamples) {
+
+    const loading = document.createElement("div");
+
+    loading.textContent =
+      "Gerando exemplos B1, B2 e C1 com IA...";
+
+    loading.style.cssText = `
+      color: #64748b;
+      font-size: 14px;
+      margin-top: 8px;
+    `;
+
+    container.appendChild(loading);
+
+    try {
+
+      // ==================================================
+      // VERIFICAR FUNÇÃO DE CONSULTA AUTOMÁTICA
+      // ==================================================
+
+      if (
+        typeof fetchAutomaticVocabularyExamples !== "function"
+      ) {
+
+        throw new Error(
+          "fetchAutomaticVocabularyExamples() não encontrada. " +
+          "Verifique o carregamento de vocabulary-examples.js."
+        );
+
+      }
+
+
+      // ==================================================
+      // CONSULTAR API / CACHE
+      // ==================================================
+
+      const result =
+        await fetchAutomaticVocabularyExamples(word);
+
+
+      // ==================================================
+      // EVITAR ATUALIZAR UMA PALAVRA ANTIGA
+      // ==================================================
+
+      if (
+        requestId !== undefined &&
+        !isVocabularyRequestCurrent(
+          container,
+          requestId
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      // ==================================================
+      // NORMALIZAR RETORNO
+      // ==================================================
+
+      examples = normalizeVocabularyExamples(
+        result
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Erro ao gerar exemplos com Gemini:",
+        error
+      );
+
+      examples = [];
+
+    }
+
+  }
+
+
+  // ====================================================
+  // 3. VALIDAR SE O MODAL CONTINUA ABERTO
+  // ====================================================
+
+  if (
+    requestId !== undefined &&
+    !isVocabularyRequestCurrent(
+      container,
+      requestId
+    )
+  ) {
+
+    return;
+
+  }
+
+  container.innerHTML = "";
+
+
+  // ====================================================
+  // 4. SEM EXEMPLOS
   // ====================================================
 
   if (examples.length === 0) {
@@ -634,7 +822,7 @@ function renderVocabularyExamples(
     const empty = document.createElement("div");
 
     empty.textContent =
-      "Nenhum exemplo cadastrado para esta palavra.";
+      "Não foi possível carregar os exemplos.";
 
     empty.style.cssText = `
       color: #64748b;
@@ -650,7 +838,7 @@ function renderVocabularyExamples(
 
 
   // ====================================================
-  // EXEMPLOS
+  // 5. EXIBIR EXEMPLOS
   // ====================================================
 
   examples.forEach(function (example) {
@@ -731,6 +919,10 @@ function renderVocabularyExamples(
 
     };
 
+
+    // ==================================================
+    // MONTAR LINHA
+    // ==================================================
 
     row.appendChild(level);
 
@@ -1455,7 +1647,6 @@ function createNormalContent(card) {
 
         span.onclick = function (event) {
 
-
           // ============================================
           // PALAVRA ESCONDIDA
           // ============================================
@@ -1717,7 +1908,6 @@ document.addEventListener(
 
 function renderLessonContent() {
 
-
   // ====================================================
   // TÍTULO DA AULA
   // ====================================================
@@ -1877,3 +2067,4 @@ window.addEventListener(
 
   }
 );
+

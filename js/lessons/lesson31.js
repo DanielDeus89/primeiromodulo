@@ -2,98 +2,182 @@ const lessonTitle = "Lesson 31";
 const currentVideoId = "Lns7yXy6NUg";
 
 const timeRanges = [
-  { start: 10, end: 999999 },
-  { start: 253 + 10, end: 999999 },
-  { start: 551 + 10, end: 999999 },
-  { start: 700 + 10, end: 999999 },
-  { start: 1228 + 10, end: 999999 },
-  { start: 1396 + 10, end: 999999 },
-  { start: 1904, end: 999999 }
+  { start: 10, end: 177 },
+  { start: 177 + 10, end: 425 },
+  { start: 425 + 10, end: 605 },
+  { start: 605 + 10, end: 788 },
+  { start: 788 + 10, end: 974 },
+  { start: 974 + 10, end: 1237 },
+  { start: 1237 + 10, end: 1941 },
+  { start: 1941 + 10, end: 2179 },
+  { start: 2179 + 10, end: 2727 },
+  { start: 2727 + 10, end: 2776 }
 ];
 
 const lessonCards = [
 {
-  "title": "Input 29",
+  "title": "Input 31",
   "columns": [
     [
-      ["I finish.", "Eu xxxxxx."],
-      ["She finishes.", "Ela termina."],
-      ["The meeting finishes at 6 o'clock.", "A reunião termina às 6 h."],
-      ["The class finishes at 9 o'clock.", "A aula termina às 9 h."],
-      ["The game finishes at 9:45 p.m.", "O jogo termina às 21h45."]
+      ["I drink.", "Eu bebo."],
+      ["I eat.", "Eu como."],
+      ["I speak.", "Eu falo."],
+      ["I talk.", "Eu converso."],
+      ["I need.", "Eu preciso."]
     ],
     [
-      ["I try.", "Ele xxxxxxx."],
-      ["He tries.", "Ele tenta."],
-      ["He tries to play soccer every day.", "Ele tenta jogar futebol todos os dias."],
-      ["She tries to study every week.", "Ela tenta estudar todas as semanas."],
-      ["He tries to read a little every night.", "Ele tenta ler um pouco toda noite."]
+      ["He drinks.", "Ele bebe."],
+      ["He eats.", "Ele come."],
+      ["He speaks.", "Ele fala."],
+      ["He talks.", "Ele conversa."],
+      ["He needs.", "Ele precisa."]
     ]
   ]
 },
-
 {
-  "title": "Input 29",
+  "title": "Input 31",
   "columns": [
     [
-      ["How does she go there?", "Como ela vai lá?"],
-      ["She goes to work by car.", "Ela vai ao trabalho de carro."],
-      ["SHe goes to school by bus.", "Ela vai à escola de ônibus."],
-      ["She goes to the park by bicycle.", "Ela vai ao parque de bicicleta."],
-      ["sHe goes to the beach by motorcycle.", "Ela vai à praia de moto."]
+      ["I speak Chinese.", "Eu falo chinês."],
+      ["I drink soft drink.", "Eu bebo refrigerante."],
+      ["I eat pancakes.", "Eu como panquecas."],
+      ["I speak Italian at home.", "Eu falo italiano em casa."]
     ],
     [
-      ["How do they come here?", "Como eles vêm aqui?"],
-      ["They come to work by train.", "Eles vêm ao trabalho de trem."],
-      ["They come downtown by subway.", "Eles vêm ao centro de metrô."],
-      ["They come home by trolley.", "Eles vêm para casa de bonde."],
-      ["They come to church on foot.", "Eles vêm à igreja a pé."]
+      ["He speaks Japanese.", "Ele fala japonês."],
+      ["She drinks green tea.", "Ela bebe chá verde."],
+      ["He eats cereal.", "Ele come cereal."],
+      ["She speaks Spanish at work.", "Ela fala espanhol no trabalho."]
     ]
   ]
 },
-
+{
+  "title": "Input 31",
+  "columns": [
+    [
+      ["I don't speak French.", "Eu não falo francês."],
+      ["I don't drink chocolate milk.", "Eu não bebo leite com chocolate."],
+      ["I don't eat cereal for breakfast.", "Eu não como cereal no café da manhã."]
+    ],
+    [
+      ["He doesn't speak German.", "Ele não fala alemão."],
+      ["She doesn't drink tea with milk.", "Ela não bebe chá com leite."],
+      ["He doesn't eat toast with peanut butter.", "Ele não come torrada com creme de amendoim."]
+    ]
+  ]
+},
+{
+  "title": "Input 31",
+  "columns": [
+    [
+      ["Do you speak Spanish?", "Você fala espanhol?"],
+      ["Do you drink hot chocolate?", "Você bebe chocolate quente?"],
+      ["Do you eat peanut butter?", "Você come creme de amendoim?"]
+    ],
+    [
+      ["Does he speak English?", "Ele fala inglês?"],
+      ["Does she drink cold tea?", "Ela bebe chá frio?"],
+      ["Does he eat toast with jelly?", "Ele come torrada com geleia?"]
+    ]
+  ]
+},
+{
+  "title": "Input 31",
+  "columns": [
+    [
+      ["I talk to you.", "Eu converso com você."],
+      ["He doesn't talk to Sally.", "Ele não conversa com a Sally."],
+      ["She talks a lot.", "Ela conversa muito."]
+    ],
+    [
+      ["Do you need to talk to me?", "Você precisa conversar comigo?"],
+      ["Does he need to talk to you?", "Ele precisa conversar com você?"],
+      ["Does she need to talk to me?", "Ela precisa conversar comigo?"]
+    ]
+  ]
+},
 {
   "title": "Verbs",
   "columns": [
     [
-      ["to finish", "terminar"]
+      ["to drink", "beber, tomar"],
+      ["to eat", "comer"],
+      ["to speak", "falar"]
     ],
     [
-      ["to try", "tentar"]
+      ["to talk", "conversar"],
+      ["to need", "precisar (de)"]
     ]
   ]
 },
-
 {
   "title": "Vocabulary",
   "columns": [
     [
-      ["watch", "relógio de pulso"],
-      ["clock", "relógio"],
-      ["truck", "caminhão"],
-      ["nice", "bom, bonito"],
-      ["shuttle", "serviço de transporte"],
-      ["airport", "aeroporto"]
+      ["English", "inglês"],
+      ["Portuguese", "português"],
+      ["Chinese", "chinês"],
+      ["Japanese", "japonês"],
+      ["Italian", "italiano"],
+      ["German", "alemão"],
+      ["French", "francês"],
+      ["Spanish", "espanhol"],
+      ["brother", "irmão"],
+      ["sister", "irmã"]
     ],
     [
-      ["parking lot", "estacionamento"],
-      ["restaurant", "restaurante"],
-      ["sandwich", "sanduíche"],
-      ["snack bar", "lanchonete"],
-      ["waiter", "garçom"],
-      ["waitress", "garçonete"]
+      ["father", "pai"],
+      ["mother", "mãe"],
+      ["parents", "pais"],
+      ["coffee", "café"],
+      ["milk", "leite"],
+      ["chocolate", "chocolate"],
+      ["tea", "chá"],
+      ["water", "água"],
+      ["juice", "suco"],
+      ["soda", "refrigerante"]
+    ],
+    [
+      ["soft drink", "refrigerante"],
+      ["green tea", "chá verde"],
+      ["fish", "peixe"],
+      ["meat", "carne"],
+      ["pancakes", "panquecas"],
+      ["syrup", "calda"],
+      ["cereal", "cereal"],
+      ["toast", "torrada"],
+      ["jam", "geleia"],
+      ["jelly", "geleia"]
+    ],
+    [
+      ["peanut butter", "creme de amendoim"],
+      ["now", "agora"],
+      ["today", "hoje"],
+      ["only", "só, somente"],
+      ["with", "com"],
+      ["and", "e"],
+      ["I", "eu"],
+      ["you", "você"],
+      ["my", "meu"],
+      ["your", "seu"]
     ]
   ]
 },
-
 {
   "title": "Expressions",
   "columns": [
     [
-      ["all day long", "o dia todo"]
+      ["thank you", "obrigado"],
+      ["thanks", "obrigado"],
+      ["you're welcome", "de nada"],
+      ["please", "por favor"]
     ],
     [
-      ["all night long", "a noite toda"]
+      ["in the morning", "de manhã"],
+      ["in the afternoon", "à tarde"],
+      ["in the evening", "à noite"],
+      ["at night", "à noite"],
+      ["every day", "todos os dias"]
     ]
   ]
 },
@@ -102,19 +186,25 @@ const lessonCards = [
   "title": "Grammar",
   "columns": [
     [
-      ["by car", "de carro"],
-      ["by bus", "de ônibus"],
-      ["by bicycle", "de bicicleta"],
-      ["by motorcycle", "de moto"],
-      ["by train", "de trem"],
-      ["by subway", "de metrô"],
-      ["by trolley", "de bonde"],
-      ["on foot", "a pé"]
+      ["I need.", "Eu preciso."],
+      ["You speak.", "Você fala."],
+      ["He drinks.", "Ele bebe."],
+      ["She eats.", "Ela come."],
+      ["He talks.", "Ele conversa."],
+      ["I don't need.", "Eu não preciso."],
+      ["You don't speak.", "Você não fala."],
+      ["He doesn't drink.", "Ele não bebe."],
+      ["She doesn't eat.", "Ela não come."],
+      ["He doesn't talk.", "Ele não conversa."]
     ],
     [
-      ["He works every day.", "Ele trabalha todos os dias."],
-      ["He works all day long.", "Ele trabalha o dia todo."],
-      ["She sleeps all night long.", "Ela dorme a noite toda."]
+      ["Do you need?", "Você precisa?"],
+      ["Do you speak?", "Você fala?"],
+      ["Does he drink?", "Ele bebe?"],
+      ["Does she eat?", "Ela come?"],
+      ["Doesn't he talk?", "Ele não conversa?"],
+      ["I need to speak English.", "Eu preciso falar inglês."],
+      ["I need to talk to you.", "Eu preciso conversar com você."]
     ]
   ]
 },
@@ -123,11 +213,11 @@ const lessonCards = [
     title: "Listening",
     type: "listening",
     segments: [
-      { text: "", start: 1914, end: 1921 },
-      { text: "", start: 1921, end: 1928 },
-      { text: "", start: 1928, end: 1936 },
-      { text: "", start: 1936, end: 1944 },
-      { text: "", start: 1944, end: 1953 }
+      { text: "", start: 2743, end: 2747 },
+      { text: "", start: 2747, end: 2754 },
+      { text: "", start: 2754, end: 2760 },
+      { text: "", start: 2760, end: 2767 },
+      { text: "", start: 2767, end: 2776 }
     ]
   }  
 ];
