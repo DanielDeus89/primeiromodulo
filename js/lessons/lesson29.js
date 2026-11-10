@@ -16,14 +16,14 @@ const lessonCards = [
   "title": "Input 29",
   "columns": [
     [
-      ["I finish.", "Eu xxxxxx."],
+      ["I finish.", "Eu termino."],
       ["She finishes.", "Ela termina."],
       ["The meeting finishes at 6 o'clock.", "A reunião termina às 6 h."],
       ["The class finishes at 9 o'clock.", "A aula termina às 9 h."],
       ["The game finishes at 9:45 p.m.", "O jogo termina às 21h45."]
     ],
     [
-      ["I try.", "Ele xxxxxxx."],
+      ["I try.", "Eu tento."],
       ["He tries.", "Ele tenta."],
       ["He tries to play soccer every day.", "Ele tenta jogar futebol todos os dias."],
       ["She tries to study every week.", "Ela tenta estudar todas as semanas."],
