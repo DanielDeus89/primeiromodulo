@@ -1,151 +1,240 @@
-const lessonTitle = "Lesson 28";
-const currentVideoId = "5_8vYlndeGo";
+const lessonTitle = "Lesson 32";
+const currentVideoId = "EeMOgR3kd2o";
 
 const timeRanges = [
-  { start: 10, end: 45 }, //0
-  { start: 45, end: 89 }, //0
-  { start: 108, end: 192 }, //Conversation
-  { start: 192, end: 272 }, //Conversation
-  { start: 272 + 10, end: 392 }, //Fixacão
-  { start: 392 + 5, end: 446 }, //Passe para o Negativo
-  { start: 446 + 5, end: 561 }, //Fixacão
-  { start: 561 + 5, end: 619  }, //Passe para o Afirmativo
-  { start: 619 + 5, end: 716 }, //Fixacão
-  { start: 716 + 5, end: 768 }, //Passe para o Interrogativo
-  { start: 768 + 5, end: 866 }, //Fixacão
-  { start: 866 + 5, end: 924 }, //
-  { start: 924 + 5, end: 1276 }, //Questions
-  { start: 1276 + 5, end: 1678 }, //REsponda
-  { start: 1678 + 5, end: 1737 }, //
-  { start: 1737 + 5, end: 1791 }, //
+  { start: 10, end: 167 }, //0
+  { start: 167 + 10, end: 488 }, //0
+  { start: 488 + 10, end: 754 }, //Conversation
+  { start: 754 + 10, end: 894 }, //Conversation
+  { start: 894 + 10, end: 1032 }, //Fixacão
+  { start: 1032 + 10, end: 1390 }, //Passe para o Negativo
+  { start: 1390 + 10, end: 2244 }, //Fixacão
+  { start: 2244 + 10, end: 2530  }, //Passe para o Afirmativo
+  { start: 2528 + 10, end: 3330 }, //Fixacão
+  { start: 3329 + 10, end: 3382 } //Passe para o Interrogativo
 ];
 
 const lessonCards = [
-{
-  "title": "Speak Right Now",
-  "type": "speak",
-  "columns": [
-    [
-    ]
-  ]
-},
-{
-  "title": "Make your own Senteces",
-  "columns": [
-  ]
-},
-{
-  "title": "Conversation",
-  "type": "conversation",
-  "columns": [
-    [
-      ["When does your brother have a test at school?", ""],
-      ["He has a test on Monday.", ""],
-      ["", " "],
 
-      ["When does your son have to go to the dentist?", ""],
-      ["He has to go to the dentist on Thursday.", ""],
-      ["", " "],
-
-      ["When do your friends go to the mall?", ""],
-      ["They go to the mall on Saturdays.", ""],
-      ["", " "],
-
-      ["Do you have many CDs at home?", ""],
-      ["Yes, I do. I have many CDs and some DVDs, too.", ""]
-    ]
-  ]
-},
 {
-  "title": "Conversation",
-  "type": "conversation",
+  "title": "Input 32",
   "columns": [
     [
-      
+      ["I want.", "Eu quero."],
+      ["I work.", "Eu trabalho."],
+      ["I study.", "Eu estudo."],
+      ["I play.", "Eu brinco, jogo, toco."]
+    ],
+    [
+      ["She wants.", "Ela quer."],
+      ["She works.", "Ela trabalha."],
+      ["She studies.", "Ela estuda."],
+      ["She plays.", "Ela brinca, joga, toca."]
     ]
   ]
 },
 {
-  "title": "Fixacão - 1",
-  "columns": []  
-},
-{
-  "title": "Passe para o Afirmativo - 6", 
-  "columns": []  
-},
-{
-  "title": "Fixacão - 11",
-  "columns": []  
-},
-{
-  "title": "Passe para o Nagativo - 16", 
-  "columns": []  
-},
-{
-  "title": "Fixacão - 21",
-  "columns": []  
-},
-{
-  "title": "Passe para o negativo - 26",
-  "columns": []  
-},
-{
-  "title": "Fixacão - 31", //aqui
-  "columns": []  
-},
-{
-  "title": "Passe para o Interrogativo - 36", 
-  "columns": []  
-},
-{
-  "title": "Questions",
+  "title": "Input 32",
   "columns": [
     [
-      ["How many children does your neighbor have?", ""],
-      ["When do you have English classes?", ""],
-      ["Does your sister have classes on Thursdays?", ""],
-      ["What days does the teacher work?", ""],
-      ["Where do you like to go on your vacation?", ""],
-      ["What do you do on Saturdays?", ""],
-      ["Does your mother make bread at home?", ""],
-      ["Do you make ice cream at home?", ""],
-      ["Do you have a lot of relatives in the USA?", ""],
-      ["Where do your relatives live?", ""],
-      ["Does your brother live in a house?", ""],
-      ["How much money do you need to buy a CD?", ""]
+      ["I work only in the morning.", "Eu trabalho somente de manhã."],
+      ["I play with my nephew.", "Eu brinco com meu sobrinho."],
+      ["I need to work the day after tomorrow.", "Eu preciso trabalhar depois de amanhã."],
+      ["I don't want to play this game.", "Eu não quero jogar este jogo."],
+      ["I don't need to study history.", "Eu não preciso estudar história."]
+    ],
+    [
+      ["He studies only in the afternoon.", "Ele estuda somente à tarde."],
+      ["She plays with my niece.", "Ela brinca com minha sobrinha."],
+      ["He needs to study math.", "Ele precisa estudar matemática."],
+      ["She doesn't need to study at night.", "Ela não precisa estudar à noite."],
+      ["He doesn't need to work today.", "Ele não precisa trabalhar hoje."]
+    ]
+  ]
+},
+
+{
+  "title": "Input 32",
+  "columns": [
+    [
+      ["Do you work?", "Você trabalha?"],
+      ["Does he play baseball?", "Ele joga beisebol?"],
+      ["Does she study geography?", "Ela estuda geografia?"]
+    ],
+    [
+      ["Where do you work?", "Onde você trabalha?"],
+      ["Where does he play golf?", "Onde ele joga golfe?"],
+      ["Where does she study English?", "Onde ela estuda inglês?"]
+    ],
+    [
+      ["When do you work?", "Quando você trabalha?"],
+      ["When does he play hockey?", "Quando ele joga hóquei?"],
+      ["When does she study Japanese?", "Quando ela estuda japonês?"]
     ]
   ]
 },
 {
-  "title": "Responda",
-  "type": "listening",
-  "segments": [
-   
+  "title": "Input 32",
+  "columns": [
+    [
+      ["What do you want to play?", "O que você quer jogar?"],
+      ["When do you want to study?", "Quando você quer estudar?"],
+    ],
+    [
+      ["What does he need to study?", "O que ele precisa estudar?"],
+      ["Where does he want to eat?", "Onde ele quer comer?"]
+    ]
   ]
 },
+
 {
-  title: "Listening & Comprehension",
+  "title": "Input 32",
+  "columns": [
+    [
+      ["Don't you study in the morning?", "Você não estuda de manhã?"],
+      ["Don't you want to talk now?", "Você não quer conversar agora?"]
+    ],
+    [
+      ["Doesn't he play soccer?", "Ele não joga futebol?"],
+      ["Doesn't she play an instrument?", "Ela não toca um instrumento?"]
+    ]
+  ]
+},
+
+
+{
+  "title": "Verbs",
+  "columns": [
+    [
+      ["to want", "querer"],
+      ["to work", "trabalhar"]
+    ],
+    [
+      ["to study", "estudar"],
+      ["to play", "brincar, jogar, tocar"]
+    ]
+  ]
+},
+
+{
+  "title": "Vocabulary",
+  "columns": [
+    [
+      ["son", "filho"],
+      ["daughter", "filha"],
+      ["children", "crianças, filhos"],
+      ["sibling", "irmão, irmã"],
+      ["uncle", "tio"],
+      ["aunt", "tia"],
+      ["nephew", "sobrinho"],
+      ["niece", "sobrinha"],
+      ["boy", "menino"],
+      ["girl", "menina"],
+      ["donut", "rosquinha"],
+      ["egg", "ovo"]
+    ],
+    [
+      ["bread", "pão"],
+      ["cheese", "queijo"],
+      ["ham", "presunto"],
+      ["slice", "fatia"],
+      ["of", "de"],
+      ["cup", "xícara"],
+      ["mug", "caneca"],
+      ["glass", "copo"],
+      ["bowl", "tigela"],
+      ["a", "um, uma"],
+      ["an", "um, uma"],
+      ["apple", "maçã"]
+    ],
+    [
+      ["orange", "laranja"],
+      ["but", "mas"],
+      ["tomorrow", "amanhã"],
+      ["week", "semana"],
+      ["what", "o que, qual"],
+      ["where", "onde, aonde"],
+      ["when", "quando"],
+      ["yes", "sim"],
+      ["no", "não"],
+      ["math", "matemática"],
+      ["geography", "geografia"]
+    ],
+    [
+      ["history", "história"],
+      ["science", "ciências"],
+      ["hockey", "hóquei"],
+      ["golf", "golfe"],
+      ["baseball", "beisebol"],
+      ["soccer", "futebol"],
+      ["game", "jogo"],
+      ["instrument", "instrumento"],
+      ["piano", "piano"],
+      ["guitar", "violão"],
+      ["keyboard", "teclado"]
+    ]
+  ]
+},
+
+{
+  "title": "Expressions",
+  "columns": [
+    [
+      ["good morning", "bom dia"],
+      ["good afternoon", "boa tarde"],
+      ["good evening", "boa noite"],
+      ["good night", "boa noite"],
+      ["sorry", "desculpe"],
+      ["excuse me", "desculpe, com licença, não entendi"]
+    ],
+    [
+      ["hi", "oi"],
+      ["hello", "olá"],
+      ["bye-bye", "tchau"],
+      ["goodbye", "tchau"],
+      ["the day after tomorrow", "depois de amanhã"]
+    ]
+  ]
+},
+
+{
+  "title": "Grammar",
+  "columns": [
+    [
+      ["How are you?", "Como vai você?"],
+      ["I'm fine, thanks.", "Estou bem, obrigado."],
+      ["I'm not doing very well.", "Não estou muito bem."],
+      ["I'm ok.", "Estou bem."],
+      ["What do you want?", "O que você quer?"],
+      ["Where does he work?", "Onde ele trabalha?"],
+      ["When does she play?", "Quando ela brinca?"],
+      ["Don't you work?", "Você não trabalha?"],
+      ["Doesn't he study?", "Ele não estuda?"]
+    ],
+    [
+      ["a cup", "uma xícara"],
+      ["a donut", "uma rosquinha"],
+      ["a glass", "um copo"],
+      ["a boy", "um menino"],
+      ["a class", "uma aula"],
+      ["an egg", "um ovo"],
+      ["an apple", "uma maçã"],
+      ["an instrument", "um instrumento"],
+      ["an orange", "uma laranja"]
+    ]
+  ]
+},
+
+
+{
+  title: "Listening: Answer the questions:",
   type: "listening",
   segments: [
-    { text: " ", start: 1688, end: 1694 }, //https://youtu.be/yeAbAUL7BWs?t=217
-    { text: " ", start: 1694, end: 1702 }, //https://youtu.be/yeAbAUL7BWs?t=242
-    { text: " ", start: 1702, end: 1714 }, //https://youtu.be/yeAbAUL7BWs?t=249
-    { text: " ", start: 1714, end: 1726 }, // https://youtu.be/yeAbAUL7BWs?t=237
-    { text: " ", start: 1726, end: 1737 } //https://youtu.be/yeAbAUL7BWs?t=241 
-  ]
-},
-{
-  "title": "Culture - Mother's and Father's Day",
-  "columns": [
-    [
-      ["In the United States, Mother's Day is celebrated on the second Sunday in May.", "Nos Estados Unidos, o Dia das Mães é celebrado no segundo domingo de maio.", 1754, 1760],
-      ["Father's Day is celebrated on the third Sunday in June.", "O Dia dos Pais é celebrado no terceiro domingo de junho.", 1760, 1765],
-      ["In schools, teachers help the children prepare cards for mom and dad on these dates.", "Nas escolas, os professores ajudam as crianças a fazer cartões para a mãe e para o pai nestas datas.", 1765, 1773],
-      ["Some children give their parents small gifts.", "Algumas crianças dão a seus pais pequenas lembranças.", 1765, 1777],
-      ["They usually make these gifts themselves at school.", "Geralmente elas mesmas fazem essas lembranças na escola.", 1777, 1782],
-      ["Others prefer to buy a gift.", "Outros preferem comprar um presente.", 1782, 1785],
-      ["Adults usually visit or call their parents on the telephone on these dates.", "Adultos geralmente visitam ou telefonam para seus pais nessas datas.", 1785, 1791],
-    ]
+    { text: " ", start: 3346, end: 3353 }, //https://youtu.be/yeAbAUL7BWs?t=217
+    { text: " ", start: 3353, end: 3360 }, //https://youtu.be/yeAbAUL7BWs?t=242
+    { text: " ", start: 3360, end: 3368 }, //https://youtu.be/yeAbAUL7BWs?t=249
+    { text: " ", start: 3368, end: 3375 }, // https://youtu.be/yeAbAUL7BWs?t=237
+    { text: " ", start: 3375, end: 3382 } //https://youtu.be/yeAbAUL7BWs?t=241 
   ]
 },
 ];
